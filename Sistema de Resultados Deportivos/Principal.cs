@@ -19,6 +19,7 @@ namespace Sistema_de_Resultados_Deportivos
             this.SetBevel(false);
             panelCategorias.Hide();
             panelOptions.Hide();
+            panelLogin.Hide();
 
             Form inicio = new Inicio();
             inicio.TopLevel = false;
@@ -89,6 +90,13 @@ namespace Sistema_de_Resultados_Deportivos
                 btnLogin.Visible = true;
                 panelOptions.Size = new System.Drawing.Size(140, 40);
             }
+            Form login = new Login();
+            login.TopLevel = false;
+            login.TopMost = true;
+            this.panelLogin.Controls.Add(login);
+            panelLogin.Show();
+            login.Show();
+
         }
 
         private void btnMore_Click(object sender, EventArgs e)

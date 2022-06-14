@@ -42,6 +42,7 @@
             this.panelPublicidad1 = new System.Windows.Forms.Panel();
             this.panelPublicidad2 = new System.Windows.Forms.Panel();
             this.panelGrande = new System.Windows.Forms.Panel();
+            this.panelLogin = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panelOptions = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.panelSuperior.SuspendLayout();
             this.panelMas.SuspendLayout();
             this.panelCategorias.SuspendLayout();
+            this.panelGrande.SuspendLayout();
             this.panelOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -197,11 +199,19 @@
             // 
             // panelGrande
             // 
+            this.panelGrande.Controls.Add(this.panelLogin);
             this.panelGrande.Location = new System.Drawing.Point(0, 58);
             this.panelGrande.Name = "panelGrande";
             this.panelGrande.Size = new System.Drawing.Size(1183, 603);
             this.panelGrande.TabIndex = 9;
             this.panelGrande.Visible = false;
+            // 
+            // panelLogin
+            // 
+            this.panelLogin.Location = new System.Drawing.Point(308, 98);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(590, 381);
+            this.panelLogin.TabIndex = 0;
             // 
             // btnLogin
             // 
@@ -290,6 +300,7 @@
             this.panelSuperior.ResumeLayout(false);
             this.panelMas.ResumeLayout(false);
             this.panelCategorias.ResumeLayout(false);
+            this.panelGrande.ResumeLayout(false);
             this.panelOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -317,5 +328,6 @@
         private Button btnLogout;
         private Button btnSettings;
         private Button btnUser;
+        private Panel panelLogin;
     }
 }
