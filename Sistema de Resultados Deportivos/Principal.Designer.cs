@@ -37,7 +37,6 @@
             this.btnMore = new System.Windows.Forms.Button();
             this.panelMas = new System.Windows.Forms.Panel();
             this.panelCategorias = new System.Windows.Forms.Panel();
-            this.btnCatA = new System.Windows.Forms.Button();
             this.panelChico = new System.Windows.Forms.Panel();
             this.panelPublicidad1 = new System.Windows.Forms.Panel();
             this.panelPublicidad2 = new System.Windows.Forms.Panel();
@@ -50,8 +49,6 @@
             this.btnUser = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.panelMas.SuspendLayout();
-            this.panelCategorias.SuspendLayout();
-            this.panelGrande.SuspendLayout();
             this.panelOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +86,6 @@
             this.btnNoticias.Name = "btnNoticias";
             this.btnNoticias.Size = new System.Drawing.Size(223, 58);
             this.btnNoticias.TabIndex = 6;
-            this.btnNoticias.Text = "Noticias";
             this.btnNoticias.UseVisualStyleBackColor = true;
             // 
             // btnDeportesPopulares
@@ -100,7 +96,6 @@
             this.btnDeportesPopulares.Name = "btnDeportesPopulares";
             this.btnDeportesPopulares.Size = new System.Drawing.Size(223, 58);
             this.btnDeportesPopulares.TabIndex = 5;
-            this.btnDeportesPopulares.Text = "Deportes populares";
             this.btnDeportesPopulares.UseVisualStyleBackColor = true;
             // 
             // btnEventosPopulares
@@ -112,7 +107,6 @@
             this.btnEventosPopulares.Name = "btnEventosPopulares";
             this.btnEventosPopulares.Size = new System.Drawing.Size(223, 58);
             this.btnEventosPopulares.TabIndex = 2;
-            this.btnEventosPopulares.Text = "Eventos populares";
             this.btnEventosPopulares.UseVisualStyleBackColor = true;
             // 
             // btnFavoritos
@@ -124,7 +118,6 @@
             this.btnFavoritos.Name = "btnFavoritos";
             this.btnFavoritos.Size = new System.Drawing.Size(223, 58);
             this.btnFavoritos.TabIndex = 1;
-            this.btnFavoritos.Text = "Favoritos";
             this.btnFavoritos.UseVisualStyleBackColor = true;
             // 
             // btnMore
@@ -136,7 +129,6 @@
             this.btnMore.Name = "btnMore";
             this.btnMore.Size = new System.Drawing.Size(229, 58);
             this.btnMore.TabIndex = 0;
-            this.btnMore.Text = "More";
             this.btnMore.UseVisualStyleBackColor = false;
             this.btnMore.Click += new System.EventHandler(this.btnMore_Click);
             // 
@@ -157,24 +149,11 @@
             // panelCategorias
             // 
             this.panelCategorias.AutoSize = true;
-            this.panelCategorias.Controls.Add(this.btnCatA);
             this.panelCategorias.Location = new System.Drawing.Point(0, 58);
             this.panelCategorias.Name = "panelCategorias";
             this.panelCategorias.Size = new System.Drawing.Size(229, 580);
             this.panelCategorias.TabIndex = 1;
             this.panelCategorias.Visible = false;
-            // 
-            // btnCatA
-            // 
-            this.btnCatA.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCatA.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCatA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCatA.Location = new System.Drawing.Point(0, 0);
-            this.btnCatA.Name = "btnCatA";
-            this.btnCatA.Size = new System.Drawing.Size(229, 58);
-            this.btnCatA.TabIndex = 1;
-            this.btnCatA.Text = "Cat A";
-            this.btnCatA.UseVisualStyleBackColor = false;
             // 
             // panelChico
             // 
@@ -199,7 +178,6 @@
             // 
             // panelGrande
             // 
-            this.panelGrande.Controls.Add(this.panelLogin);
             this.panelGrande.Location = new System.Drawing.Point(0, 58);
             this.panelGrande.Name = "panelGrande";
             this.panelGrande.Size = new System.Drawing.Size(1183, 603);
@@ -208,7 +186,7 @@
             // 
             // panelLogin
             // 
-            this.panelLogin.Location = new System.Drawing.Point(308, 98);
+            this.panelLogin.Location = new System.Drawing.Point(295, 174);
             this.panelLogin.Name = "panelLogin";
             this.panelLogin.Size = new System.Drawing.Size(590, 381);
             this.panelLogin.TabIndex = 0;
@@ -260,7 +238,6 @@
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(140, 40);
             this.btnSettings.TabIndex = 5;
-            this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Visible = false;
             // 
@@ -273,7 +250,6 @@
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(140, 40);
             this.btnUser.TabIndex = 6;
-            this.btnUser.Text = "User";
             this.btnUser.UseVisualStyleBackColor = true;
             this.btnUser.Visible = false;
             // 
@@ -282,6 +258,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelPublicidad1);
@@ -296,15 +273,54 @@
             this.MinimizeBox = false;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Principal_Load);
             this.panelSuperior.ResumeLayout(false);
             this.panelMas.ResumeLayout(false);
-            this.panelCategorias.ResumeLayout(false);
-            this.panelGrande.ResumeLayout(false);
             this.panelOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            SetIdioma();
+            SetTheme();
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            String idioma = "es";
+            switch(idioma)
+            {
+                case "en": //Ingles
+                    this.btnNoticias.Text = "News";
+                    this.btnDeportesPopulares.Text = "Popular sports";
+                    this.btnEventosPopulares.Text = "Popular events";
+                    this.btnFavoritos.Text = "Favorites";
+                    this.btnMore.Text = "More";
+                    this.btnSettings.Text = "Settings";
+                    this.btnUser.Text = "User";
+                    break;
+                case "es": //Español
+                    this.btnNoticias.Text = "Noticias";
+                    this.btnDeportesPopulares.Text = "Deportes populares";
+                    this.btnEventosPopulares.Text = "Eventos populares";
+                    this.btnFavoritos.Text = "Favoritos";
+                    this.btnMore.Text = "Mas";
+                    this.btnSettings.Text = "Opciones";
+                    this.btnUser.Text = "Usuario";
+                    break;
+            }
+        }
+
+        void SetTheme() //Establece los colores de los controladores segun el tema elegido
+        {
+            Boolean darkTheme = false;
+            switch (darkTheme)
+            {
+                case false: //Tema claro
+
+                    break;
+                case true: //Tema oscuro
+
+                    break;
+            }
         }
 
         #endregion
@@ -318,7 +334,6 @@
         private Button btnFavoritos;
         private Button btnOptions;
         private Panel panelCategorias;
-        private Button btnCatA;
         private Panel panelPublicidad1;
         private Panel panelPublicidad2;
         private Panel panelChico;

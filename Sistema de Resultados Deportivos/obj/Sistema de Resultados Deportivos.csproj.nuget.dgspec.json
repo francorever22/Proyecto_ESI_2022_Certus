@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USUARIO\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj": {}
+    "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USUARIO\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj": {
+    "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj",
+        "projectUniqueName": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj",
         "projectName": "Sistema de Resultados Deportivos",
-        "projectPath": "C:\\Users\\USUARIO\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj",
-        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USUARIO\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\obj\\",
+        "projectPath": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\Sistema de Resultados Deportivos.csproj",
+        "packagesPath": "C:\\Users\\Hinoken\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\Sistema de Resultados Deportivos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hinoken\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -62,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -22,13 +22,7 @@ namespace Sistema_de_Resultados_Deportivos
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
-
-
-
-
-
-
-
+        
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
             if(txtUsuario.Text == "Usuario")
@@ -42,13 +36,9 @@ namespace Sistema_de_Resultados_Deportivos
         {
             if(txtUsuario.Text == "")
             {
-
                 txtUsuario.Text = "Usuario";
                 txtUsuario.ForeColor = Color.DimGray;
-
             }
-
-
         }
 
         private void txtContraseña_Enter(object sender, EventArgs e)
@@ -63,7 +53,7 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void txtContraseña_Leave(object sender, EventArgs e)
         {
-            if(txtContraseña.Text == "")
+            if (txtContraseña.Text == "")
             {
                 txtContraseña.Text = "Contraseña";
                 txtContraseña.ForeColor = Color.DimGray;
@@ -71,26 +61,21 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void btnAcceder_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Parent.Hide();
+            this.Close();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            Parent.Hide();
+            this.Close();
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        private void customCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

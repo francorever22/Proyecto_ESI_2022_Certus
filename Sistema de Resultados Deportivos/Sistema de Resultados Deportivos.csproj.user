@@ -7,10 +7,13 @@
     <Compile Update="APIPublicidad.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CustomCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Inicio.cs">
+    <Compile Update="BuscadorDeEncuentros.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Principal.cs">

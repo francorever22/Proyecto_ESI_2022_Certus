@@ -21,7 +21,7 @@ namespace Sistema_de_Resultados_Deportivos
             panelOptions.Hide();
             panelLogin.Hide();
 
-            Form inicio = new Inicio();
+            Form inicio = new BuscadorDeEncuentros();
             inicio.TopLevel = false;
             this.panelChico.Controls.Add(inicio);
             inicio.Show();
@@ -34,11 +34,6 @@ namespace Sistema_de_Resultados_Deportivos
             this.panelPublicidad2.Controls.Add(publicidad2);
             publicidad1.Show();
             publicidad2.Show();
-        }
-
-        private void Principal_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void toggleSubMenu(int x) //Muestra o oculta los submenus
@@ -70,7 +65,6 @@ namespace Sistema_de_Resultados_Deportivos
                     }
                     break;
             }
-
         }
 
         private void log()
@@ -96,7 +90,6 @@ namespace Sistema_de_Resultados_Deportivos
             this.panelLogin.Controls.Add(login);
             panelLogin.Show();
             login.Show();
-
         }
 
         private void btnMore_Click(object sender, EventArgs e)

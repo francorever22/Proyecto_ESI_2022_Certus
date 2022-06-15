@@ -39,3 +39,24 @@ C:\Users\USUARIO\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Dep
 C:\Users\USUARIO\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.genruntimeconfig.cache
 C:\Users\USUARIO\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\ref\Sistema de Resultados Deportivos.dll
 C:\Users\USUARIO\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.Login.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows\Sistema de Resultados Deportivos.exe
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows\Sistema de Resultados Deportivos.deps.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows\Sistema de Resultados Deportivos.runtimeconfig.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows\Sistema de Resultados Deportivos.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows\Sistema de Resultados Deportivos.pdb
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.csproj.AssemblyReference.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.APIPublicidad.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.BuscadorDeEncuentros.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.Login.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.Principal.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema_de_Resultados_Deportivos.Properties.Resources.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.csproj.GenerateResource.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.AssemblyInfoInputs.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.AssemblyInfo.cs
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.csproj.CoreCompileInputs.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\refint\Sistema de Resultados Deportivos.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.pdb
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\Sistema de Resultados Deportivos.genruntimeconfig.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows\ref\Sistema de Resultados Deportivos.dll
