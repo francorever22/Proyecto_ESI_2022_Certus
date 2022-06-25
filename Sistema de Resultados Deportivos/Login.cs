@@ -9,23 +9,59 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
+
 namespace Sistema_de_Resultados_Deportivos
 {
     public partial class Login : Form
     {
+        private TextBox textBox1;
         public Login()
         {
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Dock = DockStyle.None;
+            this.textBox1.Name = "txtCorreo";
+            this.textBox1.Text = "Ingrese su correo";
+            this.textBox1.Size = new System.Drawing.Size(546, 20);
+            textBox1.Enter += textBox1_Enter;
+            textBox1.Leave += textBox1_Leave;
+            this.textBox1.BackColor = Color.FromArgb(15, 15, 15);
+            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.DimGray;
+
             InitializeComponent();
+           
         }
 
+        
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
-        
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if ( textBox1.Text == "Ingrese su correo" )
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.LightGray;
+            }
+        }
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.Text = "Ingrese su correo";
+                textBox1.ForeColor = Color.DimGray;
+            }
+        }
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
-            if(txtUsuario.Text == "Usuario")
+            if(txtUsuario.Text == "Usuario o email")
             {
                 txtUsuario.Text = "";
                 txtUsuario.ForeColor = Color.LightGray;
@@ -36,7 +72,7 @@ namespace Sistema_de_Resultados_Deportivos
         {
             if(txtUsuario.Text == "")
             {
-                txtUsuario.Text = "Usuario";
+                txtUsuario.Text = "Usuario o email";
                 txtUsuario.ForeColor = Color.DimGray;
             }
         }
@@ -74,6 +110,19 @@ namespace Sistema_de_Resultados_Deportivos
         }
 
         private void customCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linklblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+           panel2.Controls.Add(this.textBox1);
+           
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

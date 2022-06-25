@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linklblRegistrarse = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.btnAcceder = new System.Windows.Forms.Button();
             this.txtContraseña = new System.Windows.Forms.TextBox();
@@ -38,22 +38,24 @@
             this.customCheckBox1 = new Sistema_de_Resultados_Deportivos.CustomCheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // linkLabel1
+            // linklblRegistrarse
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.linkLabel1.LinkColor = System.Drawing.SystemColors.Highlight;
-            this.linkLabel1.Location = new System.Drawing.Point(482, 348);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(91, 20);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Registrarse";
+            this.linklblRegistrarse.AutoSize = true;
+            this.linklblRegistrarse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linklblRegistrarse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linklblRegistrarse.LinkColor = System.Drawing.SystemColors.Highlight;
+            this.linklblRegistrarse.Location = new System.Drawing.Point(482, 348);
+            this.linklblRegistrarse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linklblRegistrarse.Name = "linklblRegistrarse";
+            this.linklblRegistrarse.Size = new System.Drawing.Size(91, 20);
+            this.linklblRegistrarse.TabIndex = 1;
+            this.linklblRegistrarse.TabStop = true;
+            this.linklblRegistrarse.Text = "Registrarse";
+            this.linklblRegistrarse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklblRegistrarse_LinkClicked);
             // 
             // linkLabel2
             // 
@@ -78,7 +80,7 @@
             this.btnAcceder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.btnAcceder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnAcceder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAcceder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAcceder.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAcceder.ForeColor = System.Drawing.Color.LightGray;
             this.btnAcceder.Location = new System.Drawing.Point(22, 261);
             this.btnAcceder.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -93,12 +95,12 @@
             // 
             this.txtContraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.txtContraseña.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtContraseña.Font = new System.Drawing.Font("Century Gothic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtContraseña.ForeColor = System.Drawing.Color.DimGray;
-            this.txtContraseña.Location = new System.Drawing.Point(22, 144);
+            this.txtContraseña.Location = new System.Drawing.Point(18, 176);
             this.txtContraseña.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(546, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(546, 21);
             this.txtContraseña.TabIndex = 2;
             this.txtContraseña.Text = "Contraseña";
             this.txtContraseña.Enter += new System.EventHandler(this.txtContraseña_Enter);
@@ -109,12 +111,12 @@
             this.txtUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsuario.CausesValidation = false;
-            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtUsuario.Font = new System.Drawing.Font("Century Gothic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtUsuario.ForeColor = System.Drawing.Color.DimGray;
-            this.txtUsuario.Location = new System.Drawing.Point(22, 89);
+            this.txtUsuario.Location = new System.Drawing.Point(18, 135);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(546, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(546, 21);
             this.txtUsuario.TabIndex = 1;
             this.txtUsuario.Text = "Usuario";
             this.txtUsuario.Enter += new System.EventHandler(this.txtUsuario_Enter);
@@ -123,12 +125,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label1.Location = new System.Drawing.Point(217, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 29);
+            this.label1.Size = new System.Drawing.Size(148, 30);
             this.label1.TabIndex = 6;
             this.label1.Text = "Bienvenido";
             // 
@@ -140,7 +142,7 @@
             this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCancelar.ForeColor = System.Drawing.Color.LightGray;
             this.btnCancelar.Location = new System.Drawing.Point(346, 261);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -154,7 +156,7 @@
             // customCheckBox1
             // 
             this.customCheckBox1.AutoSize = true;
-            this.customCheckBox1.Location = new System.Drawing.Point(142, 204);
+            this.customCheckBox1.Location = new System.Drawing.Point(141, 217);
             this.customCheckBox1.MinimumSize = new System.Drawing.Size(45, 22);
             this.customCheckBox1.Name = "customCheckBox1";
             this.customCheckBox1.OffBackColor = System.Drawing.Color.Gray;
@@ -171,7 +173,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(20, 202);
+            this.label2.Location = new System.Drawing.Point(18, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 23);
             this.label2.TabIndex = 9;
@@ -179,7 +181,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.linklblRegistrarse);
             this.panel1.Controls.Add(this.linkLabel2);
             this.panel1.Controls.Add(this.btnAcceder);
             this.panel1.Controls.Add(this.txtContraseña);
@@ -192,6 +195,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(588, 378);
             this.panel1.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(18, 97);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(546, 20);
+            this.panel2.TabIndex = 10;
             // 
             // Login
             // 
@@ -213,7 +223,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linklblRegistrarse;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button btnAcceder;
         private System.Windows.Forms.TextBox txtContraseña;
@@ -223,6 +233,7 @@
         private CustomCheckBox customCheckBox1;
         private Label label2;
         private Panel panel1;
+        private Panel panel2;
     }
 }
 
