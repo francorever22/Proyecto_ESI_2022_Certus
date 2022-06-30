@@ -33,16 +33,16 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.panelTabla = new System.Windows.Forms.Panel();
             this.panelEncuentros = new System.Windows.Forms.Panel();
+            this.mtcFechasEventos = new System.Windows.Forms.MonthCalendar();
             this.panelDiferenciador = new System.Windows.Forms.Panel();
-            this.btnAvanzar = new System.Windows.Forms.Button();
-            this.btnRetroceder = new System.Windows.Forms.Button();
-            this.lblFecha = new System.Windows.Forms.Label();
+            this.btnCalendario = new System.Windows.Forms.Button();
             this.btnProximamente = new System.Windows.Forms.Button();
             this.btnTerminados = new System.Windows.Forms.Button();
             this.btnEnVivo = new System.Windows.Forms.Button();
             this.btnTodos = new System.Windows.Forms.Button();
             this.panelBuscador.SuspendLayout();
             this.panelTabla.SuspendLayout();
+            this.panelEncuentros.SuspendLayout();
             this.panelDiferenciador.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,16 +88,22 @@
             // panelEncuentros
             // 
             this.panelEncuentros.AutoScroll = true;
+            this.panelEncuentros.Controls.Add(this.mtcFechasEventos);
             this.panelEncuentros.Location = new System.Drawing.Point(0, 28);
             this.panelEncuentros.Name = "panelEncuentros";
             this.panelEncuentros.Size = new System.Drawing.Size(563, 376);
             this.panelEncuentros.TabIndex = 1;
             // 
+            // mtcFechasEventos
+            // 
+            this.mtcFechasEventos.Location = new System.Drawing.Point(354, 0);
+            this.mtcFechasEventos.Name = "mtcFechasEventos";
+            this.mtcFechasEventos.TabIndex = 0;
+            this.mtcFechasEventos.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mtcFechasEventos_DateChanged);
+            // 
             // panelDiferenciador
             // 
-            this.panelDiferenciador.Controls.Add(this.btnAvanzar);
-            this.panelDiferenciador.Controls.Add(this.btnRetroceder);
-            this.panelDiferenciador.Controls.Add(this.lblFecha);
+            this.panelDiferenciador.Controls.Add(this.btnCalendario);
             this.panelDiferenciador.Controls.Add(this.btnProximamente);
             this.panelDiferenciador.Controls.Add(this.btnTerminados);
             this.panelDiferenciador.Controls.Add(this.btnEnVivo);
@@ -108,40 +114,16 @@
             this.panelDiferenciador.Size = new System.Drawing.Size(563, 27);
             this.panelDiferenciador.TabIndex = 0;
             // 
-            // btnAvanzar
+            // btnCalendario
             // 
-            this.btnAvanzar.FlatAppearance.BorderSize = 0;
-            this.btnAvanzar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAvanzar.Location = new System.Drawing.Point(538, 1);
-            this.btnAvanzar.Name = "btnAvanzar";
-            this.btnAvanzar.Size = new System.Drawing.Size(27, 25);
-            this.btnAvanzar.TabIndex = 6;
-            this.btnAvanzar.Text = ">";
-            this.btnAvanzar.UseVisualStyleBackColor = true;
-            // 
-            // btnRetroceder
-            // 
-            this.btnRetroceder.FlatAppearance.BorderSize = 0;
-            this.btnRetroceder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRetroceder.Location = new System.Drawing.Point(428, 1);
-            this.btnRetroceder.Name = "btnRetroceder";
-            this.btnRetroceder.Size = new System.Drawing.Size(27, 25);
-            this.btnRetroceder.TabIndex = 1;
-            this.btnRetroceder.Text = "<";
-            this.btnRetroceder.UseVisualStyleBackColor = true;
-            // 
-            // lblFecha
-            // 
-            this.lblFecha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblFecha.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblFecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFecha.Location = new System.Drawing.Point(428, 0);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(137, 27);
-            this.lblFecha.TabIndex = 5;
-            this.lblFecha.Text = "xx/xx/xxxx";
-            this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCalendario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalendario.Location = new System.Drawing.Point(428, 0);
+            this.btnCalendario.Name = "btnCalendario";
+            this.btnCalendario.Size = new System.Drawing.Size(135, 27);
+            this.btnCalendario.TabIndex = 4;
+            this.btnCalendario.UseVisualStyleBackColor = true;
+            this.btnCalendario.Click += new System.EventHandler(this.btnCalendario_Click);
             // 
             // btnProximamente
             // 
@@ -183,7 +165,7 @@
             this.btnTodos.TabIndex = 0;
             this.btnTodos.UseVisualStyleBackColor = true;
             // 
-            // Inicio
+            // BuscadorDeEncuentros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,31 +173,28 @@
             this.Controls.Add(this.panelTabla);
             this.Controls.Add(this.panelBuscador);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Inicio";
+            this.Name = "BuscadorDeEncuentros";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Load += new System.EventHandler(this.Inicio_Load);
             this.panelBuscador.ResumeLayout(false);
             this.panelBuscador.PerformLayout();
             this.panelTabla.ResumeLayout(false);
+            this.panelEncuentros.ResumeLayout(false);
             this.panelDiferenciador.ResumeLayout(false);
             this.ResumeLayout(false);
 
-            SetIdioma();
-            SetTheme();
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado
         {
-            String idioma = "es";
-            switch (idioma)
+            switch (AjustesDeUsuario.language)
             {
-                case "en": //Ingles
+                case "EN": //Ingles
                     this.btnProximamente.Text = "Coming soon";
                     this.btnTerminados.Text = "Finished";
                     this.btnEnVivo.Text = "Live";
                     this.btnTodos.Text = "All";
                     break;
-                case "es": //Español
+                case "ES": //Español
                     this.btnProximamente.Text = "Proximamente";
                     this.btnTerminados.Text = "Terminados";
                     this.btnEnVivo.Text = "En vivo";
@@ -249,9 +228,8 @@
         private Button btnTerminados;
         private Button btnEnVivo;
         private Button btnTodos;
-        private Button btnAvanzar;
-        private Button btnRetroceder;
-        private Label lblFecha;
         private Panel panelEncuentros;
+        private MonthCalendar mtcFechasEventos;
+        private Button btnCalendario;
     }
 }

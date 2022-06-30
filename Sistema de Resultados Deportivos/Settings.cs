@@ -14,9 +14,13 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class Settings : Form
     {
+        bool theme = AjustesDeUsuario.darkTheme;
+        String lan = AjustesDeUsuario.language;
         public Settings()
         {
             InitializeComponent();
+            SetIdioma();
+            tglTema.Checked = theme;
         }
         
         private void Settings_Load(object sender, EventArgs e)
@@ -24,19 +28,34 @@ namespace Sistema_de_Resultados_Deportivos
 
         }
 
-        private void cbxTema_CheckedChanged(object sender, EventArgs e)
+        private void tglTema_CheckedChanged(object sender, EventArgs e)
         {
-         
+            theme = tglTema.Checked;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            
-               
-            
-
+            try
+            {
+                AjustesDeUsuario.darkTheme = theme;
+                AjustesDeUsuario.language = lan;
+                MessageBox.Show("Ajustes guardados correctamente");
+            } catch
+            {
+                MessageBox.Show("Error");
+            }
         }
-      
+        
+        private void btnCerrarSettings_Click(object sender, EventArgs e)
+        {
+            Parent.Hide();
+            this.Close();
+        }
+
+        private void cbxLenguaje_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lan = cbxLenguaje.Text;
+        }
     }
-    }
+}
 

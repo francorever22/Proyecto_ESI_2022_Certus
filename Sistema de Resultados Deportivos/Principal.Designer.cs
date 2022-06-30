@@ -47,6 +47,7 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
+            this.panelSettings = new System.Windows.Forms.Panel();
             this.panelSuperior.SuspendLayout();
             this.panelMas.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -212,7 +213,7 @@
             this.panelOptions.Controls.Add(this.btnLogin);
             this.panelOptions.Location = new System.Drawing.Point(1044, 58);
             this.panelOptions.Name = "panelOptions";
-            this.panelOptions.Size = new System.Drawing.Size(140, 40);
+            this.panelOptions.Size = new System.Drawing.Size(140, 80);
             this.panelOptions.TabIndex = 0;
             // 
             // btnLogout
@@ -239,7 +240,7 @@
             this.btnSettings.Size = new System.Drawing.Size(140, 40);
             this.btnSettings.TabIndex = 5;
             this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Visible = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnUser
             // 
@@ -253,11 +254,19 @@
             this.btnUser.UseVisualStyleBackColor = true;
             this.btnUser.Visible = false;
             // 
+            // panelSettings
+            // 
+            this.panelSettings.Location = new System.Drawing.Point(425, 131);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(350, 423);
+            this.panelSettings.TabIndex = 0;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.panelCategorias);
@@ -279,16 +288,13 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            SetIdioma();
-            SetTheme();
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado
         {
-            String idioma = "es";
-            switch(idioma)
+            switch(AjustesDeUsuario.language)
             {
-                case "en": //Ingles
+                case "EN": //Ingles
                     this.btnNoticias.Text = "News";
                     this.btnDeportesPopulares.Text = "Popular sports";
                     this.btnEventosPopulares.Text = "Popular events";
@@ -297,7 +303,7 @@
                     this.btnSettings.Text = "Settings";
                     this.btnUser.Text = "User";
                     break;
-                case "es": //Español
+                case "ES": //Español
                     this.btnNoticias.Text = "Noticias";
                     this.btnDeportesPopulares.Text = "Deportes populares";
                     this.btnEventosPopulares.Text = "Eventos populares";
@@ -344,5 +350,6 @@
         private Button btnSettings;
         private Button btnUser;
         private Panel panelLogin;
+        private Panel panelSettings;
     }
 }

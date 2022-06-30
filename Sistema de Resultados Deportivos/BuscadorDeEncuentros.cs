@@ -12,19 +12,18 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class BuscadorDeEncuentros : Form
     {
+        bool mtcVisible;
         public BuscadorDeEncuentros()
         {
             InitializeComponent();
+            SetIdioma();
+            mtcFechasEventos.Hide();
+            btnCalendario.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtBuscador.AutoSize = false;
             txtBuscador.Size = new System.Drawing.Size(514, 27);
             txtBuscador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
             CargarEncuentros(10);
-        }
-
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void CargarEncuentros(int c) //Carga los botones de panelEncuentros uno por uno
@@ -170,6 +169,24 @@ namespace Sistema_de_Resultados_Deportivos
                         break;
                 }
             }
+        }
+
+        private void btnCalendario_Click(object sender, EventArgs e)
+        {
+            if (mtcVisible == false)
+            {
+                mtcVisible = true;
+                mtcFechasEventos.Show();
+            } else
+            {
+                mtcVisible = false;
+                mtcFechasEventos.Hide();
+            }
+        }
+
+        private void mtcFechasEventos_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            btnCalendario.Text = mtcFechasEventos.SelectionRange.End.ToString("dd-MM-yyyy");
         }
     }
 }
