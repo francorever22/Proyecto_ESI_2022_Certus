@@ -165,13 +165,13 @@ namespace Sistema_de_Resultados_Deportivos
                         if (txtCorreo.Text != "" && txtContraseña.Text != "" && txtUsuario.Text != "")
                         {
                             var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                            Usuario newAdmin = new Usuario();
-                            newAdmin.nombreUsuario = txtUsuario.Text;
-                            newAdmin.email = txtCorreo.Text;
-                            newAdmin.contrasena = txtContraseña.Text;
-                            newAdmin.nivelPermisos = 1;
-                            newAdmin.numeroTelefono = null;
-                            usuarios.Add(newAdmin);
+                            Usuario newUser = new Usuario();
+                            newUser.nombreUsuario = txtUsuario.Text;
+                            newUser.email = txtCorreo.Text;
+                            newUser.contrasena = txtContraseña.Text;
+                            newUser.nivelPermisos = 1;
+                            newUser.numeroTelefono = null;
+                            usuarios.Add(newUser);
                             Logica.SerializeUsers(usuarios);
                             MessageBox.Show("New administrator created correctly");
                         }

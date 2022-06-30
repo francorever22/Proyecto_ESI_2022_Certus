@@ -13,34 +13,14 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class APIPublicidad : Form
     {
-        String link;
+        String link = "";
+        String imgPath = "";
         Random r = new Random();
+        int x = 0;
         public APIPublicidad()
         {
             InitializeComponent();
-            switch(r.Next(5))
-            {
-                case 0:
-                    this.imgPublicidad.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Publicidad_Despegar;
-                    link = "https://www.despegar.com.uy/";
-                    break;
-                case 1:
-                    this.imgPublicidad.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Publicidad_Discord;
-                    link = "https://discord.com/";
-                    break;
-                case 2:
-                    this.imgPublicidad.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Publicidad_Fanta;
-                    link = "https://www.cocacola.es/fanta";
-                    break;
-                case 3:
-                    this.imgPublicidad.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Publicidad_Monster;
-                    link = "https://www.monsterenergy.com/";
-                    break;
-                case 4:
-                    this.imgPublicidad.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Publicidad_Samsung;
-                    link = "https://www.samsung.com/uy/smartphones/galaxy-s22-ultra/";
-                    break;
-            }
+            SetBanner();
         }
 
         private void imgPublicidad_Click(object sender, EventArgs e)
@@ -51,6 +31,25 @@ namespace Sistema_de_Resultados_Deportivos
                 Verb = "open"
             };
             Process.Start(hl);
+        }
+
+        private void SetBanner()
+        {
+            var banners = Logica.DeserializeBanners(Logica.GetJson("DinamicJson\\Banners.json"));
+            foreach (var banner in banners)
+            {
+                x++;
+            }
+            int b = r.Next(x);
+            foreach (var banner in banners)
+            {
+                if (banner.IdBanner == b)
+                {
+                    link = banner.Link;
+                    imgPath = banner.BannerImage;
+                }
+            }
+            imgPublicidad.Image = Image.FromFile(imgPath);
         }
     }
 }
