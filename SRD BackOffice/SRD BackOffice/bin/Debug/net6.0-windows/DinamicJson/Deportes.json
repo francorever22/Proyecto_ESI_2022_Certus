@@ -1,0 +1,92 @@
+[
+  {
+    "nombreDeporte": "Natacion",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Acuatico",
+    "deportePopular": true
+  },
+  {
+    "nombreDeporte": "Waterpolo",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Acuatico",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Futbol",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": true
+  },
+  {
+    "nombreDeporte": "Basquetbol",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": true
+  },
+  {
+    "nombreDeporte": "Tenis",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": true
+  },
+  {
+    "nombreDeporte": "Beisbol",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": true
+  },
+  {
+    "nombreDeporte": "Rugby",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Golf",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Hockey",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Quidditch",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Voleibol",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Juegos de pelota",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Karate",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Artes marciales",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Taekwondo",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Artes marciales",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Boxeo",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Artes marciales",
+    "deportePopular": false
+  },
+  {
+    "nombreDeporte": "Kung fu",
+    "imagenDeporte": null,
+    "categoriaDeporte": "Artes marciales",
+    "deportePopular": false
+  }
+]
