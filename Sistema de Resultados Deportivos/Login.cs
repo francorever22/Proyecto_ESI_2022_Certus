@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Sistema_de_Resultados_Deportivos
 {
@@ -37,12 +38,7 @@ namespace Sistema_de_Resultados_Deportivos
            
         }
 
-        
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
-
+      
         private void textBox1_Enter(object sender, EventArgs e)
         {
             if ( textBox1.Text == "Ingrese su correo" )
@@ -99,14 +95,13 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            Parent.Hide();
-            this.Close();
-        }
+           }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Parent.Hide();
             this.Close();
+            
         }
 
         private void customCheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -116,13 +111,18 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void linklblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            btnAcceder.Text = "Registrarse";
            panel2.Controls.Add(this.textBox1);
            
 
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

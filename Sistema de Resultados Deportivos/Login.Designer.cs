@@ -118,7 +118,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(546, 21);
             this.txtUsuario.TabIndex = 1;
-            this.txtUsuario.Text = "Usuario";
+            this.txtUsuario.Text = "Usuario o email";
             this.txtUsuario.Enter += new System.EventHandler(this.txtUsuario_Enter);
             this.txtUsuario.Leave += new System.EventHandler(this.txtUsuario_Leave);
             // 
@@ -195,6 +195,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(588, 378);
             this.panel1.TabIndex = 10;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
