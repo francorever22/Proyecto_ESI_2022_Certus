@@ -1,0 +1,29 @@
+yad --title="Control Apache" \
+    --image=gtk-answ \
+    --center \
+    --width=250 \
+    --height=80 \
+    --text-align=center \
+    --text="¿Que quiere hacer?" \
+    --button=Arrancar:0 \
+    --button=Detener:1 \
+    --button=Reiniciar:2  \
+    --button=Estado:3 
+ans=$?
+if [ $ans -eq 0 ]
+then
+    systemctl start httpd
+fi
+if [ $ans -eq 1 ]
+then
+    systemctl stop httpd
+fi
+if [ $ans -eq 2 ]
+then
+   systemctl restart httpd
+fi
+if [ $ans -eq 3 ]
+then
+   systemctl status httpd    
+fi
+exit
