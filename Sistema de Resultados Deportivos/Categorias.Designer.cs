@@ -65,6 +65,27 @@
 
         }
 
+        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
+        {
+            switch (AjustesDeUsuario.darkTheme)
+            {
+                case false: //Tema claro
+                    /* Paneles */
+                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+                    this.panelDeportes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+                    /* Textos (Incluidos botones) */
+                    this.lblCategorias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                    break;
+                case true: //Tema oscuro
+                    /* Paneles */
+                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+                    this.panelDeportes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+                    /* Textos (Incluidos botones) */
+                    this.lblCategorias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                    break;
+            }
+        }
+
         #endregion
 
         private Panel panelDeportes;

@@ -12,11 +12,14 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class Login : Form
     {
+        private static Login form = null;
         bool registrarse;
         public Login()
         {
             InitializeComponent();
+            form = this;
             SetIdioma();
+            SetTheme();
             txtCorreo.Hide();
         }
 
@@ -30,14 +33,30 @@ namespace Sistema_de_Resultados_Deportivos
                         if (txtUsuario.Text == "User")
                         {
                             txtUsuario.Text = "";
-                            txtUsuario.ForeColor = Color.LightGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    break;
+                            }
                         }
                         break;
                     case "ES":
                         if (txtUsuario.Text == "Usuario")
                         {
                             txtUsuario.Text = "";
-                            txtUsuario.ForeColor = Color.LightGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.Black;
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.LightGray;
+                                    break;
+                            }
                         }
                         break;
                 }
@@ -49,14 +68,30 @@ namespace Sistema_de_Resultados_Deportivos
                         if (txtUsuario.Text == "User or email")
                         {
                             txtUsuario.Text = "";
-                            txtUsuario.ForeColor = Color.LightGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.Black;
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.LightGray;
+                                    break;
+                            }
                         }
                         break;
                     case "ES":
                         if (txtUsuario.Text == "Usuario o email")
                         {
                             txtUsuario.Text = "";
-                            txtUsuario.ForeColor = Color.LightGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.Black;
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.LightGray;
+                                    break;
+                            }
                         }
                         break;
                 }
@@ -73,11 +108,27 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         case "EN":
                             txtUsuario.Text = "User";
-                            txtUsuario.ForeColor = Color.DimGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    break;
+                            }
                             break;
                         case "ES":
                             txtUsuario.Text = "Usuario";
-                            txtUsuario.ForeColor = Color.DimGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    break;
+                            }
                             break;
                     }
                 } else
@@ -86,11 +137,27 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         case "EN":
                             txtUsuario.Text = "User or email";
-                            txtUsuario.ForeColor = Color.DimGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    break;
+                            }
                             break;
                         case "ES":
                             txtUsuario.Text = "Usuario o email";
-                            txtUsuario.ForeColor = Color.DimGray;
+                            switch (AjustesDeUsuario.darkTheme)
+                            {
+                                case false:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    break;
+                                case true:
+                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -100,7 +167,15 @@ namespace Sistema_de_Resultados_Deportivos
         private void txtCorreo_Enter(object sender, EventArgs e)
         {
             txtCorreo.Text = "";
-            txtCorreo.ForeColor = Color.LightGray;
+            switch (AjustesDeUsuario.darkTheme)
+            {
+                case false:
+                    txtCorreo.ForeColor = Color.Black;
+                    break;
+                case true:
+                    txtCorreo.ForeColor = Color.LightGray;
+                    break;
+            }
         }
 
         private void txtCorreo_Leave(object sender, EventArgs e)
@@ -108,7 +183,15 @@ namespace Sistema_de_Resultados_Deportivos
             if (txtCorreo.Text == "")
             {
                 txtCorreo.Text = "Email";
-                txtCorreo.ForeColor = Color.DimGray;
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false:
+                        txtCorreo.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                        break;
+                    case true:
+                        txtCorreo.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        break;
+                }
             }
         }
 
@@ -120,7 +203,15 @@ namespace Sistema_de_Resultados_Deportivos
                     if (txtContraseña.Text == "Password")
                     {
                         txtContraseña.Text = "";
-                        txtContraseña.ForeColor = Color.LightGray;
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                txtContraseña.ForeColor = Color.Black;
+                                break;
+                            case true:
+                                txtContraseña.ForeColor = Color.LightGray;
+                                break;
+                        }
                         txtContraseña.UseSystemPasswordChar = true;
                     }
                     break;
@@ -128,7 +219,15 @@ namespace Sistema_de_Resultados_Deportivos
                     if (txtContraseña.Text == "Contraseña")
                     {
                         txtContraseña.Text = "";
-                        txtContraseña.ForeColor = Color.LightGray;
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                txtContraseña.ForeColor = Color.Black;
+                                break;
+                            case true:
+                                txtContraseña.ForeColor = Color.LightGray;
+                                break;
+                        }
                         txtContraseña.UseSystemPasswordChar = true;
                     }
                     break;
@@ -143,12 +242,28 @@ namespace Sistema_de_Resultados_Deportivos
                 {
                     case "EN":
                         txtContraseña.Text = "Password";
-                        txtContraseña.ForeColor = Color.DimGray;
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                break;
+                            case true:
+                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                break;
+                        }
                         txtContraseña.UseSystemPasswordChar = false;
                         break;
                     case "ES":
                         txtContraseña.Text = "Contraseña";
-                        txtContraseña.ForeColor = Color.DimGray;
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                break;
+                            case true:
+                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                break;
+                        }
                         txtContraseña.UseSystemPasswordChar = false;
                         break;
                 }
@@ -195,6 +310,7 @@ namespace Sistema_de_Resultados_Deportivos
                 case false:
                     try
                     {
+                        Usuario uLog = new Usuario();
                         bool match = false;
                         String user = txtUsuario.Text;
                         String password = txtContraseña.Text;
@@ -208,6 +324,7 @@ namespace Sistema_de_Resultados_Deportivos
                                     if (usuario.email == user && usuario.contrasena == password)
                                     {
                                         match = true;
+                                        uLog = usuario;
                                     }
                                 }
                             }
@@ -218,6 +335,7 @@ namespace Sistema_de_Resultados_Deportivos
                                     if (usuario.nombreUsuario == user && usuario.contrasena == password)
                                     {
                                         match = true;
+                                        uLog = usuario;
                                     }
                                 }
                             }
@@ -232,6 +350,8 @@ namespace Sistema_de_Resultados_Deportivos
                             {
                                 MessageBox.Show("Se a logeado existosamente");
                             }
+                            Principal.AlterPrincipal(1, 3); //Make
+                            Program.login(uLog);
                             Parent.Hide();
                             this.Close();
                         }
@@ -302,6 +422,25 @@ namespace Sistema_de_Resultados_Deportivos
         private bool EsEmail(String user, String value = "@")
         {
             return user.Contains(value);
+        }
+
+        public static void AlterLogin(int y)
+        {
+            switch (y)
+            {
+                case 1:
+                    if (form != null)
+                    {
+                        form.SetTheme();
+                    }
+                    break;
+                case 2:
+                    if (form != null)
+                    {
+                        form.SetIdioma();
+                    }
+                    break;
+            }
         }
     }
 }

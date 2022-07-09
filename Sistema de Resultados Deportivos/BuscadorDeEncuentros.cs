@@ -12,10 +12,13 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class BuscadorDeEncuentros : Form
     {
+        private static BuscadorDeEncuentros form = null;
         bool mtcVisible;
         public BuscadorDeEncuentros()
         {
             InitializeComponent();
+            form = this;
+            SetTheme();
             SetIdioma();
             mtcFechasEventos.Hide();
             btnCalendario.Text = DateTime.Now.ToString("dd-MM-yyyy");
@@ -28,6 +31,7 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void CargarEncuentros(int c) //Carga los botones de panelEncuentros uno por uno
         {
+            panelEncuentros.Controls.Clear();
             String t = "partido";
             for (int i = 0; i < c; i++)
             {
@@ -38,7 +42,7 @@ namespace Sistema_de_Resultados_Deportivos
 
                         p1.Dock = System.Windows.Forms.DockStyle.Top;
                         p1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                        p1.Size = new System.Drawing.Size(563, 60);
+                        p1.Size = new System.Drawing.Size(752, 60);
                         p1.TabIndex = 0;
 
                         Button b1 = new Button(); //Crea el boton que permitira acceder al encuentro
@@ -66,7 +70,7 @@ namespace Sistema_de_Resultados_Deportivos
                         pic2.InitialImage = null;
                         pic2.BackColor = System.Drawing.Color.Transparent;
                         pic2.Size = new System.Drawing.Size(40, 40);
-                        pic2.Location = new System.Drawing.Point(498, 10);
+                        pic2.Location = new System.Drawing.Point(652, 10);
                         pic2.TabIndex = 2;
                         pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.realmadrid;
 
@@ -90,7 +94,7 @@ namespace Sistema_de_Resultados_Deportivos
                         l2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         l2.MaximumSize = new System.Drawing.Size(300, 30);
                         l2.AutoSize = true;
-                        l2.Location = new System.Drawing.Point(382, 16);
+                        l2.Location = new System.Drawing.Point(536, 16);
                         l2.TabIndex = 4;
 
                         Label l3 = new Label(); //Hora del encuentro
@@ -101,8 +105,30 @@ namespace Sistema_de_Resultados_Deportivos
                         l3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         l3.MaximumSize = new System.Drawing.Size(100, 30);
                         l3.AutoSize = true;
-                        l3.Location = new System.Drawing.Point(248, 38);
+                        l3.Location = new Point(p1.Width / 2 - l3.Width / 2, p1.Height - l3.Height);
                         l3.TabIndex = 5;
+
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                b1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                                b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                                b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                                b1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l2.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l3.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                break;
+                            case true:
+                                b1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                                b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+                                b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                                b1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l2.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l3.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                break;
+                        }
 
                         this.panelEncuentros.Controls.Add(p1); //Agrega los controles al panelEncuentros
                         p1.Controls.Add(b1);
@@ -142,6 +168,7 @@ namespace Sistema_de_Resultados_Deportivos
                         Label l4 = new Label(); //Nombre de Equipo 1
 
                         l4.BackColor = System.Drawing.Color.Transparent;
+                        l4.BackColor = System.Drawing.Color.Transparent;
                         l4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                         l4.Text = "Torneo X";
                         l4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -153,6 +180,7 @@ namespace Sistema_de_Resultados_Deportivos
                         Label l5 = new Label(); //Hora del encuentro
 
                         l5.BackColor = System.Drawing.Color.Transparent;
+                        l5.BackColor = System.Drawing.Color.Transparent;
                         l5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                         l5.Text = "10:00";
                         l5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -160,6 +188,26 @@ namespace Sistema_de_Resultados_Deportivos
                         l5.AutoSize = true;
                         l5.Location = new System.Drawing.Point(242, 14);
                         l5.TabIndex = 5;
+
+                        switch (AjustesDeUsuario.darkTheme)
+                        {
+                            case false:
+                                b2.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                                b2.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                                b2.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                                b2.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l4.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l5.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                break;
+                            case true:
+                                b2.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                                b2.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+                                b2.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                                b2.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l4.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l5.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                break;
+                        }
 
                         this.panelEncuentros.Controls.Add(p2); //Agrega los controles al panelEncuentros
                         p2.Controls.Add(b2);
@@ -187,6 +235,26 @@ namespace Sistema_de_Resultados_Deportivos
         private void mtcFechasEventos_DateChanged(object sender, DateRangeEventArgs e)
         {
             btnCalendario.Text = mtcFechasEventos.SelectionRange.End.ToString("dd-MM-yyyy");
+        }
+
+        public static void AlterBuscador(int y)
+        {
+            switch (y)
+            {
+                case 1:
+                    if (form != null)
+                    {
+                        form.SetTheme();
+                        form.CargarEncuentros(10);
+                    }
+                    break;
+                case 2:
+                    if (form != null)
+                    {
+                        form.SetIdioma();
+                    }
+                    break;
+            }
         }
     }
 }

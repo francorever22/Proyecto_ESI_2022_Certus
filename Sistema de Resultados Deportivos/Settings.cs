@@ -19,7 +19,9 @@ namespace Sistema_de_Resultados_Deportivos
         public Settings()
         {
             InitializeComponent();
+            SetTheme();
             SetIdioma();
+            cbxLenguaje.SelectedItem = AjustesDeUsuario.language;
             tglTema.Checked = theme;
         }
         
@@ -37,8 +39,25 @@ namespace Sistema_de_Resultados_Deportivos
         {
             try
             {
-                AjustesDeUsuario.darkTheme = theme;
-                AjustesDeUsuario.language = lan;
+                if (AjustesDeUsuario.darkTheme != theme)
+                {
+                    AjustesDeUsuario.darkTheme = theme;
+                    this.SetTheme();
+                    Principal.AlterPrincipal(0, 1);
+                    Users.AlterUsers(1);
+                    Login.AlterLogin(1);
+                    Categorias.AlterCategorias(1);
+                    BuscadorDeEncuentros.AlterBuscador(1);
+                }
+                if (AjustesDeUsuario.language != lan)
+                {
+                    AjustesDeUsuario.language = lan;
+                    this.SetIdioma();
+                    Principal.AlterPrincipal(0, 2);
+                    Users.AlterUsers(2);
+                    Login.AlterLogin(2);
+                    BuscadorDeEncuentros.AlterBuscador(2);
+                }
                 MessageBox.Show("Ajustes guardados correctamente");
             } catch
             {

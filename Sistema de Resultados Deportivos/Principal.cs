@@ -13,9 +13,13 @@ namespace Sistema_de_Resultados_Deportivos
     public partial class Principal : Form
     {
         bool f0 = false, f1 = false; //Determinan si los sub menus son visibles
+        private static Principal form = null;
+        private delegate void EnableDelegate(int x);
         public Principal()
         {
             InitializeComponent();
+            form = this;
+
             this.SetBevel(false);
             CargarCategorias();
             panelCategorias.Hide();
@@ -32,22 +36,42 @@ namespace Sistema_de_Resultados_Deportivos
             Form publicidad2 = new APIPublicidad();
             publicidad1.TopLevel = false;
             publicidad2.TopLevel = false;
-            this.panelPublicidad1.Controls.Add(publicidad1);
-            this.panelPublicidad2.Controls.Add(publicidad2);
+            panelPublicidad1.Controls.Add(publicidad1);
+            panelPublicidad2.Controls.Add(publicidad2);
             publicidad1.Show();
             publicidad2.Show();
 
+            SetTheme();
+            PrincipalColor();
             SetIdioma();
+        }
+
+        private void PrincipalColor() //Establece el color de fondo del formulario Principal
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is MdiClient)
+                {
+                    if (AjustesDeUsuario.darkTheme == true)
+                    {
+                        c.BackColor = Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+                    } else
+                    {
+                        c.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+                    }
+                }
+            }
         }
 
         private void CargarCategorias()
         {
+            this.panelCategorias.Controls.Clear();
+            int x = 0;
             var categorias = Logica.DeserializeCategorias(Logica.GetJson("DinamicJson\\Categorias.json"));
             foreach (var c in categorias)
             {
                 Button b1 = new Button(); //Crea el boton que permitira acceder a la categoria
 
-                b1.BackColor = System.Drawing.SystemColors.Control;
                 b1.Dock = System.Windows.Forms.DockStyle.Top;
                 b1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                 b1.Location = new System.Drawing.Point(0, 0);
@@ -58,8 +82,31 @@ namespace Sistema_de_Resultados_Deportivos
                 b1.UseVisualStyleBackColor = false;
                 b1.Click += (sender, EventArgs) => {b1_Click(sender, EventArgs, c.nombreCategoria); };
 
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false: //Tema claro
+                        b1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                        b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                        b1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                        break;
+                    case true: //Tema oscuro
+                        b1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+                        b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                        b1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        break;
+                }
+
                 this.panelCategorias.Controls.Add(b1);
+
+                if (x < 580)
+                {
+                    x += 58;
+                }
+                else { x = 602; }
             }
+            this.panelCategorias.Size = new System.Drawing.Size(229, x);
         }
 
         private void toggleSubMenu(int x) //Muestra o oculta los submenus
@@ -93,27 +140,22 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
-        private void log()
+        private void log(int x)
         {
-            if (btnLogin.Visible == true)
+            if (x == 1)
             {
                 btnLogout.Visible = true;
                 btnUser.Visible = true;
                 btnLogin.Visible = false;
-                panelOptions.Size = new System.Drawing.Size(140, 120);
-            } else
+                panelOptions.Size = new System.Drawing.Size(140, 160);
+            } else if (x == 0)
             {
                 btnLogout.Visible = false;
                 btnUser.Visible = false;
                 btnLogin.Visible = true;
-                panelOptions.Size = new System.Drawing.Size(140, 80);
+                panelOptions.Size = new System.Drawing.Size(140, 120);
+                Program.logout();
             }
-            Form login = new Login();
-            login.TopLevel = false;
-            login.TopMost = true;
-            this.panelLogin.Controls.Add(login);
-            panelLogin.Show();
-            login.Show();
         }
 
         private void btnMore_Click(object sender, EventArgs e)
@@ -128,13 +170,18 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            log();
             toggleSubMenu(1);
+            Form login = new Login();
+            login.TopLevel = false;
+            login.TopMost = true;
+            this.panelLogin.Controls.Add(login);
+            panelLogin.Show();
+            login.Show();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            log();
+            log(0);
             toggleSubMenu(1);
         }
 
@@ -158,6 +205,78 @@ namespace Sistema_de_Resultados_Deportivos
             cate.TopLevel = false;
             this.panelChico.Controls.Add(cate);
             cate.Show();
+        }
+
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelChico.Controls.Clear();
+                toggleSubMenu(1);
+                Form us = new Users();
+                us.TopLevel = false;
+                this.panelChico.Controls.Add(us);
+                us.Show();
+            } catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        public static void AlterPrincipal(int x, int y)
+        {
+            switch (y)
+            {
+                case 0:
+                    if (form != null)
+                    {
+                        form.ChangeAds(x);
+                    }
+                    break;
+                case 1:
+                    if (form != null)
+                    {
+                        form.SetTheme();
+                        form.CargarCategorias();
+                        form.PrincipalColor();
+                    }
+                    break;
+                case 2:
+                    if (form != null)
+                    {
+                        form.SetIdioma();
+                    }
+                    break;
+                case 3:
+                    if (form != null)
+                    {
+                        form.log(x);
+                    }
+                    break;
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ChangeAds(int x)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new EnableDelegate(ChangeAds), new object[] { x });
+                return;
+            }
+
+            switch (x)
+            {
+                case 0:
+                    panelPublicidad1.Show();
+                    panelPublicidad2.Show();
+                    break;
+                case 1:
+                    panelPublicidad1.Hide();
+                    panelPublicidad2.Hide();
+                    break;
+            }
         }
     }
 }

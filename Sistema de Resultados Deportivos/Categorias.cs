@@ -12,17 +12,21 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class Categorias : Form
     {
+        private static Categorias form = null;
         public Categorias(String cat)
         {
             InitializeComponent();
+            form = this;
             lblCategorias.Text = cat;
             int x = (this.Size.Width - lblCategorias.Size.Width) / 2;
             lblCategorias.Location = new Point(x, lblCategorias.Location.Y);
+            SetTheme();
             CargarDeportes();
         }
 
         private void CargarDeportes() //Carga los botones de panelDeportes uno por uno
         {
+            panelDeportes.Controls.Clear();
             int x = 12;
             int y = 0;
             var deportes = Logica.DeserializeDeportes(Logica.GetJson("DinamicJson\\Deportes.json"));
@@ -48,6 +52,22 @@ namespace Sistema_de_Resultados_Deportivos
                     b1.Image = null;
                     b1.Text = deporte.nombreDeporte;
 
+                    switch (AjustesDeUsuario.darkTheme)
+                    {
+                        case false:
+                            b1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                            b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                            b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                            b1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                            break;
+                        case true:
+                            b1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                            b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+                            b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                            b1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                            break;
+                    }
+
                     this.panelDeportes.Controls.Add(p1); //Agrega los controles al panelCategorias
                     p1.Controls.Add(b1);
 
@@ -69,6 +89,20 @@ namespace Sistema_de_Resultados_Deportivos
                         x = 12;
                     }
                 }
+            }
+        }
+
+        public static void AlterCategorias(int y)
+        {
+            switch (y)
+            {
+                case 1:
+                    if (form != null)
+                    {
+                        form.SetTheme();
+                        form.CargarDeportes();
+                    }
+                    break;
             }
         }
     }
