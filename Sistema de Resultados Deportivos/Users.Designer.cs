@@ -318,7 +318,7 @@
                     this.lblUser.Location = new System.Drawing.Point(276, 9);
                     this.btnDelete.Text = "Eliminar cuenta";
                     this.btnChangePass.Text = "Cambiar contraseña";
-                    this.btnPremium.Text = "Pasate a premium!";
+                    this.btnPremium.Text = "¡Pasate a premium!";
                     this.btnAddNumber.Text = "Agregar número de telefono";
                     this.btnAddNumber.Location = new System.Drawing.Point(11, 247);
                     this.btnAddNumber.Size = new System.Drawing.Size(224, 32);

@@ -158,6 +158,15 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
+        private void openEncuentros()
+        {
+            this.panelChico.Controls.Clear();
+            Form encu = new Frm_Encuentros_Tipo_A();
+            encu.TopLevel = false;
+            this.panelChico.Controls.Add(encu);
+            encu.Show();
+        }
+
         private void btnMore_Click(object sender, EventArgs e)
         {
             toggleSubMenu(0);
@@ -220,7 +229,7 @@ namespace Sistema_de_Resultados_Deportivos
             } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        public static void AlterPrincipal(int x, int y)
+        public static void AlterPrincipal(int x, int y, int z)
         {
             switch (y)
             {
@@ -250,10 +259,46 @@ namespace Sistema_de_Resultados_Deportivos
                         form.log(x);
                     }
                     break;
+                case 4:
+                    if (form != null)
+                    {
+                        form.ToastClicked(x, z);
+                    }
+                    break;
+                case 5:
+                    if (form != null)
+                    {
+                        form.openEncuentros();
+                    }
+                    break;
             }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
+        {
+            if (AjustesDeUsuario.tray == true)
+            {
+                toggleSubMenu(1);
+                this.Hide();
+                notifyIcon.Visible = true;
+            } else
+            {
+                Application.Exit();
+            }
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            contextMenuStrip.Show(Control.MousePosition);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            notifyIcon.Visible = false;
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -277,6 +322,16 @@ namespace Sistema_de_Resultados_Deportivos
                     panelPublicidad2.Hide();
                     break;
             }
+        }
+
+        private void ToastClicked(int type, int id)
+        {
+            if (notifyIcon.Visible == true)
+            {
+                this.Show();
+                notifyIcon.Visible = false;
+            }
+            MessageBox.Show("It works! :D");
         }
     }
 }

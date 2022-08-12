@@ -36,10 +36,10 @@ namespace Sistema_de_Resultados_Deportivos
                             switch (AjustesDeUsuario.darkTheme)
                             {
                                 case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    txtUsuario.ForeColor = Color.Black;
                                     break;
                                 case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    txtUsuario.ForeColor = Color.LightGray;
                                     break;
                             }
                         }
@@ -166,15 +166,18 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void txtCorreo_Enter(object sender, EventArgs e)
         {
-            txtCorreo.Text = "";
-            switch (AjustesDeUsuario.darkTheme)
+            if (txtCorreo.Text == "Email")
             {
-                case false:
-                    txtCorreo.ForeColor = Color.Black;
-                    break;
-                case true:
-                    txtCorreo.ForeColor = Color.LightGray;
-                    break;
+                txtCorreo.Text = "";
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false:
+                        txtCorreo.ForeColor = Color.Black;
+                        break;
+                    case true:
+                        txtCorreo.ForeColor = Color.LightGray;
+                        break;
+                }
             }
         }
 
@@ -272,6 +275,8 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
+            bool exist = false;
+            String msg = "";
             switch (registrarse)
             {
                 case true:
@@ -280,15 +285,48 @@ namespace Sistema_de_Resultados_Deportivos
                         if (txtCorreo.Text != "" && txtContraseña.Text != "" && txtUsuario.Text != "")
                         {
                             var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                            Usuario newUser = new Usuario();
-                            newUser.nombreUsuario = txtUsuario.Text;
-                            newUser.email = txtCorreo.Text;
-                            newUser.contrasena = txtContraseña.Text;
-                            newUser.nivelPermisos = 1;
-                            newUser.numeroTelefono = null;
-                            usuarios.Add(newUser);
-                            Logica.SerializeUsers(usuarios);
-                            MessageBox.Show("New administrator created correctly");
+                            foreach (var u in usuarios)
+                            {
+                                if (u.nombreUsuario == txtUsuario.Text)
+                                {
+                                    exist = true;
+                                    if (AjustesDeUsuario.language == "EN")
+                                    {
+                                        msg = "The user already exist";
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        msg = "El usuario ya existe";
+                                    }
+                                }
+                                if (u.email == txtCorreo.Text)
+                                {
+                                    exist = true;
+                                    if (AjustesDeUsuario.language == "EN")
+                                    {
+                                        msg = "The email is already registered";
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        msg = "El email ya esta registrado";
+                                    }
+                                }
+                            }
+                            if (exist == false)
+                            {
+                                Usuario newUser = new Usuario();
+                                newUser.nombreUsuario = txtUsuario.Text;
+                                newUser.email = txtCorreo.Text;
+                                newUser.contrasena = txtContraseña.Text;
+                                newUser.nivelPermisos = 1;
+                                newUser.numeroTelefono = null;
+                                usuarios.Add(newUser);
+                                Logica.SerializeUsers(usuarios);
+                                MessageBox.Show("New administrator created correctly");
+                            } else
+                            {
+                                MessageBox.Show(msg);
+                            }
                         }
                         else
                         {
@@ -350,7 +388,7 @@ namespace Sistema_de_Resultados_Deportivos
                             {
                                 MessageBox.Show("Se a logeado existosamente");
                             }
-                            Principal.AlterPrincipal(1, 3); //Make
+                            Principal.AlterPrincipal(1, 3, 0); //Make
                             Program.login(uLog);
                             Parent.Hide();
                             this.Close();
@@ -392,13 +430,16 @@ namespace Sistema_de_Resultados_Deportivos
                     btnAcceder.Text = "Registrate";
                     llbRegistrarse.Text = "Log in";
                     txtUsuario.Text = "User";
+                    txtContraseña.Text = "Password";
                 }
                 else if (AjustesDeUsuario.language == "ES")
                 {
                     btnAcceder.Text = "Registrarse";
                     llbRegistrarse.Text = "Login";
                     txtUsuario.Text = "Usuario";
+                    txtContraseña.Text = "Contraseña";
                 }
+                txtCorreo.Text = "Email";
             } else
             {
                 txtCorreo.Hide();
@@ -410,13 +451,27 @@ namespace Sistema_de_Resultados_Deportivos
                     btnAcceder.Text = "Access";
                     llbRegistrarse.Text = "Registrate";
                     txtUsuario.Text = "User or email";
+                    txtContraseña.Text = "Password";
                 } else if (AjustesDeUsuario.language == "ES")
                 {
                     btnAcceder.Text = "Acceder";
                     llbRegistrarse.Text = "Registrarse";
                     txtUsuario.Text = "Usuario o email";
+                    txtContraseña.Text = "Contraseña";
                 }
             }
+            switch (AjustesDeUsuario.darkTheme)
+            {
+                case false:
+                    txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                    break;
+                case true:
+                    txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                    break;
+            }
+            txtContraseña.UseSystemPasswordChar = false;
         }
 
         private bool EsEmail(String user, String value = "@")

@@ -28,10 +28,10 @@ namespace Sistema_de_Resultados_Deportivos
             user = u;
             if (user.nivelPermisos > 1)
             {
-                Principal.AlterPrincipal(1, 0);
+                Principal.AlterPrincipal(1, 0, 0);
             } else
             {
-                Principal.AlterPrincipal(0, 0);
+                Principal.AlterPrincipal(0, 0, 0);
             }
         }
 
@@ -45,7 +45,7 @@ namespace Sistema_de_Resultados_Deportivos
                 numeroTelefono = null,
                 deportesFavoritos = null
             };
-            Principal.AlterPrincipal(0, 0);
+            Principal.AlterPrincipal(0, 0, 0);
         }
     }
 }

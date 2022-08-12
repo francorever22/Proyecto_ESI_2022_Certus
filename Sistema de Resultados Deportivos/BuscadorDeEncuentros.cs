@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Sistema_de_Resultados_Deportivos
+﻿namespace Sistema_de_Resultados_Deportivos
 {
     public partial class BuscadorDeEncuentros : Form
     {
@@ -23,8 +13,6 @@ namespace Sistema_de_Resultados_Deportivos
             mtcFechasEventos.Hide();
             btnCalendario.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtBuscador.AutoSize = false;
-            txtBuscador.Size = new System.Drawing.Size(514, 27);
-            txtBuscador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
             CargarEncuentros(10);
         }
@@ -55,6 +43,7 @@ namespace Sistema_de_Resultados_Deportivos
                         b1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                         b1.Text = "0 - 0";
                         b1.UseVisualStyleBackColor = true;
+                        b1.Click += (sender, EventArgs) => { b1_Click(sender, EventArgs); };
 
                         PictureBox pic1 = new PictureBox(); //Imagen de Equipo 1
 
@@ -63,6 +52,7 @@ namespace Sistema_de_Resultados_Deportivos
                         pic1.Size = new System.Drawing.Size(40, 40);
                         pic1.Location = new System.Drawing.Point(10, 10);
                         pic1.TabIndex = 1;
+                        pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                         pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
 
                         PictureBox pic2 = new PictureBox(); //Imagen de Equipo 2
@@ -72,6 +62,7 @@ namespace Sistema_de_Resultados_Deportivos
                         pic2.Size = new System.Drawing.Size(40, 40);
                         pic2.Location = new System.Drawing.Point(652, 10);
                         pic2.TabIndex = 2;
+                        pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                         pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.realmadrid;
 
                         Label l1 = new Label(); //Nombre de Equipo 1
@@ -164,6 +155,7 @@ namespace Sistema_de_Resultados_Deportivos
                         pic3.Size = new System.Drawing.Size(40, 40);
                         pic3.Location = new System.Drawing.Point(10, 10);
                         pic3.TabIndex = 1;
+                        pic3.SizeMode = PictureBoxSizeMode.StretchImage;
 
                         Label l4 = new Label(); //Nombre de Equipo 1
 
@@ -219,6 +211,10 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
+        private void b1_Click(object sender, EventArgs e)
+        {
+            Principal.AlterPrincipal(0, 5, 0);
+        }
         private void btnCalendario_Click(object sender, EventArgs e)
         {
             if (mtcVisible == false)

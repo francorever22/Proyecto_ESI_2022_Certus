@@ -58,9 +58,11 @@
             // 
             this.txtBuscador.AcceptsReturn = true;
             this.txtBuscador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBuscador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtBuscador.Location = new System.Drawing.Point(0, 0);
+            this.txtBuscador.Multiline = true;
             this.txtBuscador.Name = "txtBuscador";
-            this.txtBuscador.Size = new System.Drawing.Size(514, 23);
+            this.txtBuscador.Size = new System.Drawing.Size(514, 27);
             this.txtBuscador.TabIndex = 1;
             this.txtBuscador.WordWrap = false;
             // 

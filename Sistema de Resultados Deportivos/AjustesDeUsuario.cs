@@ -10,5 +10,6 @@ namespace Sistema_de_Resultados_Deportivos
     {
         public static string language = "EN";
         public static bool darkTheme = false;
+        public static bool tray = false;
     }
 }

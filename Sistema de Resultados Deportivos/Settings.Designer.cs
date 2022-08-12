@@ -130,6 +130,7 @@
             this.tglTray.Size = new System.Drawing.Size(45, 22);
             this.tglTray.TabIndex = 8;
             this.tglTray.UseVisualStyleBackColor = true;
+            this.tglTray.CheckedChanged += new System.EventHandler(this.tglTray_CheckedChanged);
             // 
             // tglInicio
             // 
@@ -236,7 +237,7 @@
                     this.lblConfiguraciones.Text = "Configuraciones";
                     this.lblConfiguraciones.Location = new System.Drawing.Point(92, 9);
                     this.lblactivarNotificaciones.Text = "Activar notificaciones";
-                    this.lblIniciarapp.Text = "Iniciar app al iniciarse el sistema";
+                    this.lblIniciarapp.Text = "Abrir app al iniciar el sistema";
                     this.lblMinimizarlabandeja.Text = "Minimizar a la bandeja";
                     this.lblLenguaje.Text = "Lenguaje";
                     this.lblTema.Text = "Tema oscuro";
