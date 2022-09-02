@@ -29,6 +29,24 @@ namespace SRD_BackOffice
             string bannersJsonData = JsonSerializer.Serialize(banners);
             File.WriteAllText(path, bannersJsonData);
         }
+
+        public static void SerializeEquipos(List<Equipo> equipos, string path = "DinamicJson\\Equipos.json")
+        {
+            string equiposJsonData = JsonSerializer.Serialize(equipos);
+            File.WriteAllText(path, equiposJsonData);
+        }
+
+        public static void SerializeDeportistas(List<Deportista> depostistas, string path = "DinamicJson\\Deportistas.json")
+        {
+            string depostistasJsonData = JsonSerializer.Serialize(depostistas);
+            File.WriteAllText(path, depostistasJsonData);
+        }
+
+        public static void SerializeEventos(List<Evento> eventos, string path = "DinamicJson\\Eventos.json")
+        {
+            string eventosJsonData = JsonSerializer.Serialize(eventos);
+            File.WriteAllText(path, eventosJsonData);
+        }
         #endregion
 
         #region Deserialization
@@ -64,6 +82,24 @@ namespace SRD_BackOffice
         {
             var banners = JsonSerializer.Deserialize<List<Banner>>(jsonFile);
             return banners;
+        }
+
+        public static List<Equipo> DeserializeEquipos(String jsonFile)
+        {
+            var equipos = JsonSerializer.Deserialize<List<Equipo>>(jsonFile);
+            return equipos;
+        }
+
+        public static List<Deportista> DeserializeDeportistas(String jsonFile)
+        {
+            var deportistas = JsonSerializer.Deserialize<List<Deportista>>(jsonFile);
+            return deportistas;
+        }
+
+        public static List<Evento> DeserializeEventos(String jsonFile)
+        {
+            var eventos = JsonSerializer.Deserialize<List<Evento>>(jsonFile);
+            return eventos;
         }
 
         public static void DeserializeFile(String jsonFile)

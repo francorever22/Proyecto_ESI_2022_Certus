@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Collections.Generic;
-
-namespace SRD_BackOffice
+﻿namespace SRD_BackOffice
 {
     public partial class MainMenu : Form
     {
@@ -17,6 +6,16 @@ namespace SRD_BackOffice
         {
             InitializeComponent();
             SetIdioma();
+
+            if (Program.boss == false)
+            {
+                btnAgregarAdmin.Enabled = false;
+                btnManageAdmins.Enabled = false;
+                btnAgregarAdmin.Hide();
+                btnManageAdmins.Hide();
+            }
+
+            cbxLanguage.SelectedIndex = 0;
         }
 
         private void btnAgregarAdmin_Click(object sender, EventArgs e)
@@ -82,6 +81,69 @@ namespace SRD_BackOffice
         {
             Program.language = cbxLanguage.Text;
             SetIdioma();
+        }
+
+        private void AddEvent_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCrearEvento crearEvento = new MenuCrearEvento();
+            crearEvento.StartPosition = FormStartPosition.CenterParent;
+            crearEvento.ShowDialog();
+            this.Close();
+        }
+
+        private void btnManageEvents_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuManageEvents manageEvento = new MenuManageEvents();
+            manageEvento.StartPosition = FormStartPosition.CenterParent;
+            manageEvento.ShowDialog();
+            this.Close();
+        }
+
+        private void btnAddAthlete_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCrearDeportista addAthlete = new MenuCrearDeportista();
+            addAthlete.StartPosition = FormStartPosition.CenterParent;
+            addAthlete.ShowDialog();
+            this.Close();
+        }
+
+        private void btnAddTeam_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCrearEquipo addTeam = new MenuCrearEquipo();
+            addTeam.StartPosition = FormStartPosition.CenterParent;
+            addTeam.ShowDialog();
+            this.Close();
+        }
+
+        private void btnMangeTeam_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuManageTeams manageTeam = new MenuManageTeams();
+            manageTeam.StartPosition = FormStartPosition.CenterParent;
+            manageTeam.ShowDialog();
+            this.Close();
+        }
+
+        private void btnManageAthletes_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuManageAthletes manageAthletes = new MenuManageAthletes();
+            manageAthletes.StartPosition = FormStartPosition.CenterParent;
+            manageAthletes.ShowDialog();
+            this.Close();
+        }
+
+        private void btnManageAdmins_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuManageAdministradores manageAdmins = new MenuManageAdministradores();
+            manageAdmins.StartPosition = FormStartPosition.CenterParent;
+            manageAdmins.ShowDialog();
+            this.Close();
         }
     }
 }

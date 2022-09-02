@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-
-namespace SRD_BackOffice
+﻿namespace SRD_BackOffice
 {
     public partial class Login : Form
     {
@@ -105,7 +94,7 @@ namespace SRD_BackOffice
         {
             try
             {
-                bool match = false;
+                bool match = false, boss = false;
                 String user = txtUsuario.Text;
                 String password = txtContraseña.Text;
                 var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
@@ -115,9 +104,10 @@ namespace SRD_BackOffice
                     {
                         foreach (var usuario in usuarios)
                         {
-                            if (usuario.email == user && usuario.contrasena == password && usuario.nivelPermisos == 3)
+                            if (usuario.email == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
                             {
                                 match = true;
+                                if (usuario.nivelPermisos == 4) { boss = true; }
                             }
                         }
                     }
@@ -125,9 +115,10 @@ namespace SRD_BackOffice
                     {
                         foreach (var usuario in usuarios)
                         {
-                            if (usuario.nombreUsuario == user && usuario.contrasena == password && usuario.nivelPermisos == 3)
+                            if (usuario.nombreUsuario == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
                             {
                                 match = true;
+                                if (usuario.nivelPermisos == 4) { boss = true; }
                             }
                         }
                     }
@@ -135,6 +126,7 @@ namespace SRD_BackOffice
 
                 if (match == true)
                 {
+                    if (boss == true) { Program.boss = true; }
                     this.Hide();
                     MainMenu main = new MainMenu();
                     main.StartPosition = FormStartPosition.CenterParent;
