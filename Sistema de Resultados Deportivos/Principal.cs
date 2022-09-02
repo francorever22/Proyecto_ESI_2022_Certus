@@ -106,7 +106,7 @@ namespace Sistema_de_Resultados_Deportivos
                 }
                 else { x = 602; }
             }
-            this.panelCategorias.Size = new System.Drawing.Size(229, x);
+            this.panelCategorias.Size = new System.Drawing.Size(214, x);
         }
 
         private void toggleSubMenu(int x) //Muestra o oculta los submenus
@@ -161,10 +161,19 @@ namespace Sistema_de_Resultados_Deportivos
         private void openEncuentros()
         {
             this.panelChico.Controls.Clear();
-            Form encu = new Frm_Encuentros_Tipo_A();
+            Form encu = new Frm_Encuentros();
             encu.TopLevel = false;
             this.panelChico.Controls.Add(encu);
             encu.Show();
+        }
+
+        private void openEventos()
+        {
+            this.panelChico.Controls.Clear();
+            Form eve = new Frm_Eventos();
+            eve.TopLevel = false;
+            this.panelChico.Controls.Add(eve);
+            eve.Show();
         }
 
         private void btnMore_Click(object sender, EventArgs e)
@@ -204,6 +213,16 @@ namespace Sistema_de_Resultados_Deportivos
             panelSettings.Show();
 
             toggleSubMenu(1);
+        }
+
+        private void InfoEquipos_Jugadores(int type)
+        {
+            Form info = new Frm_EquiposJugadores(type);
+            info.TopLevel = false;
+            info.TopMost = true;
+            this.panelSettings.Controls.Add(info);
+            info.Show();
+            panelSettings.Show();
         }
 
         private void b1_Click(object sender, EventArgs e, string cat)
@@ -271,6 +290,18 @@ namespace Sistema_de_Resultados_Deportivos
                         form.openEncuentros();
                     }
                     break;
+                case 6:
+                    if (form != null)
+                    {
+                        form.InfoEquipos_Jugadores(x);
+                    }
+                    break;
+                case 7:
+                    if (form != null)
+                    {
+                        form.openEventos();
+                    }
+                    break;
             }
         }
 
@@ -324,6 +355,23 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
+        private void btnNoticias_Click(object sender, EventArgs e)
+        {
+            //foreach (var n in Program.noticias)
+            //{
+            //    MessageBox.Show(n.header);
+            //}
+        }
+
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            this.panelChico.Controls.Clear();
+            Form buscador = new BuscadorDeEncuentros();
+            buscador.TopLevel = false;
+            this.panelChico.Controls.Add(buscador);
+            buscador.Show();
+        }
+        
         private void ToastClicked(int type, int id)
         {
             if (notifyIcon.Visible == true)

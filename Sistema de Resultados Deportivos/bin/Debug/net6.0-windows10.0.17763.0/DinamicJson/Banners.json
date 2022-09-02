@@ -1,0 +1,32 @@
+[
+  {
+    "IdBanner": 0,
+    "TitleBanner": "Fanta",
+    "Link": "https://www.cocacola.es/fanta",
+    "BannerImage": "..\\..\\..\\Resources\\Publicidad_Fanta.gif"
+  },
+  {
+    "IdBanner": 1,
+    "TitleBanner": "Despegar",
+    "Link": "https://www.despegar.com.uy/",
+    "BannerImage": "..\\..\\..\\Resources\\Publicidad_Despegar.gif"
+  },
+  {
+    "IdBanner": 2,
+    "TitleBanner": "Discord",
+    "Link": "https://discord.com/",
+    "BannerImage": "..\\..\\..\\Resources\\Publicidad_Discord.gif"
+  },
+  {
+    "IdBanner": 3,
+    "TitleBanner": "Monster",
+    "Link": "https://www.monsterenergy.com/",
+    "BannerImage": "..\\..\\..\\Resources\\Publicidad_Monster.gif"
+  },
+  {
+    "IdBanner": 4,
+    "TitleBanner": "Samsung",
+    "Link": "https://www.samsung.com/uy/smartphones/galaxy-s22-ultra/",
+    "BannerImage": "..\\..\\..\\Resources\\Publicidad_Samsung.gif"
+  }
+]

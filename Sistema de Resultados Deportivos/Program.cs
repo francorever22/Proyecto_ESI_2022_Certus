@@ -11,6 +11,9 @@ namespace Sistema_de_Resultados_Deportivos
             numeroTelefono = null,
             deportesFavoritos = null
         };
+
+        //public static List<Noticia> noticias = News.GetNoticias();
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

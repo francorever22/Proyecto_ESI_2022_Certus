@@ -55,6 +55,7 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnInicio = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.panelMas.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -70,16 +71,16 @@
             this.panelSuperior.Controls.Add(this.btnDeportesPopulares);
             this.panelSuperior.Controls.Add(this.btnEventosPopulares);
             this.panelSuperior.Controls.Add(this.btnFavoritos);
-            this.panelSuperior.Location = new System.Drawing.Point(228, -1);
+            this.panelSuperior.Location = new System.Drawing.Point(276, 0);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(1198, 60);
+            this.panelSuperior.Size = new System.Drawing.Size(1150, 60);
             this.panelSuperior.TabIndex = 1;
             // 
             // btnOptions
             // 
             this.btnOptions.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOptions.Location = new System.Drawing.Point(892, 0);
+            this.btnOptions.Location = new System.Drawing.Point(844, 0);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(0);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(63, 58);
@@ -92,19 +93,20 @@
             // 
             this.btnNoticias.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnNoticias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNoticias.Location = new System.Drawing.Point(669, 0);
+            this.btnNoticias.Location = new System.Drawing.Point(633, 0);
             this.btnNoticias.Name = "btnNoticias";
-            this.btnNoticias.Size = new System.Drawing.Size(223, 58);
+            this.btnNoticias.Size = new System.Drawing.Size(211, 58);
             this.btnNoticias.TabIndex = 6;
             this.btnNoticias.UseVisualStyleBackColor = false;
+            this.btnNoticias.Click += new System.EventHandler(this.btnNoticias_Click);
             // 
             // btnDeportesPopulares
             // 
             this.btnDeportesPopulares.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnDeportesPopulares.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeportesPopulares.Location = new System.Drawing.Point(446, 0);
+            this.btnDeportesPopulares.Location = new System.Drawing.Point(422, 0);
             this.btnDeportesPopulares.Name = "btnDeportesPopulares";
-            this.btnDeportesPopulares.Size = new System.Drawing.Size(223, 58);
+            this.btnDeportesPopulares.Size = new System.Drawing.Size(211, 58);
             this.btnDeportesPopulares.TabIndex = 5;
             this.btnDeportesPopulares.UseVisualStyleBackColor = false;
             // 
@@ -112,10 +114,10 @@
             // 
             this.btnEventosPopulares.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnEventosPopulares.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEventosPopulares.Location = new System.Drawing.Point(223, 0);
+            this.btnEventosPopulares.Location = new System.Drawing.Point(211, 0);
             this.btnEventosPopulares.Margin = new System.Windows.Forms.Padding(0);
             this.btnEventosPopulares.Name = "btnEventosPopulares";
-            this.btnEventosPopulares.Size = new System.Drawing.Size(223, 58);
+            this.btnEventosPopulares.Size = new System.Drawing.Size(211, 58);
             this.btnEventosPopulares.TabIndex = 2;
             this.btnEventosPopulares.UseVisualStyleBackColor = false;
             // 
@@ -126,17 +128,17 @@
             this.btnFavoritos.Location = new System.Drawing.Point(0, 0);
             this.btnFavoritos.Margin = new System.Windows.Forms.Padding(0);
             this.btnFavoritos.Name = "btnFavoritos";
-            this.btnFavoritos.Size = new System.Drawing.Size(223, 58);
+            this.btnFavoritos.Size = new System.Drawing.Size(211, 58);
             this.btnFavoritos.TabIndex = 1;
             this.btnFavoritos.UseVisualStyleBackColor = false;
             // 
             // btnMore
             // 
-            this.btnMore.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMore.Location = new System.Drawing.Point(0, 0);
             this.btnMore.Name = "btnMore";
-            this.btnMore.Size = new System.Drawing.Size(229, 58);
+            this.btnMore.Size = new System.Drawing.Size(214, 60);
             this.btnMore.TabIndex = 0;
             this.btnMore.UseVisualStyleBackColor = false;
             this.btnMore.Click += new System.EventHandler(this.btnMore_Click);
@@ -146,18 +148,18 @@
             this.panelMas.AutoSize = true;
             this.panelMas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelMas.Controls.Add(this.btnMore);
-            this.panelMas.Location = new System.Drawing.Point(0, 0);
+            this.panelMas.Location = new System.Drawing.Point(63, 0);
             this.panelMas.Margin = new System.Windows.Forms.Padding(0);
             this.panelMas.MaximumSize = new System.Drawing.Size(229, 1200);
-            this.panelMas.MinimumSize = new System.Drawing.Size(229, 58);
+            this.panelMas.MinimumSize = new System.Drawing.Size(210, 58);
             this.panelMas.Name = "panelMas";
-            this.panelMas.Size = new System.Drawing.Size(229, 59);
+            this.panelMas.Size = new System.Drawing.Size(214, 60);
             this.panelMas.TabIndex = 3;
             // 
             // panelCategorias
             // 
             this.panelCategorias.BackColor = System.Drawing.Color.Transparent;
-            this.panelCategorias.Location = new System.Drawing.Point(0, 58);
+            this.panelCategorias.Location = new System.Drawing.Point(63, 60);
             this.panelCategorias.Name = "panelCategorias";
             this.panelCategorias.Size = new System.Drawing.Size(200, 100);
             this.panelCategorias.TabIndex = 1;
@@ -313,11 +315,24 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
+            // btnInicio
+            // 
+            this.btnInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInicio.Location = new System.Drawing.Point(0, 0);
+            this.btnInicio.Margin = new System.Windows.Forms.Padding(0);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(63, 60);
+            this.btnInicio.TabIndex = 7;
+            this.btnInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInicio.UseVisualStyleBackColor = false;
+            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.panelOptions);
@@ -416,6 +431,9 @@
                     this.btnMore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
                     this.btnMore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
                     this.btnMore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                    this.btnInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                    this.btnInicio.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                    this.btnInicio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
                     /* Textos (Incluidos botones) */
                     this.btnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                     this.btnUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
@@ -428,8 +446,10 @@
                     this.btnEventosPopulares.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                     this.btnFavoritos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                     this.btnMore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                    this.btnInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                     /* Imagenes */
                     this.btnOptions.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.menu;
+                    this.btnInicio.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Inicio_Claro;
                     break;
                 case true: //Tema oscuro
                     /* Paneles */
@@ -474,6 +494,9 @@
                     this.btnMore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
                     this.btnMore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
                     this.btnMore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                    this.btnInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                    this.btnInicio.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+                    this.btnInicio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                     /* Textos (Incluidos botones) */
                     this.btnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                     this.btnUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
@@ -486,8 +509,10 @@
                     this.btnEventosPopulares.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                     this.btnFavoritos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                     this.btnMore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                    this.btnInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                     /* Imagenes */
                     this.btnOptions.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.menu_dark;
+                    this.btnInicio.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.Inicio_Oscuro;
                     break;
             }
         }
@@ -519,5 +544,6 @@
         private ContextMenuStrip contextMenuStrip;
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem;
+        private Button btnInicio;
     }
 }

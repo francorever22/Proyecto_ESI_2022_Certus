@@ -20,7 +20,7 @@
         private void CargarEncuentros(int c) //Carga los botones de panelEncuentros uno por uno
         {
             panelEncuentros.Controls.Clear();
-            String t = "partido";
+            String t = "torneo";
             for (int i = 0; i < c; i++)
             {
                 switch (t)
@@ -29,21 +29,9 @@
                         Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
                         p1.Dock = System.Windows.Forms.DockStyle.Top;
-                        p1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                        p1.Size = new System.Drawing.Size(752, 60);
+                        p1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                        p1.Size = new System.Drawing.Size(722, 60);
                         p1.TabIndex = 0;
-
-                        Button b1 = new Button(); //Crea el boton que permitira acceder al encuentro
-
-                        b1.Dock = System.Windows.Forms.DockStyle.Fill;
-                        b1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                        b1.Location = new System.Drawing.Point(0, 0);
-                        b1.Size = new System.Drawing.Size(563, 60);
-                        b1.TabIndex = 10;
-                        b1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                        b1.Text = "0 - 0";
-                        b1.UseVisualStyleBackColor = true;
-                        b1.Click += (sender, EventArgs) => { b1_Click(sender, EventArgs); };
 
                         PictureBox pic1 = new PictureBox(); //Imagen de Equipo 1
 
@@ -94,59 +82,60 @@
                         l3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                         l3.Text = "18:00";
                         l3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                        l3.MaximumSize = new System.Drawing.Size(100, 30);
-                        l3.AutoSize = true;
-                        l3.Location = new Point(p1.Width / 2 - l3.Width / 2, p1.Height - l3.Height);
+                        l3.Size = new System.Drawing.Size(l3.Text.Length * 12, 20);
+                        l3.Location = new Point(p1.Width / 2 - l3.Width / 2, p1.Height - 25);
                         l3.TabIndex = 5;
+
+                        Label l4 = new Label(); //Marcador del encuentro
+
+                        l4.BackColor = System.Drawing.Color.Transparent;
+                        l4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                        l4.Text = "10 - 10";
+                        l4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                        l4.Size = new System.Drawing.Size(l4.Text.Length * 14, 30);
+                        l4.Location = new Point(p1.Width / 2 - l4.Width/2, 8);
+                        l4.TabIndex = 5;
+
+                        p1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        l1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        l2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        l3.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        l4.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        pic1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
+                        pic2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs); };
 
                         switch (AjustesDeUsuario.darkTheme)
                         {
                             case false:
-                                b1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                                b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                                b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                                b1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 l1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 l2.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 l3.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l4.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 break;
                             case true:
-                                b1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                                b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                                b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                                b1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                                 l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                                 l2.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                                 l3.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l4.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 break;
                         }
 
                         this.panelEncuentros.Controls.Add(p1); //Agrega los controles al panelEncuentros
-                        p1.Controls.Add(b1);
-                        b1.Controls.Add(pic1);
-                        b1.Controls.Add(pic2);
-                        b1.Controls.Add(l1);
-                        b1.Controls.Add(l2);
-                        b1.Controls.Add(l3);
+                        p1.Controls.Add(pic1);
+                        p1.Controls.Add(pic2);
+                        p1.Controls.Add(l1);
+                        p1.Controls.Add(l2);
+                        p1.Controls.Add(l3);
+                        p1.Controls.Add(l4);
                         break;
 
                     case "torneo": //Crea opcion para torneo
                         Panel p2 = new Panel(); //Crea el panel donde apareceran los controles
 
                         p2.Dock = System.Windows.Forms.DockStyle.Top;
-                        p2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                        p2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                         p2.Size = new System.Drawing.Size(563, 60);
 
-                        Button b2 = new Button(); //Crea el boton que permitira acceder al encuentro
-
-                        b2.Dock = System.Windows.Forms.DockStyle.Fill;
-                        b2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                        b2.Location = new System.Drawing.Point(0, 0);
-                        b2.Size = new System.Drawing.Size(563, 60);
-                        b2.TabIndex = 10;
-                        b2.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                        b2.Text = "";
-                        b2.UseVisualStyleBackColor = true;
 
                         PictureBox pic3 = new PictureBox(); //Imagen de Equipo 1
 
@@ -157,17 +146,17 @@
                         pic3.TabIndex = 1;
                         pic3.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                        Label l4 = new Label(); //Nombre de Equipo 1
+                        Label l6 = new Label(); //Nombre de Equipo 1
 
-                        l4.BackColor = System.Drawing.Color.Transparent;
-                        l4.BackColor = System.Drawing.Color.Transparent;
-                        l4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                        l4.Text = "Torneo X";
-                        l4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                        l4.MaximumSize = new System.Drawing.Size(300, 30);
-                        l4.AutoSize = true;
-                        l4.Location = new System.Drawing.Point(60, 16);
-                        l4.TabIndex = 3;
+                        l6.BackColor = System.Drawing.Color.Transparent;
+                        l6.BackColor = System.Drawing.Color.Transparent;
+                        l6.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                        l6.Text = "Torneo X";
+                        l6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                        l6.MaximumSize = new System.Drawing.Size(300, 30);
+                        l6.AutoSize = true;
+                        l6.Location = new System.Drawing.Point(60, 16);
+                        l6.TabIndex = 3;
 
                         Label l5 = new Label(); //Hora del encuentro
 
@@ -181,40 +170,46 @@
                         l5.Location = new System.Drawing.Point(242, 14);
                         l5.TabIndex = 5;
 
+                        l6.Click += (sender, EventArgs) => { OpenEventos_Click(sender, EventArgs); };
+                        l5.Click += (sender, EventArgs) => { OpenEventos_Click(sender, EventArgs); };
+                        p2.Click += (sender, EventArgs) => { OpenEventos_Click(sender, EventArgs); };
+                        pic3.Click += (sender, EventArgs) => { OpenEventos_Click(sender, EventArgs); };
+
                         switch (AjustesDeUsuario.darkTheme)
                         {
                             case false:
-                                b2.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                                b2.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                                b2.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                                b2.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                l4.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                l6.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 l5.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
                                 break;
                             case true:
-                                b2.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                                b2.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                                b2.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                                b2.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                l4.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                l6.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                                 l5.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                                 break;
                         }
 
                         this.panelEncuentros.Controls.Add(p2); //Agrega los controles al panelEncuentros
-                        p2.Controls.Add(b2);
-                        b2.Controls.Add(pic3);
-                        b2.Controls.Add(l4);
-                        b2.Controls.Add(l5);
+                        p2.Controls.Add(pic3);
+                        p2.Controls.Add(l6);
+                        p2.Controls.Add(l5);
                         break;
                 }
+                if (t == "torneo")
+                {
+                    t = "partido";
+                } else { t = "torneo"; }
             }
         }
 
-        private void b1_Click(object sender, EventArgs e)
+        private void OpenEncuentros_Click(object sender, EventArgs e)
         {
             Principal.AlterPrincipal(0, 5, 0);
         }
+
+        private void OpenEventos_Click(object sender, EventArgs e)
+        {
+            Principal.AlterPrincipal(0, 7, 0);
+        }
+
         private void btnCalendario_Click(object sender, EventArgs e)
         {
             if (mtcVisible == false)

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation.Collections;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Sistema_de_Resultados_Deportivos
 {

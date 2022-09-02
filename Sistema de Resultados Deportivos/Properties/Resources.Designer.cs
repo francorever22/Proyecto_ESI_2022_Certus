@@ -83,6 +83,56 @@ namespace Sistema_de_Resultados_Deportivos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap estrellaRellena {
+            get {
+                object obj = ResourceManager.GetObject("estrellaRellena", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap estrellaVacia {
+            get {
+                object obj = ResourceManager.GetObject("estrellaVacia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Incio_Claro {
+            get {
+                object obj = ResourceManager.GetObject("Incio_Claro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Inicio_Claro {
+            get {
+                object obj = ResourceManager.GetObject("Inicio_Claro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Inicio_Oscuro {
+            get {
+                object obj = ResourceManager.GetObject("Inicio_Oscuro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lupa {
             get {
                 object obj = ResourceManager.GetObject("lupa", resourceCulture);
@@ -196,6 +246,16 @@ namespace Sistema_de_Resultados_Deportivos.Properties {
         internal static System.Drawing.Bitmap realmadrid {
             get {
                 object obj = ResourceManager.GetObject("realmadrid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap versus {
+            get {
+                object obj = ResourceManager.GetObject("versus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
