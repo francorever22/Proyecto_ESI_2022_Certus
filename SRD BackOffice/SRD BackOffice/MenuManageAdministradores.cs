@@ -1,8 +1,8 @@
 ﻿namespace SRD_BackOffice
 {
-    public partial class MenuManageUsers : Form
+    public partial class MenuManageAdministradores : Form
     {
-        public MenuManageUsers()
+        public MenuManageAdministradores()
         {
             InitializeComponent();
             SetIdioma();
@@ -18,7 +18,7 @@
             int count = usuarios.Count();
             foreach (var usuario in usuarios)
             {
-                if (usuario.nivelPermisos < 3)
+                if (usuario.nivelPermisos == 3)
                 {
                     try
                     {
@@ -32,7 +32,7 @@
                             p1.Size = new Size(420, 25);
                             p1.TabIndex = 0;
 
-                            TextBox l1 = new TextBox(); //Nombre de usuario
+                            TextBox l1 = new TextBox(); //Nombre de admin
 
                             l1.ReadOnly = true;
                             l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -45,38 +45,18 @@
                             l1.Location = new Point(0, 0);
                             l1.TabIndex = 3;
 
-                            TextBox l2 = new TextBox(); //Email de usuario
+                            TextBox l2 = new TextBox(); //Email de admin
 
                             l2.ReadOnly = true;
                             l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
                             l2.Text = $"{usuario.email}";
                             l2.TextAlign = HorizontalAlignment.Center;
-                            l2.Size = new Size(195, 25);
+                            l2.Size = new Size(295, 25);
                             l2.BackColor = Color.FromArgb(255, 255, 248);
                             l2.AutoSize = false;
                             l2.BorderStyle = BorderStyle.FixedSingle;
                             l2.Location = new Point(100, 0);
                             l2.TabIndex = 3;
-
-                            TextBox l3 = new TextBox(); //Nivel de permisos de usuario
-
-                            l3.ReadOnly = true;
-                            l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                            if (usuario.nivelPermisos == 2)
-                            {
-                                l3.Text = "Si";
-                            }
-                            else
-                            {
-                                l3.Text = "No";
-                            }
-                            l3.TextAlign = HorizontalAlignment.Center;
-                            l3.Size = new Size(100, 25);
-                            l3.BackColor = Color.FromArgb(255, 255, 248);
-                            l3.BorderStyle = BorderStyle.FixedSingle;
-                            l3.AutoSize = false;
-                            l3.Location = new Point(295, 0);
-                            l3.TabIndex = 3;
 
                             PictureBox pic1 = new PictureBox();
 
@@ -87,11 +67,10 @@
                             pic1.Image = Properties.Resources.cruz;
                             pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, usuarios, usuario, p1); };
 
-                            this.panelUsersContenedor.Controls.Add(p1); //Agrega los controles al panelEncuentros
+                            this.panelUsersContenedor.Controls.Add(p1); //Agrega los controles al panelContenedor
                             p1.Controls.Add(pic1);
                             p1.Controls.Add(l1);
                             p1.Controls.Add(l2);
-                            p1.Controls.Add(l3);
                         }
                         x++;
                     } catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -132,7 +111,7 @@
 
             foreach (var usuario in usuarios)
             {
-                if ((usuario.nombreUsuario.Contains(busqueda) || usuario.email.Contains(busqueda) || (busqueda == "Premium" && usuario.nivelPermisos == 2)) && usuario.nivelPermisos < 3)
+                if ((usuario.nombreUsuario.Contains(busqueda) || usuario.email.Contains(busqueda)) && usuario.nivelPermisos == 3)
                 {
                     Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
@@ -142,7 +121,7 @@
                     p1.Size = new Size(420, 25);
                     p1.TabIndex = 0;
 
-                    TextBox l1 = new TextBox(); //Nombre de usuario
+                    TextBox l1 = new TextBox(); //Nombre de admin
 
                     l1.ReadOnly = true;
                     l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -155,38 +134,18 @@
                     l1.Location = new Point(0, 0);
                     l1.TabIndex = 3;
 
-                    TextBox l2 = new TextBox(); //Email de usuario
+                    TextBox l2 = new TextBox(); //Email de admin
 
                     l2.ReadOnly = true;
                     l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
                     l2.Text = $"{usuario.email}";
                     l2.TextAlign = HorizontalAlignment.Center;
-                    l2.Size = new Size(195, 25);
+                    l2.Size = new Size(295, 25);
                     l2.BackColor = Color.FromArgb(255, 255, 248);
                     l2.AutoSize = false;
                     l2.BorderStyle = BorderStyle.FixedSingle;
                     l2.Location = new Point(100, 0);
                     l2.TabIndex = 3;
-
-                    TextBox l3 = new TextBox(); //Nivel de permisos de usuario
-
-                    l3.ReadOnly = true;
-                    l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                    if (usuario.nivelPermisos == 2)
-                    {
-                        l3.Text = "Si";
-                    }
-                    else
-                    {
-                        l3.Text = "No";
-                    }
-                    l3.TextAlign = HorizontalAlignment.Center;
-                    l3.Size = new Size(100, 25);
-                    l3.BackColor = Color.FromArgb(255, 255, 248);
-                    l3.BorderStyle = BorderStyle.FixedSingle;
-                    l3.AutoSize = false;
-                    l3.Location = new Point(295, 0);
-                    l3.TabIndex = 3;
 
                     PictureBox pic1 = new PictureBox();
 
@@ -197,11 +156,10 @@
                     pic1.Image = Properties.Resources.cruz;
                     pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, usuarios, usuario, p1); };
 
-                    this.panelUsersContenedor.Controls.Add(p1); //Agrega los controles al panelEncuentros
+                    this.panelUsersContenedor.Controls.Add(p1); //Agrega los controles al panelContenedor
                     p1.Controls.Add(pic1);
                     p1.Controls.Add(l1);
                     p1.Controls.Add(l2);
-                    p1.Controls.Add(l3);
                 }
             }
         }

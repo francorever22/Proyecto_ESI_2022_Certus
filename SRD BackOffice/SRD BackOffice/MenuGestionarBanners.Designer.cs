@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.panelMangeBanners = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelBannersContenedor = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.lblBannerTitle = new System.Windows.Forms.Label();
             this.txtBannerTitle = new System.Windows.Forms.TextBox();
             this.lblBannerLink = new System.Windows.Forms.Label();
@@ -53,7 +55,9 @@
             // panelMangeBanners
             // 
             this.panelMangeBanners.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+            this.panelMangeBanners.Controls.Add(this.btnBuscar);
             this.panelMangeBanners.Controls.Add(this.panel2);
+            this.panelMangeBanners.Controls.Add(this.txtBuscador);
             this.panelMangeBanners.Controls.Add(this.lblBannerTitle);
             this.panelMangeBanners.Controls.Add(this.txtBannerTitle);
             this.panelMangeBanners.Controls.Add(this.lblBannerLink);
@@ -69,6 +73,16 @@
             this.panelMangeBanners.Size = new System.Drawing.Size(907, 605);
             this.panelMangeBanners.TabIndex = 10;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBuscar.Location = new System.Drawing.Point(829, 99);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
@@ -77,7 +91,7 @@
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Location = new System.Drawing.Point(493, 135);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(363, 409);
+            this.panel2.Size = new System.Drawing.Size(388, 409);
             this.panel2.TabIndex = 26;
             // 
             // panelBannersContenedor
@@ -87,7 +101,7 @@
             this.panelBannersContenedor.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelBannersContenedor.Location = new System.Drawing.Point(0, 25);
             this.panelBannersContenedor.Name = "panelBannersContenedor";
-            this.panelBannersContenedor.Size = new System.Drawing.Size(361, 383);
+            this.panelBannersContenedor.Size = new System.Drawing.Size(386, 383);
             this.panelBannersContenedor.TabIndex = 1;
             // 
             // panel4
@@ -99,7 +113,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(361, 25);
+            this.panel4.Size = new System.Drawing.Size(386, 25);
             this.panel4.TabIndex = 0;
             // 
             // label5
@@ -107,9 +121,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(246, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 15);
+            this.label5.Size = new System.Drawing.Size(29, 15);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Popular";
+            this.label5.Text = "Link";
             // 
             // label7
             // 
@@ -118,6 +132,13 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 15);
             this.label7.TabIndex = 0;
+            // 
+            // txtBuscador
+            // 
+            this.txtBuscador.Location = new System.Drawing.Point(520, 100);
+            this.txtBuscador.Name = "txtBuscador";
+            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
+            this.txtBuscador.TabIndex = 28;
             // 
             // lblBannerTitle
             // 
@@ -264,12 +285,12 @@
                     this.lblMangaTitle.Text = "Administrar banners";
                     this.lblMangaTitle.Location = new System.Drawing.Point(460, 44);
                     this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblBannerImage.Text = "Agregue una imagen para el nuevo banner";
+                    this.lblBannerImage.Text = "Agregué una imagen para el nuevo banner";
                     this.lblBannerImage.Location = new System.Drawing.Point(4, 249);
                     this.btnAddBanner.Text = "Agregar";
                     this.lblBannerLink.Text = "Inserte el link vinculado con el banner";
                     this.lblBannerLink.Location = new System.Drawing.Point(20, 413);
-                    this.lblBannerTitle.Text = "Inserte el titulo del banner";
+                    this.lblBannerTitle.Text = "Inserte el título del banner";
                     this.label7.Text = "Nombre";
                     this.label7.Location = new System.Drawing.Point(64, 3);
                     break;
@@ -293,5 +314,7 @@
         private Panel panel4;
         private Label label5;
         private Label label7;
+        private Button btnBuscar;
+        private TextBox txtBuscador;
     }
 }

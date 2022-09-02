@@ -135,9 +135,9 @@
                     this.btnCategoryAgregar.Text = "Add";
                     break;
                 case "ES": //Español
-                    this.lblCategoryTitle.Text = "Agregar categoria";
+                    this.lblCategoryTitle.Text = "Agregar categoría";
                     this.lblCategoryTitle.Location = new System.Drawing.Point(53, 33);
-                    this.lblCategoryName.Text = "Ingrese nombre de la categoria";
+                    this.lblCategoryName.Text = "Ingrese nombre de la categoría";
                     this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                     this.lblCategoryName.Location = new System.Drawing.Point(10, 154);
                     this.txtCategoryName.Location = new System.Drawing.Point(220, 152);

@@ -45,6 +45,7 @@
             // 
             // panelAddmin
             // 
+            this.panelAddmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
             this.panelAddmin.Controls.Add(this.btnAddminCerrar);
             this.panelAddmin.Controls.Add(this.lblAddminConfirm);
             this.panelAddmin.Controls.Add(this.txtConfirmPassword);
@@ -56,7 +57,6 @@
             this.panelAddmin.Controls.Add(this.lblAddminUsuario);
             this.panelAddmin.Controls.Add(this.txtAddminUsername);
             this.panelAddmin.Controls.Add(this.lblAddminTitle);
-            this.panelAddmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
             this.panelAddmin.Location = new System.Drawing.Point(0, 0);
             this.panelAddmin.Name = "panelAddmin";
             this.panelAddmin.Size = new System.Drawing.Size(535, 552);
@@ -83,7 +83,7 @@
             this.lblAddminConfirm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAddminConfirm.Location = new System.Drawing.Point(45, 398);
             this.lblAddminConfirm.Name = "lblAddminConfirm";
-            this.lblAddminConfirm.Size = new System.Drawing.Size(129, 21);
+            this.lblAddminConfirm.Size = new System.Drawing.Size(0, 21);
             this.lblAddminConfirm.TabIndex = 25;
             // 
             // txtConfirmPassword
@@ -101,7 +101,7 @@
             this.lblAddminConstraseña.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAddminConstraseña.Location = new System.Drawing.Point(45, 317);
             this.lblAddminConstraseña.Name = "lblAddminConstraseña";
-            this.lblAddminConstraseña.Size = new System.Drawing.Size(76, 21);
+            this.lblAddminConstraseña.Size = new System.Drawing.Size(0, 21);
             this.lblAddminConstraseña.TabIndex = 23;
             // 
             // txtAddminPassword
@@ -119,9 +119,9 @@
             this.lblAddminEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAddminEmail.Location = new System.Drawing.Point(45, 237);
             this.lblAddminEmail.Name = "lblAddminEmail";
-            this.lblAddminEmail.Text = "Email";
             this.lblAddminEmail.Size = new System.Drawing.Size(48, 21);
             this.lblAddminEmail.TabIndex = 21;
+            this.lblAddminEmail.Text = "Email";
             // 
             // txtAddminEmail
             // 
@@ -148,7 +148,7 @@
             this.lblAddminUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAddminUsuario.Location = new System.Drawing.Point(45, 156);
             this.lblAddminUsuario.Name = "lblAddminUsuario";
-            this.lblAddminUsuario.Size = new System.Drawing.Size(81, 21);
+            this.lblAddminUsuario.Size = new System.Drawing.Size(0, 21);
             this.lblAddminUsuario.TabIndex = 12;
             // 
             // txtAddminUsername
@@ -166,7 +166,7 @@
             this.lblAddminTitle.Font = new System.Drawing.Font("Montserrat", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAddminTitle.Location = new System.Drawing.Point(68, 49);
             this.lblAddminTitle.Name = "lblAddminTitle";
-            this.lblAddminTitle.Size = new System.Drawing.Size(391, 55);
+            this.lblAddminTitle.Size = new System.Drawing.Size(0, 55);
             this.lblAddminTitle.TabIndex = 8;
             // 
             // MenuAgregarAdmin
@@ -182,7 +182,6 @@
             this.panelAddmin.PerformLayout();
             this.ResumeLayout(false);
 
-            SetIdioma();
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado

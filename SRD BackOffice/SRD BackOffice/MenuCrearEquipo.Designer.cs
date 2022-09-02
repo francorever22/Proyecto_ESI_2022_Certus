@@ -1,6 +1,6 @@
 ﻿namespace SRD_BackOffice
 {
-    partial class MenuCrearDeporte
+    partial class MenuCrearEquipo
     {
         /// <summary>
         /// Required designer variable.
@@ -29,41 +29,152 @@
         private void InitializeComponent()
         {
             this.panelAgregarDeporte = new System.Windows.Forms.Panel();
+            this.panelBuscadorEquipos = new System.Windows.Forms.Panel();
+            this.picAddPlayer = new System.Windows.Forms.PictureBox();
+            this.lblPlayers = new System.Windows.Forms.Label();
+            this.panelPlayers = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblImage = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblPais = new System.Windows.Forms.Label();
+            this.lblTipo = new System.Windows.Forms.Label();
+            this.txtPais = new System.Windows.Forms.TextBox();
             this.btnSportCerrar = new System.Windows.Forms.Button();
             this.btnSportAdd = new System.Windows.Forms.Button();
-            this.imgSportSelected = new System.Windows.Forms.PictureBox();
+            this.picTeam = new System.Windows.Forms.PictureBox();
             this.lblSportImage = new System.Windows.Forms.Label();
             this.lblSportPopular = new System.Windows.Forms.Label();
-            this.tgbSportPopular = new SRD_BackOffice.CustomToggleBox();
             this.btnSelectImage = new System.Windows.Forms.Button();
             this.lblSportName = new System.Windows.Forms.Label();
             this.lblSportCategory = new System.Windows.Forms.Label();
-            this.cbxSportCategory = new System.Windows.Forms.ComboBox();
-            this.txtSportName = new System.Windows.Forms.TextBox();
+            this.cbxTipo = new System.Windows.Forms.ComboBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblSportTitle = new System.Windows.Forms.Label();
             this.panelAgregarDeporte.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSportSelected)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTeam)).BeginInit();
             this.SuspendLayout();
             // 
             // panelAgregarDeporte
             // 
             this.panelAgregarDeporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+            this.panelAgregarDeporte.Controls.Add(this.panelBuscadorEquipos);
+            this.panelAgregarDeporte.Controls.Add(this.picAddPlayer);
+            this.panelAgregarDeporte.Controls.Add(this.lblPlayers);
+            this.panelAgregarDeporte.Controls.Add(this.panelPlayers);
+            this.panelAgregarDeporte.Controls.Add(this.lblTitle);
+            this.panelAgregarDeporte.Controls.Add(this.lblImage);
+            this.panelAgregarDeporte.Controls.Add(this.lblName);
+            this.panelAgregarDeporte.Controls.Add(this.lblPais);
+            this.panelAgregarDeporte.Controls.Add(this.lblTipo);
+            this.panelAgregarDeporte.Controls.Add(this.txtPais);
             this.panelAgregarDeporte.Controls.Add(this.btnSportCerrar);
             this.panelAgregarDeporte.Controls.Add(this.btnSportAdd);
-            this.panelAgregarDeporte.Controls.Add(this.imgSportSelected);
+            this.panelAgregarDeporte.Controls.Add(this.picTeam);
             this.panelAgregarDeporte.Controls.Add(this.lblSportImage);
             this.panelAgregarDeporte.Controls.Add(this.lblSportPopular);
-            this.panelAgregarDeporte.Controls.Add(this.tgbSportPopular);
             this.panelAgregarDeporte.Controls.Add(this.btnSelectImage);
             this.panelAgregarDeporte.Controls.Add(this.lblSportName);
             this.panelAgregarDeporte.Controls.Add(this.lblSportCategory);
-            this.panelAgregarDeporte.Controls.Add(this.cbxSportCategory);
-            this.panelAgregarDeporte.Controls.Add(this.txtSportName);
+            this.panelAgregarDeporte.Controls.Add(this.cbxTipo);
+            this.panelAgregarDeporte.Controls.Add(this.txtNombre);
             this.panelAgregarDeporte.Controls.Add(this.lblSportTitle);
             this.panelAgregarDeporte.Location = new System.Drawing.Point(0, 0);
             this.panelAgregarDeporte.Name = "panelAgregarDeporte";
             this.panelAgregarDeporte.Size = new System.Drawing.Size(481, 561);
             this.panelAgregarDeporte.TabIndex = 10;
+            // 
+            // panelBuscadorEquipos
+            // 
+            this.panelBuscadorEquipos.Location = new System.Drawing.Point(64, 124);
+            this.panelBuscadorEquipos.Name = "panelBuscadorEquipos";
+            this.panelBuscadorEquipos.Size = new System.Drawing.Size(352, 312);
+            this.panelBuscadorEquipos.TabIndex = 30;
+            // 
+            // picAddPlayer
+            // 
+            this.picAddPlayer.BackgroundImage = global::SRD_BackOffice.Properties.Resources.mas;
+            this.picAddPlayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picAddPlayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picAddPlayer.Location = new System.Drawing.Point(276, 315);
+            this.picAddPlayer.Name = "picAddPlayer";
+            this.picAddPlayer.Size = new System.Drawing.Size(15, 15);
+            this.picAddPlayer.TabIndex = 29;
+            this.picAddPlayer.TabStop = false;
+            this.picAddPlayer.Click += new System.EventHandler(this.picAddPlayer_Click);
+            // 
+            // lblPlayers
+            // 
+            this.lblPlayers.AutoSize = true;
+            this.lblPlayers.Location = new System.Drawing.Point(216, 315);
+            this.lblPlayers.Name = "lblPlayers";
+            this.lblPlayers.Size = new System.Drawing.Size(57, 15);
+            this.lblPlayers.TabIndex = 28;
+            this.lblPlayers.Text = "Members";
+            // 
+            // panelPlayers
+            // 
+            this.panelPlayers.AutoScroll = true;
+            this.panelPlayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPlayers.Location = new System.Drawing.Point(26, 336);
+            this.panelPlayers.Name = "panelPlayers";
+            this.panelPlayers.Size = new System.Drawing.Size(434, 175);
+            this.panelPlayers.TabIndex = 27;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.Location = new System.Drawing.Point(187, 22);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(107, 25);
+            this.lblTitle.TabIndex = 26;
+            this.lblTitle.Text = "Create team";
+            // 
+            // lblImage
+            // 
+            this.lblImage.AutoSize = true;
+            this.lblImage.Location = new System.Drawing.Point(63, 80);
+            this.lblImage.Name = "lblImage";
+            this.lblImage.Size = new System.Drawing.Size(71, 15);
+            this.lblImage.TabIndex = 25;
+            this.lblImage.Text = "Team image";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(290, 97);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(68, 15);
+            this.lblName.TabIndex = 24;
+            this.lblName.Text = "Team name";
+            // 
+            // lblPais
+            // 
+            this.lblPais.AutoSize = true;
+            this.lblPais.Location = new System.Drawing.Point(276, 175);
+            this.lblPais.Name = "lblPais";
+            this.lblPais.Size = new System.Drawing.Size(98, 15);
+            this.lblPais.TabIndex = 23;
+            this.lblPais.Text = "Country of origin";
+            // 
+            // lblTipo
+            // 
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.Location = new System.Drawing.Point(352, 251);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(75, 15);
+            this.lblTipo.TabIndex = 22;
+            this.lblTipo.Text = "Type of team";
+            // 
+            // txtPais
+            // 
+            this.txtPais.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.txtPais.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtPais.Location = new System.Drawing.Point(192, 195);
+            this.txtPais.Name = "txtPais";
+            this.txtPais.Size = new System.Drawing.Size(268, 25);
+            this.txtPais.TabIndex = 21;
             // 
             // btnSportCerrar
             // 
@@ -87,21 +198,22 @@
             this.btnSportAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnSportAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnSportAdd.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSportAdd.Location = new System.Drawing.Point(154, 497);
+            this.btnSportAdd.Location = new System.Drawing.Point(154, 517);
             this.btnSportAdd.Name = "btnSportAdd";
             this.btnSportAdd.Size = new System.Drawing.Size(181, 41);
             this.btnSportAdd.TabIndex = 20;
+            this.btnSportAdd.Text = "Add";
             this.btnSportAdd.UseVisualStyleBackColor = true;
             this.btnSportAdd.Click += new System.EventHandler(this.btnSportAdd_Click);
             // 
-            // imgSportSelected
+            // picTeam
             // 
-            this.imgSportSelected.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgSportSelected.Location = new System.Drawing.Point(310, 247);
-            this.imgSportSelected.Name = "imgSportSelected";
-            this.imgSportSelected.Size = new System.Drawing.Size(150, 150);
-            this.imgSportSelected.TabIndex = 17;
-            this.imgSportSelected.TabStop = false;
+            this.picTeam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picTeam.Location = new System.Drawing.Point(25, 101);
+            this.picTeam.Name = "picTeam";
+            this.picTeam.Size = new System.Drawing.Size(150, 150);
+            this.picTeam.TabIndex = 17;
+            this.picTeam.TabStop = false;
             // 
             // lblSportImage
             // 
@@ -121,20 +233,6 @@
             this.lblSportPopular.Size = new System.Drawing.Size(0, 21);
             this.lblSportPopular.TabIndex = 15;
             // 
-            // tgbSportPopular
-            // 
-            this.tgbSportPopular.AutoSize = true;
-            this.tgbSportPopular.Location = new System.Drawing.Point(125, 377);
-            this.tgbSportPopular.MinimumSize = new System.Drawing.Size(45, 22);
-            this.tgbSportPopular.Name = "tgbSportPopular";
-            this.tgbSportPopular.OffBackColor = System.Drawing.Color.Gray;
-            this.tgbSportPopular.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.tgbSportPopular.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-            this.tgbSportPopular.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tgbSportPopular.Size = new System.Drawing.Size(45, 22);
-            this.tgbSportPopular.TabIndex = 14;
-            this.tgbSportPopular.UseVisualStyleBackColor = true;
-            // 
             // btnSelectImage
             // 
             this.btnSelectImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -142,10 +240,11 @@
             this.btnSelectImage.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnSelectImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnSelectImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.btnSelectImage.Location = new System.Drawing.Point(76, 309);
+            this.btnSelectImage.Location = new System.Drawing.Point(25, 271);
             this.btnSelectImage.Name = "btnSelectImage";
             this.btnSelectImage.Size = new System.Drawing.Size(150, 25);
             this.btnSelectImage.TabIndex = 13;
+            this.btnSelectImage.Text = "Select image";
             this.btnSelectImage.UseVisualStyleBackColor = true;
             this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
             // 
@@ -167,25 +266,29 @@
             this.lblSportCategory.Size = new System.Drawing.Size(0, 21);
             this.lblSportCategory.TabIndex = 11;
             // 
-            // cbxSportCategory
+            // cbxTipo
             // 
-            this.cbxSportCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.cbxSportCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxSportCategory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cbxSportCategory.FormattingEnabled = true;
-            this.cbxSportCategory.Location = new System.Drawing.Point(192, 174);
-            this.cbxSportCategory.Name = "cbxSportCategory";
-            this.cbxSportCategory.Size = new System.Drawing.Size(268, 25);
-            this.cbxSportCategory.TabIndex = 10;
+            this.cbxTipo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.cbxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxTipo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbxTipo.FormattingEnabled = true;
+            this.cbxTipo.Items.AddRange(new object[] {
+            "National team",
+            "Team",
+            "Individual team"});
+            this.cbxTipo.Location = new System.Drawing.Point(315, 271);
+            this.cbxTipo.Name = "cbxTipo";
+            this.cbxTipo.Size = new System.Drawing.Size(145, 25);
+            this.cbxTipo.TabIndex = 10;
             // 
-            // txtSportName
+            // txtNombre
             // 
-            this.txtSportName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.txtSportName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtSportName.Location = new System.Drawing.Point(192, 113);
-            this.txtSportName.Name = "txtSportName";
-            this.txtSportName.Size = new System.Drawing.Size(269, 25);
-            this.txtSportName.TabIndex = 9;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtNombre.Location = new System.Drawing.Point(192, 119);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(268, 25);
+            this.txtNombre.TabIndex = 9;
             // 
             // lblSportTitle
             // 
@@ -196,68 +299,45 @@
             this.lblSportTitle.Size = new System.Drawing.Size(0, 55);
             this.lblSportTitle.TabIndex = 8;
             // 
-            // MenuCrearDeporte
+            // MenuCrearEquipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 561);
             this.Controls.Add(this.panelAgregarDeporte);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MenuCrearDeporte";
+            this.Name = "MenuCrearEquipo";
             this.Text = "AdministradorAPP";
             this.panelAgregarDeporte.ResumeLayout(false);
             this.panelAgregarDeporte.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSportSelected)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTeam)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblSportTitle.Text = "Add sport";
-                    this.lblSportTitle.Location = new System.Drawing.Point(146, 25);
-                    this.lblSportCategory.Text = "Select sport category";
-                    this.lblSportCategory.Location = new System.Drawing.Point(25, 173);
-                    this.lblSportName.Text = "Add sport name";
-                    this.lblSportName.Location = new System.Drawing.Point(25, 114);
-                    this.btnSelectImage.Text = "Select image";
-                    this.lblSportPopular.Text = "Is it popular?";
-                    this.lblSportImage.Text = "Add an image to represent the sport";
-                    this.lblSportImage.Location = new System.Drawing.Point(25, 247);
-                    this.btnSportAdd.Text = "Add";
-                    break;
-                case "ES": //Español
-                    this.lblSportTitle.Text = "Agregar deporte";
-                    this.lblSportTitle.Location = new System.Drawing.Point(60, 25);
-                    this.lblSportCategory.Text = "Seleccione la categoría \ndel deporte";
-                    this.lblSportCategory.Location = new System.Drawing.Point(20, 165);
-                    this.lblSportName.Text = "Agregué un nombre \npara el deporte";
-                    this.lblSportName.Location = new System.Drawing.Point(20, 114);
-                    this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblSportPopular.Text = "Es popular?";
-                    this.lblSportImage.Text = "Agregué una imagen para representar \nal deporte";
-                    this.lblSportImage.Location = new System.Drawing.Point(20, 240);
-                    this.btnSportAdd.Text = "Agregar";
-                    break;
-            }
-        }
-
         #endregion
         private Panel panelAgregarDeporte;
-        private PictureBox imgSportSelected;
+        private PictureBox picTeam;
         private Label lblSportImage;
         private Label lblSportPopular;
-        private CustomToggleBox tgbSportPopular;
         private Button btnSelectImage;
         private Label lblSportName;
         private Label lblSportCategory;
-        private ComboBox cbxSportCategory;
-        private TextBox txtSportName;
+        private ComboBox cbxTipo;
+        private TextBox txtNombre;
         private Label lblSportTitle;
         private Button btnSportCerrar;
         private Button btnSportAdd;
+        private Label lblPlayers;
+        private Panel panelPlayers;
+        private Label lblTitle;
+        private Label lblImage;
+        private Label lblName;
+        private Label lblPais;
+        private Label lblTipo;
+        private TextBox txtPais;
+        private PictureBox picAddPlayer;
+        private Panel panelBuscadorEquipos;
     }
 }

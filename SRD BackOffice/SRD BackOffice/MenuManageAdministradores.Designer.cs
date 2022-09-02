@@ -1,6 +1,6 @@
 ﻿namespace SRD_BackOffice
 {
-    partial class MenuManageUsers
+    partial class MenuManageAdministradores
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,6 @@
             this.panelUsers = new System.Windows.Forms.Panel();
             this.panelUsersContenedor = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUsersManagerCerrar = new System.Windows.Forms.Button();
@@ -99,7 +98,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -108,19 +106,10 @@
             this.panel1.Size = new System.Drawing.Size(420, 25);
             this.panel1.TabIndex = 0;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(317, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Premium";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(177, 5);
+            this.label2.Location = new System.Drawing.Point(234, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 15);
             this.label2.TabIndex = 1;
@@ -157,14 +146,14 @@
             this.lblUsersManagerTitle.Size = new System.Drawing.Size(0, 15);
             this.lblUsersManagerTitle.TabIndex = 8;
             // 
-            // MenuManageUsers
+            // MenuManageAdministradores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 567);
             this.Controls.Add(this.panelAgregarCategoria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MenuManageUsers";
+            this.Name = "MenuManageAdministradores";
             this.Text = "AdministradorAPP";
             this.panelAgregarCategoria.ResumeLayout(false);
             this.panelAgregarCategoria.PerformLayout();
@@ -180,17 +169,17 @@
             switch (Program.language)
             {
                 case "EN": //Ingles
-                    this.lblUsersManagerTitle.Text = "Users manager";
+                    this.lblUsersManagerTitle.Text = "Admin manager";
                     this.lblUsersManagerTitle.Location = new System.Drawing.Point(110, 36);
                     this.lblUsersManagerTitle.Font = new System.Drawing.Font("Montserrat", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.label1.Text = "User";
+                    this.label1.Text = "Admin";
                     this.label1.Location = new System.Drawing.Point(35, 5);
                     break;
                 case "ES": //Español
-                    this.lblUsersManagerTitle.Text = "Administrador de usuarios";
+                    this.lblUsersManagerTitle.Text = "Administrador de admins";
                     this.lblUsersManagerTitle.Location = new System.Drawing.Point(10, 36);
                     this.lblUsersManagerTitle.Font = new System.Drawing.Font("Montserrat", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.label1.Text = "Usuario";
+                    this.label1.Text = "Admin";
                     this.label1.Location = new System.Drawing.Point(27, 5);
                     break;
             }
@@ -202,7 +191,6 @@
         private Button btnUsersManagerCerrar;
         private Panel panelUsers;
         private Panel panel1;
-        private Label label3;
         private Label label2;
         private Label label1;
         private Panel panelUsersContenedor;

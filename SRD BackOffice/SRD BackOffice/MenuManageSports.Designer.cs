@@ -43,6 +43,8 @@
             this.lblCategories = new System.Windows.Forms.Label();
             this.btnSportsManagerCerrar = new System.Windows.Forms.Button();
             this.lblSportsManagerTitle = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.panelManageSports.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -53,6 +55,8 @@
             // panelManageSports
             // 
             this.panelManageSports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+            this.panelManageSports.Controls.Add(this.btnBuscar);
+            this.panelManageSports.Controls.Add(this.txtBuscador);
             this.panelManageSports.Controls.Add(this.panel2);
             this.panelManageSports.Controls.Add(this.panelCategorias);
             this.panelManageSports.Controls.Add(this.label1);
@@ -70,9 +74,9 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.panelDeportesContenedor);
             this.panel2.Controls.Add(this.panel4);
-            this.panel2.Location = new System.Drawing.Point(254, 181);
+            this.panel2.Location = new System.Drawing.Point(226, 181);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(397, 338);
+            this.panel2.Size = new System.Drawing.Size(437, 338);
             this.panel2.TabIndex = 23;
             // 
             // panelDeportesContenedor
@@ -82,7 +86,7 @@
             this.panelDeportesContenedor.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDeportesContenedor.Location = new System.Drawing.Point(0, 25);
             this.panelDeportesContenedor.Name = "panelDeportesContenedor";
-            this.panelDeportesContenedor.Size = new System.Drawing.Size(395, 312);
+            this.panelDeportesContenedor.Size = new System.Drawing.Size(435, 312);
             this.panelDeportesContenedor.TabIndex = 1;
             // 
             // panel4
@@ -95,7 +99,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(395, 25);
+            this.panel4.Size = new System.Drawing.Size(435, 25);
             this.panel4.TabIndex = 0;
             // 
             // label5
@@ -129,9 +133,9 @@
             this.panelCategorias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCategorias.Controls.Add(this.panelCategoriasContenedor);
             this.panelCategorias.Controls.Add(this.panel1);
-            this.panelCategorias.Location = new System.Drawing.Point(24, 180);
+            this.panelCategorias.Location = new System.Drawing.Point(16, 181);
             this.panelCategorias.Name = "panelCategorias";
-            this.panelCategorias.Size = new System.Drawing.Size(162, 338);
+            this.panelCategorias.Size = new System.Drawing.Size(187, 338);
             this.panelCategorias.TabIndex = 20;
             // 
             // panelCategoriasContenedor
@@ -141,7 +145,7 @@
             this.panelCategoriasContenedor.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCategoriasContenedor.Location = new System.Drawing.Point(0, 25);
             this.panelCategoriasContenedor.Name = "panelCategoriasContenedor";
-            this.panelCategoriasContenedor.Size = new System.Drawing.Size(160, 312);
+            this.panelCategoriasContenedor.Size = new System.Drawing.Size(185, 312);
             this.panelCategoriasContenedor.TabIndex = 1;
             // 
             // panel1
@@ -152,7 +156,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(160, 25);
+            this.panel1.Size = new System.Drawing.Size(185, 25);
             this.panel1.TabIndex = 0;
             // 
             // label4
@@ -205,6 +209,23 @@
             this.lblSportsManagerTitle.Size = new System.Drawing.Size(0, 55);
             this.lblSportsManagerTitle.TabIndex = 8;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBuscar.Location = new System.Drawing.Point(475, 92);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // txtBuscador
+            // 
+            this.txtBuscador.Location = new System.Drawing.Point(166, 93);
+            this.txtBuscador.Name = "txtBuscador";
+            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
+            this.txtBuscador.TabIndex = 28;
+            // 
             // MenuManageSports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -246,9 +267,9 @@
                     this.lblSportsManagerTitle.Location = new System.Drawing.Point(50, 24);
                     this.label7.Text = "Nombre";
                     this.label7.Location = new System.Drawing.Point(27, 5);
-                    this.label6.Text = "Categoria";
-                    this.label4.Text = "Categorias";
-                    this.lblCategories.Text = "Categorias";
+                    this.label6.Text = "Categoría";
+                    this.label4.Text = "Categorías";
+                    this.lblCategories.Text = "Categorías";
                     this.label1.Text = "Deportes";
                     this.label1.Location = new System.Drawing.Point(400, 120);
                     break;
@@ -271,5 +292,7 @@
         private Label label5;
         private Label label6;
         private Label label7;
+        private Button btnBuscar;
+        private TextBox txtBuscador;
     }
 }
