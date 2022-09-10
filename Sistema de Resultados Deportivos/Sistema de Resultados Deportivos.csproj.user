@@ -13,9 +13,6 @@
     <Compile Update="Frm_Encuentros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Frm_Encuentros_Tipo_A.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Frm_EquiposJugadores.cs">
       <SubType>Form</SubType>
     </Compile>

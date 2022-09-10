@@ -15,7 +15,6 @@ C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Dep
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.BuscadorDeEncuentros.resources
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Categorias.resources
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Frm_Encuentros.resources
-C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Frm_Encuentros_Tipo_A.resources
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Frm_EquiposJugadores.resources
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Frm_Eventos.resources
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Login.resources
