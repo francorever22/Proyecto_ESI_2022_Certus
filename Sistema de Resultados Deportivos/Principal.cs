@@ -44,6 +44,8 @@ namespace Sistema_de_Resultados_Deportivos
             SetTheme();
             PrincipalColor();
             SetIdioma();
+
+            Toast t = new Toast(2, "It", "Works");
         }
 
         private void PrincipalColor() //Establece el color de fondo del formulario Principal

@@ -29,7 +29,7 @@ namespace Sistema_de_Resultados_Deportivos
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, null))
+            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, "10 - 10"))
             .Show();
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
@@ -42,7 +42,7 @@ namespace Sistema_de_Resultados_Deportivos
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, "10"))
+            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, "1 - 1"))
             .Show();
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
