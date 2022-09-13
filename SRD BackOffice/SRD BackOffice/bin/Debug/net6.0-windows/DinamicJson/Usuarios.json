@@ -17,7 +17,7 @@
     "nombreUsuario": "Administrador",
     "email": "admin@certus.com",
     "contrasena": "122333",
-    "nivelPermisos": 3,
+    "nivelPermisos": 4,
     "numeroTelefono": null
   }
 ]
