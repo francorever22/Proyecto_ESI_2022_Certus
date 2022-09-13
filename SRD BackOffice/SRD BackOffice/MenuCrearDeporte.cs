@@ -206,5 +206,38 @@
                 MessageBox.Show("Error");
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblSportTitle.Text = "Add sport";
+                    lblSportTitle.Location = new Point(146, 25);
+                    lblSportCategory.Text = "Select sport category";
+                    lblSportCategory.Location = new Point(25, 173);
+                    lblSportName.Text = "Add sport name";
+                    lblSportName.Location = new Point(25, 114);
+                    btnSelectImage.Text = "Select image";
+                    lblSportPopular.Text = "Is it popular?";
+                    lblSportImage.Text = "Add an image to represent the sport";
+                    lblSportImage.Location = new Point(25, 247);
+                    btnSportAdd.Text = "Add";
+                    break;
+                case "ES": //Español
+                    lblSportTitle.Text = "Agregar deporte";
+                    lblSportTitle.Location = new Point(60, 25);
+                    lblSportCategory.Text = "Seleccione la categoría \ndel deporte";
+                    lblSportCategory.Location = new Point(20, 165);
+                    lblSportName.Text = "Agregué un nombre \npara el deporte";
+                    lblSportName.Location = new Point(20, 114);
+                    btnSelectImage.Text = "Seleccione una imagen";
+                    lblSportPopular.Text = "Es popular?";
+                    lblSportImage.Text = "Agregué una imagen para representar \nal deporte";
+                    lblSportImage.Location = new Point(20, 240);
+                    btnSportAdd.Text = "Agregar";
+                    break;
+            }
+        }
     }
 }

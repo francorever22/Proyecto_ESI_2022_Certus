@@ -48,7 +48,7 @@
             this.imgEventSelected = new System.Windows.Forms.PictureBox();
             this.btnSelectImage = new System.Windows.Forms.Button();
             this.panelEvent = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.cbxEstadoEvento = new System.Windows.Forms.ComboBox();
             this.btnAddEvent = new System.Windows.Forms.Button();
             this.lblImageEvent = new System.Windows.Forms.Label();
@@ -95,11 +95,10 @@
             // lblEstadoFase
             // 
             this.lblEstadoFase.AutoSize = true;
-            this.lblEstadoFase.Location = new System.Drawing.Point(489, 77);
+            this.lblEstadoFase.Location = new System.Drawing.Point(0, 0);
             this.lblEstadoFase.Name = "lblEstadoFase";
-            this.lblEstadoFase.Size = new System.Drawing.Size(66, 15);
+            this.lblEstadoFase.Size = new System.Drawing.Size(0, 15);
             this.lblEstadoFase.TabIndex = 33;
-            this.lblEstadoFase.Text = "Phase state";
             // 
             // cbxEstadoFase
             // 
@@ -125,47 +124,42 @@
             // lblFaseActual
             // 
             this.lblFaseActual.AutoSize = true;
-            this.lblFaseActual.Location = new System.Drawing.Point(175, 13);
+            this.lblFaseActual.Location = new System.Drawing.Point(0, 0);
             this.lblFaseActual.Name = "lblFaseActual";
-            this.lblFaseActual.Size = new System.Drawing.Size(38, 15);
+            this.lblFaseActual.Size = new System.Drawing.Size(0, 15);
             this.lblFaseActual.TabIndex = 31;
-            this.lblFaseActual.Text = "Phase";
             // 
             // lblCantFases
             // 
             this.lblCantFases.AutoSize = true;
             this.lblCantFases.Location = new System.Drawing.Point(24, 13);
             this.lblCantFases.Name = "lblCantFases";
-            this.lblCantFases.Size = new System.Drawing.Size(104, 15);
+            this.lblCantFases.Size = new System.Drawing.Size(0, 15);
             this.lblCantFases.TabIndex = 30;
-            this.lblCantFases.Text = "Amount of phases";
             // 
             // lblTipoFase
             // 
             this.lblTipoFase.AutoSize = true;
-            this.lblTipoFase.Location = new System.Drawing.Point(360, 77);
+            this.lblTipoFase.Location = new System.Drawing.Point(0, 0);
             this.lblTipoFase.Name = "lblTipoFase";
-            this.lblTipoFase.Size = new System.Drawing.Size(64, 15);
+            this.lblTipoFase.Size = new System.Drawing.Size(0, 15);
             this.lblTipoFase.TabIndex = 28;
-            this.lblTipoFase.Text = "Phase type";
             // 
             // lblFechaFase
             // 
             this.lblFechaFase.AutoSize = true;
-            this.lblFechaFase.Location = new System.Drawing.Point(230, 78);
+            this.lblFechaFase.Location = new System.Drawing.Point(0, 0);
             this.lblFechaFase.Name = "lblFechaFase";
-            this.lblFechaFase.Size = new System.Drawing.Size(64, 15);
+            this.lblFechaFase.Size = new System.Drawing.Size(0, 15);
             this.lblFechaFase.TabIndex = 27;
-            this.lblFechaFase.Text = "Phase date";
             // 
             // lblNombreFase
             // 
             this.lblNombreFase.AutoSize = true;
-            this.lblNombreFase.Location = new System.Drawing.Point(67, 78);
+            this.lblNombreFase.Location = new System.Drawing.Point(0, 0);
             this.lblNombreFase.Name = "lblNombreFase";
-            this.lblNombreFase.Size = new System.Drawing.Size(71, 15);
+            this.lblNombreFase.Size = new System.Drawing.Size(0, 15);
             this.lblNombreFase.TabIndex = 26;
-            this.lblNombreFase.Text = "Phase name";
             // 
             // cbxTipoFase
             // 
@@ -201,7 +195,6 @@
             this.btnGoEvent.Name = "btnGoEvent";
             this.btnGoEvent.Size = new System.Drawing.Size(117, 25);
             this.btnGoEvent.TabIndex = 23;
-            this.btnGoEvent.Text = "Event";
             this.btnGoEvent.UseVisualStyleBackColor = true;
             // 
             // btnPlusFases
@@ -277,12 +270,11 @@
             this.btnSelectImage.Name = "btnSelectImage";
             this.btnSelectImage.Size = new System.Drawing.Size(150, 25);
             this.btnSelectImage.TabIndex = 22;
-            this.btnSelectImage.Text = "Select image";
             this.btnSelectImage.UseVisualStyleBackColor = true;
             // 
             // panelEvent
             // 
-            this.panelEvent.Controls.Add(this.label1);
+            this.panelEvent.Controls.Add(this.lblEstado);
             this.panelEvent.Controls.Add(this.cbxEstadoEvento);
             this.panelEvent.Controls.Add(this.btnAddEvent);
             this.panelEvent.Controls.Add(this.lblImageEvent);
@@ -302,14 +294,13 @@
             this.panelEvent.Size = new System.Drawing.Size(820, 434);
             this.panelEvent.TabIndex = 24;
             // 
-            // label1
+            // lblEstado
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 290);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
-            this.label1.TabIndex = 36;
-            this.label1.Text = "Event state";
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(0, 0);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(0, 15);
+            this.lblEstado.TabIndex = 36;
             // 
             // cbxEstadoEvento
             // 
@@ -330,7 +321,6 @@
             this.btnAddEvent.Name = "btnAddEvent";
             this.btnAddEvent.Size = new System.Drawing.Size(141, 32);
             this.btnAddEvent.TabIndex = 34;
-            this.btnAddEvent.Text = "Add event";
             this.btnAddEvent.UseVisualStyleBackColor = true;
             this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
@@ -339,45 +329,40 @@
             this.lblImageEvent.AutoSize = true;
             this.lblImageEvent.Location = new System.Drawing.Point(309, 22);
             this.lblImageEvent.Name = "lblImageEvent";
-            this.lblImageEvent.Size = new System.Drawing.Size(186, 15);
+            this.lblImageEvent.Size = new System.Drawing.Size(0, 15);
             this.lblImageEvent.TabIndex = 33;
-            this.lblImageEvent.Text = "Representative image of the event";
             // 
             // lblHoraEvento
             // 
             this.lblHoraEvento.AutoSize = true;
-            this.lblHoraEvento.Location = new System.Drawing.Point(56, 235);
+            this.lblHoraEvento.Location = new System.Drawing.Point(0, 0);
             this.lblHoraEvento.Name = "lblHoraEvento";
-            this.lblHoraEvento.Size = new System.Drawing.Size(89, 15);
+            this.lblHoraEvento.Size = new System.Drawing.Size(0, 15);
             this.lblHoraEvento.TabIndex = 32;
-            this.lblHoraEvento.Text = "Event start time";
             // 
             // lblFechaEvento
             // 
             this.lblFechaEvento.AutoSize = true;
-            this.lblFechaEvento.Location = new System.Drawing.Point(56, 178);
+            this.lblFechaEvento.Location = new System.Drawing.Point(0, 0);
             this.lblFechaEvento.Name = "lblFechaEvento";
-            this.lblFechaEvento.Size = new System.Drawing.Size(88, 15);
+            this.lblFechaEvento.Size = new System.Drawing.Size(0, 15);
             this.lblFechaEvento.TabIndex = 31;
-            this.lblFechaEvento.Text = "Event start date";
             // 
             // lblLugarEvento
             // 
             this.lblLugarEvento.AutoSize = true;
             this.lblLugarEvento.Location = new System.Drawing.Point(60, 116);
             this.lblLugarEvento.Name = "lblLugarEvento";
-            this.lblLugarEvento.Size = new System.Drawing.Size(199, 15);
+            this.lblLugarEvento.Size = new System.Drawing.Size(0, 15);
             this.lblLugarEvento.TabIndex = 30;
-            this.lblLugarEvento.Text = "Place where the event will take place";
             // 
             // lblNombreEvento
             // 
             this.lblNombreEvento.AutoSize = true;
-            this.lblNombreEvento.Location = new System.Drawing.Point(128, 53);
+            this.lblNombreEvento.Location = new System.Drawing.Point(0, 0);
             this.lblNombreEvento.Name = "lblNombreEvento";
-            this.lblNombreEvento.Size = new System.Drawing.Size(69, 15);
+            this.lblNombreEvento.Size = new System.Drawing.Size(0, 15);
             this.lblNombreEvento.TabIndex = 29;
-            this.lblNombreEvento.Text = "Event name";
             // 
             // btnGoFases
             // 
@@ -390,7 +375,6 @@
             this.btnGoFases.Name = "btnGoFases";
             this.btnGoFases.Size = new System.Drawing.Size(117, 25);
             this.btnGoFases.TabIndex = 28;
-            this.btnGoFases.Text = "Phases";
             this.btnGoFases.UseVisualStyleBackColor = true;
             // 
             // txtHoraEvento
@@ -439,9 +423,8 @@
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.Location = new System.Drawing.Point(375, 41);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(60, 28);
+            this.lblTitle.Size = new System.Drawing.Size(0, 28);
             this.lblTitle.TabIndex = 25;
-            this.lblTitle.Text = "Event";
             // 
             // btnEventCerrar
             // 
@@ -520,7 +503,7 @@
         private Button btnAddEvent;
         private Label lblEstadoFase;
         private ComboBox cbxEstadoFase;
-        private Label label1;
+        private Label lblEstado;
         private ComboBox cbxEstadoEvento;
     }
 }

@@ -152,5 +152,28 @@
         {
             Application.Exit();
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    btnCancelar.Text = "Cancel";
+                    label1.Text = "Welcome";
+                    label1.Location = new Point(239, 19);
+                    txtUsuario.Text = "User or email";
+                    txtContraseña.Text = "Password";
+                    btnAcceder.Text = "Log in";
+                    break;
+                case "ES": //Español
+                    btnCancelar.Text = "Cancelar";
+                    label1.Text = "Bienvenido";
+                    label1.Location = new Point(227, 19);
+                    txtUsuario.Text = "Usuario o email";
+                    txtContraseña.Text = "Contraseña";
+                    btnAcceder.Text = "Acceder";
+                    break;
+            }
+        }
     }
 }

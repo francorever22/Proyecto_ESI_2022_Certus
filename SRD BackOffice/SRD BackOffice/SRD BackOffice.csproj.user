@@ -10,5 +10,26 @@
     <Compile Update="CustomToggleBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="MenuCrearDeportista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuCrearEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuCrearEvento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuManageAdministradores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuManageAthletes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuManageEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuManageTeams.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

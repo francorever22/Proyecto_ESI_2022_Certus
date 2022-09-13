@@ -11,6 +11,7 @@
         public MenuCrearEquipo()
         {
             InitializeComponent();
+            SetIdioma();
 
             panelBuscadorEquipos.Hide();
         }
@@ -18,6 +19,7 @@
         public MenuCrearEquipo(int index)
         {
             InitializeComponent();
+            SetIdioma();
             panelBuscadorEquipos.Hide();
             this.index = index;
             modify = true;
@@ -525,6 +527,43 @@
         {
             miembros.RemoveAt(member);
             p.Dispose();
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblTitle.Text = "Create team";
+                    lblTipo.Text = "Type of team";
+                    lblTipo.Location = new Point(352, 251);
+                    lblPais.Text = "Country of origin";
+                    lblPais.Location = new Point(276, 175);
+                    lblName.Text = "Team name";
+                    lblName.Location = new Point(290, 97);
+                    lblImage.Text = "Team image";
+                    lblImage.Location = new Point(63, 80);
+                    lblPlayers.Text = "Members";
+                    lblPlayers.Location = new Point(216, 315);
+                    btnSportAdd.Text = "Add";
+                    btnSelectImage.Text = "Select image";
+                    break;
+                case "ES": //Español
+                    lblTitle.Text = "Crear equipo";
+                    lblTipo.Text = "Tipo de equipo";
+                    lblTipo.Location = new Point(345, 251);
+                    lblPais.Text = "País de origen";
+                    lblPais.Location = new Point(286, 175);
+                    lblName.Text = "Nombre del equipo";
+                    lblName.Location = new Point(275, 97);
+                    lblImage.Text = "Imagen del equipo";
+                    lblImage.Location = new Point(48, 80);
+                    lblPlayers.Text = "Miembros";
+                    lblPlayers.Location = new Point(206, 315);
+                    btnSportAdd.Text = "Agregar";
+                    btnSelectImage.Text = "Seleccionar imagen";
+                    break;
+            }
         }
     }
 }

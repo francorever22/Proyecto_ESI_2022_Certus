@@ -92,5 +92,36 @@
                 MessageBox.Show("There was an error in the process");
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblAddminTitle.Text = "Add administrator";
+                    lblAddminTitle.Location = new Point(68, 49);
+                    lblAddminUsuario.Text = "Username";
+                    lblAddminUsuario.Location = new Point(45, 156);
+                    lblAddminEmail.Location = new Point(45, 237);
+                    btnAddminAdd.Text = "Add";
+                    lblAddminConstraseña.Text = "Password";
+                    lblAddminConstraseña.Location = new Point(45, 317);
+                    lblAddminConfirm.Text = "Repeat password";
+                    lblAddminConfirm.Location = new Point(45, 398);
+                    break;
+                case "ES": //Español
+                    lblAddminTitle.Text = "Agregar administrador";
+                    lblAddminTitle.Location = new Point(27, 49);
+                    lblAddminUsuario.Text = "Nombre de usuario";
+                    lblAddminUsuario.Location = new Point(30, 157);
+                    lblAddminEmail.Location = new Point(30, 237);
+                    btnAddminAdd.Text = "Agregar";
+                    lblAddminConstraseña.Text = "Contraseña";
+                    lblAddminConstraseña.Location = new Point(30, 317);
+                    lblAddminConfirm.Text = "Confirme la contraseña";
+                    lblAddminConfirm.Location = new Point(30, 398);
+                    break;
+            }
+        }
     }
 }

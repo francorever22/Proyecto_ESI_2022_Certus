@@ -163,29 +163,8 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblUsersManagerTitle.Text = "Admin manager";
-                    this.lblUsersManagerTitle.Location = new System.Drawing.Point(110, 36);
-                    this.lblUsersManagerTitle.Font = new System.Drawing.Font("Montserrat", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.label1.Text = "Admin";
-                    this.label1.Location = new System.Drawing.Point(35, 5);
-                    break;
-                case "ES": //Español
-                    this.lblUsersManagerTitle.Text = "Administrador de admins";
-                    this.lblUsersManagerTitle.Location = new System.Drawing.Point(10, 36);
-                    this.lblUsersManagerTitle.Font = new System.Drawing.Font("Montserrat", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.label1.Text = "Admin";
-                    this.label1.Location = new System.Drawing.Point(27, 5);
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAgregarCategoria;
         private Label lblUsersManagerTitle;
         private Button btnUsersManagerCerrar;

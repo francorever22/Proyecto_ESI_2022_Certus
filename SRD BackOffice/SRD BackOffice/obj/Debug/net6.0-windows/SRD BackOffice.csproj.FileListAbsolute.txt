@@ -27,3 +27,42 @@ C:\Users\Hinoken\source\repos\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-win
 C:\Users\Hinoken\source\repos\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Categorias.json
 C:\Users\Hinoken\source\repos\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Deportes.json
 C:\Users\Hinoken\source\repos\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Banners.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Banners.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Categorias.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Deportes.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Usuarios.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\SRD BackOffice.exe
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\SRD BackOffice.deps.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\SRD BackOffice.runtimeconfig.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\SRD BackOffice.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\SRD BackOffice.pdb
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.csproj.AssemblyReference.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.Login.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MainMenu.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuAgregarAdmin.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearCategoria.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearDeporte.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearDeportista.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearEquipo.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearEvento.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuGestionarBanners.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageAdministradores.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageAthletes.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageEvents.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageSports.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageTeams.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageUsers.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.Properties.Resources.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.csproj.GenerateResource.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.AssemblyInfoInputs.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.AssemblyInfo.cs
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.csproj.CoreCompileInputs.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\refint\SRD BackOffice.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.pdb
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD BackOffice.genruntimeconfig.cache
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\ref\SRD BackOffice.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Deportistas.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Equipos.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Eventos.json

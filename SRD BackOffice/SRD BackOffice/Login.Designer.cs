@@ -142,30 +142,6 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.btnCancelar.Text = "Cancel";
-                    this.label1.Text = "Welcome";
-                    this.label1.Location = new System.Drawing.Point(239, 19);
-                    this.txtUsuario.Text = "User or email";
-                    this.txtContraseña.Text = "Password";
-                    this.btnAcceder.Text = "Log in";
-                    break;
-                case "ES": //Español
-                    this.btnCancelar.Text = "Cancelar";
-                    this.label1.Text = "Bienvenido";
-                    this.label1.Location = new System.Drawing.Point(227, 19);
-                    this.txtUsuario.Text = "Usuario o email";
-                    this.txtContraseña.Text = "Contraseña";
-                    this.btnAcceder.Text = "Acceder";
-                    break;
-            }
-        }
-
         #endregion
         private System.Windows.Forms.Button btnAcceder;
         private System.Windows.Forms.TextBox txtContraseña;

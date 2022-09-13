@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelManageEvents = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.panelLabels = new System.Windows.Forms.Panel();
@@ -40,8 +42,6 @@
             this.lblState = new System.Windows.Forms.Label();
             this.btnEventManagerCerrar = new System.Windows.Forms.Button();
             this.lblEventManagerTitle = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.panelManageEvents.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.panelLabels.SuspendLayout();
@@ -59,6 +59,23 @@
             this.panelManageEvents.Name = "panelManageEvents";
             this.panelManageEvents.Size = new System.Drawing.Size(676, 541);
             this.panelManageEvents.TabIndex = 11;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBuscar.Location = new System.Drawing.Point(483, 61);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // txtBuscador
+            // 
+            this.txtBuscador.Location = new System.Drawing.Point(174, 62);
+            this.txtBuscador.Name = "txtBuscador";
+            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
+            this.txtBuscador.TabIndex = 28;
             // 
             // panelPrincipal
             // 
@@ -111,45 +128,40 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(179, 4);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(39, 15);
+            this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 4;
-            this.lblName.Text = "Name";
             // 
             // lblPhases
             // 
             this.lblPhases.AutoSize = true;
-            this.lblPhases.Location = new System.Drawing.Point(318, 4);
+            this.lblPhases.Location = new System.Drawing.Point(322, 4);
             this.lblPhases.Name = "lblPhases";
-            this.lblPhases.Size = new System.Drawing.Size(60, 15);
+            this.lblPhases.Size = new System.Drawing.Size(0, 15);
             this.lblPhases.TabIndex = 0;
-            this.lblPhases.Text = "Nº phases";
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Location = new System.Drawing.Point(396, 4);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(31, 15);
+            this.lblDate.Size = new System.Drawing.Size(0, 15);
             this.lblDate.TabIndex = 2;
-            this.lblDate.Text = "Date";
             // 
             // lblHour
             // 
             this.lblHour.AutoSize = true;
             this.lblHour.Location = new System.Drawing.Point(465, 4);
             this.lblHour.Name = "lblHour";
-            this.lblHour.Size = new System.Drawing.Size(34, 15);
+            this.lblHour.Size = new System.Drawing.Size(0, 15);
             this.lblHour.TabIndex = 1;
-            this.lblHour.Text = "Hour";
             // 
             // lblState
             // 
             this.lblState.AutoSize = true;
             this.lblState.Location = new System.Drawing.Point(549, 4);
             this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(33, 15);
+            this.lblState.Size = new System.Drawing.Size(0, 15);
             this.lblState.TabIndex = 5;
-            this.lblState.Text = "State";
             // 
             // btnEventManagerCerrar
             // 
@@ -169,28 +181,11 @@
             // lblEventManagerTitle
             // 
             this.lblEventManagerTitle.AutoSize = true;
-            this.lblEventManagerTitle.Font = new System.Drawing.Font("Montserrat", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEventManagerTitle.Font = new System.Drawing.Font("Montserrat", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEventManagerTitle.Location = new System.Drawing.Point(0, 0);
             this.lblEventManagerTitle.Name = "lblEventManagerTitle";
-            this.lblEventManagerTitle.Size = new System.Drawing.Size(0, 55);
+            this.lblEventManagerTitle.Size = new System.Drawing.Size(0, 37);
             this.lblEventManagerTitle.TabIndex = 8;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
-            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBuscar.Location = new System.Drawing.Point(483, 61);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
-            this.btnBuscar.TabIndex = 29;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // txtBuscador
-            // 
-            this.txtBuscador.Location = new System.Drawing.Point(174, 62);
-            this.txtBuscador.Name = "txtBuscador";
-            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
-            this.txtBuscador.TabIndex = 28;
             // 
             // MenuManageEvents
             // 
@@ -209,21 +204,8 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-
-                    break;
-                case "ES": //Español
-
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelManageEvents;
         private Label lblEventManagerTitle;
         private Button btnEventManagerCerrar;

@@ -244,39 +244,9 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblSportsManagerTitle.Text = "Sports manager";
-                    this.lblSportsManagerTitle.Location = new System.Drawing.Point(169, 24);
-                    this.label7.Text = "Name";
-                    this.label7.Location = new System.Drawing.Point(33, 5);
-                    this.label6.Text = "Category";
-                    this.label4.Text = "Categories";
-                    this.lblCategories.Text = "Categories";
-                    this.label1.Text = "Sports";
-                    this.label1.Location = new System.Drawing.Point(413, 120);
-                    break;
-                case "ES": //Español
-                    this.lblSportsManagerTitle.Text = "Administrador de deportes";
-                    this.lblSportsManagerTitle.Location = new System.Drawing.Point(50, 24);
-                    this.label7.Text = "Nombre";
-                    this.label7.Location = new System.Drawing.Point(27, 5);
-                    this.label6.Text = "Categoría";
-                    this.label4.Text = "Categorías";
-                    this.lblCategories.Text = "Categorías";
-                    this.label1.Text = "Deportes";
-                    this.label1.Location = new System.Drawing.Point(400, 120);
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelManageSports;
         private Label lblSportsManagerTitle;
         private Button btnSportsManagerCerrar;

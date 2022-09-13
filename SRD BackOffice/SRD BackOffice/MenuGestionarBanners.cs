@@ -310,5 +310,38 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblMangaTitle.Text = "Manage banners";
+                    lblMangaTitle.Location = new Point(493, 44);
+                    btnSelectImage.Text = "Select image";
+                    lblBannerImage.Text = "Add an image for the new banner";
+                    lblBannerImage.Location = new Point(31, 249);
+                    btnAddBanner.Text = "Add";
+                    lblBannerLink.Text = "Insert the link attched to the banner";
+                    lblBannerLink.Location = new Point(24, 413);
+                    lblBannerTitle.Text = "Insert the title of the banner";
+                    label7.Text = "Name";
+                    label7.Location = new Point(70, 3);
+                    break;
+                case "ES": //Español
+                    lblMangaTitle.Text = "Administrar banners";
+                    lblMangaTitle.Location = new Point(460, 44);
+                    btnSelectImage.Text = "Seleccione una imagen";
+                    lblBannerImage.Text = "Agregué una imagen para el nuevo banner";
+                    lblBannerImage.Location = new Point(4, 249);
+                    btnAddBanner.Text = "Agregar";
+                    lblBannerLink.Text = "Inserte el link vinculado con el banner";
+                    lblBannerLink.Location = new Point(20, 413);
+                    lblBannerTitle.Text = "Inserte el título del banner";
+                    label7.Text = "Nombre";
+                    label7.Location = new Point(64, 3);
+                    break;
+            }
+        }
     }
 }

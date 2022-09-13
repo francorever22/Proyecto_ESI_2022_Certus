@@ -2,9 +2,12 @@
 {
     public partial class Frm_Eventos : Form
     {
+        private static Frm_Eventos form = null;
         public Frm_Eventos()
         {
             InitializeComponent();
+            form = this;
+            SetTheme();
 
             ChargePhasesButtons(5);
         }
@@ -22,6 +25,10 @@
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.TabIndex = 0;
                 btn.Name = "btnFases";
+                btn.BackColor = AjustesDeUsuario.btnBack;
+                btn.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+                btn.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+                btn.ForeColor = AjustesDeUsuario.foreColor;
                 btn.Click += (sender, EventArgs) => { PhasesButton_Click(sender, EventArgs, rand.Next(1, 5)); };
 
                 if (f == 1)
@@ -46,6 +53,7 @@
             pic.Location = new Point(0, 0);
             pic.TabIndex = 0;
             pic.TabStop = false;
+            pic.BackColor = Color.Transparent;
 
             panelContenedor.Controls.Add(pic);
 
@@ -55,9 +63,10 @@
             var teamImage = new Bitmap(150, 150); //Temporal
             var image = new Bitmap(400 * (rounds + 1), 150 * (participants / 2));
 
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            SolidBrush drawBrush = new SolidBrush(AjustesDeUsuario.foreColor);
             Font font = new Font("Montserrat", 10f);
             StringFormat drawFormat = new StringFormat();
+            Pen pen = new Pen(AjustesDeUsuario.foreColor);
 
             for (int r = 0; r <= rounds; r++)
             {
@@ -79,13 +88,13 @@
                     {
                         if (j == 1)
                         {
-                            g.DrawRectangle(Pens.Black, 0 + (400 * r), y, 200, 50);
+                            g.DrawRectangle(pen, 0 + (400 * r), y, 200, 50);
                             g.DrawImage(teamImage, 5 + (400 * r), 5 + y, 40, 40);
                             g.DrawString($"Group {i}", font, drawBrush, 50 + (400 * r), 15 + y, drawFormat);
                         }
                         else
                         {
-                            g.DrawRectangle(Pens.Black, 0 + (400 * r), y + 50, 200, 50);
+                            g.DrawRectangle(pen, 0 + (400 * r), y + 50, 200, 50);
                             g.DrawImage(teamImage, 5 + (400 * r), 55 + y, 40, 40);
                             g.DrawString($"Group {i}", font, drawBrush, 50 + (400 * r), 65 + y, drawFormat);
                         }
@@ -109,11 +118,11 @@
                         
                         y = y1 + y2 + 50;
 
-                        g.DrawLine(Pens.Black, 200 + (400 * r), y, 300 + (400 * r), y); //Horizontal superior
+                        g.DrawLine(pen, 200 + (400 * r), y, 300 + (400 * r), y); //Horizontal superior
                         yB = y + y3;
-                        g.DrawLine(Pens.Black, 200 + (400 * r), yB, 300 + (400 * r), yB); //Horizontal inferior
-                        g.DrawLine(Pens.Black, 300 + (400 * r), y, 300 + (400 * r), yB); //Vertical
-                        g.DrawLine(Pens.Black, 300 + (400 * r), (yB + y) / 2, 400 + (400 * r), (yB + y) / 2); //Horizontal central
+                        g.DrawLine(pen, 200 + (400 * r), yB, 300 + (400 * r), yB); //Horizontal inferior
+                        g.DrawLine(pen, 300 + (400 * r), y, 300 + (400 * r), yB); //Vertical
+                        g.DrawLine(pen, 300 + (400 * r), (yB + y) / 2, 400 + (400 * r), (yB + y) / 2); //Horizontal central
                     }
                 }
             }
@@ -129,6 +138,7 @@
             pic.Location = new Point(0, 0);
             pic.TabIndex = 0;
             pic.TabStop = false;
+            pic.BackColor = Color.Transparent;
 
             panelContenedor.Controls.Add(pic);
 
@@ -138,21 +148,22 @@
             var teamImage = new Bitmap(150, 150); //Temporal
             var image = new Bitmap(250 * (24 / 4 / 2), 600);
 
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            SolidBrush drawBrush = new SolidBrush(AjustesDeUsuario.foreColor);
             Font font = new Font("Montserrat", 10f);
             StringFormat drawFormat = new StringFormat();
+            Pen pen = new Pen(AjustesDeUsuario.foreColor);
 
             Graphics g = Graphics.FromImage(image);
 
             for (int i = 1; i <= 24 / 4; i++)
             {
-                g.DrawRectangle(Pens.Black, x, y, 200, 50);
+                g.DrawRectangle(pen, x, y, 200, 50);
                 g.DrawString($"Group {i}", font, drawBrush, x + 70, 15 + y, drawFormat);
 
                 for (int j = 1; j <= 4; j++)
                 {
                     y += 50;
-                    g.DrawRectangle(Pens.Black, x, y, 200, 50);
+                    g.DrawRectangle(pen, x, y, 200, 50);
                     g.DrawImage(teamImage, 5 + x, 5 + y, 40, 40);
                     g.DrawString(text, font, drawBrush, x + 50, 15 + y, drawFormat);
                 }
@@ -177,6 +188,7 @@
             pic.Location = new Point(0, 0);
             pic.TabIndex = 0;
             pic.TabStop = false;
+            pic.BackColor = Color.Transparent;
 
             panelContenedor.Controls.Add(pic);
 
@@ -186,9 +198,10 @@
             var teamImage = new Bitmap(150, 150); //Temporal
             var image = new Bitmap(250 * (24 / 2 / 2), 350);
 
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            SolidBrush drawBrush = new SolidBrush(AjustesDeUsuario.foreColor);
             Font font = new Font("Montserrat", 10f);
             StringFormat drawFormat = new StringFormat();
+            Pen pen = new Pen(AjustesDeUsuario.foreColor);
 
             Graphics g = Graphics.FromImage(image);
 
@@ -196,7 +209,7 @@
             {
                 for (int j = 1; j <= 2; j++)
                 {
-                    g.DrawRectangle(Pens.Black, x, y, 200, 50);
+                    g.DrawRectangle(pen, x, y, 200, 50);
                     g.DrawImage(teamImage, 5 + x, 5 + y, 40, 40);
                     g.DrawString(text, font, drawBrush, x + 50, 15 + y, drawFormat);
                     y += 50;
@@ -225,16 +238,17 @@
                 p1.BorderStyle = BorderStyle.FixedSingle;
                 p1.Size = new Size(724, 50);
                 p1.TabIndex = 0;
+                p1.BackColor = AjustesDeUsuario.panel;
 
                 PictureBox pic1 = new PictureBox();
 
                 pic1.InitialImage = null;
-                pic1.BackColor = System.Drawing.Color.Transparent;
-                pic1.Size = new System.Drawing.Size(40, 40);
-                pic1.Location = new System.Drawing.Point(10, 5);
+                pic1.BackColor = Color.Transparent;
+                pic1.Size = new Size(40, 40);
+                pic1.Location = new Point(10, 5);
                 pic1.TabIndex = 1;
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                pic1.Image = Properties.Resources.barcelona;
 
                 Label l1 = new Label();
 
@@ -245,6 +259,7 @@
                 l1.BorderStyle = BorderStyle.None;
                 l1.Location = new Point(60, 12);
                 l1.TabIndex = 3;
+                l1.ForeColor = AjustesDeUsuario.foreColor;
 
                 Label l2 = new Label();
 
@@ -256,6 +271,7 @@
                 l2.BorderStyle = BorderStyle.None;
                 l2.Location = new Point(650, 12);
                 l2.TabIndex = 3;
+                l2.ForeColor = AjustesDeUsuario.foreColor;
 
                 p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
                 l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
@@ -279,16 +295,17 @@
                 p1.BorderStyle = BorderStyle.FixedSingle;
                 p1.Size = new Size(724, 50);
                 p1.TabIndex = 0;
+                p1.BackColor = AjustesDeUsuario.panel;
 
                 PictureBox pic1 = new PictureBox();
 
                 pic1.InitialImage = null;
-                pic1.BackColor = System.Drawing.Color.Transparent;
-                pic1.Size = new System.Drawing.Size(40, 40);
-                pic1.Location = new System.Drawing.Point(10, 5);
+                pic1.BackColor = Color.Transparent;
+                pic1.Size = new Size(40, 40);
+                pic1.Location = new Point(10, 5);
                 pic1.TabIndex = 1;
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                pic1.Image = Properties.Resources.barcelona;
 
                 Label l1 = new Label();
 
@@ -299,6 +316,7 @@
                 l1.BorderStyle = BorderStyle.None;
                 l1.Location = new Point(60, 12);
                 l1.TabIndex = 3;
+                l1.ForeColor = AjustesDeUsuario.foreColor;
 
                 Label l2 = new Label();
 
@@ -310,6 +328,7 @@
                 l2.BorderStyle = BorderStyle.None;
                 l2.Location = new Point(696 - l2.Width, 12);
                 l2.TabIndex = 3;
+                l2.ForeColor = AjustesDeUsuario.foreColor;
 
                 p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
                 l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
@@ -349,6 +368,15 @@
         private void Team_Click(object sender, EventArgs e)
         {
             Principal.AlterPrincipal(1, 6, 0);
+        }
+
+        private void SetTheme()
+        {
+            /* Paneles */
+            BackColor = AjustesDeUsuario.panel;
+            panelContenedor.BackColor = AjustesDeUsuario.panel;
+            /* Textos (Incluidos botones) */
+            label1.ForeColor = AjustesDeUsuario.foreColor;
         }
     }
 }

@@ -13,6 +13,7 @@
         public MenuCrearEvento()
         {
             InitializeComponent();
+            SetIdioma();
 
             this.txtFechaFase.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, this.txtFechaFase); };
             this.txtFechaFase.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, this.txtFechaFase); };
@@ -40,6 +41,7 @@
         public MenuCrearEvento(int index)
         {
             InitializeComponent();
+            SetIdioma();
 
             this.index = index;
             modify = true;
@@ -1088,6 +1090,69 @@
                 {
                     y = 0; x += 250;
                 }
+            }
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblCantFases.Text = "Amount of phases";
+                    lblEstado.Text = "Event state";
+                    lblEstado.Location = new Point(69, 290);
+                    lblEstadoFase.Text = "Phase state";
+                    lblEstadoFase.Location = new Point(489, 77);
+                    lblFaseActual.Text = "Phase";
+                    lblFaseActual.Location = new Point(175, 13);
+                    lblFechaEvento.Text = "Event start date";
+                    lblFechaEvento.Location = new Point(56, 178);
+                    lblFechaFase.Text = "Phase date";
+                    lblFechaFase.Location = new Point(230, 78);
+                    lblHoraEvento.Text = "Event start time";
+                    lblHoraEvento.Location = new Point(56, 235);
+                    lblImageEvent.Text = "Representative image of the event";
+                    lblLugarEvento.Text = "Place where the event will take place";
+                    lblNombreEvento.Text = "Event name";
+                    lblNombreEvento.Location = new Point(128, 53);
+                    lblNombreFase.Text = "Phase name";
+                    lblNombreFase.Location = new Point(67, 78);
+                    lblTipoFase.Text = "Phase type";
+                    lblTipoFase.Location = new Point(360, 77);
+                    lblTitle.Text = "Event";
+                    btnAddEvent.Text = "Add event";
+                    btnGoEvent.Text = "Event";
+                    btnGoFases.Text = "Phases";
+                    btnSelectImage.Text = "Select image";
+                    break;
+                case "ES": //Español
+                    lblCantFases.Text = "Cantidad de fases";
+                    lblEstado.Text = "Estado del evento";
+                    lblEstado.Location = new Point(54, 290);
+                    lblEstadoFase.Text = "Estado de la fase";
+                    lblEstadoFase.Location = new Point(474, 77);
+                    lblFaseActual.Text = "Fase";
+                    lblFaseActual.Location = new Point(178, 13);
+                    lblFechaEvento.Text = "Fecha de inicio del evento";
+                    lblFechaEvento.Location = new Point(27, 178);
+                    lblFechaFase.Text = "Fecha de la fase";
+                    lblFechaFase.Location = new Point(217, 78);
+                    lblHoraEvento.Text = "Hora de comienzo del evento";
+                    lblHoraEvento.Location = new Point(20, 235);
+                    lblImageEvent.Text = "Imagen representativa del evento";
+                    lblLugarEvento.Text = "Lugar donde se realizara el evento";
+                    lblNombreEvento.Text = "Nombre del evento";
+                    lblNombreEvento.Location = new Point(100, 53);
+                    lblNombreFase.Text = "Nombre de la fase";
+                    lblNombreFase.Location = new Point(52, 78);
+                    lblTipoFase.Text = "Tipo de fase";
+                    lblTipoFase.Location = new Point(355, 77);
+                    lblTitle.Text = "Evento";
+                    btnAddEvent.Text = "Agregar evento";
+                    btnGoEvent.Text = "Evento";
+                    btnGoFases.Text = "Fases";
+                    btnSelectImage.Text = "Seleccionar imagen";
+                    break;
             }
         }
     }

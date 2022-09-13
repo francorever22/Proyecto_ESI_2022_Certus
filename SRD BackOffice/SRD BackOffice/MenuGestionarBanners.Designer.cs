@@ -264,39 +264,6 @@
 
         }
 
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblMangaTitle.Text = "Manage banners";
-                    this.lblMangaTitle.Location = new System.Drawing.Point(493, 44);
-                    this.btnSelectImage.Text = "Select image";
-                    this.lblBannerImage.Text = "Add an image for the new banner";
-                    this.lblBannerImage.Location = new System.Drawing.Point(31, 249);
-                    this.btnAddBanner.Text = "Add";
-                    this.lblBannerLink.Text = "Insert the link attched to the banner";
-                    this.lblBannerLink.Location = new System.Drawing.Point(24, 413);
-                    this.lblBannerTitle.Text = "Insert the title of the banner";
-                    this.label7.Text = "Name";
-                    this.label7.Location = new System.Drawing.Point(70, 3);
-                    break;
-                case "ES": //Español
-                    this.lblMangaTitle.Text = "Administrar banners";
-                    this.lblMangaTitle.Location = new System.Drawing.Point(460, 44);
-                    this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblBannerImage.Text = "Agregué una imagen para el nuevo banner";
-                    this.lblBannerImage.Location = new System.Drawing.Point(4, 249);
-                    this.btnAddBanner.Text = "Agregar";
-                    this.lblBannerLink.Text = "Inserte el link vinculado con el banner";
-                    this.lblBannerLink.Location = new System.Drawing.Point(20, 413);
-                    this.lblBannerTitle.Text = "Inserte el título del banner";
-                    this.label7.Text = "Nombre";
-                    this.label7.Location = new System.Drawing.Point(64, 3);
-                    break;
-            }
-        }
-
         #endregion
         private Panel panelMangeBanners;
         private PictureBox imgBannerSelected;

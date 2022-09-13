@@ -2,9 +2,13 @@
 {
     public partial class Frm_Encuentros : Form
     {
+        private static Frm_Encuentros form = null;
         public Frm_Encuentros()
         {
             InitializeComponent();
+            SetTheme();
+            SetIdioma();
+            form = this;
 
             llbTeam2.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, this.llbTeam2); };
             llbTeam2.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, this.llbTeam2); };
@@ -34,6 +38,7 @@
                             p1.Size = new Size(362, c * 25);
                             p1.Location = new Point(0, 0);
                             p1.TabIndex = 0;
+                            p1.BackColor = AjustesDeUsuario.panel;
 
                             Panel p2 = new Panel();
 
@@ -41,11 +46,13 @@
                             p2.Size = new Size(362, c * 25);
                             p2.Location = new Point(362, 0);
                             p2.TabIndex = 0;
+                            p2.BackColor = AjustesDeUsuario.panel;
 
                             Panel p3 = new Panel();
 
                             p3.Size = new Size(724, 50);
                             p3.TabIndex = 0;
+                            p3.BackColor = AjustesDeUsuario.panel;
 
                             if (c * 25 < 301)
                             {
@@ -69,17 +76,18 @@
                                     p4.BorderStyle = BorderStyle.FixedSingle;
                                     p4.Size = new Size(265, 25);
                                     p4.TabIndex = 0;
+                                    p4.BackColor = AjustesDeUsuario.panel;
 
                                     LinkLabel llb = new LinkLabel(); //Deportista
 
                                     llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
                                     llb.Text = $"Leonel Messi";
                                     llb.Size = new Size(200, 25);
-                                    llb.DisabledLinkColor = Color.Black;
-                                    llb.VisitedLinkColor = Color.Black;
-                                    llb.ActiveLinkColor = Color.Black;
+                                    llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                                    llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                                    llb.ActiveLinkColor = AjustesDeUsuario.foreColor;
                                     llb.LinkBehavior = LinkBehavior.NeverUnderline;
-                                    llb.LinkColor = Color.Black;
+                                    llb.LinkColor = AjustesDeUsuario.foreColor;
                                     llb.Dock = DockStyle.Left;
                                     llb.AutoSize = false;
                                     llb.BorderStyle = BorderStyle.None;
@@ -100,6 +108,7 @@
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.Location = new Point(0, 0);
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                     if (i == 1)
                                     {
@@ -121,6 +130,7 @@
                                 l3.BorderStyle = BorderStyle.None;
                                 l3.Location = new Point(0, 12);
                                 l3.TabIndex = 3;
+                                l3.ForeColor = AjustesDeUsuario.foreColor;
 
                                 Label l4 = new Label(); //Clima
                                 l4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -131,6 +141,7 @@
                                 l4.BorderStyle = BorderStyle.None;
                                 l4.Location = new Point((p3.Width / 2) - (l4.Width / 2), 12);
                                 l4.TabIndex = 3;
+                                l4.ForeColor = AjustesDeUsuario.foreColor;
 
                                 Label l5 = new Label(); //Arbitro
                                 l5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -142,6 +153,7 @@
                                 l5.AutoSize = false;
                                 l5.BorderStyle = BorderStyle.None;
                                 l5.TabIndex = 3;
+                                l5.ForeColor = AjustesDeUsuario.foreColor;
 
                                 p3.Controls.Add(l3);
                                 p3.Controls.Add(l4);
@@ -157,7 +169,6 @@
                             lineup.Location = new Point(0, 0);
                             lineup.Image = null;
                             break;
-
                         case 3: // Últimos 10 encuentros
                             Panel p7 = new Panel();
 
@@ -165,6 +176,7 @@
                             p7.Size = new Size(362, 500);
                             p7.Location = new Point(0, 0);
                             p7.TabIndex = 0;
+                            p7.BackColor = AjustesDeUsuario.panel;
 
                             Panel p8 = new Panel();
 
@@ -172,6 +184,7 @@
                             p8.Size = new Size(345, 500);
                             p8.Location = new Point(362, 0);
                             p8.TabIndex = 0;
+                            p8.BackColor = AjustesDeUsuario.panel;
 
                             this.panelContenedor.Controls.Add(p7);
                             this.panelContenedor.Controls.Add(p8);
@@ -193,26 +206,27 @@
                                         p4.Size = new Size(345, 50);
                                     }
                                     p4.TabIndex = 0;
+                                    p4.BackColor = AjustesDeUsuario.panel;
 
                                     PictureBox pic1 = new PictureBox();
 
                                     pic1.InitialImage = null;
-                                    pic1.BackColor = System.Drawing.Color.Transparent;
-                                    pic1.Size = new System.Drawing.Size(40, 40);
-                                    pic1.Location = new System.Drawing.Point(10, 5);
+                                    pic1.BackColor = Color.Transparent;
+                                    pic1.Size = new Size(40, 40);
+                                    pic1.Location = new Point(10, 5);
                                     pic1.TabIndex = 1;
                                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic1.Image = Properties.Resources.barcelona;
 
                                     PictureBox pic2 = new PictureBox();
 
                                     pic2.InitialImage = null;
-                                    pic2.BackColor = System.Drawing.Color.Transparent;
-                                    pic2.Size = new System.Drawing.Size(40, 40);
-                                    pic2.Location = new System.Drawing.Point(295, 5);
+                                    pic2.BackColor = Color.Transparent;
+                                    pic2.Size = new Size(40, 40);
+                                    pic2.Location = new Point(295, 5);
                                     pic2.TabIndex = 1;
                                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic2.Image = Properties.Resources.barcelona;
 
                                     Label l2 = new Label();
 
@@ -230,6 +244,8 @@
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.Location = new Point(p4.Width / 2 - l2.Width / 2, 12);
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
+
                                     p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
@@ -262,6 +278,7 @@
                                 l1.AutoSize = false;
                                 l1.BorderStyle = BorderStyle.FixedSingle;
                                 l1.TabIndex = 3;
+                                l1.ForeColor = AjustesDeUsuario.foreColor;
                                 if (i == 0)
                                 {
                                     l1.Location = new Point(0, 0);
@@ -277,6 +294,7 @@
                                 p5.Size = new Size(344, c * 25);
                                 p5.Location = new Point(0, c * 25 * i + (25 * i));
                                 p5.TabIndex = 0;
+                                p5.BackColor = AjustesDeUsuario.panel;
 
                                 Panel p6 = new Panel();
 
@@ -284,6 +302,7 @@
                                 p6.Size = new Size(344, c * 25);
                                 p6.Location = new Point(344, c * 25 * i + (25 * i));
                                 p6.TabIndex = 0;
+                                p6.BackColor = AjustesDeUsuario.panel;
 
                                 this.panelContenedor.Controls.Add(l1);
                                 this.panelContenedor.Controls.Add(p5);
@@ -299,6 +318,7 @@
                                     l2.AutoSize = true;
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                     Label l3 = new Label();
 
@@ -308,6 +328,7 @@
                                     l3.AutoSize = true;
                                     l3.BorderStyle = BorderStyle.None;
                                     l3.TabIndex = 3;
+                                    l3.ForeColor = AjustesDeUsuario.foreColor;
 
                                     if (e == 1)
                                     {
@@ -344,16 +365,17 @@
                                 
                                 p4.BorderStyle = BorderStyle.FixedSingle;
                                 p4.TabIndex = 0;
+                                p4.BackColor = AjustesDeUsuario.panel;
 
                                 LinkLabel llb = new LinkLabel();
 
                                 llb.Text = $"Leonel Messi";
                                 llb.Size = new Size(200, 25);
-                                llb.DisabledLinkColor = Color.Black;
-                                llb.VisitedLinkColor = Color.Black;
-                                llb.ActiveLinkColor = Color.Black;
+                                llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                                llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                                llb.ActiveLinkColor = AjustesDeUsuario.foreColor;
                                 llb.LinkBehavior = LinkBehavior.NeverUnderline;
-                                llb.LinkColor = Color.Black;
+                                llb.LinkColor = AjustesDeUsuario.foreColor;
                                 llb.Dock = DockStyle.Left;
                                 llb.AutoSize = false;
                                 llb.TextAlign = ContentAlignment.MiddleLeft;
@@ -375,6 +397,7 @@
                                 l2.BorderStyle = BorderStyle.None;
                                 l2.Location = new Point(0, 0);
                                 l2.TabIndex = 3;
+                                l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                 if (j == 1)
                                 {
@@ -420,6 +443,7 @@
                             }
                             p3.TabIndex = 0;
                             p3.Dock = DockStyle.Bottom;
+                            p3.BackColor = AjustesDeUsuario.panel;
 
                             Label l3 = new Label(); //Lugar
                             l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -430,6 +454,7 @@
                             l3.BorderStyle = BorderStyle.None;
                             l3.Location = new Point(0, 12);
                             l3.TabIndex = 3;
+                            l3.ForeColor = AjustesDeUsuario.foreColor;
 
                             Label l4 = new Label(); //Clima
                             l4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -440,6 +465,7 @@
                             l4.BorderStyle = BorderStyle.None;
                             l4.Location = new Point((p3.Width / 2) - (l4.Width / 2), 12);
                             l4.TabIndex = 3;
+                            l4.ForeColor = AjustesDeUsuario.foreColor;
 
                             Label l5 = new Label(); //Arbitro
                             l5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -451,6 +477,7 @@
                             l5.AutoSize = false;
                             l5.BorderStyle = BorderStyle.None;
                             l5.TabIndex = 3;
+                            l5.ForeColor = AjustesDeUsuario.foreColor;
 
                             this.panelContenedor.Controls.Add(p3);
                             p3.Controls.Add(l3);
@@ -466,7 +493,6 @@
                             lineup.Location = new Point(0, 0);
                             lineup.Image = null;
                             break;
-                            
                         case 3: // Últimos 10 encuentros (del ganador)
                             for (int j = 0; j < 10; j++)
                             {
@@ -476,16 +502,17 @@
                                 p4.BorderStyle = BorderStyle.FixedSingle;
                                 p4.Size = new Size(724, 50);
                                 p4.TabIndex = 0;
+                                p4.BackColor = AjustesDeUsuario.panel;
 
                                 PictureBox pic1 = new PictureBox();
 
                                 pic1.InitialImage = null;
-                                pic1.BackColor = System.Drawing.Color.Transparent;
-                                pic1.Size = new System.Drawing.Size(40, 40);
-                                pic1.Location = new System.Drawing.Point(10, 5);
+                                pic1.BackColor = Color.Transparent;
+                                pic1.Size = new Size(40, 40);
+                                pic1.Location = new Point(10, 5);
                                 pic1.TabIndex = 1;
                                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                pic1.Image = Properties.Resources.barcelona;
 
                                 Label l2 = new Label();
 
@@ -496,6 +523,8 @@
                                 l2.BorderStyle = BorderStyle.None;
                                 l2.Location = new Point(62, 12);
                                 l2.TabIndex = 3;
+                                l2.ForeColor = AjustesDeUsuario.foreColor;
+
                                 p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                 l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                 pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
@@ -518,6 +547,7 @@
                                 l1.AutoSize = false;
                                 l1.BorderStyle = BorderStyle.FixedSingle;
                                 l1.TabIndex = 3;
+                                l1.ForeColor = AjustesDeUsuario.foreColor;
                                 if (i == 1)
                                 {
                                     l1.Location = new Point(0, 0);
@@ -533,6 +563,7 @@
                                 p5.BorderStyle = BorderStyle.None;
                                 p5.Size = new Size(707, c * 25);
                                 p5.TabIndex = 0;
+                                p5.BackColor = AjustesDeUsuario.panel;
 
                                 if (i == 1)
                                 {
@@ -556,6 +587,7 @@
                                     l2.AutoSize = true;
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                     Label l6 = new Label();
 
@@ -565,6 +597,7 @@
                                     l6.AutoSize = true;
                                     l6.BorderStyle = BorderStyle.None;
                                     l6.TabIndex = 3;
+                                    l6.ForeColor = AjustesDeUsuario.foreColor;
 
                                     l2.Location = new Point(0, 25 * j);
                                     l6.Location = new Point(l2.Width, 25 * j);
@@ -576,7 +609,6 @@
                             break;
                     }
                     break;
-
                 case 'C':
                     switch (b)
                     {
@@ -595,6 +627,7 @@
                             p8.Size = new Size(724 - big, 25);
                             p8.Location = new Point(0, 0);
                             p8.TabIndex = 0;
+                            p8.BackColor = AjustesDeUsuario.panel;
 
                             Label l1 = new Label();
 
@@ -606,6 +639,7 @@
                             l1.BorderStyle = BorderStyle.FixedSingle;
                             l1.TabIndex = 3;
                             l1.Location = new Point(0, 0);
+                            l1.ForeColor = AjustesDeUsuario.foreColor;
 
                             Panel p9 = new Panel();
 
@@ -613,6 +647,7 @@
                             p9.Size = new Size(724 - big, 25);
                             p9.Location = new Point(0, 25);
                             p9.TabIndex = 0;
+                            p9.BackColor = AjustesDeUsuario.panel;
 
                             Label l8 = new Label();
 
@@ -624,6 +659,7 @@
                             l8.BorderStyle = BorderStyle.FixedSingle;
                             l8.TabIndex = 3;
                             l8.Location = new Point(0, 0);
+                            l8.ForeColor = AjustesDeUsuario.foreColor;
 
                             Panel p10 = new Panel();
 
@@ -631,6 +667,7 @@
                             p10.Size = new Size(724 - big, 25);
                             p10.Location = new Point(0, 50);
                             p10.TabIndex = 0;
+                            p10.BackColor = AjustesDeUsuario.panel;
 
                             Label l7 = new Label();
 
@@ -642,6 +679,7 @@
                             l7.BorderStyle = BorderStyle.FixedSingle;
                             l7.TabIndex = 3;
                             l7.Location = new Point(0, 0);
+                            l7.ForeColor = AjustesDeUsuario.foreColor;
 
                             this.panelContenedor.Controls.Add(p8);
                             this.panelContenedor.Controls.Add(p9);
@@ -662,6 +700,7 @@
                                 l9.BorderStyle = BorderStyle.FixedSingle;
                                 l9.TabIndex = 3;
                                 l9.Location = new Point(124 + (50 * (i - 1)) - big, 0);
+                                l9.ForeColor = AjustesDeUsuario.foreColor;
 
                                 Label l10 = new Label();
 
@@ -673,6 +712,7 @@
                                 l10.BorderStyle = BorderStyle.FixedSingle;
                                 l10.TabIndex = 3;
                                 l10.Location = new Point(124 + (50 * (i - 1)) - big, 0);
+                                l10.ForeColor = AjustesDeUsuario.foreColor;
 
                                 Label l11 = new Label();
 
@@ -684,6 +724,7 @@
                                 l11.BorderStyle = BorderStyle.FixedSingle;
                                 l11.TabIndex = 3;
                                 l11.Location = new Point(124 + (50 * (i - 1)) - big, 0);
+                                l11.ForeColor = AjustesDeUsuario.foreColor;
 
                                 p8.Controls.Add(l9);
                                 p9.Controls.Add(l10);
@@ -700,6 +741,7 @@
                             l2.BorderStyle = BorderStyle.FixedSingle;
                             l2.TabIndex = 3;
                             l2.Location = new Point(0, 75);
+                            l2.ForeColor = AjustesDeUsuario.foreColor;
 
                             Panel p1 = new Panel();
 
@@ -707,6 +749,7 @@
                             p1.Size = new Size(362, c * 25);
                             p1.Location = new Point(0, 100);
                             p1.TabIndex = 0;
+                            p1.BackColor = AjustesDeUsuario.panel;
 
                             Panel p2 = new Panel();
 
@@ -714,11 +757,13 @@
                             p2.Size = new Size(362 - big, c * 25);
                             p2.Location = new Point(362, 100);
                             p2.TabIndex = 0;
+                            p2.BackColor = AjustesDeUsuario.panel;
 
                             Panel p3 = new Panel();
 
                             p3.Size = new Size(724, 50);
                             p3.TabIndex = 0;
+                            p3.BackColor = AjustesDeUsuario.panel;
 
                             if (c * 25 < 201)
                             {
@@ -744,17 +789,18 @@
                                     p4.BorderStyle = BorderStyle.FixedSingle;
                                     p4.Size = new Size(265, 25);
                                     p4.TabIndex = 0;
+                                    p4.BackColor = AjustesDeUsuario.panel;
 
                                     LinkLabel llb = new LinkLabel(); //Deportista
 
                                     llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
                                     llb.Text = $"Leonel Messi";
                                     llb.Size = new Size(200, 25);
-                                    llb.DisabledLinkColor = Color.Black;
-                                    llb.VisitedLinkColor = Color.Black;
-                                    llb.ActiveLinkColor = Color.Black;
+                                    llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                                    llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                                    llb.ActiveLinkColor = AjustesDeUsuario.foreColor;
                                     llb.LinkBehavior = LinkBehavior.NeverUnderline;
-                                    llb.LinkColor = Color.Black;
+                                    llb.LinkColor = AjustesDeUsuario.foreColor;
                                     llb.Dock = DockStyle.Left;
                                     llb.AutoSize = false;
                                     llb.BorderStyle = BorderStyle.None;
@@ -775,6 +821,7 @@
                                     l6.BorderStyle = BorderStyle.None;
                                     l6.Location = new Point(0, 0);
                                     l6.TabIndex = 3;
+                                    l6.ForeColor = AjustesDeUsuario.foreColor;
 
                                     if (i == 1)
                                     {
@@ -797,6 +844,7 @@
                                 l3.BorderStyle = BorderStyle.None;
                                 l3.Location = new Point(0, 12);
                                 l3.TabIndex = 3;
+                                l3.ForeColor = AjustesDeUsuario.foreColor;
 
                                 Label l4 = new Label(); //Clima
                                 l4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -807,6 +855,7 @@
                                 l4.BorderStyle = BorderStyle.None;
                                 l4.Location = new Point((p3.Width / 2) - (l4.Width / 2), 12);
                                 l4.TabIndex = 3;
+                                l4.BackColor = AjustesDeUsuario.foreColor;
 
                                 Label l5 = new Label(); //Arbitro
                                 l5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -818,6 +867,7 @@
                                 l5.AutoSize = false;
                                 l5.BorderStyle = BorderStyle.None;
                                 l5.TabIndex = 3;
+                                l5.ForeColor = AjustesDeUsuario.foreColor;
 
                                 p3.Controls.Add(l3);
                                 p3.Controls.Add(l4);
@@ -841,6 +891,7 @@
                             p7.Size = new Size(362, 500);
                             p7.Location = new Point(0, 0);
                             p7.TabIndex = 0;
+                            p7.BackColor = AjustesDeUsuario.panel;
 
                             Panel p12 = new Panel();
 
@@ -848,6 +899,7 @@
                             p12.Size = new Size(345, 500);
                             p12.Location = new Point(362, 0);
                             p12.TabIndex = 0;
+                            p12.BackColor = AjustesDeUsuario.panel;
 
                             this.panelContenedor.Controls.Add(p7);
                             this.panelContenedor.Controls.Add(p12);
@@ -869,26 +921,27 @@
                                         p4.Size = new Size(345, 50);
                                     }
                                     p4.TabIndex = 0;
+                                    p4.BackColor = AjustesDeUsuario.panel;
 
                                     PictureBox pic1 = new PictureBox();
 
                                     pic1.InitialImage = null;
-                                    pic1.BackColor = System.Drawing.Color.Transparent;
-                                    pic1.Size = new System.Drawing.Size(40, 40);
-                                    pic1.Location = new System.Drawing.Point(10, 5);
+                                    pic1.BackColor = Color.Transparent;
+                                    pic1.Size = new Size(40, 40);
+                                    pic1.Location = new Point(10, 5);
                                     pic1.TabIndex = 1;
                                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic1.Image = Properties.Resources.barcelona;
 
                                     PictureBox pic2 = new PictureBox();
 
                                     pic2.InitialImage = null;
-                                    pic2.BackColor = System.Drawing.Color.Transparent;
-                                    pic2.Size = new System.Drawing.Size(40, 40);
-                                    pic2.Location = new System.Drawing.Point(295, 5);
+                                    pic2.BackColor = Color.Transparent;
+                                    pic2.Size = new Size(40, 40);
+                                    pic2.Location = new Point(295, 5);
                                     pic2.TabIndex = 1;
                                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic2.Image = Properties.Resources.barcelona;
 
                                     Label l6 = new Label();
 
@@ -906,6 +959,8 @@
                                     l6.BorderStyle = BorderStyle.None;
                                     l6.Location = new Point(p4.Width / 2 - l6.Width / 2, 12);
                                     l6.TabIndex = 3;
+                                    l6.ForeColor = AjustesDeUsuario.foreColor;
+
                                     p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     l6.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
@@ -938,6 +993,7 @@
                                 l6.AutoSize = false;
                                 l6.BorderStyle = BorderStyle.FixedSingle;
                                 l6.TabIndex = 3;
+                                l6.ForeColor = AjustesDeUsuario.foreColor;
                                 if (i == 0)
                                 {
                                     l6.Location = new Point(0, 0);
@@ -953,6 +1009,7 @@
                                 p5.Size = new Size(344, c * 25);
                                 p5.Location = new Point(0, c * 25 * i + (25 * i));
                                 p5.TabIndex = 0;
+                                p5.BackColor = AjustesDeUsuario.panel;
 
                                 Panel p6 = new Panel();
 
@@ -960,6 +1017,7 @@
                                 p6.Size = new Size(344, c * 25);
                                 p6.Location = new Point(344, c * 25 * i + (25 * i));
                                 p6.TabIndex = 0;
+                                p6.BackColor = AjustesDeUsuario.panel;
 
                                 this.panelContenedor.Controls.Add(l6);
                                 this.panelContenedor.Controls.Add(p5);
@@ -975,6 +1033,7 @@
                                     l9.AutoSize = true;
                                     l9.BorderStyle = BorderStyle.None;
                                     l9.TabIndex = 3;
+                                    l9.ForeColor = AjustesDeUsuario.foreColor;
 
                                     Label l3 = new Label();
 
@@ -984,6 +1043,7 @@
                                     l3.AutoSize = true;
                                     l3.BorderStyle = BorderStyle.None;
                                     l3.TabIndex = 3;
+                                    l3.ForeColor = AjustesDeUsuario.foreColor;
 
                                     if (e == 1)
                                     {
@@ -1027,6 +1087,7 @@
                     p11.TabIndex = 0;
                     p11.Location = new Point(0, 366);
                     p11.BorderStyle = BorderStyle.FixedSingle;
+                    p11.BackColor = AjustesDeUsuario.panel;
 
                     Label l14 = new Label(); //Lugar
 
@@ -1038,6 +1099,7 @@
                     l14.BorderStyle = BorderStyle.None;
                     l14.Location = new Point(0, 12);
                     l14.TabIndex = 3;
+                    l14.ForeColor = AjustesDeUsuario.foreColor;
 
                     Label l12 = new Label(); //Clima
 
@@ -1049,6 +1111,7 @@
                     l12.BorderStyle = BorderStyle.None;
                     l12.Location = new Point((p11.Width / 2) - (l12.Width / 2), 12);
                     l12.TabIndex = 3;
+                    l12.ForeColor = AjustesDeUsuario.foreColor;
 
                     Label l13 = new Label(); //Arbitro
 
@@ -1061,6 +1124,7 @@
                     l13.AutoSize = false;
                     l13.BorderStyle = BorderStyle.None;
                     l13.TabIndex = 3;
+                    l13.ForeColor = AjustesDeUsuario.foreColor;
 
                     this.panelPrincipal.Controls.Add(p11);
                     p11.Controls.Add(l14);
@@ -1076,6 +1140,7 @@
                             p7.Size = new Size(362, 500);
                             p7.Location = new Point(0, 0);
                             p7.TabIndex = 0;
+                            p7.BackColor = AjustesDeUsuario.panel;
 
                             Panel p8 = new Panel();
 
@@ -1083,6 +1148,7 @@
                             p8.Size = new Size(345, 500);
                             p8.Location = new Point(362, 0);
                             p8.TabIndex = 0;
+                            p8.BackColor = AjustesDeUsuario.panel;
 
                             this.panelContenedor.Controls.Add(p7);
                             this.panelContenedor.Controls.Add(p8);
@@ -1104,26 +1170,27 @@
                                         p4.Size = new Size(345, 50);
                                     }
                                     p4.TabIndex = 0;
+                                    p4.BackColor = AjustesDeUsuario.panel;
 
                                     PictureBox pic1 = new PictureBox();
 
                                     pic1.InitialImage = null;
-                                    pic1.BackColor = System.Drawing.Color.Transparent;
-                                    pic1.Size = new System.Drawing.Size(40, 40);
-                                    pic1.Location = new System.Drawing.Point(10, 5);
+                                    pic1.BackColor = Color.Transparent;
+                                    pic1.Size = new Size(40, 40);
+                                    pic1.Location = new Point(10, 5);
                                     pic1.TabIndex = 1;
                                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic1.Image = Properties.Resources.barcelona;
 
                                     PictureBox pic2 = new PictureBox();
 
                                     pic2.InitialImage = null;
-                                    pic2.BackColor = System.Drawing.Color.Transparent;
-                                    pic2.Size = new System.Drawing.Size(40, 40);
-                                    pic2.Location = new System.Drawing.Point(295, 5);
+                                    pic2.BackColor = Color.Transparent;
+                                    pic2.Size = new Size(40, 40);
+                                    pic2.Location = new Point(295, 5);
                                     pic2.TabIndex = 1;
                                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                                    pic2.Image = Properties.Resources.barcelona;
 
                                     Label l2 = new Label();
 
@@ -1141,6 +1208,8 @@
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.Location = new Point(p4.Width / 2 - l2.Width / 2, 12);
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
+
                                     p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                                     pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
@@ -1172,6 +1241,7 @@
                                 l1.AutoSize = false;
                                 l1.BorderStyle = BorderStyle.FixedSingle;
                                 l1.TabIndex = 3;
+                                l1.ForeColor = AjustesDeUsuario.foreColor;
                                 if (i == 1)
                                 {
                                     l1.Location = new Point(0, 0);
@@ -1187,7 +1257,7 @@
                                 p5.BorderStyle = BorderStyle.None;
                                 p5.Size = new Size(707, c * 25);
                                 p5.TabIndex = 0;
-
+                                p5.BackColor = AjustesDeUsuario.panel;
                                 if (i == 1)
                                 {
                                     p5.Location = new Point(0, 25);
@@ -1210,6 +1280,7 @@
                                     l2.AutoSize = true;
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.TabIndex = 3;
+                                    l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                     Label l6 = new Label();
 
@@ -1219,6 +1290,7 @@
                                     l6.AutoSize = true;
                                     l6.BorderStyle = BorderStyle.None;
                                     l6.TabIndex = 3;
+                                    l6.ForeColor = AjustesDeUsuario.foreColor;
 
                                     l2.Location = new Point(0, 25 * j);
                                     l6.Location = new Point(l2.Width, 25 * j);
@@ -1235,12 +1307,12 @@
 
         private void mouseHover_Click(object sender, EventArgs e, LinkLabel l)
         {
-            l.LinkColor = Color.IndianRed;
+            l.LinkColor = Color.MediumVioletRed;
         }
 
         private void mouseLeave_Click(object sender, EventArgs e, LinkLabel l)
         {
-            l.LinkColor = Color.Black;
+            l.LinkColor = AjustesDeUsuario.foreColor;
         }
 
         private void llb_Click(object sender, EventArgs e)
@@ -1281,6 +1353,84 @@
         private void llbTeam2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Principal.AlterPrincipal(1, 6, 0);
+        }
+
+        public static void AlterEncuentros(int x)
+        {
+            switch (x)
+            {
+                case 1:
+                    if (form != null)
+                    {
+                        form.SetTheme();
+                        form.CargarContenedor('A', 1, 11);
+                    }
+                    break;
+                case 2:
+                    if (form != null)
+                    {
+                        form.SetIdioma();
+                    }
+                    break;
+            }
+        }
+
+        private void SetTheme()
+        {
+            /* Paneles */
+            BackColor = AjustesDeUsuario.panel;
+            panelContenedor.BackColor = AjustesDeUsuario.panel;
+            panelHeader.BackColor = AjustesDeUsuario.panel;
+            panelPrincipal.BackColor = AjustesDeUsuario.panel;
+            panelTeam1.BackColor = AjustesDeUsuario.panel;
+            panelTeam2.BackColor = AjustesDeUsuario.panel;
+            /* Botones */
+            btnAlineamiento.BackColor = AjustesDeUsuario.btnBack;
+            btnAlineamiento.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnAlineamiento.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnJugadores.BackColor = AjustesDeUsuario.btnBack;
+            btnJugadores.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnJugadores.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnResumen.BackColor = AjustesDeUsuario.btnBack;
+            btnResumen.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnResumen.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnUltimosEncuentros.BackColor = AjustesDeUsuario.btnBack;
+            btnUltimosEncuentros.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnUltimosEncuentros.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            /* Textos (Incluidos botones) */
+            lblMarcador.ForeColor = AjustesDeUsuario.foreColor;
+            lblSets.ForeColor = AjustesDeUsuario.foreColor;
+            llbTeam2.ActiveLinkColor = AjustesDeUsuario.foreColor;
+            llbTeam2.DisabledLinkColor = AjustesDeUsuario.foreColor;
+            llbTeam2.LinkColor = AjustesDeUsuario.foreColor;
+            llbTeam2.VisitedLinkColor = AjustesDeUsuario.foreColor;
+            llbTeam1.ActiveLinkColor = AjustesDeUsuario.foreColor;
+            llbTeam1.DisabledLinkColor = AjustesDeUsuario.foreColor;
+            llbTeam1.LinkColor = AjustesDeUsuario.foreColor;
+            llbTeam1.VisitedLinkColor = AjustesDeUsuario.foreColor;
+            btnAlineamiento.ForeColor = AjustesDeUsuario.foreColor;
+            btnJugadores.ForeColor = AjustesDeUsuario.foreColor;
+            btnResumen.ForeColor = AjustesDeUsuario.foreColor;
+            btnUltimosEncuentros.ForeColor = AjustesDeUsuario.foreColor;
+        }
+
+        private void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (AjustesDeUsuario.language)
+            {
+                case "EN": //Ingles
+                    btnJugadores.Text = "Players";
+                    btnAlineamiento.Text = "Alignment";
+                    btnResumen.Text = "Resume";
+                    btnUltimosEncuentros.Text = "Last matches";
+                    break;
+                case "ES": //Español
+                    btnJugadores.Text = "Jugadores";
+                    btnAlineamiento.Text = "Alineamiento";
+                    btnResumen.Text = "Resumen";
+                    btnUltimosEncuentros.Text = "Últimos encuentros";
+                    break;
+            }
         }
     }
 }

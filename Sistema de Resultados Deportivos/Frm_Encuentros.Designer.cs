@@ -131,18 +131,18 @@
             // 
             // llbTeam2
             // 
-            this.llbTeam2.ActiveLinkColor = System.Drawing.Color.Black;
             this.llbTeam2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.llbTeam2.ActiveLinkColor = System.Drawing.Color.Black;
             this.llbTeam2.DisabledLinkColor = System.Drawing.Color.Black;
+            this.llbTeam2.LinkColor = System.Drawing.Color.Black;
+            this.llbTeam2.VisitedLinkColor = System.Drawing.Color.Black;
             this.llbTeam2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llbTeam2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.llbTeam2.LinkColor = System.Drawing.Color.Black;
             this.llbTeam2.Location = new System.Drawing.Point(0, 0);
             this.llbTeam2.Name = "llbTeam2";
             this.llbTeam2.Size = new System.Drawing.Size(362, 35);
             this.llbTeam2.TabIndex = 1;
             this.llbTeam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.llbTeam2.VisitedLinkColor = System.Drawing.Color.Black;
             this.llbTeam2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbTeam2_LinkClicked);
             // 
             // panelTeam1
@@ -179,6 +179,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Location = new System.Drawing.Point(50, 18);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -187,6 +188,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Location = new System.Drawing.Point(576, 18);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);

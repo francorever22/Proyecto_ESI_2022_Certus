@@ -274,5 +274,30 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblName.Text = "Name";
+                    lblPhases.Text = "Nº phases";
+                    lblDate.Text = "Date";
+                    lblHour.Text = "Hour";
+                    lblState.Text = "State";
+                    lblEventManagerTitle.Text = "Manage events";
+                    lblEventManagerTitle.Location = new Point(230, 14);
+                    break;
+                case "ES": //Español
+                    lblName.Text = "Nombre";
+                    lblPhases.Text = "Nº fases";
+                    lblDate.Text = "Fecha";
+                    lblHour.Text = "Hora";
+                    lblState.Text = "Estado";
+                    lblEventManagerTitle.Text = "Administrar eventos";
+                    lblEventManagerTitle.Location = new Point(195, 14);
+                    break;
+            }
+        }
     }
 }

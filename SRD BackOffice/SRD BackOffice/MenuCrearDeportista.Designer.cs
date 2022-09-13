@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panelAgregarDeporte = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lblState = new System.Windows.Forms.Label();
+            this.lblNationality = new System.Windows.Forms.Label();
+            this.lblSurname = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtNacionalidad = new System.Windows.Forms.TextBox();
@@ -48,11 +48,11 @@
             // panelAgregarDeporte
             // 
             this.panelAgregarDeporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
-            this.panelAgregarDeporte.Controls.Add(this.label6);
-            this.panelAgregarDeporte.Controls.Add(this.label5);
-            this.panelAgregarDeporte.Controls.Add(this.label4);
-            this.panelAgregarDeporte.Controls.Add(this.label3);
-            this.panelAgregarDeporte.Controls.Add(this.label2);
+            this.panelAgregarDeporte.Controls.Add(this.lblDescription);
+            this.panelAgregarDeporte.Controls.Add(this.lblState);
+            this.panelAgregarDeporte.Controls.Add(this.lblNationality);
+            this.panelAgregarDeporte.Controls.Add(this.lblSurname);
+            this.panelAgregarDeporte.Controls.Add(this.lblName);
             this.panelAgregarDeporte.Controls.Add(this.lblTitle);
             this.panelAgregarDeporte.Controls.Add(this.txtDescripcion);
             this.panelAgregarDeporte.Controls.Add(this.txtNacionalidad);
@@ -66,50 +66,45 @@
             this.panelAgregarDeporte.Size = new System.Drawing.Size(481, 561);
             this.panelAgregarDeporte.TabIndex = 10;
             // 
-            // label6
+            // lblDescription
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(208, 209);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 29;
-            this.label6.Text = "Description";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(208, 209);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(0, 15);
+            this.lblDescription.TabIndex = 29;
             // 
-            // label5
+            // lblState
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(340, 153);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 15);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "State";
+            this.lblState.AutoSize = true;
+            this.lblState.Location = new System.Drawing.Point(340, 153);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(0, 15);
+            this.lblState.TabIndex = 28;
             // 
-            // label4
+            // lblNationality
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 153);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 15);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "Nationality";
+            this.lblNationality.AutoSize = true;
+            this.lblNationality.Location = new System.Drawing.Point(89, 153);
+            this.lblNationality.Name = "lblNationality";
+            this.lblNationality.Size = new System.Drawing.Size(0, 15);
+            this.lblNationality.TabIndex = 27;
             // 
-            // label3
+            // lblSurname
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(331, 95);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 15);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "Surname";
+            this.lblSurname.AutoSize = true;
+            this.lblSurname.Location = new System.Drawing.Point(331, 95);
+            this.lblSurname.Name = "lblSurname";
+            this.lblSurname.Size = new System.Drawing.Size(0, 15);
+            this.lblSurname.TabIndex = 26;
             // 
-            // label2
+            // lblName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(102, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "Name";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(102, 94);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(0, 15);
+            this.lblName.TabIndex = 25;
             // 
             // lblTitle
             // 
@@ -117,9 +112,8 @@
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.Location = new System.Drawing.Point(191, 34);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(104, 25);
+            this.lblTitle.Size = new System.Drawing.Size(0, 25);
             this.lblTitle.TabIndex = 24;
-            this.lblTitle.Text = "Add athlete";
             // 
             // txtDescripcion
             // 
@@ -220,19 +214,8 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    break;
-                case "ES": //Español
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAgregarDeporte;
         private ComboBox cbxEstado;
         private TextBox txtNombre;
@@ -241,11 +224,11 @@
         private TextBox txtDescripcion;
         private TextBox txtNacionalidad;
         private TextBox txtApellido;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
+        private Label lblDescription;
+        private Label lblState;
+        private Label lblNationality;
+        private Label lblSurname;
+        private Label lblName;
         private Label lblTitle;
     }
 }

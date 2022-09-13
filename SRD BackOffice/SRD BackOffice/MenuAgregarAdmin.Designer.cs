@@ -183,39 +183,8 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblAddminTitle.Text = "Add administrator";
-                    this.lblAddminTitle.Location = new System.Drawing.Point(68, 49);
-                    this.lblAddminUsuario.Text = "Username";
-                    this.lblAddminUsuario.Location = new System.Drawing.Point(45, 156);
-                    this.lblAddminEmail.Location = new System.Drawing.Point(45, 237);
-                    this.btnAddminAdd.Text = "Add";
-                    this.lblAddminConstraseña.Text = "Password";
-                    this.lblAddminConstraseña.Location = new System.Drawing.Point(45, 317);
-                    this.lblAddminConfirm.Text = "Repeat password";
-                    this.lblAddminConfirm.Location = new System.Drawing.Point(45, 398);
-                    break;
-                case "ES": //Español
-                    this.lblAddminTitle.Text = "Agregar administrador";
-                    this.lblAddminTitle.Location = new System.Drawing.Point(27, 49);
-                    this.lblAddminUsuario.Text = "Nombre de usuario";
-                    this.lblAddminUsuario.Location = new System.Drawing.Point(30, 157);
-                    this.lblAddminEmail.Location = new System.Drawing.Point(30, 237);
-                    this.btnAddminAdd.Text = "Agregar";
-                    this.lblAddminConstraseña.Text = "Contraseña";
-                    this.lblAddminConstraseña.Location = new System.Drawing.Point(30, 317);
-                    this.lblAddminConfirm.Text = "Confirme la contraseña";
-                    this.lblAddminConfirm.Location = new System.Drawing.Point(30, 398);
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAddmin;
         private Label lblAddminConfirm;
         private TextBox txtConfirmPassword;

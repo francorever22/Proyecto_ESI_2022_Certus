@@ -149,5 +149,32 @@
                 }
             }
         }
+
+        private void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblCategoryTitle.Text = "Add category";
+                    lblCategoryTitle.Location = new Point(94, 33);
+                    lblCategoryName.Text = "Add category name";
+                    lblCategoryName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+                    lblCategoryName.Location = new Point(19, 153);
+                    txtCategoryName.Location = new Point(186, 152);
+                    txtCategoryName.Size = new Size(250, 25);
+                    btnCategoryAgregar.Text = "Add";
+                    break;
+                case "ES": //Español
+                    lblCategoryTitle.Text = "Agregar categoría";
+                    lblCategoryTitle.Location = new Point(53, 33);
+                    lblCategoryName.Text = "Ingrese nombre de la categoría";
+                    lblCategoryName.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+                    lblCategoryName.Location = new Point(10, 154);
+                    txtCategoryName.Location = new Point(220, 152);
+                    txtCategoryName.Size = new Size(250, 25);
+                    btnCategoryAgregar.Text = "Agregar";
+                    break;
+            }
+        }
     }
 }

@@ -205,5 +205,16 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    break;
+                case "ES": //Español
+                    break;
+            }
+        }
     }
 }

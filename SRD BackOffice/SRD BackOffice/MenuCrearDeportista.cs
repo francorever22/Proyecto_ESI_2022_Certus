@@ -146,5 +146,32 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblTitle.Text = "Add athlete";
+                    lblTitle.Location = new Point(191, 34);
+                    lblName.Text = "Name";
+                    lblSurname.Text = "Surname";
+                    lblNationality.Text = "Nationality";
+                    lblState.Text = "State";
+                    lblDescription.Text = "Description";
+                    btnAddDeportista.Text = "Add";
+                    break;
+                case "ES": //Español
+                    lblTitle.Text = "Agregar deportista";
+                    lblTitle.Location = new Point(160, 34);
+                    lblName.Text = "Nombre";
+                    lblSurname.Text = "Apellido";
+                    lblNationality.Text = "Nacionalidad";
+                    lblState.Text = "Estado";
+                    lblDescription.Text = "Descripción";
+                    btnAddDeportista.Text = "Agregar";
+                    break;
+            }
+        }
     }
 }

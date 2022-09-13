@@ -122,18 +122,16 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(178, 3);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(39, 15);
+            this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 1;
-            this.lblName.Text = "Name";
             // 
             // lblPaisOrigen
             // 
             this.lblPaisOrigen.AutoSize = true;
             this.lblPaisOrigen.Location = new System.Drawing.Point(330, 4);
             this.lblPaisOrigen.Name = "lblPaisOrigen";
-            this.lblPaisOrigen.Size = new System.Drawing.Size(98, 15);
+            this.lblPaisOrigen.Size = new System.Drawing.Size(0, 15);
             this.lblPaisOrigen.TabIndex = 0;
-            this.lblPaisOrigen.Text = "Country of origin";
             // 
             // lblTitle
             // 

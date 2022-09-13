@@ -61,7 +61,7 @@
             // 
             this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
             this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBuscar.Location = new System.Drawing.Point(379, 90);
+            this.btnBuscar.Location = new System.Drawing.Point(390, 90);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(25, 25);
             this.btnBuscar.TabIndex = 27;
@@ -69,7 +69,7 @@
             // 
             // txtBuscador
             // 
-            this.txtBuscador.Location = new System.Drawing.Point(70, 91);
+            this.txtBuscador.Location = new System.Drawing.Point(81, 91);
             this.txtBuscador.Name = "txtBuscador";
             this.txtBuscador.Size = new System.Drawing.Size(309, 23);
             this.txtBuscador.TabIndex = 26;
@@ -122,24 +122,22 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(178, 4);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(39, 15);
+            this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 1;
-            this.lblName.Text = "Name";
             // 
             // lblNacionalidad
             // 
             this.lblNacionalidad.AutoSize = true;
             this.lblNacionalidad.Location = new System.Drawing.Point(330, 4);
             this.lblNacionalidad.Name = "lblNacionalidad";
-            this.lblNacionalidad.Size = new System.Drawing.Size(67, 15);
+            this.lblNacionalidad.Size = new System.Drawing.Size(0, 15);
             this.lblNacionalidad.TabIndex = 0;
-            this.lblNacionalidad.Text = "Nacionality";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.Location = new System.Drawing.Point(150, 20);
+            this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(0, 32);
             this.lblTitle.TabIndex = 21;

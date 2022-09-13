@@ -5,6 +5,7 @@
         public MenuManageAthletes()
         {
             InitializeComponent();
+            SetIdioma();
             CargarDeportistas();
 
             btnBuscar.Click += (sender, EventArgs) => { btnBuscar_Click(sender, EventArgs, txtBuscador.Text); };
@@ -205,6 +206,25 @@
                     p1.Controls.Add(l2);
                     p1.Controls.Add(l3);
                 }
+            }
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblName.Text = "Name";
+                    lblNacionalidad.Text = "Nacionality";
+                    lblTitle.Text = "Manage athletes";
+                    lblTitle.Location = new Point(150, 20);
+                    break;
+                case "ES": //Español
+                    lblName.Text = "Nombre";
+                    lblNacionalidad.Text = "Nacionalidad";
+                    lblTitle.Text = "Administrar deportistas";
+                    lblTitle.Location = new Point(115, 20);
+                    break;
             }
         }
     }

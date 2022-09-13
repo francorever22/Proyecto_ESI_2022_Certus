@@ -211,41 +211,8 @@
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblSportTitle.Text = "Add sport";
-                    this.lblSportTitle.Location = new System.Drawing.Point(146, 25);
-                    this.lblSportCategory.Text = "Select sport category";
-                    this.lblSportCategory.Location = new System.Drawing.Point(25, 173);
-                    this.lblSportName.Text = "Add sport name";
-                    this.lblSportName.Location = new System.Drawing.Point(25, 114);
-                    this.btnSelectImage.Text = "Select image";
-                    this.lblSportPopular.Text = "Is it popular?";
-                    this.lblSportImage.Text = "Add an image to represent the sport";
-                    this.lblSportImage.Location = new System.Drawing.Point(25, 247);
-                    this.btnSportAdd.Text = "Add";
-                    break;
-                case "ES": //Español
-                    this.lblSportTitle.Text = "Agregar deporte";
-                    this.lblSportTitle.Location = new System.Drawing.Point(60, 25);
-                    this.lblSportCategory.Text = "Seleccione la categoría \ndel deporte";
-                    this.lblSportCategory.Location = new System.Drawing.Point(20, 165);
-                    this.lblSportName.Text = "Agregué un nombre \npara el deporte";
-                    this.lblSportName.Location = new System.Drawing.Point(20, 114);
-                    this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblSportPopular.Text = "Es popular?";
-                    this.lblSportImage.Text = "Agregué una imagen para representar \nal deporte";
-                    this.lblSportImage.Location = new System.Drawing.Point(20, 240);
-                    this.btnSportAdd.Text = "Agregar";
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAgregarDeporte;
         private PictureBox imgSportSelected;
         private Label lblSportImage;

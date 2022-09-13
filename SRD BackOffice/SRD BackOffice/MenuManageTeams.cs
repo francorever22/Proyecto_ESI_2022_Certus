@@ -5,6 +5,7 @@
         public MenuManageTeams()
         {
             InitializeComponent();
+            SetIdioma();
             CargarEquipos();
 
             btnBuscar.Click += (sender, EventArgs) => { btnBuscar_Click(sender, EventArgs, txtBuscador.Text); };
@@ -205,6 +206,25 @@
                     p1.Controls.Add(l2);
                     p1.Controls.Add(l3);
                 }
+            }
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblName.Text = "Name";
+                    lblPaisOrigen.Text = "Country of origin";
+                    lblTitle.Text = "Manage teams";
+                    lblTitle.Location = new Point(150, 20);
+                    break;
+                case "ES": //Español
+                    lblName.Text = "Nombre";
+                    lblPaisOrigen.Text = "País de origen";
+                    lblTitle.Text = "Administrar equipos";
+                    lblTitle.Location = new Point(125, 20);
+                    break;
             }
         }
     }

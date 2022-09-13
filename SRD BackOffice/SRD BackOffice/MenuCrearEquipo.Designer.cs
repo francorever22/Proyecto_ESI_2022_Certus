@@ -106,11 +106,10 @@
             // lblPlayers
             // 
             this.lblPlayers.AutoSize = true;
-            this.lblPlayers.Location = new System.Drawing.Point(216, 315);
+            this.lblPlayers.Location = new System.Drawing.Point(0, 0);
             this.lblPlayers.Name = "lblPlayers";
-            this.lblPlayers.Size = new System.Drawing.Size(57, 15);
+            this.lblPlayers.Size = new System.Drawing.Size(0, 15);
             this.lblPlayers.TabIndex = 28;
-            this.lblPlayers.Text = "Members";
             // 
             // panelPlayers
             // 
@@ -127,45 +126,40 @@
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.Location = new System.Drawing.Point(187, 22);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(107, 25);
+            this.lblTitle.Size = new System.Drawing.Size(0, 25);
             this.lblTitle.TabIndex = 26;
-            this.lblTitle.Text = "Create team";
             // 
             // lblImage
             // 
             this.lblImage.AutoSize = true;
-            this.lblImage.Location = new System.Drawing.Point(63, 80);
+            this.lblImage.Location = new System.Drawing.Point(0, 0);
             this.lblImage.Name = "lblImage";
-            this.lblImage.Size = new System.Drawing.Size(71, 15);
+            this.lblImage.Size = new System.Drawing.Size(0, 15);
             this.lblImage.TabIndex = 25;
-            this.lblImage.Text = "Team image";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(290, 97);
+            this.lblName.Location = new System.Drawing.Point(0, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(68, 15);
+            this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 24;
-            this.lblName.Text = "Team name";
             // 
             // lblPais
             // 
             this.lblPais.AutoSize = true;
-            this.lblPais.Location = new System.Drawing.Point(276, 175);
+            this.lblPais.Location = new System.Drawing.Point(0, 0);
             this.lblPais.Name = "lblPais";
-            this.lblPais.Size = new System.Drawing.Size(98, 15);
+            this.lblPais.Size = new System.Drawing.Size(0, 15);
             this.lblPais.TabIndex = 23;
-            this.lblPais.Text = "Country of origin";
             // 
             // lblTipo
             // 
             this.lblTipo.AutoSize = true;
-            this.lblTipo.Location = new System.Drawing.Point(352, 251);
+            this.lblTipo.Location = new System.Drawing.Point(0, 0);
             this.lblTipo.Name = "lblTipo";
-            this.lblTipo.Size = new System.Drawing.Size(75, 15);
+            this.lblTipo.Size = new System.Drawing.Size(0, 15);
             this.lblTipo.TabIndex = 22;
-            this.lblTipo.Text = "Type of team";
             // 
             // txtPais
             // 
@@ -202,7 +196,6 @@
             this.btnSportAdd.Name = "btnSportAdd";
             this.btnSportAdd.Size = new System.Drawing.Size(181, 41);
             this.btnSportAdd.TabIndex = 20;
-            this.btnSportAdd.Text = "Add";
             this.btnSportAdd.UseVisualStyleBackColor = true;
             this.btnSportAdd.Click += new System.EventHandler(this.btnSportAdd_Click);
             // 
@@ -244,7 +237,6 @@
             this.btnSelectImage.Name = "btnSelectImage";
             this.btnSelectImage.Size = new System.Drawing.Size(150, 25);
             this.btnSelectImage.TabIndex = 13;
-            this.btnSelectImage.Text = "Select image";
             this.btnSelectImage.UseVisualStyleBackColor = true;
             this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
             // 
@@ -315,8 +307,8 @@
             this.ResumeLayout(false);
 
         }
-
         #endregion
+
         private Panel panelAgregarDeporte;
         private PictureBox picTeam;
         private Label lblSportImage;

@@ -2,10 +2,13 @@
 {
     public partial class Frm_EquiposJugadores : Form
     {
+        private static Frm_EquiposJugadores form = null;
         bool favorite = false;
         public Frm_EquiposJugadores(int type)
         {
             InitializeComponent();
+            form = this;
+            SetTheme();
 
             CargarContenido(type);
         }
@@ -30,26 +33,29 @@
                         p4.Size = new Size(310, 50);
                         p4.TabIndex = 0;
                         p4.Location = new Point(0, 50 * (j - 1));
+                        p4.BackColor = AjustesDeUsuario.panel;
 
                         PictureBox pic1 = new PictureBox();
 
                         pic1.InitialImage = null;
-                        pic1.BackColor = System.Drawing.Color.Transparent;
-                        pic1.Size = new System.Drawing.Size(40, 40);
-                        pic1.Location = new System.Drawing.Point(10, 5);
+                        pic1.BackColor = Color.Transparent;
+                        pic1.Size = new Size(40, 40);
+                        pic1.Location = new Point(10, 5);
                         pic1.TabIndex = 1;
                         pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pic1.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                        pic1.Image = Properties.Resources.barcelona;
+                        pic1.BackColor = Color.Transparent;
 
                         PictureBox pic2 = new PictureBox();
 
                         pic2.InitialImage = null;
-                        pic2.BackColor = System.Drawing.Color.Transparent;
-                        pic2.Size = new System.Drawing.Size(40, 40);
-                        pic2.Location = new System.Drawing.Point(260, 5);
+                        pic2.BackColor = Color.Transparent;
+                        pic2.Size = new Size(40, 40);
+                        pic2.Location = new Point(260, 5);
                         pic2.TabIndex = 1;
                         pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pic2.Image = global::Sistema_de_Resultados_Deportivos.Properties.Resources.barcelona;
+                        pic2.Image = Properties.Resources.barcelona;
+                        pic2.BackColor= Color.Transparent;
 
                         Label l2 = new Label();
 
@@ -60,6 +66,7 @@
                         l2.BorderStyle = BorderStyle.None;
                         l2.Location = new Point(p4.Width / 2 - l2.Width / 2, 12);
                         l2.TabIndex = 3;
+                        l2.ForeColor = AjustesDeUsuario.foreColor;
 
                         p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
                         l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
@@ -84,6 +91,8 @@
                     descripcion.TabIndex = 3;
                     descripcion.Size = new Size(328, 159);
                     descripcion.Enabled = false;
+                    descripcion.BackColor = AjustesDeUsuario.btnBack;
+                    descripcion.ForeColor = AjustesDeUsuario.foreColor;
 
                     Panel p1 = new Panel();
 
@@ -91,6 +100,7 @@
                     p1.TabIndex = 3;
                     p1.Location = new Point(0, 159);
                     p1.BorderStyle = BorderStyle.FixedSingle;
+                    p1.BackColor = AjustesDeUsuario.panel;
 
                     Label lbl1 = new Label();
 
@@ -102,6 +112,7 @@
                     lbl1.BorderStyle = BorderStyle.None;
                     lbl1.Location = new Point(5, 13);
                     lbl1.TabIndex = 3;
+                    lbl1.ForeColor = AjustesDeUsuario.foreColor;
 
                     Label lbl2 = new Label();
 
@@ -113,6 +124,7 @@
                     lbl2.BorderStyle = BorderStyle.None;
                     lbl2.Location = new Point(328 - (lbl2.Width + 5), 13);
                     lbl2.TabIndex = 3;
+                    lbl2.ForeColor = AjustesDeUsuario.foreColor;
 
                     panelContenedor.Controls.Add(p1);
                     panelContenedor.Controls.Add(descripcion);
@@ -146,6 +158,28 @@
             Principal.AlterPrincipal(0, 5, 0);
             Parent.Hide();
             this.Close();
+        }
+
+        public static void AlterEquiposJugadores()
+        {
+            if (form != null)
+            {
+                form.SetTheme();
+            }
+        }
+
+        private void SetTheme()
+        {
+            /* Paneles */
+            BackColor = AjustesDeUsuario.panel;
+            panelContenedor.BackColor = AjustesDeUsuario.panel;
+            /* Botones */
+            btnCerrarSettings.BackColor = AjustesDeUsuario.btnBack;
+            btnCerrarSettings.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnCerrarSettings.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            /* Textos (Incluidos botones) */
+            btnCerrarSettings.ForeColor = AjustesDeUsuario.foreColor;
+            lblNombre.ForeColor = AjustesDeUsuario.foreColor;
         }
     }
 }

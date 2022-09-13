@@ -163,5 +163,26 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblUsersManagerTitle.Text = "Admin manager";
+                    lblUsersManagerTitle.Location = new Point(110, 36);
+                    lblUsersManagerTitle.Font = new Font("Montserrat", 25F, FontStyle.Regular, GraphicsUnit.Point);
+                    label1.Text = "Admin";
+                    label1.Location = new Point(35, 5);
+                    break;
+                case "ES": //Español
+                    lblUsersManagerTitle.Text = "Administrador de admins";
+                    lblUsersManagerTitle.Location = new Point(10, 36);
+                    lblUsersManagerTitle.Font = new Font("Montserrat", 25F, FontStyle.Regular, GraphicsUnit.Point);
+                    label1.Text = "Admin";
+                    label1.Location = new Point(27, 5);
+                    break;
+            }
+        }
     }
 }

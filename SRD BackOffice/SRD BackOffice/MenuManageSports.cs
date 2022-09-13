@@ -366,5 +366,34 @@
                 }
             }
         }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblSportsManagerTitle.Text = "Sports manager";
+                    lblSportsManagerTitle.Location = new Point(169, 24);
+                    label7.Text = "Name";
+                    label7.Location = new Point(33, 5);
+                    label6.Text = "Category";
+                    label4.Text = "Categories";
+                    lblCategories.Text = "Categories";
+                    label1.Text = "Sports";
+                    label1.Location = new Point(413, 120);
+                    break;
+                case "ES": //Español
+                    lblSportsManagerTitle.Text = "Administrador de deportes";
+                    lblSportsManagerTitle.Location = new Point(50, 24);
+                    label7.Text = "Nombre";
+                    label7.Location = new Point(27, 5);
+                    label6.Text = "Categoría";
+                    label4.Text = "Categorías";
+                    lblCategories.Text = "Categorías";
+                    label1.Text = "Deportes";
+                    label1.Location = new Point(400, 120);
+                    break;
+            }
+        }
     }
 }
