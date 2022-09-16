@@ -4,23 +4,20 @@
     "email": "Simon@gmail.com",
     "contrasena": "a",
     "nivelPermisos": 1,
-    "numeroTelefono": null,
-    "deportesFavoritos": [ "Futbol", "Tenis" ]
+    "numeroTelefono": null
   },
   {
     "nombreUsuario": "Lucas",
     "email": "Lucas@gmail.com",
     "contrasena": "sinzero",
     "nivelPermisos": 2,
-    "numeroTelefono": null,
-    "deportesFavoritos": [ "Natacion", "Rugby", "Basquetbol" ]
+    "numeroTelefono": null
   },
   {
     "nombreUsuario": "Administrador",
     "email": "admin@certus.com",
     "contrasena": "122333",
-    "nivelPermisos": 3,
-    "numeroTelefono": null,
-    "deportesFavoritos": [ "Karate", "Quidditch", "Hockey", "Golf" ]
+    "nivelPermisos": 4,
+    "numeroTelefono": null
   }
 ]

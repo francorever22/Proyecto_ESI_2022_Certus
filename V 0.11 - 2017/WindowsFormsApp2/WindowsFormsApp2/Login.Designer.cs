@@ -100,9 +100,9 @@ namespace SRD_BackOffice
             this.panel1.Controls.Add(this.txtContraseña);
             this.panel1.Controls.Add(this.txtUsuario);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(588, 378);
+            this.panel1.Size = new System.Drawing.Size(591, 382);
             this.panel1.TabIndex = 10;
             // 
             // btnCancelar
@@ -138,30 +138,6 @@ namespace SRD_BackOffice
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.btnCancelar.Text = "Cancel";
-                    this.label1.Text = "Welcome";
-                    this.label1.Location = new System.Drawing.Point(239, 19);
-                    this.txtUsuario.Text = "User or email";
-                    this.txtContraseña.Text = "Password";
-                    this.btnAcceder.Text = "Log in";
-                    break;
-                case "ES": //Español
-                    this.btnCancelar.Text = "Cancelar";
-                    this.label1.Text = "Bienvenido";
-                    this.label1.Location = new System.Drawing.Point(227, 19);
-                    this.txtUsuario.Text = "Usuario o email";
-                    this.txtContraseña.Text = "Contraseña";
-                    this.btnAcceder.Text = "Acceder";
-                    break;
-            }
-        }
-
         #endregion
         private Button btnAcceder;
         private TextBox txtContraseña;

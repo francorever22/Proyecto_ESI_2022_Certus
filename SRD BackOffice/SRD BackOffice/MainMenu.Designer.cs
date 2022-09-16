@@ -221,7 +221,7 @@
             this.panelMain.Controls.Add(this.btnAgregarAdmin);
             this.panelMain.Controls.Add(this.lblTitle);
             this.panelMain.Controls.Add(this.btnManageTeam);
-            this.panelMain.Location = new System.Drawing.Point(-1, 0);
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1123, 625);
             this.panelMain.TabIndex = 9;

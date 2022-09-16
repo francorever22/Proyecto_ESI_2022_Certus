@@ -111,17 +111,59 @@
     <Compile Include="MenuCrearDeporte.Designer.cs">
       <DependentUpon>MenuCrearDeporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuCrearDeportista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuCrearDeportista.Designer.cs">
+      <DependentUpon>MenuCrearDeportista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuCrearEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuCrearEquipo.Designer.cs">
+      <DependentUpon>MenuCrearEquipo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuCrearEvento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuCrearEvento.Designer.cs">
+      <DependentUpon>MenuCrearEvento.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuGestionarBanners.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuGestionarBanners.Designer.cs">
       <DependentUpon>MenuGestionarBanners.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuManageAdministradores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuManageAdministradores.Designer.cs">
+      <DependentUpon>MenuManageAdministradores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuManageAthletes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuManageAthletes.Designer.cs">
+      <DependentUpon>MenuManageAthletes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuManageEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuManageEvents.Designer.cs">
+      <DependentUpon>MenuManageEvents.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuManageSports.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuManageSports.Designer.cs">
       <DependentUpon>MenuManageSports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuManageTeams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuManageTeams.Designer.cs">
+      <DependentUpon>MenuManageTeams.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuManageUsers.cs">
       <SubType>Form</SubType>
@@ -132,6 +174,9 @@
     <Compile Include="Objects\Banner.cs" />
     <Compile Include="Objects\Categoria.cs" />
     <Compile Include="Objects\Deporte.cs" />
+    <Compile Include="Objects\Deportista.cs" />
+    <Compile Include="Objects\Equipo.cs" />
+    <Compile Include="Objects\Evento.cs" />
     <Compile Include="Objects\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,11 +195,32 @@
     <EmbeddedResource Include="MenuCrearDeporte.resx">
       <DependentUpon>MenuCrearDeporte.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuCrearDeportista.resx">
+      <DependentUpon>MenuCrearDeportista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuCrearEquipo.resx">
+      <DependentUpon>MenuCrearEquipo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuCrearEvento.resx">
+      <DependentUpon>MenuCrearEvento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuGestionarBanners.resx">
       <DependentUpon>MenuGestionarBanners.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuManageAdministradores.resx">
+      <DependentUpon>MenuManageAdministradores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuManageAthletes.resx">
+      <DependentUpon>MenuManageAthletes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuManageEvents.resx">
+      <DependentUpon>MenuManageEvents.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuManageSports.resx">
       <DependentUpon>MenuManageSports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuManageTeams.resx">
+      <DependentUpon>MenuManageTeams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuManageUsers.resx">
       <DependentUpon>MenuManageUsers.cs</DependentUpon>
@@ -176,6 +242,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DinamicJson\Deportes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DinamicJson\Deportistas.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DinamicJson\Equipos.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DinamicJson\Eventos.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DinamicJson\Usuarios.json">
@@ -201,13 +276,22 @@
     <Content Include="Resources\AgregarDeporte.png" />
     <Content Include="Resources\AgregarEncuentro.png" />
     <Content Include="Resources\AgregarEvento.png" />
+    <None Include="Resources\Athlete.png" />
     <Content Include="Resources\Banner.png" />
+    <None Include="Resources\cruz.png" />
     <Content Include="Resources\desconectar.png" />
     <Content Include="Resources\Flecha_Derecha_Claro.png" />
     <Content Include="Resources\Incio_Claro.png" />
+    <None Include="Resources\Team.png" />
+    <None Include="Resources\ManageAthlete.png" />
+    <None Include="Resources\lupa.png" />
     <Content Include="Resources\ManageEvents.png" />
     <Content Include="Resources\ManageMatch.png" />
+    <None Include="Resources\ManageTeam.png" />
+    <None Include="Resources\ManageSubditos.png" />
     <Content Include="Resources\ManageUsers.png" />
+    <None Include="Resources\mas.png" />
+    <None Include="Resources\pluma.png" />
     <Content Include="Resources\SportsManager.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

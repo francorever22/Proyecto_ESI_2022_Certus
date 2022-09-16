@@ -1,0 +1,26 @@
+[
+  {
+    "IdEvento": 0,
+    "FechaEvento": "17/12/2022",
+    "NombreEvento": "Copa salame",
+    "HoraEvento": "12:30",
+    "EstadoEvento": "Proximamente",
+    "Lugar": "Estadio centenario",
+    "LogoEvento":  null,
+    "Fases": [
+      {
+        "NumeroFase": 1,
+        "NombreFase": "Fase 1",
+        "FechaFase": "17/12/2022",
+        "EstadoFase": "Proximamente",
+        "TipoFase": 1,
+        "IdEquiposParticipantes": [
+          914,
+          1,
+          914,
+          1
+        ]
+      }
+    ]
+  }
+]

@@ -36,13 +36,13 @@ namespace SRD_BackOffice
             this.imgSportSelected = new System.Windows.Forms.PictureBox();
             this.lblSportImage = new System.Windows.Forms.Label();
             this.lblSportPopular = new System.Windows.Forms.Label();
+            this.tgbSportPopular = new SRD_BackOffice.CustomToggleBox();
             this.btnSelectImage = new System.Windows.Forms.Button();
             this.lblSportName = new System.Windows.Forms.Label();
             this.lblSportCategory = new System.Windows.Forms.Label();
             this.cbxSportCategory = new System.Windows.Forms.ComboBox();
             this.txtSportName = new System.Windows.Forms.TextBox();
             this.lblSportTitle = new System.Windows.Forms.Label();
-            this.tgbSportPopular = new SRD_BackOffice.CustomToggleBox();
             this.panelAgregarDeporte.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgSportSelected)).BeginInit();
             this.SuspendLayout();
@@ -118,10 +118,23 @@ namespace SRD_BackOffice
             // 
             this.lblSportPopular.AutoSize = true;
             this.lblSportPopular.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblSportPopular.Location = new System.Drawing.Point(21, 375);
+            this.lblSportPopular.Location = new System.Drawing.Point(25, 377);
             this.lblSportPopular.Name = "lblSportPopular";
             this.lblSportPopular.Size = new System.Drawing.Size(0, 21);
             this.lblSportPopular.TabIndex = 15;
+            // 
+            // tgbSportPopular
+            // 
+            this.tgbSportPopular.Location = new System.Drawing.Point(125, 377);
+            this.tgbSportPopular.MinimumSize = new System.Drawing.Size(39, 19);
+            this.tgbSportPopular.Name = "tgbSportPopular";
+            this.tgbSportPopular.OffBackColor = System.Drawing.Color.Gray;
+            this.tgbSportPopular.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.tgbSportPopular.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+            this.tgbSportPopular.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.tgbSportPopular.Size = new System.Drawing.Size(45, 22);
+            this.tgbSportPopular.TabIndex = 14;
+            this.tgbSportPopular.UseVisualStyleBackColor = true;
             // 
             // btnSelectImage
             // 
@@ -172,7 +185,7 @@ namespace SRD_BackOffice
             this.txtSportName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSportName.Location = new System.Drawing.Point(192, 113);
             this.txtSportName.Name = "txtSportName";
-            this.txtSportName.Size = new System.Drawing.Size(268, 25);
+            this.txtSportName.Size = new System.Drawing.Size(269, 25);
             this.txtSportName.TabIndex = 9;
             // 
             // lblSportTitle
@@ -183,20 +196,6 @@ namespace SRD_BackOffice
             this.lblSportTitle.Name = "lblSportTitle";
             this.lblSportTitle.Size = new System.Drawing.Size(0, 55);
             this.lblSportTitle.TabIndex = 8;
-            // 
-            // tgbSportPopular
-            // 
-            this.tgbSportPopular.AutoSize = true;
-            this.tgbSportPopular.Location = new System.Drawing.Point(121, 377);
-            this.tgbSportPopular.MinimumSize = new System.Drawing.Size(39, 19);
-            this.tgbSportPopular.Name = "tgbSportPopular";
-            this.tgbSportPopular.OffBackColor = System.Drawing.Color.Gray;
-            this.tgbSportPopular.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.tgbSportPopular.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-            this.tgbSportPopular.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tgbSportPopular.Size = new System.Drawing.Size(39, 19);
-            this.tgbSportPopular.TabIndex = 14;
-            this.tgbSportPopular.UseVisualStyleBackColor = true;
             // 
             // MenuCrearDeporte
             // 
@@ -213,41 +212,8 @@ namespace SRD_BackOffice
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblSportTitle.Text = "Add sport";
-                    this.lblSportTitle.Location = new System.Drawing.Point(146, 25);
-                    this.lblSportCategory.Text = "Select sport category";
-                    this.lblSportCategory.Location = new System.Drawing.Point(25, 173);
-                    this.lblSportName.Text = "Add sport name";
-                    this.lblSportName.Location = new System.Drawing.Point(25, 114);
-                    this.btnSelectImage.Text = "Select image";
-                    this.lblSportPopular.Text = "Is it popular?";
-                    this.lblSportImage.Text = "Add an image to represent the sport";
-                    this.lblSportImage.Location = new System.Drawing.Point(25, 247);
-                    this.btnSportAdd.Text = "Add";
-                    break;
-                case "ES": //Español
-                    this.lblSportTitle.Text = "Agregar deporte";
-                    this.lblSportTitle.Location = new System.Drawing.Point(60, 25);
-                    this.lblSportCategory.Text = "Seleccione la categoria \ndel deporte";
-                    this.lblSportCategory.Location = new System.Drawing.Point(20, 165);
-                    this.lblSportName.Text = "Agregue un nombre \npara el deporte";
-                    this.lblSportName.Location = new System.Drawing.Point(20, 114);
-                    this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblSportPopular.Text = "Es popular?";
-                    this.lblSportImage.Text = "Agregue una imagen para representar \nal deporte";
-                    this.lblSportImage.Location = new System.Drawing.Point(20, 240);
-                    this.btnSportAdd.Text = "Agregar";
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAgregarDeporte;
         private PictureBox imgSportSelected;
         private Label lblSportImage;

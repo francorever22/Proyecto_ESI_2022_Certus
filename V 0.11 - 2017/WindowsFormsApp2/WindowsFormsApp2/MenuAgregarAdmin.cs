@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace SRD_BackOffice
 {
@@ -30,6 +24,8 @@ namespace SRD_BackOffice
 
         private void btnAddminAdd_Click(object sender, EventArgs e)
         {
+            bool exist = false;
+            String msg = "";
             try
             {
                 if (txtAddminEmail.Text != "" && txtAddminPassword.Text != "" && txtAddminUsername.Text != "" && txtConfirmPassword.Text != "")
@@ -37,15 +33,48 @@ namespace SRD_BackOffice
                     if (txtAddminPassword.Text == txtConfirmPassword.Text)
                     {
                         var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                        Usuario newAdmin = new Usuario();
-                        newAdmin.nombreUsuario = txtAddminUsername.Text;
-                        newAdmin.email = txtAddminEmail.Text;
-                        newAdmin.contrasena = txtAddminPassword.Text;
-                        newAdmin.nivelPermisos = 3;
-                        newAdmin.numeroTelefono = null;
-                        usuarios.Add(newAdmin);
-                        Logica.SerializeUsers(usuarios);
-                        MessageBox.Show("New administrator created correctly");
+                        foreach (var u in usuarios)
+                        {
+                            if (u.nombreUsuario == txtAddminUsername.Text)
+                            {
+                                exist = true;
+                                if (Program.language == "EN")
+                                {
+                                    msg = "The user already exist";
+                                }
+                                else if (Program.language == "ES")
+                                {
+                                    msg = "El usuario ya existe";
+                                }
+                            }
+                            if (u.email == txtAddminEmail.Text)
+                            {
+                                exist = true;
+                                if (Program.language == "EN")
+                                {
+                                    msg = "The email is already registered";
+                                }
+                                else if (Program.language == "ES")
+                                {
+                                    msg = "El email ya esta registrado";
+                                }
+                            }
+                        }
+                        if (exist == false)
+                        {
+                            Usuario newAdmin = new Usuario();
+                            newAdmin.nombreUsuario = txtAddminUsername.Text;
+                            newAdmin.email = txtAddminEmail.Text;
+                            newAdmin.contrasena = txtAddminPassword.Text;
+                            newAdmin.nivelPermisos = 3;
+                            newAdmin.numeroTelefono = null;
+                            usuarios.Add(newAdmin);
+                            Logica.SerializeUsers(usuarios);
+                            MessageBox.Show("New administrator created correctly");
+                        } else
+                        {
+                            MessageBox.Show(msg);
+                        }
                     }
                     else
                     {
@@ -66,6 +95,37 @@ namespace SRD_BackOffice
             catch
             {
                 MessageBox.Show("There was an error in the process");
+            }
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    lblAddminTitle.Text = "Add administrator";
+                    lblAddminTitle.Location = new Point(68, 49);
+                    lblAddminUsuario.Text = "Username";
+                    lblAddminUsuario.Location = new Point(45, 156);
+                    lblAddminEmail.Location = new Point(45, 237);
+                    btnAddminAdd.Text = "Add";
+                    lblAddminConstraseña.Text = "Password";
+                    lblAddminConstraseña.Location = new Point(45, 317);
+                    lblAddminConfirm.Text = "Repeat password";
+                    lblAddminConfirm.Location = new Point(45, 398);
+                    break;
+                case "ES": //Español
+                    lblAddminTitle.Text = "Agregar administrador";
+                    lblAddminTitle.Location = new Point(27, 49);
+                    lblAddminUsuario.Text = "Nombre de usuario";
+                    lblAddminUsuario.Location = new Point(30, 157);
+                    lblAddminEmail.Location = new Point(30, 237);
+                    btnAddminAdd.Text = "Agregar";
+                    lblAddminConstraseña.Text = "Contraseña";
+                    lblAddminConstraseña.Location = new Point(30, 317);
+                    lblAddminConfirm.Text = "Confirme la contraseña";
+                    lblAddminConfirm.Location = new Point(30, 398);
+                    break;
             }
         }
     }

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace SRD_BackOffice
 {
@@ -105,7 +98,7 @@ namespace SRD_BackOffice
         {
             try
             {
-                bool match = false;
+                bool match = false, boss = false;
                 String user = txtUsuario.Text;
                 String password = txtContraseña.Text;
                 var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
@@ -115,9 +108,10 @@ namespace SRD_BackOffice
                     {
                         foreach (var usuario in usuarios)
                         {
-                            if (usuario.email == user && usuario.contrasena == password && usuario.nivelPermisos == 3)
+                            if (usuario.email == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
                             {
                                 match = true;
+                                if (usuario.nivelPermisos == 4) { boss = true; }
                             }
                         }
                     }
@@ -125,9 +119,10 @@ namespace SRD_BackOffice
                     {
                         foreach (var usuario in usuarios)
                         {
-                            if (usuario.nombreUsuario == user && usuario.contrasena == password && usuario.nivelPermisos == 3)
+                            if (usuario.nombreUsuario == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
                             {
                                 match = true;
+                                if (usuario.nivelPermisos == 4) { boss = true; }
                             }
                         }
                     }
@@ -135,6 +130,7 @@ namespace SRD_BackOffice
 
                 if (match == true)
                 {
+                    if (boss == true) { Program.boss = true; }
                     this.Hide();
                     MainMenu main = new MainMenu();
                     main.StartPosition = FormStartPosition.CenterParent;
@@ -159,6 +155,29 @@ namespace SRD_BackOffice
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (Program.language)
+            {
+                case "EN": //Ingles
+                    btnCancelar.Text = "Cancel";
+                    label1.Text = "Welcome";
+                    label1.Location = new Point(239, 19);
+                    txtUsuario.Text = "User or email";
+                    txtContraseña.Text = "Password";
+                    btnAcceder.Text = "Log in";
+                    break;
+                case "ES": //Español
+                    btnCancelar.Text = "Cancelar";
+                    label1.Text = "Bienvenido";
+                    label1.Location = new Point(227, 19);
+                    txtUsuario.Text = "Usuario o email";
+                    txtContraseña.Text = "Contraseña";
+                    btnAcceder.Text = "Acceder";
+                    break;
+            }
         }
     }
 }

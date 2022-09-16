@@ -30,9 +30,9 @@ namespace SRD_BackOffice
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnManageTeam = new System.Windows.Forms.Button();
             this.btnManageUsers = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnManageAthletes = new System.Windows.Forms.Button();
             this.btnManageSports = new System.Windows.Forms.Button();
             this.btnGestionarBanner = new System.Windows.Forms.Button();
             this.btnAgregarDeporte = new System.Windows.Forms.Button();
@@ -41,10 +41,10 @@ namespace SRD_BackOffice
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
             this.cbxLanguage = new System.Windows.Forms.ComboBox();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.btnAddTeam = new System.Windows.Forms.Button();
+            this.btnManageAdmins = new System.Windows.Forms.Button();
             this.btnManageMatch = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btnAddAthlete = new System.Windows.Forms.Button();
             this.btnAddMatch = new System.Windows.Forms.Button();
             this.AddEvent = new System.Windows.Forms.Button();
             this.btnManageEvents = new System.Windows.Forms.Button();
@@ -52,20 +52,22 @@ namespace SRD_BackOffice
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnManageTeam
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(497, 451);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 150);
-            this.button1.TabIndex = 0;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnManageTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnManageTeam.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnManageTeam.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnManageTeam.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnManageTeam.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.btnManageTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageTeam.Image = global::WindowsFormsApp2.Properties.Resources.ManageTeam;
+            this.btnManageTeam.Location = new System.Drawing.Point(717, 267);
+            this.btnManageTeam.Name = "btnManageTeam";
+            this.btnManageTeam.Size = new System.Drawing.Size(150, 150);
+            this.btnManageTeam.TabIndex = 0;
+            this.btnManageTeam.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnManageTeam.UseVisualStyleBackColor = true;
+            this.btnManageTeam.Click += new System.EventHandler(this.btnMangeTeam_Click);
             // 
             // btnManageUsers
             // 
@@ -77,7 +79,7 @@ namespace SRD_BackOffice
             this.btnManageUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManageUsers.Font = new System.Drawing.Font("Montserrat", 10F);
             this.btnManageUsers.Image = global::WindowsFormsApp2.Properties.Resources.ManageUsers;
-            this.btnManageUsers.Location = new System.Drawing.Point(717, 268);
+            this.btnManageUsers.Location = new System.Drawing.Point(497, 451);
             this.btnManageUsers.Name = "btnManageUsers";
             this.btnManageUsers.Size = new System.Drawing.Size(150, 150);
             this.btnManageUsers.TabIndex = 1;
@@ -85,19 +87,22 @@ namespace SRD_BackOffice
             this.btnManageUsers.UseVisualStyleBackColor = true;
             this.btnManageUsers.Click += new System.EventHandler(this.btnManageUsers_Click);
             // 
-            // button3
+            // btnManageAthletes
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(717, 452);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 150);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnManageAthletes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnManageAthletes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnManageAthletes.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnManageAthletes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnManageAthletes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.btnManageAthletes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageAthletes.Image = global::WindowsFormsApp2.Properties.Resources.ManageAthlete;
+            this.btnManageAthletes.Location = new System.Drawing.Point(52, 450);
+            this.btnManageAthletes.Name = "btnManageAthletes";
+            this.btnManageAthletes.Size = new System.Drawing.Size(150, 150);
+            this.btnManageAthletes.TabIndex = 2;
+            this.btnManageAthletes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnManageAthletes.UseVisualStyleBackColor = true;
+            this.btnManageAthletes.Click += new System.EventHandler(this.btnManageAthletes_Click);
             // 
             // btnManageSports
             // 
@@ -181,7 +186,7 @@ namespace SRD_BackOffice
             this.btnAgregarAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarAdmin.Font = new System.Drawing.Font("Montserrat", 10F);
             this.btnAgregarAdmin.Image = global::WindowsFormsApp2.Properties.Resources.AgregarAdmin;
-            this.btnAgregarAdmin.Location = new System.Drawing.Point(924, 267);
+            this.btnAgregarAdmin.Location = new System.Drawing.Point(924, 451);
             this.btnAgregarAdmin.Name = "btnAgregarAdmin";
             this.btnAgregarAdmin.Size = new System.Drawing.Size(150, 150);
             this.btnAgregarAdmin.TabIndex = 7;
@@ -193,7 +198,7 @@ namespace SRD_BackOffice
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Montserrat", 30F);
-            this.lblTitle.Location = new System.Drawing.Point(270, 8);
+            this.lblTitle.Location = new System.Drawing.Point(315, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(0, 55);
             this.lblTitle.TabIndex = 8;
@@ -201,24 +206,24 @@ namespace SRD_BackOffice
             // panelMain
             // 
             this.panelMain.Controls.Add(this.cbxLanguage);
-            this.panelMain.Controls.Add(this.button11);
-            this.panelMain.Controls.Add(this.button12);
+            this.panelMain.Controls.Add(this.btnAddTeam);
+            this.panelMain.Controls.Add(this.btnManageAdmins);
             this.panelMain.Controls.Add(this.btnManageMatch);
-            this.panelMain.Controls.Add(this.button10);
+            this.panelMain.Controls.Add(this.btnAddAthlete);
             this.panelMain.Controls.Add(this.btnAddMatch);
             this.panelMain.Controls.Add(this.AddEvent);
             this.panelMain.Controls.Add(this.btnManageEvents);
             this.panelMain.Controls.Add(this.btnMainCerrar);
             this.panelMain.Controls.Add(this.btnManageUsers);
-            this.panelMain.Controls.Add(this.button3);
+            this.panelMain.Controls.Add(this.btnManageAthletes);
             this.panelMain.Controls.Add(this.btnManageSports);
             this.panelMain.Controls.Add(this.btnGestionarBanner);
             this.panelMain.Controls.Add(this.btnAgregarDeporte);
             this.panelMain.Controls.Add(this.btnAgregarCategoria);
             this.panelMain.Controls.Add(this.btnAgregarAdmin);
             this.panelMain.Controls.Add(this.lblTitle);
-            this.panelMain.Controls.Add(this.button1);
-            this.panelMain.Location = new System.Drawing.Point(-1, 0);
+            this.panelMain.Controls.Add(this.btnManageTeam);
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1123, 625);
             this.panelMain.TabIndex = 9;
@@ -239,35 +244,39 @@ namespace SRD_BackOffice
             this.cbxLanguage.ValueMember = "0";
             this.cbxLanguage.SelectedIndexChanged += new System.EventHandler(this.cbxLanguage_SelectedIndexChanged);
             // 
-            // button11
+            // btnAddTeam
             // 
-            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(277, 452);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(150, 150);
-            this.button11.TabIndex = 27;
-            this.button11.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button11.UseVisualStyleBackColor = true;
+            this.btnAddTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnAddTeam.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddTeam.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAddTeam.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnAddTeam.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.btnAddTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddTeam.Image = global::WindowsFormsApp2.Properties.Resources.Team;
+            this.btnAddTeam.Location = new System.Drawing.Point(924, 266);
+            this.btnAddTeam.Name = "btnAddTeam";
+            this.btnAddTeam.Size = new System.Drawing.Size(150, 150);
+            this.btnAddTeam.TabIndex = 27;
+            this.btnAddTeam.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAddTeam.UseVisualStyleBackColor = true;
+            this.btnAddTeam.Click += new System.EventHandler(this.btnAddTeam_Click);
             // 
-            // button12
+            // btnManageAdmins
             // 
-            this.button12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(924, 451);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(150, 150);
-            this.button12.TabIndex = 26;
-            this.button12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnManageAdmins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnManageAdmins.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnManageAdmins.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnManageAdmins.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnManageAdmins.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.btnManageAdmins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageAdmins.Image = global::WindowsFormsApp2.Properties.Resources.ManageSubditos;
+            this.btnManageAdmins.Location = new System.Drawing.Point(717, 451);
+            this.btnManageAdmins.Name = "btnManageAdmins";
+            this.btnManageAdmins.Size = new System.Drawing.Size(150, 150);
+            this.btnManageAdmins.TabIndex = 26;
+            this.btnManageAdmins.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnManageAdmins.UseVisualStyleBackColor = true;
+            this.btnManageAdmins.Click += new System.EventHandler(this.btnManageAdmins_Click);
             // 
             // btnManageMatch
             // 
@@ -286,20 +295,22 @@ namespace SRD_BackOffice
             this.btnManageMatch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnManageMatch.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // btnAddAthlete
             // 
-            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(52, 451);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(150, 150);
-            this.button10.TabIndex = 24;
-            this.button10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button10.UseVisualStyleBackColor = true;
+            this.btnAddAthlete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnAddAthlete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddAthlete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAddAthlete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnAddAthlete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.btnAddAthlete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddAthlete.Image = global::WindowsFormsApp2.Properties.Resources.Athlete;
+            this.btnAddAthlete.Location = new System.Drawing.Point(277, 450);
+            this.btnAddAthlete.Name = "btnAddAthlete";
+            this.btnAddAthlete.Size = new System.Drawing.Size(150, 150);
+            this.btnAddAthlete.TabIndex = 24;
+            this.btnAddAthlete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAddAthlete.UseVisualStyleBackColor = true;
+            this.btnAddAthlete.Click += new System.EventHandler(this.btnAddAthlete_Click);
             // 
             // btnAddMatch
             // 
@@ -334,6 +345,7 @@ namespace SRD_BackOffice
             this.AddEvent.TabIndex = 23;
             this.AddEvent.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.AddEvent.UseVisualStyleBackColor = true;
+            this.AddEvent.Click += new System.EventHandler(this.AddEvent_Click);
             // 
             // btnManageEvents
             // 
@@ -351,6 +363,7 @@ namespace SRD_BackOffice
             this.btnManageEvents.TabIndex = 21;
             this.btnManageEvents.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnManageEvents.UseVisualStyleBackColor = true;
+            this.btnManageEvents.Click += new System.EventHandler(this.btnManageEvents_Click);
             // 
             // btnMainCerrar
             // 
@@ -377,67 +390,11 @@ namespace SRD_BackOffice
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblTitle.Text = "Aplication administrator";
-                    this.lblTitle.Location = new System.Drawing.Point(315, 9);
-                    this.btnManageEvents.Text = "Manage events";
-                    this.btnManageEvents.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.AddEvent.Text = "Add event";
-                    this.AddEvent.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAddMatch.Text = "Add match";
-                    this.btnAddMatch.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageMatch.Text = "Manage matchs";
-                    this.btnManageMatch.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarAdmin.Text = "Add administrator";
-                    this.btnAgregarAdmin.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarCategoria.Text = "Add category";
-                    this.btnAgregarCategoria.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarDeporte.Text = "Add sport";
-                    this.btnAgregarDeporte.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnGestionarBanner.Text = "Manage banners";
-                    this.btnGestionarBanner.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageSports.Text = "Manage sports";
-                    this.btnManageSports.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageUsers.Text = "Manage users";
-                    this.btnManageUsers.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    break;
-                case "ES": //Español
-                    this.lblTitle.Text = "Administrador de la aplicación";
-                    this.lblTitle.Location = new System.Drawing.Point(257, 9);
-                    this.btnManageEvents.Text = "Administrar eventos";
-                    this.btnManageEvents.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.AddEvent.Text = "Agregar evento";
-                    this.AddEvent.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAddMatch.Text = "Agregar encuentro";
-                    this.btnAddMatch.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageMatch.Text = "Administrar encuentros";
-                    this.btnManageMatch.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarAdmin.Text = "Agregar administrador";
-                    this.btnAgregarAdmin.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarCategoria.Text = "Agregar categoria";
-                    this.btnAgregarCategoria.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnAgregarDeporte.Text = "Agregar deporte";
-                    this.btnAgregarDeporte.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnGestionarBanner.Text = "Administrar banners";
-                    this.btnGestionarBanner.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageSports.Text = "Administrar deportes";
-                    this.btnManageSports.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.btnManageUsers.Text = "Administrar usuarios";
-                    this.btnManageUsers.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    break;
-            }
-        }
-
         #endregion
 
-        private Button button1;
+        private Button btnManageTeam;
         private Button btnManageUsers;
-        private Button button3;
+        private Button btnManageAthletes;
         private Button btnManageSports;
         private Button btnGestionarBanner;
         private Button btnAgregarDeporte;
@@ -445,14 +402,14 @@ namespace SRD_BackOffice
         private Button btnAgregarAdmin;
         private Label lblTitle;
         private Panel panelMain;
-        private Button button11;
-        private Button button12;
+        private Button btnMainCerrar;
+        private Button btnAddTeam;
+        private Button btnManageAdmins;
         private Button btnManageMatch;
-        private Button button10;
+        private Button btnAddAthlete;
         private Button btnAddMatch;
         private Button AddEvent;
         private Button btnManageEvents;
         private ComboBox cbxLanguage;
-        private Button btnMainCerrar;
     }
 }

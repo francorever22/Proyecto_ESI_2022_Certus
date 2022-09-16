@@ -31,11 +31,13 @@ namespace SRD_BackOffice
         private void InitializeComponent()
         {
             this.panelMangeBanners = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelBannersContenedor = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.lblBannerTitle = new System.Windows.Forms.Label();
             this.txtBannerTitle = new System.Windows.Forms.TextBox();
             this.lblBannerLink = new System.Windows.Forms.Label();
@@ -55,7 +57,9 @@ namespace SRD_BackOffice
             // panelMangeBanners
             // 
             this.panelMangeBanners.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
+            this.panelMangeBanners.Controls.Add(this.btnBuscar);
             this.panelMangeBanners.Controls.Add(this.panel2);
+            this.panelMangeBanners.Controls.Add(this.txtBuscador);
             this.panelMangeBanners.Controls.Add(this.lblBannerTitle);
             this.panelMangeBanners.Controls.Add(this.txtBannerTitle);
             this.panelMangeBanners.Controls.Add(this.lblBannerLink);
@@ -71,6 +75,16 @@ namespace SRD_BackOffice
             this.panelMangeBanners.Size = new System.Drawing.Size(907, 605);
             this.panelMangeBanners.TabIndex = 10;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = WindowsFormsApp2.Properties.Resources.lupa;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBuscar.Location = new System.Drawing.Point(829, 99);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
@@ -79,7 +93,7 @@ namespace SRD_BackOffice
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Location = new System.Drawing.Point(493, 135);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(363, 409);
+            this.panel2.Size = new System.Drawing.Size(388, 409);
             this.panel2.TabIndex = 26;
             // 
             // panelBannersContenedor
@@ -89,7 +103,7 @@ namespace SRD_BackOffice
             this.panelBannersContenedor.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelBannersContenedor.Location = new System.Drawing.Point(0, 25);
             this.panelBannersContenedor.Name = "panelBannersContenedor";
-            this.panelBannersContenedor.Size = new System.Drawing.Size(361, 383);
+            this.panelBannersContenedor.Size = new System.Drawing.Size(386, 383);
             this.panelBannersContenedor.TabIndex = 1;
             // 
             // panel4
@@ -101,31 +115,37 @@ namespace SRD_BackOffice
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(361, 25);
+            this.panel4.Size = new System.Drawing.Size(386, 25);
             this.panel4.TabIndex = 0;
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(246, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 15);
+            this.label5.Size = new System.Drawing.Size(29, 15);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Popular";
+            this.label5.Text = "Link";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 15);
             this.label7.TabIndex = 0;
             // 
+            // txtBuscador
+            // 
+            this.txtBuscador.Location = new System.Drawing.Point(520, 100);
+            this.txtBuscador.Name = "txtBuscador";
+            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
+            this.txtBuscador.TabIndex = 28;
+            // 
             // lblBannerTitle
             // 
             this.lblBannerTitle.AutoSize = true;
-            this.lblBannerTitle.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblBannerTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblBannerTitle.Location = new System.Drawing.Point(52, 88);
             this.lblBannerTitle.Name = "lblBannerTitle";
             this.lblBannerTitle.Size = new System.Drawing.Size(0, 21);
@@ -136,13 +156,13 @@ namespace SRD_BackOffice
             this.txtBannerTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtBannerTitle.Location = new System.Drawing.Point(31, 123);
             this.txtBannerTitle.Name = "txtBannerTitle";
-            this.txtBannerTitle.Size = new System.Drawing.Size(242, 20);
+            this.txtBannerTitle.Size = new System.Drawing.Size(242, 23);
             this.txtBannerTitle.TabIndex = 24;
             // 
             // lblBannerLink
             // 
             this.lblBannerLink.AutoSize = true;
-            this.lblBannerLink.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblBannerLink.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblBannerLink.Location = new System.Drawing.Point(0, 0);
             this.lblBannerLink.Name = "lblBannerLink";
             this.lblBannerLink.Size = new System.Drawing.Size(0, 21);
@@ -153,7 +173,7 @@ namespace SRD_BackOffice
             this.txtBannerLink.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtBannerLink.Location = new System.Drawing.Point(31, 450);
             this.txtBannerLink.Name = "txtBannerLink";
-            this.txtBannerLink.Size = new System.Drawing.Size(242, 20);
+            this.txtBannerLink.Size = new System.Drawing.Size(242, 23);
             this.txtBannerLink.TabIndex = 21;
             // 
             // btnBannerCerrar
@@ -163,7 +183,7 @@ namespace SRD_BackOffice
             this.btnBannerCerrar.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnBannerCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnBannerCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.btnBannerCerrar.Image = global::WindowsFormsApp2.Properties.Resources.Incio_Claro;
+            this.btnBannerCerrar.Image = WindowsFormsApp2.Properties.Resources.Incio_Claro;
             this.btnBannerCerrar.Location = new System.Drawing.Point(857, 12);
             this.btnBannerCerrar.Name = "btnBannerCerrar";
             this.btnBannerCerrar.Size = new System.Drawing.Size(38, 38);
@@ -178,7 +198,7 @@ namespace SRD_BackOffice
             this.btnAddBanner.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnAddBanner.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnAddBanner.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.btnAddBanner.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnAddBanner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddBanner.Location = new System.Drawing.Point(311, 561);
             this.btnAddBanner.Name = "btnAddBanner";
             this.btnAddBanner.Size = new System.Drawing.Size(150, 30);
@@ -198,7 +218,7 @@ namespace SRD_BackOffice
             // lblBannerImage
             // 
             this.lblBannerImage.AutoSize = true;
-            this.lblBannerImage.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblBannerImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblBannerImage.Location = new System.Drawing.Point(0, 0);
             this.lblBannerImage.Name = "lblBannerImage";
             this.lblBannerImage.Size = new System.Drawing.Size(0, 21);
@@ -221,7 +241,7 @@ namespace SRD_BackOffice
             // lblMangaTitle
             // 
             this.lblMangaTitle.AutoSize = true;
-            this.lblMangaTitle.Font = new System.Drawing.Font("Montserrat", 30F);
+            this.lblMangaTitle.Font = new System.Drawing.Font("Montserrat", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblMangaTitle.Location = new System.Drawing.Point(0, 0);
             this.lblMangaTitle.Name = "lblMangaTitle";
             this.lblMangaTitle.Size = new System.Drawing.Size(0, 55);
@@ -229,7 +249,7 @@ namespace SRD_BackOffice
             // 
             // MenuGestionarBanners
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 605);
             this.Controls.Add(this.panelMangeBanners);
@@ -244,39 +264,6 @@ namespace SRD_BackOffice
             ((System.ComponentModel.ISupportInitialize)(this.imgBannerSelected)).EndInit();
             this.ResumeLayout(false);
 
-        }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblMangaTitle.Text = "Manage banners";
-                    this.lblMangaTitle.Location = new System.Drawing.Point(493, 44);
-                    this.btnSelectImage.Text = "Select image";
-                    this.lblBannerImage.Text = "Add an image for the new banner";
-                    this.lblBannerImage.Location = new System.Drawing.Point(31, 249);
-                    this.btnAddBanner.Text = "Add";
-                    this.lblBannerLink.Text = "Insert the link attched to the banner";
-                    this.lblBannerLink.Location = new System.Drawing.Point(24, 413);
-                    this.lblBannerTitle.Text = "Insert the title of the banner";
-                    this.label7.Text = "Name";
-                    this.label7.Location = new System.Drawing.Point(70, 3);
-                    break;
-                case "ES": //Español
-                    this.lblMangaTitle.Text = "Administrar banners";
-                    this.lblMangaTitle.Location = new System.Drawing.Point(460, 44);
-                    this.btnSelectImage.Text = "Seleccione una imagen";
-                    this.lblBannerImage.Text = "Agregue una imagen para el nuevo banner";
-                    this.lblBannerImage.Location = new System.Drawing.Point(4, 249);
-                    this.btnAddBanner.Text = "Agregar";
-                    this.lblBannerLink.Text = "Inserte el link vinculado con el banner";
-                    this.lblBannerLink.Location = new System.Drawing.Point(20, 413);
-                    this.lblBannerTitle.Text = "Inserte el titulo del banner";
-                    this.label7.Text = "Nombre";
-                    this.label7.Location = new System.Drawing.Point(64, 3);
-                    break;
-            }
         }
 
         #endregion
@@ -296,5 +283,7 @@ namespace SRD_BackOffice
         private Panel panel4;
         private Label label5;
         private Label label7;
+        private Button btnBuscar;
+        private TextBox txtBuscador;
     }
 }

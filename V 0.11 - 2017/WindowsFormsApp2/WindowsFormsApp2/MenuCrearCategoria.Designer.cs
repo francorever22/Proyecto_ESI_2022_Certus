@@ -123,35 +123,8 @@ namespace SRD_BackOffice
             this.ResumeLayout(false);
 
         }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (Program.language)
-            {
-                case "EN": //Ingles
-                    this.lblCategoryTitle.Text = "Add category";
-                    this.lblCategoryTitle.Location = new System.Drawing.Point(94, 33);
-                    this.lblCategoryName.Text = "Add category name";
-                    this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.lblCategoryName.Location = new System.Drawing.Point(19, 153);
-                    this.txtCategoryName.Location = new System.Drawing.Point(186, 152);
-                    this.txtCategoryName.Size = new System.Drawing.Size(250, 25);
-                    this.btnCategoryAgregar.Text = "Add";
-                    break;
-                case "ES": //Español
-                    this.lblCategoryTitle.Text = "Agregar categoria";
-                    this.lblCategoryTitle.Location = new System.Drawing.Point(53, 33);
-                    this.lblCategoryName.Text = "Ingrese nombre de la categoria";
-                    this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-                    this.lblCategoryName.Location = new System.Drawing.Point(10, 154);
-                    this.txtCategoryName.Location = new System.Drawing.Point(220, 152);
-                    this.txtCategoryName.Size = new System.Drawing.Size(250, 25);
-                    this.btnCategoryAgregar.Text = "Agregar";
-                    break;
-            }
-        }
-
         #endregion
+
         private Panel panelAgregarCategoria;
         private Label lblCategoryName;
         private TextBox txtCategoryName;

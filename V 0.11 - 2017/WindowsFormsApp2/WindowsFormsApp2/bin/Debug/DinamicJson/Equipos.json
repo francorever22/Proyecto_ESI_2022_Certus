@@ -1,0 +1,20 @@
+[
+  {
+    "IdEquipo": 0,
+    "Uniforme": null,
+    "ImagenRepresentativa": null,
+    "PaisOrigen": "Espana",
+    "NombreEquipo": "Barcelona",
+    "TipoEquipo": "Club",
+    "Miembros": null
+  },
+  {
+    "IdEquipo": 1,
+    "Uniforme": null,
+    "ImagenRepresentativa": null,
+    "PaisOrigen": "Espana",
+    "NombreEquipo": "Real Madrid",
+    "TipoEquipo": "Club",
+    "Miembros": null
+  }
+]

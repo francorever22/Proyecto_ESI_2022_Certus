@@ -5,5 +5,4 @@
     public string contrasena { get; set; }
     public int nivelPermisos { get; set; }
     public string numeroTelefono { get; set; }
-    public string[] deportesFavoritos { get; set; }
 }
