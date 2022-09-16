@@ -106,7 +106,6 @@ namespace Sistema_de_Resultados_Deportivos
             // 
             // tglTema
             // 
-            this.tglTema.AutoSize = true;
             this.tglTema.Location = new System.Drawing.Point(270, 124);
             this.tglTema.MinimumSize = new System.Drawing.Size(39, 19);
             this.tglTema.Name = "tglTema";
@@ -114,14 +113,13 @@ namespace Sistema_de_Resultados_Deportivos
             this.tglTema.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.tglTema.OnBackColor = System.Drawing.Color.MediumSlateBlue;
             this.tglTema.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tglTema.Size = new System.Drawing.Size(39, 19);
+            this.tglTema.Size = new System.Drawing.Size(45, 22);
             this.tglTema.TabIndex = 7;
             this.tglTema.UseVisualStyleBackColor = true;
             this.tglTema.CheckedChanged += new System.EventHandler(this.tglTema_CheckedChanged);
             // 
             // tglTray
             // 
-            this.tglTray.AutoSize = true;
             this.tglTray.Location = new System.Drawing.Point(270, 180);
             this.tglTray.MinimumSize = new System.Drawing.Size(39, 19);
             this.tglTray.Name = "tglTray";
@@ -129,14 +127,13 @@ namespace Sistema_de_Resultados_Deportivos
             this.tglTray.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.tglTray.OnBackColor = System.Drawing.Color.MediumSlateBlue;
             this.tglTray.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tglTray.Size = new System.Drawing.Size(39, 19);
+            this.tglTray.Size = new System.Drawing.Size(45, 22);
             this.tglTray.TabIndex = 8;
             this.tglTray.UseVisualStyleBackColor = true;
             this.tglTray.CheckedChanged += new System.EventHandler(this.tglTray_CheckedChanged);
             // 
             // tglInicio
             // 
-            this.tglInicio.AutoSize = true;
             this.tglInicio.Location = new System.Drawing.Point(270, 237);
             this.tglInicio.MinimumSize = new System.Drawing.Size(39, 19);
             this.tglInicio.Name = "tglInicio";
@@ -144,13 +141,12 @@ namespace Sistema_de_Resultados_Deportivos
             this.tglInicio.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.tglInicio.OnBackColor = System.Drawing.Color.MediumSlateBlue;
             this.tglInicio.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tglInicio.Size = new System.Drawing.Size(39, 19);
+            this.tglInicio.Size = new System.Drawing.Size(45, 22);
             this.tglInicio.TabIndex = 9;
             this.tglInicio.UseVisualStyleBackColor = true;
             // 
             // tglNotificaciones
             // 
-            this.tglNotificaciones.AutoSize = true;
             this.tglNotificaciones.Location = new System.Drawing.Point(270, 291);
             this.tglNotificaciones.MinimumSize = new System.Drawing.Size(39, 19);
             this.tglNotificaciones.Name = "tglNotificaciones";
@@ -158,7 +154,7 @@ namespace Sistema_de_Resultados_Deportivos
             this.tglNotificaciones.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.tglNotificaciones.OnBackColor = System.Drawing.Color.MediumSlateBlue;
             this.tglNotificaciones.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tglNotificaciones.Size = new System.Drawing.Size(39, 19);
+            this.tglNotificaciones.Size = new System.Drawing.Size(45, 22);
             this.tglNotificaciones.TabIndex = 10;
             this.tglNotificaciones.UseVisualStyleBackColor = true;
             // 
@@ -218,118 +214,6 @@ namespace Sistema_de_Resultados_Deportivos
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (AjustesDeUsuario.language)
-            {
-                case "EN": //Ingles
-                    this.btnGuardar.Text = "Save changes";
-                    this.lblConfiguraciones.Text = "Settings";
-                    this.lblConfiguraciones.Location = new System.Drawing.Point(136, 9);
-                    this.lblactivarNotificaciones.Text = "Activate notifications";
-                    this.lblIniciarapp.Text = "Open application on pc startup";
-                    this.lblMinimizarlabandeja.Text = "Minimize to tray";
-                    this.lblLenguaje.Text = "Language";
-                    this.lblTema.Text = "Dark theme";
-                    break;
-                case "ES": //Español
-                    this.btnGuardar.Text = "Guardar cambios";
-                    this.lblConfiguraciones.Text = "Configuraciones";
-                    this.lblConfiguraciones.Location = new System.Drawing.Point(92, 9);
-                    this.lblactivarNotificaciones.Text = "Activar notificaciones";
-                    this.lblIniciarapp.Text = "Iniciar app al iniciarse el sistema";
-                    this.lblMinimizarlabandeja.Text = "Minimizar a la bandeja";
-                    this.lblLenguaje.Text = "Lenguaje";
-                    this.lblTema.Text = "Tema oscuro";
-                    break;
-            }
-        }
-
-        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
-        {
-            switch (AjustesDeUsuario.darkTheme)
-            {
-                case false: //Tema claro
-                    /* Paneles */
-                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
-                    /* Botones */
-                    this.btnCerrarSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.btnCerrarSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                    this.btnCerrarSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                    this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                    this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                    /* Textos (Incluidos botones) */
-                    this.btnCerrarSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblLenguaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblMinimizarlabandeja.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblTema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblConfiguraciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblactivarNotificaciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.lblIniciarapp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.cbxLenguaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.cbxLenguaje.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    /* Botones on/off */
-                    this.tglTema.OffBackColor = System.Drawing.Color.Gray;
-                    this.tglTema.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglTema.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.tglTema.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglTray.OffBackColor = System.Drawing.Color.Gray;
-                    this.tglTray.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglTray.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.tglTray.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglInicio.OffBackColor = System.Drawing.Color.Gray;
-                    this.tglInicio.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglInicio.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.tglInicio.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglNotificaciones.OffBackColor = System.Drawing.Color.Gray;
-                    this.tglNotificaciones.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglNotificaciones.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.tglNotificaciones.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    break;
-                case true: //Tema oscuro
-                    /* Paneles */
-                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-                    /* Botones */
-                    this.btnCerrarSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.btnCerrarSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                    this.btnCerrarSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                    this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                    this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                    /* Textos (Incluidos botones) */
-                    this.btnCerrarSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblLenguaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblMinimizarlabandeja.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblTema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblConfiguraciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblactivarNotificaciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.lblIniciarapp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.cbxLenguaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.cbxLenguaje.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    /* Botones on/off */
-                    this.tglTema.OffBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.tglTema.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglTema.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.tglTema.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglTray.OffBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.tglTray.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglTray.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.tglTray.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglInicio.OffBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.tglInicio.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglInicio.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.tglInicio.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    this.tglNotificaciones.OffBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.tglNotificaciones.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.tglNotificaciones.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.tglNotificaciones.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    break;
-            }
         }
 
         #endregion

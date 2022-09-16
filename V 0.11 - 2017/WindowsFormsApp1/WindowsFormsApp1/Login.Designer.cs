@@ -1,4 +1,6 @@
-﻿namespace Sistema_de_Resultados_Deportivos
+﻿using System.Windows.Forms;
+
+namespace Sistema_de_Resultados_Deportivos
 {
     partial class Login
     {
@@ -137,16 +139,14 @@
             // 
             // customtogglebutton1
             // 
-            this.customtogglebutton1.AutoSize = true;
             this.customtogglebutton1.Location = new System.Drawing.Point(150, 215);
-            this.customtogglebutton1.MaximumSize = new System.Drawing.Size(45, 22);
             this.customtogglebutton1.MinimumSize = new System.Drawing.Size(39, 19);
             this.customtogglebutton1.Name = "customtogglebutton1";
             this.customtogglebutton1.OffBackColor = System.Drawing.Color.Gray;
             this.customtogglebutton1.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.customtogglebutton1.OnBackColor = System.Drawing.Color.MediumSlateBlue;
             this.customtogglebutton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.customtogglebutton1.Size = new System.Drawing.Size(39, 19);
+            this.customtogglebutton1.Size = new System.Drawing.Size(45, 22);
             this.customtogglebutton1.TabIndex = 8;
             this.customtogglebutton1.UseVisualStyleBackColor = true;
             this.customtogglebutton1.CheckedChanged += new System.EventHandler(this.customToggleButton1_CheckedChanged);
@@ -156,7 +156,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12.75F);
             this.label2.Location = new System.Drawing.Point(19, 212);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 23);
+            this.label2.Size = new System.Drawing.Size(105, 20);
             this.label2.TabIndex = 9;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -172,7 +172,7 @@
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.customtogglebutton1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(0, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(588, 378);
             this.panel1.TabIndex = 10;
@@ -193,112 +193,18 @@
 
         }
 
-        void SetIdioma() //Establece el texto segun el idioma seleccionado
-        {
-            switch (AjustesDeUsuario.language)
-            {
-                case "EN": //Ingles
-                    this.llbRegistrarse.Text = "Registrate";
-                    this.linkLabel2.Text = "Recover password";
-                    this.label2.Text = "Remember me";
-                    this.btnCancelar.Text = "Cancel";
-                    this.label1.Text = "Welcome";
-                    this.txtUsuario.Text = "User or email";
-                    this.txtContraseña.Text = "Password";
-                    this.btnAcceder.Text = "Access";
-                    break;
-                case "ES": //Español
-                    this.llbRegistrarse.Text = "Registrarse";
-                    this.linkLabel2.Text = "Recuperar contraseña";
-                    this.label2.Text = "Recordarme";
-                    this.btnCancelar.Text = "Cancelar";
-                    this.label1.Text = "Bienvenido";
-                    this.txtUsuario.Text = "Usuario o email";
-                    this.txtContraseña.Text = "Contraseña";
-                    this.btnAcceder.Text = "Acceder";
-                    break;
-            }
-        }
-
-        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
-        {
-            switch (AjustesDeUsuario.darkTheme)
-            {
-                case false: //Tema claro
-                    /* Paneles */
-                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
-                    this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
-                    /* Botones */
-                    this.btnAcceder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.btnAcceder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                    this.btnAcceder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                    this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                    this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                    /* Textos (Incluidos botones) */
-                    this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.llbRegistrarse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.txtContraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.txtContraseña.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.txtUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.txtUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.txtCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                    this.txtCorreo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.btnAcceder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    /* Botones on/off */
-                    this.customtogglebutton1.OffBackColor = System.Drawing.Color.Gray;
-                    this.customtogglebutton1.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.customtogglebutton1.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                    this.customtogglebutton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    break;
-                case true: //Tema oscuro
-                    /* Paneles */
-                    this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-                    this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-                    /* Botones */
-                    this.btnAcceder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.btnAcceder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                    this.btnAcceder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                    this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                    this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                    /* Textos (Incluidos botones) */
-                    this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.llbRegistrarse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.txtContraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.txtContraseña.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.txtUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.txtUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.txtCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.txtCorreo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.btnAcceder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    /* Botones on/off */
-                    this.customtogglebutton1.OffBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                    this.customtogglebutton1.OffToggleColor = System.Drawing.Color.Gainsboro;
-                    this.customtogglebutton1.OnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                    this.customtogglebutton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-                    break;
-            }
-        }
-
         #endregion
-        private System.Windows.Forms.LinkLabel llbRegistrarse;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Button btnAcceder;
-        private System.Windows.Forms.TextBox txtContraseña;
-        private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCancelar;
+        private LinkLabel llbRegistrarse;
+        private LinkLabel linkLabel2;
+        private Button btnAcceder;
+        private TextBox txtContraseña;
+        private TextBox txtUsuario;
+        private TextBox txtCorreo;
+        private Label label1;
+        private Button btnCancelar;
         private CustomToggleButton customtogglebutton1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private Label label2;
+        private Panel panel1;
     }
 }
 

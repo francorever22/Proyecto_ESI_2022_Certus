@@ -369,72 +369,72 @@ namespace Sistema_de_Resultados_Deportivos
         public void SetTheme() //Establece los colores de los controladores segun el tema elegido
         {
             /* Paneles */
-            this.panelSettings.BackColor = AjustesDeUsuario.panel;
-            this.panelOptions.BackColor = AjustesDeUsuario.panel;
-            this.panelChico.BackColor = AjustesDeUsuario.panel;
-            this.panelGrande.BackColor = AjustesDeUsuario.panel;
-            this.panelLogin.BackColor = AjustesDeUsuario.panel;
-            this.panelSuperior.BackColor = AjustesDeUsuario.panel;
-            this.panelMas.BackColor = AjustesDeUsuario.panel;
+            panelSettings.BackColor = AjustesDeUsuario.panel;
+            panelOptions.BackColor = AjustesDeUsuario.panel;
+            panelChico.BackColor = AjustesDeUsuario.panel;
+            panelGrande.BackColor = AjustesDeUsuario.panel;
+            panelLogin.BackColor = AjustesDeUsuario.panel;
+            panelSuperior.BackColor = AjustesDeUsuario.panel;
+            panelMas.BackColor = AjustesDeUsuario.panel;
             /* Botones */
-            this.btnLogin.BackColor = AjustesDeUsuario.btnBack;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnLogin.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnUser.BackColor = AjustesDeUsuario.btnBack;
-            this.btnUser.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnUser.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnExit.BackColor = AjustesDeUsuario.btnBack;
-            this.btnExit.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnExit.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnLogout.BackColor = AjustesDeUsuario.btnBack;
-            this.btnLogout.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnLogout.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnSettings.BackColor = AjustesDeUsuario.btnBack;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnSettings.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnOptions.BackColor = AjustesDeUsuario.btnBack;
-            this.btnOptions.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnOptions.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnNoticias.BackColor = AjustesDeUsuario.btnBack;
-            this.btnNoticias.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnNoticias.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnDeportesPopulares.BackColor = AjustesDeUsuario.btnBack;
-            this.btnDeportesPopulares.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnDeportesPopulares.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnEventosPopulares.BackColor = AjustesDeUsuario.btnBack;
-            this.btnEventosPopulares.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnEventosPopulares.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnFavoritos.BackColor = AjustesDeUsuario.btnBack;
-            this.btnFavoritos.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnFavoritos.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnMore.BackColor = AjustesDeUsuario.btnBack;
-            this.btnMore.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnMore.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-            this.btnInicio.BackColor = AjustesDeUsuario.btnBack;
-            this.btnInicio.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-            this.btnInicio.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnLogin.BackColor = AjustesDeUsuario.btnBack;
+            btnLogin.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnLogin.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnUser.BackColor = AjustesDeUsuario.btnBack;
+            btnUser.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnUser.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnExit.BackColor = AjustesDeUsuario.btnBack;
+            btnExit.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnExit.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnLogout.BackColor = AjustesDeUsuario.btnBack;
+            btnLogout.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnLogout.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnSettings.BackColor = AjustesDeUsuario.btnBack;
+            btnSettings.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnSettings.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnOptions.BackColor = AjustesDeUsuario.btnBack;
+            btnOptions.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnOptions.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnNoticias.BackColor = AjustesDeUsuario.btnBack;
+            btnNoticias.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnNoticias.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnDeportesPopulares.BackColor = AjustesDeUsuario.btnBack;
+            btnDeportesPopulares.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnDeportesPopulares.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnEventosPopulares.BackColor = AjustesDeUsuario.btnBack;
+            btnEventosPopulares.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnEventosPopulares.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnFavoritos.BackColor = AjustesDeUsuario.btnBack;
+            btnFavoritos.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnFavoritos.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnMore.BackColor = AjustesDeUsuario.btnBack;
+            btnMore.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnMore.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnInicio.BackColor = AjustesDeUsuario.btnBack;
+            btnInicio.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnInicio.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
             /* Textos (Incluidos botones) */
-            this.btnLogin.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnUser.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnExit.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnLogout.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnSettings.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnOptions.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnNoticias.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnDeportesPopulares.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnEventosPopulares.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnFavoritos.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnMore.ForeColor = AjustesDeUsuario.foreColor;
-            this.btnInicio.ForeColor = AjustesDeUsuario.foreColor;
+            btnLogin.ForeColor = AjustesDeUsuario.foreColor;
+            btnUser.ForeColor = AjustesDeUsuario.foreColor;
+            btnExit.ForeColor = AjustesDeUsuario.foreColor;
+            btnLogout.ForeColor = AjustesDeUsuario.foreColor;
+            btnSettings.ForeColor = AjustesDeUsuario.foreColor;
+            btnOptions.ForeColor = AjustesDeUsuario.foreColor;
+            btnNoticias.ForeColor = AjustesDeUsuario.foreColor;
+            btnDeportesPopulares.ForeColor = AjustesDeUsuario.foreColor;
+            btnEventosPopulares.ForeColor = AjustesDeUsuario.foreColor;
+            btnFavoritos.ForeColor = AjustesDeUsuario.foreColor;
+            btnMore.ForeColor = AjustesDeUsuario.foreColor;
+            btnInicio.ForeColor = AjustesDeUsuario.foreColor;
             /* Imagenes */
             if (AjustesDeUsuario.darkTheme == true)
             {
-                this.btnOptions.Image = Properties.Resources.menu_dark;
-                this.btnInicio.Image = Properties.Resources.Inicio_Oscuro;
+                btnOptions.Image = Properties.Resources.menu_dark;
+                btnInicio.Image = Properties.Resources.Inicio_Oscuro;
             } else
             {
-                this.btnOptions.Image = Properties.Resources.menu;
-                this.btnInicio.Image = Properties.Resources.Inicio_Claro;
+                btnOptions.Image = Properties.Resources.menu;
+                btnInicio.Image = Properties.Resources.Inicio_Claro;
             }
         }
 

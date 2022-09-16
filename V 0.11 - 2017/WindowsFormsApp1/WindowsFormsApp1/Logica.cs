@@ -68,6 +68,12 @@ namespace Sistema_de_Resultados_Deportivos
             return banners;
         }
 
+        public static List<Noticia> DeserializeNoticias(string jsonFile)
+        {
+            var noticias = JsonSerializer.Deserialize<List<Noticia>>(jsonFile);
+            return noticias;
+        }
+
         public static void DeserializeFile(string jsonFile)
         {
             var file = JsonSerializer.Deserialize<string[]>(jsonFile);

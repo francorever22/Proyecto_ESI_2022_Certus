@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sistema_de_Resultados_Deportivos
@@ -190,6 +184,105 @@ namespace Sistema_de_Resultados_Deportivos
                     }
                     break;
             }
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (AjustesDeUsuario.language)
+            {
+                case "EN": //Ingles
+                    label2.Text = "Password";
+                    label3.Text = "Repeat password";
+                    btnAcceptNewPassword.Text = "Accept";
+                    label4.Text = "Password change";
+                    label4.Location = new Point(93, 7);
+                    btnCancel.Text = "Cancel";
+                    lblUser.Text = "User";
+                    lblUser.Location = new Point(300, 9);
+                    btnDelete.Text = "Delete account";
+                    btnChangePass.Text = "Change password";
+                    btnPremium.Text = "Become premium!";
+                    btnAddNumber.Text = "Add phone number";
+                    btnAddNumber.Location = new Point(44, 247);
+                    btnAddNumber.Size = new Size(165, 32);
+                    label1.Text = "Favorite sports";
+                    label1.Location = new Point(420, 88);
+                    break;
+                case "ES": //Español
+                    label2.Text = "Contraseña";
+                    label3.Text = "Repite la contraseña";
+                    btnAcceptNewPassword.Text = "Aceptar";
+                    label4.Text = "Cambio de contraseña";
+                    label4.Location = new Point(76, 7);
+                    btnCancel.Text = "Cancelar";
+                    lblUser.Text = "Usuario";
+                    lblUser.Location = new Point(276, 9);
+                    btnDelete.Text = "Eliminar cuenta";
+                    btnChangePass.Text = "Cambiar contraseña";
+                    btnPremium.Text = "¡Pasate a premium!";
+                    btnAddNumber.Text = "Agregar número de telefono";
+                    btnAddNumber.Location = new Point(11, 247);
+                    btnAddNumber.Size = new Size(224, 32);
+                    label1.Text = "Deportes Favoritos";
+                    label1.Location = new Point(393, 88);
+                    break;
+            }
+        }
+
+        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
+        {
+            /* Paneles */
+            panelChangePassword.BackColor = AjustesDeUsuario.panel;
+            panelDepFav.BackColor = AjustesDeUsuario.panel;
+            BackColor = AjustesDeUsuario.panel;
+            /* Botones */
+            btnEditPhone.BackColor = AjustesDeUsuario.btnBack;
+            btnEditPhone.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnEditPhone.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnEditarUsuario.BackColor = AjustesDeUsuario.btnBack;
+            btnEditarUsuario.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnEditarUsuario.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnAcceptNewPassword.BackColor = AjustesDeUsuario.btnBack;
+            btnAcceptNewPassword.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnAcceptNewPassword.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnAddNumber.BackColor = AjustesDeUsuario.btnBack;
+            btnAddNumber.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnAddNumber.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnCancel.BackColor = AjustesDeUsuario.btnBack;
+            btnCancel.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnCancel.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnChangePass.BackColor = AjustesDeUsuario.btnBack;
+            btnChangePass.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnChangePass.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnDelete.BackColor = AjustesDeUsuario.btnBack;
+            btnDelete.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnDelete.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnEditarEmail.BackColor = AjustesDeUsuario.btnBack;
+            btnEditarEmail.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnEditarEmail.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnPremium.BackColor = AjustesDeUsuario.btnBack;
+            btnPremium.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnPremium.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            /* Textos (Incluidos botones) */
+            txtEmail.ForeColor = Color.Black;
+            txtPassword.ForeColor = Color.Black;
+            txtPhoneNumber.ForeColor = Color.Black;
+            txtRepeatPassword.ForeColor = Color.Black;
+            txtUser.ForeColor = Color.Black;
+            label1.ForeColor = AjustesDeUsuario.foreColor;
+            label2.ForeColor = AjustesDeUsuario.foreColor;
+            label3.ForeColor = AjustesDeUsuario.foreColor;
+            label4.ForeColor = AjustesDeUsuario.foreColor;
+            lblUser.ForeColor = AjustesDeUsuario.foreColor;
+            btnEditPhone.ForeColor = AjustesDeUsuario.foreColor;
+            btnEditarUsuario.ForeColor = AjustesDeUsuario.foreColor;
+            btnAcceptNewPassword.ForeColor = AjustesDeUsuario.foreColor;
+            btnAddNumber.ForeColor = AjustesDeUsuario.foreColor;
+            btnCancel.ForeColor = AjustesDeUsuario.foreColor;
+            btnChangePass.ForeColor = AjustesDeUsuario.foreColor;
+            btnDelete.ForeColor = AjustesDeUsuario.foreColor;
+            btnEditarEmail.ForeColor = AjustesDeUsuario.foreColor;
+            btnPremium.ForeColor = AjustesDeUsuario.foreColor;
         }
     }
 }

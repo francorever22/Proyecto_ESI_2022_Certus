@@ -35,38 +35,26 @@ namespace Sistema_de_Resultados_Deportivos
                 if (deporte.categoriaDeporte == lblCategorias.Text)
                 {
                     Panel p1 = new Panel();
-                    p1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                    p1.Size = new System.Drawing.Size(150, 150);
+                    p1.BorderStyle = BorderStyle.None;
+                    p1.Size = new Size(150, 150);
                     p1.TabIndex = 0;
-                    p1.Location = new System.Drawing.Point(x, y);
+                    p1.Location = new Point(x, y);
 
                     Button b1 = new Button(); //Crea el boton que permitira acceder al deporte
-                    b1.Dock = System.Windows.Forms.DockStyle.Fill;
-                    b1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                    b1.Location = new System.Drawing.Point(0, 0);
-                    b1.Size = new System.Drawing.Size(563, 60);
+                    b1.Dock = DockStyle.Fill;
+                    b1.FlatStyle = FlatStyle.Flat;
+                    b1.Location = new Point(0, 0);
+                    b1.Size = new Size(563, 60);
                     b1.TabIndex = 10;
-                    b1.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    b1.Font = new Font("Montserrat", 10F, FontStyle.Regular, GraphicsUnit.Point);
                     b1.UseVisualStyleBackColor = true;
-                    b1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+                    b1.TextAlign = ContentAlignment.BottomCenter;
                     b1.Image = null;
                     b1.Text = deporte.nombreDeporte;
-
-                    switch (AjustesDeUsuario.darkTheme)
-                    {
-                        case false:
-                            b1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-                            b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-                            b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-                            b1.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                            break;
-                        case true:
-                            b1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-                            b1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-                            b1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                            b1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                            break;
-                    }
+                    b1.BackColor = AjustesDeUsuario.btnBack;
+                    b1.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+                    b1.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+                    b1.ForeColor = AjustesDeUsuario.foreColor;
 
                     this.panelDeportes.Controls.Add(p1); //Agrega los controles al panelCategorias
                     p1.Controls.Add(b1);
@@ -104,6 +92,13 @@ namespace Sistema_de_Resultados_Deportivos
                     }
                     break;
             }
+        }
+
+        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
+        {
+            BackColor = AjustesDeUsuario.panel;
+            panelDeportes.BackColor = AjustesDeUsuario.panel;
+            lblCategorias.ForeColor = AjustesDeUsuario.foreColor;
         }
     }
 }

@@ -36,10 +36,10 @@ namespace Sistema_de_Resultados_Deportivos
                             switch (AjustesDeUsuario.darkTheme)
                             {
                                 case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+                                    txtUsuario.ForeColor = Color.Black;
                                     break;
                                 case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                                    txtUsuario.ForeColor = Color.LightGray;
                                     break;
                             }
                         }
@@ -108,73 +108,42 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         case "EN":
                             txtUsuario.Text = "User";
-                            switch (AjustesDeUsuario.darkTheme)
-                            {
-                                case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                    break;
-                                case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                    break;
-                            }
                             break;
                         case "ES":
                             txtUsuario.Text = "Usuario";
-                            switch (AjustesDeUsuario.darkTheme)
-                            {
-                                case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                    break;
-                                case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                    break;
-                            }
                             break;
                     }
+                    txtUsuario.ForeColor = AjustesDeUsuario.foreColor;
                 } else
                 {
                     switch (AjustesDeUsuario.language)
                     {
                         case "EN":
                             txtUsuario.Text = "User or email";
-                            switch (AjustesDeUsuario.darkTheme)
-                            {
-                                case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                    break;
-                                case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                    break;
-                            }
                             break;
                         case "ES":
                             txtUsuario.Text = "Usuario o email";
-                            switch (AjustesDeUsuario.darkTheme)
-                            {
-                                case false:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                    break;
-                                case true:
-                                    txtUsuario.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                    break;
-                            }
                             break;
                     }
+                    txtUsuario.ForeColor = AjustesDeUsuario.foreColor;
                 }
             }
         }
 
         private void txtCorreo_Enter(object sender, EventArgs e)
         {
-            txtCorreo.Text = "";
-            switch (AjustesDeUsuario.darkTheme)
+            if (txtCorreo.Text == "Email")
             {
-                case false:
-                    txtCorreo.ForeColor = Color.Black;
-                    break;
-                case true:
-                    txtCorreo.ForeColor = Color.LightGray;
-                    break;
+                txtCorreo.Text = "";
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false:
+                        txtCorreo.ForeColor = Color.Black;
+                        break;
+                    case true:
+                        txtCorreo.ForeColor = Color.LightGray;
+                        break;
+                }
             }
         }
 
@@ -183,15 +152,7 @@ namespace Sistema_de_Resultados_Deportivos
             if (txtCorreo.Text == "")
             {
                 txtCorreo.Text = "Email";
-                switch (AjustesDeUsuario.darkTheme)
-                {
-                    case false:
-                        txtCorreo.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                        break;
-                    case true:
-                        txtCorreo.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                        break;
-                }
+                txtCorreo.ForeColor = AjustesDeUsuario.foreColor;
             }
         }
 
@@ -242,36 +203,20 @@ namespace Sistema_de_Resultados_Deportivos
                 {
                     case "EN":
                         txtContraseña.Text = "Password";
-                        switch (AjustesDeUsuario.darkTheme)
-                        {
-                            case false:
-                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                break;
-                            case true:
-                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                break;
-                        }
-                        txtContraseña.UseSystemPasswordChar = false;
                         break;
                     case "ES":
                         txtContraseña.Text = "Contraseña";
-                        switch (AjustesDeUsuario.darkTheme)
-                        {
-                            case false:
-                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
-                                break;
-                            case true:
-                                txtContraseña.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                                break;
-                        }
-                        txtContraseña.UseSystemPasswordChar = false;
                         break;
                 }
+                txtContraseña.UseSystemPasswordChar = false;
+                txtContraseña.ForeColor = AjustesDeUsuario.foreColor;
             }
         }
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
+            bool exist = false;
+            String msg = "";
             switch (registrarse)
             {
                 case true:
@@ -280,15 +225,48 @@ namespace Sistema_de_Resultados_Deportivos
                         if (txtCorreo.Text != "" && txtContraseña.Text != "" && txtUsuario.Text != "")
                         {
                             var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                            Usuario newUser = new Usuario();
-                            newUser.nombreUsuario = txtUsuario.Text;
-                            newUser.email = txtCorreo.Text;
-                            newUser.contrasena = txtContraseña.Text;
-                            newUser.nivelPermisos = 1;
-                            newUser.numeroTelefono = null;
-                            usuarios.Add(newUser);
-                            Logica.SerializeUsers(usuarios);
-                            MessageBox.Show("New administrator created correctly");
+                            foreach (var u in usuarios)
+                            {
+                                if (u.nombreUsuario == txtUsuario.Text)
+                                {
+                                    exist = true;
+                                    if (AjustesDeUsuario.language == "EN")
+                                    {
+                                        msg = "The user already exist";
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        msg = "El usuario ya existe";
+                                    }
+                                }
+                                if (u.email == txtCorreo.Text)
+                                {
+                                    exist = true;
+                                    if (AjustesDeUsuario.language == "EN")
+                                    {
+                                        msg = "The email is already registered";
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        msg = "El email ya esta registrado";
+                                    }
+                                }
+                            }
+                            if (exist == false)
+                            {
+                                Usuario newUser = new Usuario();
+                                newUser.nombreUsuario = txtUsuario.Text;
+                                newUser.email = txtCorreo.Text;
+                                newUser.contrasena = txtContraseña.Text;
+                                newUser.nivelPermisos = 1;
+                                newUser.numeroTelefono = null;
+                                usuarios.Add(newUser);
+                                Logica.SerializeUsers(usuarios);
+                                MessageBox.Show("New administrator created correctly");
+                            } else
+                            {
+                                MessageBox.Show(msg);
+                            }
                         }
                         else
                         {
@@ -392,13 +370,16 @@ namespace Sistema_de_Resultados_Deportivos
                     btnAcceder.Text = "Registrate";
                     llbRegistrarse.Text = "Log in";
                     txtUsuario.Text = "User";
+                    txtContraseña.Text = "Password";
                 }
                 else if (AjustesDeUsuario.language == "ES")
                 {
                     btnAcceder.Text = "Registrarse";
                     llbRegistrarse.Text = "Login";
                     txtUsuario.Text = "Usuario";
+                    txtContraseña.Text = "Contraseña";
                 }
+                txtCorreo.Text = "Email";
             } else
             {
                 txtCorreo.Hide();
@@ -410,13 +391,18 @@ namespace Sistema_de_Resultados_Deportivos
                     btnAcceder.Text = "Access";
                     llbRegistrarse.Text = "Registrate";
                     txtUsuario.Text = "User or email";
+                    txtContraseña.Text = "Password";
                 } else if (AjustesDeUsuario.language == "ES")
                 {
                     btnAcceder.Text = "Acceder";
                     llbRegistrarse.Text = "Registrarse";
                     txtUsuario.Text = "Usuario o email";
+                    txtContraseña.Text = "Contraseña";
                 }
             }
+            txtContraseña.ForeColor = AjustesDeUsuario.foreColor;
+            txtUsuario.ForeColor = AjustesDeUsuario.foreColor;
+            txtContraseña.UseSystemPasswordChar = false;
         }
 
         private bool EsEmail(String user, String value = "@")
@@ -439,6 +425,65 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         form.SetIdioma();
                     }
+                    break;
+            }
+        }
+
+        public void SetTheme() //Establece los colores de los controladores segun el tema elegido
+        {
+            /* Paneles */
+            BackColor = AjustesDeUsuario.panel;
+            panel1.BackColor = AjustesDeUsuario.panel;
+            /* Botones */
+            btnAcceder.BackColor = AjustesDeUsuario.btnBack;
+            btnAcceder.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnAcceder.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            btnCancelar.BackColor = AjustesDeUsuario.btnBack;
+            btnCancelar.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+            btnCancelar.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+            /* Textos (Incluidos botones) */
+            label2.ForeColor = AjustesDeUsuario.foreColor;
+            llbRegistrarse.LinkColor = AjustesDeUsuario.foreColor;
+            linkLabel2.LinkColor = AjustesDeUsuario.foreColor;
+            txtContraseña.BackColor = AjustesDeUsuario.btnBack;
+            txtContraseña.ForeColor = AjustesDeUsuario.foreColor;
+            txtUsuario.BackColor = AjustesDeUsuario.btnBack;
+            txtUsuario.ForeColor = AjustesDeUsuario.foreColor;
+            label1.ForeColor = AjustesDeUsuario.foreColor;
+            txtCorreo.BackColor = AjustesDeUsuario.btnBack;
+            txtCorreo.ForeColor = AjustesDeUsuario.foreColor;
+            btnAcceder.ForeColor = AjustesDeUsuario.foreColor;
+            btnCancelar.ForeColor = AjustesDeUsuario.foreColor;
+            /* Botones on/off */
+            customtogglebutton1.OffBackColor = Color.Gray;
+            customtogglebutton1.OffToggleColor = Color.Gainsboro;
+            customtogglebutton1.OnBackColor = AjustesDeUsuario.foreColor;
+            customtogglebutton1.OnToggleColor = Color.WhiteSmoke;
+        }
+
+        void SetIdioma() //Establece el texto segun el idioma seleccionado
+        {
+            switch (AjustesDeUsuario.language)
+            {
+                case "EN": //Ingles
+                    llbRegistrarse.Text = "Registrate";
+                    linkLabel2.Text = "Recover password";
+                    label2.Text = "Remember me";
+                    btnCancelar.Text = "Cancel";
+                    label1.Text = "Welcome";
+                    txtUsuario.Text = "User or email";
+                    txtContraseña.Text = "Password";
+                    btnAcceder.Text = "Access";
+                    break;
+                case "ES": //Español
+                    llbRegistrarse.Text = "Registrarse";
+                    linkLabel2.Text = "Recuperar contraseña";
+                    label2.Text = "Recordarme";
+                    btnCancelar.Text = "Cancelar";
+                    label1.Text = "Bienvenido";
+                    txtUsuario.Text = "Usuario o email";
+                    txtContraseña.Text = "Contraseña";
+                    btnAcceder.Text = "Acceder";
                     break;
             }
         }

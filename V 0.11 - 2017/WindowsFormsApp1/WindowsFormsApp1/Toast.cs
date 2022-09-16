@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Drawing;
-using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Sistema_de_Resultados_Deportivos
 {
     internal class Toast
     {
         private static Toast baker = null;
-        public Toast(int x, String title, String msg)
+        public Toast(int x, string title, string msg)
         {
             baker = this;
             SelectBread(x, title, msg);
         }
 
-        private void MatchBeginsToast(String title, String msg)
+        private void MatchBeginsToast(string title, string msg)
         {
             new ToastContentBuilder()
             .AddText(title)
@@ -26,12 +26,12 @@ namespace Sistema_de_Resultados_Deportivos
             };
         }
 
-        private void MatchScoreToast(String title, String msg)
+        private void MatchScoreToast(string title, string msg)
         {
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(WindowsFormsApp1.Properties.Resources.barcelona), new Bitmap(WindowsFormsApp1.Properties.Resources.realmadrid), 2, null))
+            .AddInlineImage(NewImage(new Bitmap(WindowsFormsApp1.Properties.Resources.barcelona), new Bitmap(WindowsFormsApp1.Properties.Resources.realmadrid), 2, "10 - 10"))
             .Show();
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
@@ -39,12 +39,12 @@ namespace Sistema_de_Resultados_Deportivos
             };
         }
 
-        private void MatchRoundToast(String title, String msg)
+        private void MatchRoundToast(string title, string msg)
         {
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(WindowsFormsApp1.Properties.Resources.barcelona), new Bitmap(WindowsFormsApp1.Properties.Resources.realmadrid), 2, "10"))
+            .AddInlineImage(NewImage(new Bitmap(WindowsFormsApp1.Properties.Resources.barcelona), new Bitmap(WindowsFormsApp1.Properties.Resources.realmadrid), 2, "1 - 1"))
             .Show();
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Resultados_Deportivos
             };
         }
 
-        private void MatchNotificationToast(String title, String msg)
+        private void MatchNotificationToast(string title, string msg)
         {
             new ToastContentBuilder()
             .AddText(title)
@@ -64,7 +64,7 @@ namespace Sistema_de_Resultados_Deportivos
             };
         }
 
-        private void EventToast(String title, String msg)
+        private void EventToast(string title, string msg)
         {
             new ToastContentBuilder()
             .AddText(title)
@@ -82,7 +82,7 @@ namespace Sistema_de_Resultados_Deportivos
             Principal.AlterPrincipal(type, 4, 1);
         }
 
-        private void SelectBread(int x, String title, String msg)
+        private void SelectBread(int x, string title, string msg)
         {
             switch (x)
             {

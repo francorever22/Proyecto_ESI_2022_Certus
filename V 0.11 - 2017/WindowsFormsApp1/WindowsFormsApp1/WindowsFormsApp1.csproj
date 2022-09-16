@@ -89,6 +89,24 @@
     <Compile Include="CustomToggleButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Frm_Encuentros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Encuentros.Designer.cs">
+      <DependentUpon>Frm_Encuentros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_EquiposJugadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_EquiposJugadores.Designer.cs">
+      <DependentUpon>Frm_EquiposJugadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Eventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Eventos.Designer.cs">
+      <DependentUpon>Frm_Eventos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logica.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -97,9 +115,11 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="MDIClientSupport.cs" />
+    <Compile Include="News.cs" />
     <Compile Include="Objects\Banner.cs" />
     <Compile Include="Objects\Categoria.cs" />
     <Compile Include="Objects\Deporte.cs" />
+    <Compile Include="Objects\Noticia.cs" />
     <Compile Include="Objects\Usuario.cs" />
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -130,6 +150,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Categorias.resx">
       <DependentUpon>Categorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Encuentros.resx">
+      <DependentUpon>Frm_Encuentros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_EquiposJugadores.resx">
+      <DependentUpon>Frm_EquiposJugadores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Eventos.resx">
+      <DependentUpon>Frm_Eventos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -182,6 +211,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Resources\barcelona.png" />
     <Content Include="Resources\disco.png" />
+    <None Include="Resources\estrellaVacia.png" />
+    <None Include="Resources\estrellaRellena.png" />
+    <Content Include="Resources\Incio_Claro.png" />
+    <None Include="Resources\Inicio_Claro.png" />
+    <None Include="Resources\Inicio_Oscuro.png" />
     <Content Include="Resources\lupa.png" />
     <Content Include="Resources\lupa1.png" />
     <Content Include="Resources\lupa_dark.png" />

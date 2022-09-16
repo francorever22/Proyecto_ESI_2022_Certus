@@ -1,4 +1,6 @@
-﻿namespace Sistema_de_Resultados_Deportivos
+﻿using System.Windows.Forms;
+
+namespace Sistema_de_Resultados_Deportivos
 {
     partial class APIPublicidad
     {
@@ -64,6 +66,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox imgPublicidad;
+        private PictureBox imgPublicidad;
     }
 }

@@ -31,7 +31,8 @@ namespace Sistema_de_Resultados_Deportivos
             if (user.nivelPermisos > 1)
             {
                 Principal.AlterPrincipal(1, 0, 0);
-            } else
+            }
+            else
             {
                 Principal.AlterPrincipal(0, 0, 0);
             }
@@ -39,7 +40,8 @@ namespace Sistema_de_Resultados_Deportivos
 
         public static void logout()
         {
-            user = new Usuario {
+            user = new Usuario
+            {
                 nombreUsuario = "Guest",
                 email = null,
                 contrasena = null,

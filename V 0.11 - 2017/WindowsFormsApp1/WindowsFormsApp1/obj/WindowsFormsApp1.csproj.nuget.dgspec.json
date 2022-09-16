@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\V 0.11 - 2017\\WindowsFormsApp1\\WindowsFormsApp1\\WindowsFormsApp1.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\V 0.11 - 2017\\WindowsFormsApp1\\WindowsFormsApp1\\WindowsFormsApp1.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\V 0.11 - 2017\\WindowsFormsApp1\\WindowsFormsApp1\\WindowsFormsApp1.csproj",
+        "projectName": "WindowsFormsApp1",
+        "projectPath": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\V 0.11 - 2017\\WindowsFormsApp1\\WindowsFormsApp1\\WindowsFormsApp1.csproj",
+        "packagesPath": "C:\\Users\\Hinoken\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\V 0.11 - 2017\\WindowsFormsApp1\\WindowsFormsApp1\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hinoken\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies.net48": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            },
+            "Microsoft.Windows.SDK.Contracts": {
+              "target": "Package",
+              "version": "[10.0.19041.1, )"
+            },
+            "System.Runtime.WindowsRuntime": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Runtime.WindowsRuntime.UI.Xaml": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "uap10.0.19041"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
