@@ -220,5 +220,23 @@
                     break;
             }
         }
+
+        private void btnAddMatch_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCrearEncuentro crearEncuentro = new MenuCrearEncuentro();
+            crearEncuentro.StartPosition = FormStartPosition.CenterParent;
+            crearEncuentro.ShowDialog();
+            this.Close();
+        }
+
+        private void btnManageMatch_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuManageEncuentros manageEncuentros = new MenuManageEncuentros();
+            manageEncuentros.StartPosition = FormStartPosition.CenterParent;
+            manageEncuentros.ShowDialog();
+            this.Close();
+        }
     }
 }

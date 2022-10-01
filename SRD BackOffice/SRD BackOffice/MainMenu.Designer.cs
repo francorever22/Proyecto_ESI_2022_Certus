@@ -292,6 +292,7 @@
             this.btnManageMatch.TabIndex = 25;
             this.btnManageMatch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnManageMatch.UseVisualStyleBackColor = true;
+            this.btnManageMatch.Click += new System.EventHandler(this.btnManageMatch_Click);
             // 
             // btnAddAthlete
             // 
@@ -326,6 +327,7 @@
             this.btnAddMatch.TabIndex = 22;
             this.btnAddMatch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAddMatch.UseVisualStyleBackColor = true;
+            this.btnAddMatch.Click += new System.EventHandler(this.btnAddMatch_Click);
             // 
             // AddEvent
             // 

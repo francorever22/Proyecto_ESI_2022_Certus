@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Frm_Noticias.cs">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 

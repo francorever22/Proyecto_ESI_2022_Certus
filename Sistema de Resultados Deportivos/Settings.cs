@@ -41,6 +41,7 @@
                     BuscadorDeEncuentros.AlterBuscador(1);
                     Frm_EquiposJugadores.AlterEquiposJugadores();
                     Frm_Encuentros.AlterEncuentros(1);
+                    Frm_Noticias.AlterNoticias(1);
                 }
                 if (AjustesDeUsuario.tray != tray)
                 {
@@ -55,6 +56,7 @@
                     Login.AlterLogin(2);
                     BuscadorDeEncuentros.AlterBuscador(2);
                     Frm_Encuentros.AlterEncuentros(2);
+                    Frm_Noticias.AlterNoticias(2);
                 }
                 MessageBox.Show("Ajustes guardados correctamente");
             } catch

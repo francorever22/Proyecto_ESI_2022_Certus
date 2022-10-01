@@ -33,3 +33,12 @@ C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Dep
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema de Resultados Deportivos.pdb
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema de Resultados Deportivos.genruntimeconfig.cache
 C:\Users\Hinoken\Source\Repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\ref\Sistema de Resultados Deportivos.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\Google.Protobuf.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\K4os.Compression.LZ4.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\K4os.Hash.xxHash.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\MySql.Data.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\Ubiety.Dns.Core.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\ZstdNet.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\BouncyCastle.Crypto.dll
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\obj\Debug\net6.0-windows10.0.17763.0\Sistema_de_Resultados_Deportivos.Frm_Noticias.resources

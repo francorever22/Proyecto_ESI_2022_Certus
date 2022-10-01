@@ -4,6 +4,11 @@
     {
 		private static List<Noticia> noticias;
 
+		public News()
+        {
+			New();
+        }
+
         public static async void New()
         {
 			String body = "";
@@ -24,15 +29,13 @@
 				{
 					response.EnsureSuccessStatusCode();
 					body = await response.Content.ReadAsStringAsync();
-					noticias = Logica.DeserializeNoticias(Logica.GetJson(body));
+					noticias = Logica.DeserializeNoticias(body);
 				}
-			} catch (Exception ex) { MessageBox.Show(ex.Message); }
-			MessageBox.Show(body);
+			} catch (Exception ex) { MessageBox.Show("Error, "+ex.Message); }
 		}
 
-		public static List<Noticia> GetNoticias()
+		public List<Noticia> GetNoticias()
         {
-			New();
 			return noticias;
         }
     }

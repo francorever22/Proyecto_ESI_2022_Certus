@@ -66,3 +66,7 @@ C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOf
 C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Deportistas.json
 C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Equipos.json
 C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Eventos.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuCrearEncuentro.resources
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Arbitros.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\bin\Debug\net6.0-windows\DinamicJson\Encuentros.json
+C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\SRD BackOffice\SRD BackOffice\obj\Debug\net6.0-windows\SRD_BackOffice.MenuManageEncuentros.resources

@@ -13,6 +13,9 @@
     <Compile Update="MenuAgregarAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MenuManageEncuentros.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MenuManageUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -27,6 +30,27 @@
     </Compile>
     <Compile Update="MenuCrearDeporte.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Objects\Categoria.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Deporte.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Deportista.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Encuentro.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Equipo.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Evento.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Objects\Usuario.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -43,6 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DinamicJson\Encuentros.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DinamicJson\Arbitros.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DinamicJson\Banners.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

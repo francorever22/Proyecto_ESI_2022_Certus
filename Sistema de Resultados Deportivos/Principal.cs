@@ -341,10 +341,15 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnNoticias_Click(object sender, EventArgs e)
         {
-            //foreach (var n in Program.noticias)
-            //{
-            //    MessageBox.Show(n.header);
-            //}
+            try
+            {
+                panelChico.Controls.Clear();
+                Form news = new Frm_Noticias();
+                news.TopLevel = false;
+                this.panelChico.Controls.Add(news);
+                news.Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnInicio_Click(object sender, EventArgs e)

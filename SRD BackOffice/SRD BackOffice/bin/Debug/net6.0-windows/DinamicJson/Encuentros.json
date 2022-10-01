@@ -1,0 +1,14 @@
+[
+  {
+    "IdEncuentro": 1,
+    "IdDeporte": 1,
+    "IdCategoria": 1,
+    "IdPersona": 1,
+    "Hora": "10:30",
+    "Lugar":  "Estadio X",
+    "Fecha":  "17/10/2022",
+    "Nombre": "Amistoso x contra y",
+    "Estado": "Coming soon",
+    "Clima":  "Sunny"
+  }
+]

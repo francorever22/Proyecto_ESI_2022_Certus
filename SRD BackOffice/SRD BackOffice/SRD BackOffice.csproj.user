@@ -13,6 +13,9 @@
     <Compile Update="MenuCrearDeportista.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MenuCrearEncuentro.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MenuCrearEquipo.cs">
       <SubType>Form</SubType>
     </Compile>

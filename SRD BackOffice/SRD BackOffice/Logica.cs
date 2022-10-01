@@ -42,10 +42,22 @@ namespace SRD_BackOffice
             File.WriteAllText(path, depostistasJsonData);
         }
 
+        public static void SerializeArbitros(List<Arbitro> arbitros, string path = "DinamicJson\\Arbitros.json")
+        {
+            string arbitrosJsonData = JsonSerializer.Serialize(arbitros);
+            File.WriteAllText(path, arbitrosJsonData);
+        }
+
         public static void SerializeEventos(List<Evento> eventos, string path = "DinamicJson\\Eventos.json")
         {
             string eventosJsonData = JsonSerializer.Serialize(eventos);
             File.WriteAllText(path, eventosJsonData);
+        }
+
+        public static void SerializeEncuentros(List<Encuentro> encuentros, string path = "DinamicJson\\Encuentros.json")
+        {
+            string encuentrosJsonData = JsonSerializer.Serialize(encuentros);
+            File.WriteAllText(path, encuentrosJsonData);
         }
         #endregion
 
@@ -96,10 +108,22 @@ namespace SRD_BackOffice
             return deportistas;
         }
 
+        public static List<Arbitro> DeserializeArbitros(String jsonFile)
+        {
+            var arbitros = JsonSerializer.Deserialize<List<Arbitro>>(jsonFile);
+            return arbitros;
+        }
+
         public static List<Evento> DeserializeEventos(String jsonFile)
         {
             var eventos = JsonSerializer.Deserialize<List<Evento>>(jsonFile);
             return eventos;
+        }
+
+        public static List<Encuentro> DeserializeEncuentros(String jsonFile)
+        {
+            var encuentros = JsonSerializer.Deserialize<List<Encuentro>>(jsonFile);
+            return encuentros;
         }
 
         public static void DeserializeFile(String jsonFile)
