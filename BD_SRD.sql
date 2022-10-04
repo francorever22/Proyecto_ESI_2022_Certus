@@ -208,19 +208,19 @@ TituloHito varchar(70),
 TiempoHito time
 );
 
-create table Categorias (
+CREATE TABLE Categorias (
 IdCategoria int primary key, 
 NombreCategoria varchar(50) not null
 );
 
-create table Deportes (
+CREATE TABLE Deportes (
  IdDeporte int primary key, 
  NombreDeporte varchar(50) not null,
  ImagenDeporte blob,
  Destacado bool
 );
  
-create table DeportesCategorizados (
+CREATE TABLE DeportesCategorizados (
  IdDeporte int,
  IdCategoria int, 
  NombreDeporte varchar(50) not null,
@@ -230,7 +230,7 @@ create table DeportesCategorizados (
  primary key (IdDeporte, IdCategoria)
  );
  
-create table Encuentros (
+CREATE TABLE Encuentros (
  IdEncuentro int primary key,
  IdDeporte int,
  IdCategoria int,
@@ -243,7 +243,7 @@ create table Encuentros (
  Clima varchar(25)
 );
 
-create table EquiposEncuentros (
+CREATE TABLE EquiposEncuentros (
  IdEquipo int, 
  IdEncuentro int,
  IdDeporte int,
@@ -266,7 +266,7 @@ create table EquiposEncuentros (
  primary key (IdEquipo, IdEncuentro)
  );
  
-create table Round (
+CREATE TABLE Round (
 NumeroRound int, 
 IdEncuentro int,
 TiempoTranscurridoRound time not null,
@@ -276,7 +276,7 @@ primary key (NumeroRound, IdEncuentro)
 );
  
  
-create table PuntuacionRound (
+CREATE TABLE PuntuacionRound (
 IdPuntuacionRound int primary key,
 NumeroRound int, 
 IdEncuentro int,
@@ -286,71 +286,71 @@ IdEquipo int not null
 
 
 
-drop user Usuario_A;
-drop user Usuario_B;
-drop user Usuario_C;
-drop user Usuario_D;
-drop user Usuario_E;
+DROP USER Usuario_A;
+DROP USER Usuario_B;
+DROP USER Usuario_C;
+DROP USER Usuario_D;
+DROP USER Usuario_E;
 
-create user Usuario_A;
-grant insert, update, drop, create ON Usuario TO Usuario_A;
-grant insert, update, drop, create ON Publicidades TO Usuario_A;
-grant insert, update, drop, create ON UsuariosPersonas TO Usuario_A;
-grant insert, update, drop, create ON PublicidadesUsuarios TO Usuario_A;
-grant insert, update, drop, create ON EncuentrosFavoritos TO Usuario_A;
-grant insert, update, drop, create ON EquiposFvaoritos TO Usuario_A;
-grant insert, update, drop, create ON EventosFavoritos TO Usuario_A;
+CREATE USER Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON Usuario TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON Publicidades TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON UsuariosPersonas TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON PublicidadesUsuarios TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON EncuentrosFavoritos TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON EquiposFvaoritos TO Usuario_A;
+GRANT INSERT, UPDATE, DROP, CREATE ON EventosFavoritos TO Usuario_A;
 
-create user Usuario_B;
-grant insert, update, drop ON Personas TO Usuario_B;
-grant insert, update, drop ON Deportistas TO Usuario_B;
-grant insert, update, drop ON Arbitros TO Usuario_B;
-grant insert, update, drop ON Equipos TO Usuario_B;
-grant insert, update, drop ON Categorias TO Usuario_B;
-grant insert, update, drop ON Deportes TO Usuario_B;
-grant insert, update, drop ON DeportesCategorizados TO Usuario_B;
-grant insert, update, drop ON EquiposDeportistas TO Usuario_B;
+CREATE USER Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Personas TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Deportistas TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Arbitros TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Equipos TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Categorias TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON Deportes TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON DeportesCategorizados TO Usuario_B;
+GRANT INSERT, UPDATE, DROP ON EquiposDeportistas TO Usuario_B;
 
-create user Usuario_C;
-grant insert, update, drop ON Encuentros TO Usuario_C;
-grant insert, update, drop ON Eventos TO Usuario_C;
-grant insert, update, drop ON EquiposEncuentros TO Usuario_C;
-grant insert, update, drop ON Round TO Usuario_C;
-grant insert, update, drop ON PuntuacionRound TO Usuario_C;
-grant insert, update, drop ON Hito TO Usuario_C;
-grant insert, update, drop ON EventosEncuentros TO Usuario_C;
-grant insert, update, drop ON Fases TO Usuario_C;
-grant insert, update, drop ON EstadisticasJugador TO Usuario_C;
-grant insert, update, drop ON EquiposFases TO Usuario_C;
+CREATE USER Usuario_C;
+GRANT INSERT, UPDATE, DROP ON Encuentros TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON Eventos TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON EquiposEncuentros TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON Round TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON PuntuacionRound TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON Hito TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON EventosEncuentros TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON Fases TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON EstadisticasJugador TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON EquiposFases TO Usuario_C;
 
-create user Usuario_D;
-grant select ON Usuarios TO Usuario_D;
-grant select ON UsuariosPersonas TO Usuario_D;
-grant select ON PublicidadesUsuarios TO Usuario_D;
-grant select ON EncuentrosFavoritos TO Usuario_D;
-grant select ON EquiposFavoritos TO Usuario_D;
-grant select ON EventosFavoritos TO Usuario_D;
+CREATE USER Usuario_D;
+GRANT SELECT ON Usuarios TO Usuario_D;
+GRANT SELECT ON UsuariosPersonas TO Usuario_D;
+GRANT SELECT ON PublicidadesUsuarios TO Usuario_D;
+GRANT SELECT ON EncuentrosFavoritos TO Usuario_D;
+GRANT SELECT ON EquiposFavoritos TO Usuario_D;
+GRANT SELECT ON EventosFavoritos TO Usuario_D;
 
-create user Usuario_E;
-grant select ON Publicidades TO Usuario_E;
-grant select ON Personas TO Usuario_E;
-grant select ON Deportistas TO Usuario_E;
-grant select ON Arbitros TO Usuario_E;
-grant select ON Equipos TO Usuario_E;
-grant select ON Categorias TO Usuario_E;
-grant select ON Deportes TO Usuario_E;
-grant select ON DeportesCategorizados TO Usuario_E;
-grant select ON EquiposDeportistas TO Usuario_E;
-grant select ON Encuentros TO Usuario_E;
-grant select ON Eventos TO Usuario_E;
-grant select ON EquiposEncuentros TO Usuario_E;
-grant select ON Round TO Usuario_E;
-grant select ON PuntuacionRound TO Usuario_E;
-grant select ON Hito TO Usuario_E;
-grant select ON EventosEncuentros TO Usuario_E;
-grant select ON Fases TO Usuario_E;
-grant select ON EstadisticasJugador TO Usuario_E;
-grant select ON EquiposFases TO Usuario_E;
+CREATE USER Usuario_E;
+GRANT SELECT ON Publicidades TO Usuario_E;
+GRANT SELECT ON Personas TO Usuario_E;
+GRANT SELECT ON Deportistas TO Usuario_E;
+GRANT SELECT ON Arbitros TO Usuario_E;
+GRANT SELECT ON Equipos TO Usuario_E;
+GRANT SELECT ON Categorias TO Usuario_E;
+GRANT SELECT ON Deportes TO Usuario_E;
+GRANT SELECT ON DeportesCategorizados TO Usuario_E;
+GRANT SELECT ON EquiposDeportistas TO Usuario_E;
+GRANT SELECT ON Encuentros TO Usuario_E;
+GRANT SELECT ON Eventos TO Usuario_E;
+GRANT SELECT ON EquiposEncuentros TO Usuario_E;
+GRANT SELECT ON Round TO Usuario_E;
+GRANT SELECT ON PuntuacionRound TO Usuario_E;
+GRANT SELECT ON Hito TO Usuario_E;
+GRANT SELECT ON EventosEncuentros TO Usuario_E;
+GRANT SELECT ON Fases TO Usuario_E;
+GRANT SELECT ON EstadisticasJugador TO Usuario_E;
+GRANT SELECT ON EquiposFases TO Usuario_E;
 
 
 
@@ -583,26 +583,26 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
-insert into EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima) values
+INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima) VALUES
 ('1', '1','2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia', '13:00', 'Estadio Campeon del Siglo', '2022-06-22', 'Uruguay vs Brasil', 'En juego', 'Lluvioso'),
 ('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Estadio centenario', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null),
 ('3', '4', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda', '12:00', 'Donde cayo el avion', '2026-02-16', 'Dar caridad y amor', 'En transcurso', 'LLuvia de meteoritos'),
 ('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In process', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null);
 
-insert into Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha) values
+INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha) VALUES
 ('1', '1', 'En curso', 'Grupo A', '2022-12-2'),
 ('2', '4', 'En curso', 'Grupo B', '2034-10-19'),
 ('3', '2', 'Por venir', 'Grupo C', '2012-10-16'),
 ('4', '5', 'Ya casi viene', 'Grupo D', '2029-03-16'),
 ('5', '3', 'Casi casi', 'Grupo D', '2029-03-16');
 
-insert into EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) values
+INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
 ('1', '1', '3', '1', '73' ),
 ('2', '3', '1', '0', '1010' ),
 ('3', '4', '3', '4', '2019' ),
 ('4', '5', '3', '2', '2021' );
 
-insert into EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo) values 
+INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo) VALUES 
 ('1919', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion'),
 ('1900', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion'),
 ('567', '2', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual'),
@@ -638,15 +638,25 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
 ('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
 ('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235'),
-('admin@certus.com', 'Administrador', '122333', null, '4', '1', '1', '1');
-('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '5', '12', '103');
-('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1');
-('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '11', '107', '34');
-('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonasevendenenlaesquinadelautu', 091919191, '2', '7', '17', '37');
-('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '43', '24', '3');
-('simba@gmail.com', 'Simba', 'amipapaloatropellounñu', 095565676, '1', '46', '42', '14');
-('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '26', '45', '16');
-('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '34', '41', '13');
+('admin@certus.com', 'Administrador', '122333', null, '4', '1', '1', '1'),
+('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '5', '12', '103'),
+('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1'),
+('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '11', '107', '34'),
+('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonasevendenenlaesquinadelautu', 091919191, '2', '7', '17', '37'),
+('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '43', '24', '3'),
+('simba@gmail.com', 'Simba', 'amipapaloatropellounñu', 095565676, '1', '46', '42', '14'),
+('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '26', '45', '16'),
+('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '34', '41', '13'),
+('Cacatua@gmail.com', 'Cacatua', 'sacala1234', 091233453, '2', '12', '14', '11'),
+('Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', '74', '81', '4'),
+('Sombra@gmail.com', 'Darker', 'Oscuridad', 092766246, '1', '76', '46', '12'),
+('Mufasa@gmail.com', 'Mufasa', 'todoculpademihijo', 098324324, '1', '23', '45', '12'),
+('Scar@gmail.com', 'Scar', 'ahorasoyadminXD', 094828434, '2', '42', '12', '45'),
+('Lahyena@gmail.com', 'Hyena', 'MufasaUHHH', 091234123, '1', '15', '63', '15'),
+('Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', '53', '46', '14'),
+('Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', '53', '46', '14'),
+('Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', '43', '12', '53'),
+('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabanfuertessimba', null, '1', '54', '26', '73');
 
 INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('994', 'alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', 'C:\Users\USUARIO\Downloads', 'https://www.Apple.es/fotos-publicidad/imagenes', 'Apple', '15', '8', '67'),
@@ -661,4 +671,3 @@ INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, 
 ('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
 ('loloOne@gmail.com', '2332', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
 ('lolaFive@gmail.com', '2113', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235');
-
