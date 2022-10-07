@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS SRD;
 CREATE DATABASE SRD;
 USE SRD;
 
@@ -202,8 +203,8 @@ primary key (IdEvento)
 CREATE TABLE Hito
 (
 IdHito int primary key,
- NumeroRound int, 
- IdEncuentro int,
+NumeroRound int, 
+IdEncuentro int,
 TituloHito varchar(70),
 TiempoHito time
 );
@@ -286,11 +287,11 @@ IdEquipo int not null
 
 
 
-DROP USER Usuario_A;
-DROP USER Usuario_B;
-DROP USER Usuario_C;
-DROP USER Usuario_D;
-DROP USER Usuario_E;
+DROP USER IF EXISTS Usuario_A;
+DROP USER IF EXISTS Usuario_B;
+DROP USER IF EXISTS Usuario_C;
+DROP USER IF EXISTS Usuario_D;
+DROP USER IF EXISTS Usuario_E;
 
 CREATE USER Usuario_A;
 GRANT INSERT, UPDATE, DROP, CREATE ON Usuario TO Usuario_A;
@@ -517,7 +518,7 @@ INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lu
 ('5', '4', '3', '2300', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null);
 
 INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo) VALUES
-('1', '1', '1', '79', '1919', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', null, '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion'),
+('1', '1', '1', '79', '1919', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion'),
 ('1', '1', '1', '79', '1900', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion'),
 ('2', '3', '2', '1018', '32', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual'),
 ('2', '3', '2', '1018', '33', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual'),
@@ -585,9 +586,9 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 
 INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima) VALUES
 ('1', '1','2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia', '13:00', 'Estadio Campeon del Siglo', '2022-06-22', 'Uruguay vs Brasil', 'En juego', 'Lluvioso'),
-('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Estadio centenario', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null),
+('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Coming soon', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null),
 ('3', '4', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda', '12:00', 'Donde cayo el avion', '2026-02-16', 'Dar caridad y amor', 'En transcurso', 'LLuvia de meteoritos'),
-('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In process', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null);
+('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In progress', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null);
 
 INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha) VALUES
 ('1', '1', 'En curso', 'Grupo A', '2022-12-2'),
@@ -634,29 +635,29 @@ INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
  
 INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
 ('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '15', '8', '67'),
-('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '34', '9', '22'),
+('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '2', '34', '9', '22'),
 ('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
 ('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
 ('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235'),
 ('admin@certus.com', 'Administrador', '122333', null, '4', '1', '1', '1'),
-('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '5', '12', '103'),
+('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '1', '1', '1'),
 ('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1'),
-('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '11', '107', '34'),
-('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonasevendenenlaesquinadelautu', 091919191, '2', '7', '17', '37'),
-('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '43', '24', '3'),
-('simba@gmail.com', 'Simba', 'amipapaloatropellounñu', 095565676, '1', '46', '42', '14'),
-('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '26', '45', '16'),
-('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '34', '41', '13'),
-('Cacatua@gmail.com', 'Cacatua', 'sacala1234', 091233453, '2', '12', '14', '11'),
-('Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', '74', '81', '4'),
-('Sombra@gmail.com', 'Darker', 'Oscuridad', 092766246, '1', '76', '46', '12'),
-('Mufasa@gmail.com', 'Mufasa', 'todoculpademihijo', 098324324, '1', '23', '45', '12'),
-('Scar@gmail.com', 'Scar', 'ahorasoyadminXD', 094828434, '2', '42', '12', '45'),
-('Lahyena@gmail.com', 'Hyena', 'MufasaUHHH', 091234123, '1', '15', '63', '15'),
-('Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', '53', '46', '14'),
-('Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', '53', '46', '14'),
-('Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', '43', '12', '53'),
-('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabanfuertessimba', null, '1', '54', '26', '73');
+('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '1', '1', '1'),
+('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonasevendenenlaesquinadelautu', 091919191, '2', '1', '1', '1'),
+('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '1', '1', '1'),
+('simba@gmail.com', 'Simba', 'amipapaloatropellounñu', 095565676, '1', '1', '1', '1'),
+('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '1', '1', '1'),
+('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '1', '1', '1'),
+('Cacatua@gmail.com', 'Cacatua', 'sacala1234', 091233453, '2', '1', '1', '1'),
+('Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', '1', '1', '1'),
+('Sombra@gmail.com', 'Darker', 'Oscuridad', 092766246, '1', '1', '1', '1'),
+('Mufasa@gmail.com', 'Mufasa', 'todoculpademihijo', 098324324, '1', '1', '1', '1'),
+('Scar@gmail.com', 'Scar', 'ahorasoyadminXD', 094828434, '2', '1', '1', '1'),
+('Lahyena@gmail.com', 'Hyena', 'MufasaUHHH', 091234123, '1', '1', '1', '1'),
+('Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', '1', '1', '1'),
+('Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', '1', '1', '1'),
+('Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', '1', '1', '1'),
+('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabanfuertessimba', null, '1', '1', '1', '1');
 
 INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('994', 'alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', 'C:\Users\USUARIO\Downloads', 'https://www.Apple.es/fotos-publicidad/imagenes', 'Apple', '15', '8', '67'),
@@ -667,7 +668,49 @@ INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseñ
  
 INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '15', '8', '67'),
-('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '1', '34', '9', '22'),
+('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '34', '9', '22'),
 ('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
 ('loloOne@gmail.com', '2332', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
 ('lolaFive@gmail.com', '2113', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235');
+
+SELECT IdEncuentro, NombreEncuentro
+FROM Encuentros INNER JOIN DeportesCategorizados ON Encuentros.IdDeporte = DeportesCategorizados.IdDeporte
+WHERE NombreDeporte = 'Futbol' AND FechaEncuentro = '2022-12-17';
+
+SELECT NombreUsuario
+FROM Usuarios
+WHERE NivelPermisos = 2;
+
+SELECT NombreUsuario
+FROM Usuarios INNER JOIN EquiposFavoritos ON Usuarios.IdEquiposFavoritos = EquiposFavoritos.IdEquiposFavoritos INNER JOIN Equipos ON EquiposFavoritos.IdEquipo = Equipos.IdEquipo
+WHERE NivelPermisos = 2 AND NombreEquipo = 'Aguada';
+
+SELECT NombreUsuario
+FROM Usuarios
+WHERE NivelPermisos < 2;
+
+SELECT NombreDeporte, COUNT(IdEvento)
+FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte)
+WHERE EstadoEvento = 'In progress'
+GROUP BY DeportesCategorizados.IdDeporte;
+
+SELECT Alineacion
+FROM EquiposEncuentros;
+
+SELECT Nombre, Apellido, MAX(Anotacion)
+FROM EstadisticasJugador JOIN Encuentros ON EstadisticasJugador.IdEncuentro = Encuentros.IdEncuentro JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro) JOIN Equipos ON EquiposEncuentros.IdEquipo = Equipos.IdEquipo JOIN EquiposDeportistas ON Equipos.IdEquipo = EquiposDeportistas.IdEquipo JOIN Deportistas ON (EquiposDeportistas.IdPersona = Deportistas.IdPersona)
+GROUP BY EquiposDeportistas.IdEquipo;
+
+SELECT Puntuacion
+FROM EquiposEncuentros
+WHERE IdEquipo = 1919
+ORDER BY IdEncuentro DESC limit 5;
+
+SELECT Equipos.IdEquipo, Equipos.NombreEquipo
+FROM Equipos INNER JOIN EquiposFases ON Equipos.IdEquipo = EquiposFases.IdEquipo INNER JOIN Fases ON EquiposFases.IdEvento = Fases.IdEvento INNER JOIN Eventos ON Fases.IdEvento = Eventos.IdEvento
+WHERE NombreEvento = 'Copa Libertadores de America' AND EstadoEquipo != 'Eliminado';
+
+SELECT NombreEvento, NombreDeporte, COUNT(IdEquipo)
+FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro)
+WHERE TipoEquipo = 'Individual'
+GROUP BY IdEvento;
