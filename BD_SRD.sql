@@ -15,7 +15,7 @@ CREATE TABLE Usuarios
 Email varchar(70),
 NombreUsuario varchar(50) unique,
 Contraseña varchar(50),
-NumeroTelefono varchar(9),
+NumeroTelefono varchar(15),
 NivelPermisos int,
 IdEventosFavoritos int,
 IdEncuentrosFavoritos int,
@@ -49,7 +49,7 @@ IdPublicidad int,
 Email varchar(70),
 NombreUsuario varchar(50),
 Contraseña varchar(50),
-NumeroTelefono varchar(9),
+NumeroTelefono varchar(15),
 NivelPermisos int,
 Banner blob,
 Link varchar(120),
@@ -77,7 +77,7 @@ Apellido varchar(50) not null,
 Nacionalidad varchar(50) not null,
 NombreUsuario varchar(50),
 Contraseña varchar(50),
-NumeroTelefono varchar(9),
+NumeroTelefono varchar(15),
 NivelPermisos int,
 IdEventosFavoritos int,
 IdEncuentrosFavoritos int,
@@ -430,14 +430,34 @@ ADD CONSTRAINT FK_EstadisticasJugadorDeportistas
 FOREIGN KEY (IdDeportista)
 REFERENCES Deportistas(IdPersona);
 
+ALTER TABLE Usuarios
+ADD CONSTRAINT CHK_Usuarios_NivelPermisos
+CHECK (NivelPermisos >= 1 AND NivelPermisos <= 4);
+
 
 
 INSERT INTO Publicidades (Banner, Link, TituloPublicidad) VALUES
-('C:\Users\USUARIO\Downloads', 'https://www.Apple.es/fotos-publicidad/imagenes', 'Apple'),
-('C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.Samsung.es/fotos-publicidad/imagenes', 'Samsung'),
-('C:\Users\USUARIO\Documents', 'https://www.Sony.es/fotos-publicidad/imagenes', 'Sony'),
-('C:\Program Files', 'https://www.Despegar.com.es/fotos-publicidad/imagenes', 'Despegar.com'),
-('C:\Users\USUARIO\Videos', 'https://www.Sprite.es/fotos-publicidad/imagenes', 'Sprite');
+('C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple'),
+('C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.samsung.com/uy/', 'Samsung'),
+('C:\Users\USUARIO\Documents\Sony', 'https://www.sony.es/', 'Sony'),
+('C:\Users\USUARIO\Documents\Despegar', 'https://www.despegar.com.uy/', 'Despegar.com'),
+('C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite'),
+('C:\Users\USUARIO\Videos\Fanta', 'https://www.coca-coladeuruguay.com.uy/marcas/fanta', 'Fanta'),
+('C:\Users\USUARIO\Videos\Smite', 'https://www.smitegame.com/', 'Smite'),
+('C:\Users\USUARIO\Videos\Discord', 'https://discord.com/', 'Discord'),
+('C:\Users\USUARIO\Videos\Sega', 'https://www.sega.es/', 'Sega'),
+('C:\Users\USUARIO\Videos\Disney', 'https://disneylatino.com/', 'Disney'),
+('C:\Users\USUARIO\Videos\Gatorade', 'https://www.gatorade.com/', 'Gatorade'),
+('C:\Users\USUARIO\Videos\Duolingo', 'https://es.duolingo.com/', 'Duolingo'),
+('C:\Users\USUARIO\Videos\Tramontina', 'https://www.tramontina.com.br/es', 'Tramontina'),
+('C:\Users\USUARIO\Videos\Gotita', 'https://www.lagotita.com.uy/', 'Gotita'),
+('C:\Users\USUARIO\Videos\Bimbo', 'https://www.grupobimbo.com/', 'Bimbo'),
+('C:\Users\USUARIO\Videos\Mercedes', 'https://www.mercedes-benz.com.uy/', 'Mercedes'),
+('C:\Users\USUARIO\Videos\Lacoste', 'https://global.lacoste.com/es/homepage', 'Lacoste'),
+('C:\Users\USUARIO\Videos\Microsoft', 'https://www.microsoft.com/es-es', 'Microsoft'),
+('C:\Users\USUARIO\Videos\Jameson', 'https://www.jamesonwhiskey.com', 'Jameson'),
+('C:\Users\USUARIO\Videos\Tang', 'https://www.tang.com.uy/', 'Tang'),
+('C:\Users\USUARIO\Videos\Volvo', 'https://www.volvocars.com/', 'Volvo');
 
 INSERT INTO Personas (IdPersona, Nombre, Apellido, Nacionalidad) VALUES
 ('61', 'Alex', 'Sarasola', 'Uruguaya'),
@@ -494,14 +514,50 @@ INSERT INTO Categorias (IdCategoria, NombreCategoria) VALUES
 ('2', 'Artes marciales'),
 ('3', 'Acuáticos'),
 ('4', 'Motorizados'),
-('5', 'Aéros');
+('5', 'Aéros'),
+('6', 'Estrategia'),
+('7', 'Extremos'),
+('8', 'Danza'),
+('9', 'Atletismo'),
+('10', 'Individuales'),
+('11', 'De mesa'),
+('12', 'Precision'),
+('13', 'Deslizamiento'),
+('14', 'De invierno'),
+('15', 'Ciclismo');
 
 INSERT INTO Deportes (IdDeporte, ImagenDeporte, Destacado, NombreDeporte) VALUES
 ('1', 'C:\Users\USUARIO\Downloads\PelotaFutbol.jpg', true, 'Futbol'),
 ('2', 'C:\Users\USUARIO\Downloads\PelotaBasquet.jpg', true, 'Basquetbol'),
 ('3', 'C:\Users\USUARIO\Downloads\PersonaM.jpg', false, 'Karate'),
 ('4', 'C:\Users\USUARIO\Downloads\PersonaN.jpg', true, 'Natación'),
-('5', 'C:\Users\USUARIO\Downloads\Auto.jpg', true, 'Fórmula 1');
+('5', 'C:\Users\USUARIO\Downloads\Auto.jpg', true, 'Fórmula 1'),
+('6', 'C:\Users\USUARIO\Downloads\Arco.jpg', true, 'Tiro al arco'),
+('7', 'C:\Users\USUARIO\Downloads\Golf.jpg', true, 'Golf'),
+('8', 'C:\Users\USUARIO\Downloads\Plato.jpg', false, 'Tiro al plato'),
+('9', 'C:\Users\USUARIO\Downloads\Arma.jpg', true, 'Tiro con pistola'),
+('10', 'C:\Users\USUARIO\Downloads\Bolos.jpg', false, 'Bolos'),
+('11', 'C:\Users\USUARIO\Downloads\Dardo.jpg', true, 'Dardos'),
+('12', 'C:\Users\USUARIO\Downloads\Tai-Chi.jpg', false, 'Tai Chi'),
+('13', 'C:\Users\USUARIO\Downloads\Judo.jpg', false, 'Judo'),
+('14', 'C:\Users\USUARIO\Downloads\Taekwondo.jpg', true, 'Taekwondo'),
+('15', 'C:\Users\USUARIO\Downloads\Muay-Thay.jpg', true, 'Muay Thay'),
+('16', 'C:\Users\USUARIO\Downloads\Sambo.jpg', true, 'Sambo'),
+('17', 'C:\Users\USUARIO\Downloads\JiuJitsu.jpg', true, 'Jiu Jitsu'),
+('18', 'C:\Users\USUARIO\Downloads\KickBoxing.jpg', true, 'KickBoxing'),
+('19', 'C:\Users\USUARIO\Downloads\JiuJitsuBrasileño.jpg', true, 'Jiu Jitsu Brasileño'),
+('20', 'C:\Users\USUARIO\Downloads\Remo.jpg', false, 'Remo'),
+('21', 'C:\Users\USUARIO\Downloads\EsquiAcuatico.jpg', false, 'Esqui Acuatico'),
+('22', 'C:\Users\USUARIO\Downloads\Motonautica.jpg', true, 'Motonautica'),
+('23', 'C:\Users\USUARIO\Downloads\JetSki.jpg', false, 'Jet Ski'),
+('24', 'C:\Users\USUARIO\Downloads\Buceo.jpg', true, 'Buceo'),
+('25', 'C:\Users\USUARIO\Downloads\Canoa.jpg', false, 'Canoa'),
+('26', 'C:\Users\USUARIO\Downloads\KayakPolo.jpg', true, 'Kayak-Polo'),
+('27', 'C:\Users\USUARIO\Downloads\Rally.jpg', true, 'Rally'),
+('28', 'C:\Users\USUARIO\Downloads\Motocross.jpg', true, 'Motocross'),
+('29', 'C:\Users\USUARIO\Downloads\Drifting.jpg', true, 'Drifting'),
+('30', 'C:\Users\USUARIO\Downloads\Snocross.jpg', false, 'Snocross'),
+('31', 'C:\Users\USUARIO\Downloads\Enduro.jpg', true, 'Enduro');
 
 INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, ImagenDeporte, Destacado, NombreDeporte, NombreCategoria) VALUES
 ('1', '1', 'C:\Users\USUARIO\Downloads\PelotaFutbol.jpg', true, 'Futbol', 'Juegos de pelota'),
@@ -635,7 +691,7 @@ INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
  
 INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
 ('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '15', '8', '67'),
-('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '2', '34', '9', '22'),
+('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '34', '9', '22'),
 ('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
 ('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
 ('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235'),
@@ -643,9 +699,9 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '1', '1', '1'),
 ('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1'),
 ('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '1', '1', '1'),
-('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonasevendenenlaesquinadelautu', 091919191, '2', '1', '1', '1'),
+('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonalaesquinadelautu', 091919191, '2', '1', '1', '1'),
 ('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '1', '1', '1'),
-('simba@gmail.com', 'Simba', 'amipapaloatropellounñu', 095565676, '1', '1', '1', '1'),
+('simba@gmail.com', 'Simba', 'amipapaunñu', 095565676, '1', '1', '1', '1'),
 ('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '1', '1', '1'),
 ('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '1', '1', '1'),
 ('Cacatua@gmail.com', 'Cacatua', 'sacala1234', 091233453, '2', '1', '1', '1'),
@@ -657,14 +713,56 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', '1', '1', '1'),
 ('Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', '1', '1', '1'),
 ('Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', '1', '1', '1'),
-('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabanfuertessimba', null, '1', '1', '1', '1');
+('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabansimba', null, '1', '1', '1', '1'),
+('korino300@gmail.com', 'Hinoken', 'dragonoy300', 095243013, '2', '1', '1', '1'),
+('Bastion@gmail.com', 'Vanguard', 'torreA4', 099999999, '1', '1', '1', '1'),
+('Gaston1234@gmail.com', 'Gasty', '7261726', null, '1', '1', '1', '1'),
+('Leonidas@gmail.com', 'Leo', 'termopilas', null, '2', '1', '1', '1'),
+('Salazar@gmail.com', 'Salado', 'rimaters', 094527465, '1', '1', '1', '1'),
+('Gimoteo@gmail.com', 'Gimoteo', 'it5f374fgyedxdb63664frh44', 092454374, '1', '1', '1', '1'),
+('Lacoste@gmail.com', 'Lacoste', 'etsocal', null, '2', '1', '1', '1'),
+('koala@gmail.com', 'koala', 'panda', 093053242, '1', '1', '1', '1'),
+('rriittoo@gmail.com', 'Rito', 'ritual', 096268834, '1', '1', '1', '1'),
+('Lucas1@gmail.com', 'Lucas', 'Elprimero', 091111111, '1', '1', '1', '1'),
+('Lucas2@gmail.com', 'Lucas2', 'Elsegundo', 092222222, '1', '1', '1', '1'),
+('Lucas3@gmail.com', 'Lucas3', 'Eltercero', 093333333, '1', '1', '1', '1'),
+('Gerardo@gmail.com', 'Geo', 'laspiedras', 094625375, '1', '1', '1', '1'),
+('ImagineDragons@gmail.com', 'Imagine', 'dragons', 091234567, '2', '1', '1', '1'),
+('Desmond@gmail.com', 'Des', 'mond', 094636342, '1', '1', '1', '1'),
+('Timoteo@gmail.com', 'Titi', 'teoteo', 093517352, '1', '1', '1', '1'),
+('ZhangChu@gmail.com', 'Ah', 'Chu', 093615225, '1', '1', '1', '1'),
+('Termodinamics@gmail.com', 'Im', 'boring', null, '1', '1', '1', '1'),
+('Gelato@gmail.com', 'Helado', 'delimon', null, '1', '1', '1', '1'),
+('Jason@gmail.com', 'Json', 'martes13', 091313131, '1', '1', '1', '1'),
+('Kerosen@gmail.com', 'Kero', 'fire', 097474479, '1', '1', '1', '1'),
+('Michi@gmail.com', 'Elmichi', 'karennomedadecomer', null, '1', '1', '1', '1'),
+('Karen@gmail.com', 'Karen', 'misifusmiente', 095236756, '1', '1', '1', '1'),
+('Lucas4@gmail.com', 'Lucas4', 'Elcuarto', 094444444, '1', '1', '1', '1'),
+('Lucas5@gmail.com', 'Lucas5', 'Elquinto', 095555555, '1', '1', '1', '1'),
+('Lucas6@gmail.com', 'Lucas6', 'Elsexto', 096666666, '1', '1', '1', '1'),
+('Fiss@gmail.com', 'Freeze', 'Freezer', 093247242, '1', '1', '1', '1');
 
 INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
-('994', 'alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', 'C:\Users\USUARIO\Downloads', 'https://www.Apple.es/fotos-publicidad/imagenes', 'Apple', '15', '8', '67'),
-('2339', 'perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', 'C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.Samsung.es/fotos-publicidad/imagenes', 'Samsung', '34', '9', '22'),
-('1177', 'analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', 'C:\Users\USUARIO\Documents', 'https://www.Sony.es/fotos-publicidad/imagenes', 'Sony',  '111', '234', '68'),
-('4444', 'loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', 'C:\Program Files', 'https://www.Despegar.com.es/fotos-publicidad/imagenes', 'Despegar.com', '1234', '777', '80'),
-('3499','lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', 'C:\Users\USUARIO\Videos', 'https://www.Sprite.es/fotos-publicidad/imagenes', 'Sprite', '1235', '789', '235');
+('1', 'loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1234', '777', '80'),
+('1', 'lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1235', '789', '235'),
+('2', 'Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', 'C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.samsung.com/uy/', 'Samsung', '1', '1', '1'),
+('3', 'simba@gmail.com', 'Simba', 'amipapaunñu', 095565676, '1', 'C:\Users\USUARIO\Documents\Sony', 'https://www.sony.es/', 'Sony', '1', '1', '1'),
+('4', 'volar@gmail.com', 'Volar', 'violin', 091234623, '1', 'C:\Users\USUARIO\Documents\Despegar', 'https://www.despegar.com.uy/', 'Despegar.com', '1234', '777', '80'),
+('5', 'Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite', '1', '1', '1'),
+('5', 'perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite', '1', '1', '1'),
+('5', 'Sombra@gmail.com', 'Darker', 'Oscuridad', 092766246, '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite',  '1', '1', '1'),
+('1', 'Mufasa@gmail.com', 'Mufasa', 'todoculpademihijo', 098324324, '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1', '1', '1'),
+('6', 'Lahyena@gmail.com', 'Hyena', 'MufasaUHHH', 091234123, '1', 'C:\Users\USUARIO\Videos\Fanta', 'https://www.coca-coladeuruguay.com.uy/marcas/fanta', 'Fanta', '1', '1', '1'),
+('7', 'Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', 'C:\Users\USUARIO\Videos\Smite', 'https://www.smitegame.com/', 'Smite', '15', '8', '67'),
+('8', 'Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', 'C:\Users\USUARIO\Videos\Discord', 'https://discord.com/', 'Discord', '1', '1', '1'),
+('9', 'Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', 'C:\Users\USUARIO\Videos\Sega', 'https://www.sega.es/', 'Sega',  '1', '1', '1'),
+('10', 'Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabansimba', null, '1','C:\Users\USUARIO\Videos\Disney', 'https://disneylatino.com/', 'Disney', '1', '1', '1'),
+('11', 'Bastion@gmail.com', 'Vanguard', 'torreA4', 099999999, '1', 'C:\Users\USUARIO\Videos\Gatorade', 'https://www.gatorade.com/', 'Gatorade', '1', '1', '1'),
+('12', 'Gaston1234@gmail.com', 'Gasty', '7261726', null, '1', 'C:\Users\USUARIO\Videos\Duolingo', 'https://es.duolingo.com/', 'Duolingo', '1', '1', '1'),
+('13', 'Salazar@gmail.com', 'Salado', 'rimaters', 094527465, '1', 'C:\Users\USUARIO\Videos\Tramontina', 'https://www.tramontina.com.br/es', 'Tramontina', '1', '1', '1'),
+('14', 'Gimoteo@gmail.com', 'Gimoteo', 'it5f374fgyedxdb63664frh44', 092454374, '1', 'C:\Users\USUARIO\Videos\Gotita', 'https://www.lagotita.com.uy/', 'Gotita',  '1', '1', '1'),
+('15', 'koala@gmail.com', 'koala', 'panda', 093053242, '1', 'C:\Users\USUARIO\Videos\Bimbo', 'https://www.grupobimbo.com/', 'Bimbo', '1', '1', '1'),
+('16', 'Desmond@gmail.com', 'Des', 'mond', 094636342, '1', 'C:\Users\USUARIO\Videos\Mercedes', 'https://www.mercedes-benz.com.uy/', 'Mercedes', '1', '1', '1');
  
 INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '15', '8', '67'),
@@ -713,4 +811,4 @@ WHERE NombreEvento = 'Copa Libertadores de America' AND EstadoEquipo != 'Elimina
 SELECT NombreEvento, NombreDeporte, COUNT(IdEquipo)
 FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro)
 WHERE TipoEquipo = 'Individual'
-GROUP BY IdEvento;
+GROUP BY IdEvento
