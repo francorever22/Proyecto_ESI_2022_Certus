@@ -700,36 +700,42 @@ INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, P
 ('287', '2', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual');
 
 INSERT INTO EventosFavoritos (IdEventosFavoritos, IdEvento, Email) VALUES
-('15', '1', 'alexelleon2018@gmail.com'),
-('34', '4', 'perezgomez45@gmail.com'),
-('111', '3', 'analaurali@gmail.com'),
-('1234', '2', 'loloOne@gmail.com'),
-('1235', '2', 'lolaFive@gmail.com'),
-('1', '5', 'admin@certus.com');
+('1', '1', 'alexelleon2018@gmail.com'),
+('2', '4', 'perezgomez45@gmail.com'),
+('3', '3', 'analaurali@gmail.com'),
+('4', '2', 'loloOne@gmail.com'),
+('5', '2', 'lolaFive@gmail.com'),
+('6', '5', 'admin@certus.com');
  
 INSERT INTO EncuentrosFavoritos (IdEncuentrosFavoritos, IdEncuentro, Email) VALUES
-('8', '1', 'alexelleon2018@gmail.com'),
-('9', '3', 'perezgomez45@gmail.com'),
-('234', '4', 'analaurali@gmail.com'),
-('777', '5', 'loloOne@gmail.com'),
-('789', '3', 'lolaFive@gmail.com'),
-('1', '2', 'admin@certus.com');
+('1', '1', 'alexelleon2018@gmail.com'),
+('2', '3', 'perezgomez45@gmail.com'),
+('3', '4', 'analaurali@gmail.com'),
+('4', '5', 'loloOne@gmail.com'),
+('5', '3', 'lolaFive@gmail.com'),
+('1', '2', 'admin@certus.com'),
+('7', '4', 'admin@certus.com');
  
 INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
-('67', '1919', 'alexelleon2018@gmail.com'),
-('22', '5', 'perezgomez45@gmail.com'),
-('68', '4', 'analaurali@gmail.com'),
-('80', '17', 'loloOne@gmail.com'),
-('235', '16', 'lolaFive@gmail.com'),
-('1', '1900', 'admin@certus.com');
+('1', '1919', 'alexelleon2018@gmail.com'),
+('2', '5', 'perezgomez45@gmail.com'),
+('3', '4', 'analaurali@gmail.com'),
+('4', '17', 'loloOne@gmail.com'),
+('5', '16', 'lolaFive@gmail.com'),
+('6', '1900', 'admin@certus.com'),
+('7', '16', 'sinclair@hotmail.com'),
+('8', '567', 'elseñordelaesquinaquevendetortafritas@gmail.com'),
+('9', '32', 'Mufasa@gmail.com'),
+('10', '33', 'simba@gmail.com');
+ 
  
 INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
-('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '15', '8', '67'),
-('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '34', '9', '22'),
-('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
-('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
-('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235'),
-('admin@certus.com', 'Administrador', '122333', null, '4', '1', '1', '1'),
+('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '1', '1', '1'),
+('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '2', '2', '2'),
+('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
+('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '4', '4', '4'),
+('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '5', '5', '5'),
+('admin@certus.com', 'Administrador', '122333', null, '4', '6', '1', '6'),
 ('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '1', '1', '1'),
 ('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1'),
 ('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '1', '1', '1'),
