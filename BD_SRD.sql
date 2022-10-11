@@ -713,7 +713,7 @@ INSERT INTO EncuentrosFavoritos (IdEncuentrosFavoritos, IdEncuentro, Email) VALU
 ('3', '4', 'analaurali@gmail.com'),
 ('4', '5', 'loloOne@gmail.com'),
 ('5', '3', 'lolaFive@gmail.com'),
-('1', '2', 'admin@certus.com'),
+('6', '2', 'admin@certus.com'),
 ('7', '4', 'admin@certus.com');
  
 INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
@@ -728,7 +728,6 @@ INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
 ('9', '32', 'Mufasa@gmail.com'),
 ('10', '33', 'simba@gmail.com');
  
- 
 INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
 ('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '1', '1', '1'),
 ('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '2', '2', '2'),
@@ -742,7 +741,7 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('elseñordelaesquinaquevendetortafritas@gmail.com', 'El tortafritero', 'Lasmejorestortafritasdelazonalaesquinadelautu', 091919191, '2', '1', '1', '1'),
 ('Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', '1', '1', '1'),
 ('simba@gmail.com', 'Simba', 'amipapaunñu', 095565676, '1', '1', '1', '1'),
-('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '1', '1', '1'),
+('guillermoperez@gmail.com', 'El guille', 'alpaca', 093242381, '2', '2', '2', '2'),
 ('volar@gmail.com', 'Volar', 'violin', 091234623, '1', '1', '1', '1'),
 ('Cacatua@gmail.com', 'Cacatua', 'sacala1234', 091233453, '2', '1', '1', '1'),
 ('Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', '1', '1', '1'),
@@ -783,17 +782,17 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('Fiss@gmail.com', 'Freeze', 'Freezer', 093247242, '1', '1', '1', '1');
 
 INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
-('1', 'loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1234', '777', '80'),
-('1', 'lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1235', '789', '235'),
+('1', 'loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '4', '4', '4'),
+('1', 'lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '5', '5', '5'),
 ('2', 'Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', 'C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.samsung.com/uy/', 'Samsung', '1', '1', '1'),
 ('3', 'simba@gmail.com', 'Simba', 'amipapaunñu', 095565676, '1', 'C:\Users\USUARIO\Documents\Sony', 'https://www.sony.es/', 'Sony', '1', '1', '1'),
-('4', 'volar@gmail.com', 'Volar', 'violin', 091234623, '1', 'C:\Users\USUARIO\Documents\Despegar', 'https://www.despegar.com.uy/', 'Despegar.com', '1234', '777', '80'),
+('4', 'volar@gmail.com', 'Volar', 'violin', 091234623, '1', 'C:\Users\USUARIO\Documents\Despegar', 'https://www.despegar.com.uy/', 'Despegar.com', '1', '1', '1'),
 ('5', 'Cilnantro@gmail.com', 'Pepino', '3nsalad4', 097843777, '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite', '1', '1', '1'),
 ('5', 'perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite', '1', '1', '1'),
 ('5', 'Sombra@gmail.com', 'Darker', 'Oscuridad', 092766246, '1', 'C:\Users\USUARIO\Videos\Sprite', 'https://www.coca-coladeuruguay.com.uy/marcas/sprite', 'Sprite',  '1', '1', '1'),
 ('1', 'Mufasa@gmail.com', 'Mufasa', 'todoculpademihijo', 098324324, '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '1', '1', '1'),
 ('6', 'Lahyena@gmail.com', 'Hyena', 'MufasaUHHH', 091234123, '1', 'C:\Users\USUARIO\Videos\Fanta', 'https://www.coca-coladeuruguay.com.uy/marcas/fanta', 'Fanta', '1', '1', '1'),
-('7', 'Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', 'C:\Users\USUARIO\Videos\Smite', 'https://www.smitegame.com/', 'Smite', '15', '8', '67'),
+('7', 'Nala@gmail.com', 'Nala', 'simbatutiomecaemal', 092344623, '1', 'C:\Users\USUARIO\Videos\Smite', 'https://www.smitegame.com/', 'Smite', '1', '1', '1'),
 ('8', 'Timon@gmail.com', 'Timon', 'insectosdebajodeltronco', 092363423, '1', 'C:\Users\USUARIO\Videos\Discord', 'https://discord.com/', 'Discord', '1', '1', '1'),
 ('9', 'Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', 'C:\Users\USUARIO\Videos\Sega', 'https://www.sega.es/', 'Sega',  '1', '1', '1'),
 ('10', 'Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabansimba', null, '1','C:\Users\USUARIO\Videos\Disney', 'https://disneylatino.com/', 'Disney', '1', '1', '1'),
@@ -805,11 +804,11 @@ INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseñ
 ('16', 'Desmond@gmail.com', 'Des', 'mond', 094636342, '1', 'C:\Users\USUARIO\Videos\Mercedes', 'https://www.mercedes-benz.com.uy/', 'Mercedes', '1', '1', '1');
  
 INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
-('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '15', '8', '67'),
-('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '34', '9', '22'),
-('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '111', '234', '68'),
-('loloOne@gmail.com', '2332', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '1234', '777', '80'),
-('lolaFive@gmail.com', '2113', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '1235', '789', '235');
+('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '1', '1', '1'),
+('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '2', '2', '2'),
+('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
+('loloOne@gmail.com', '2332', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '3', '3', '3'),
+('lolaFive@gmail.com', '2113', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '4', '4', '4');
 
 SELECT IdEncuentro, NombreEncuentro
 FROM Encuentros INNER JOIN DeportesCategorizados ON Encuentros.IdDeporte = DeportesCategorizados.IdDeporte
@@ -851,4 +850,4 @@ WHERE NombreEvento = 'Copa Libertadores de America' AND EstadoEquipo != 'Elimina
 SELECT NombreEvento, NombreDeporte, COUNT(IdEquipo)
 FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro)
 WHERE TipoEquipo = 'Individual'
-GROUP BY IdEvento
+GROUP BY IdEvento;
