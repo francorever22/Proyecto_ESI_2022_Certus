@@ -107,7 +107,6 @@ Descripcion text
 CREATE TABLE Equipos
 (
 IdEquipo int primary key,
-Uniforme blob,
 ImagenRepresentativa blob,
 PaisOrigen varchar(80) not null,
 NombreEquipo varchar(120) not null,
@@ -490,17 +489,17 @@ INSERT INTO Deportistas (IdPersona, Nombre, Apellido, Nacionalidad, EstadoJugado
 ('2021', 'Neymar', 'Da Silva Santos', 'Brasileña', 'Activo','Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil'),
 ('2019', 'Lucas', 'Torreira', 'Uruguaya', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018.');
 
-INSERT INTO Equipos (IdEquipo, Uniforme, ImagenRepresentativa, PaisOrigen, NombreEquipo, TipoEquipo) VALUES
-('1919', 'C:\Users\USUARIO\Downloads\UruguayUniforme.jpg', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg','Uruguay', 'Uruguay', 'Seleccion'),
-('5', 'C:\Users\USUARIO\Downloads\AguadaUniforme.jpg', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', 'Club'),
-('4', 'C:\Users\USUARIO\Downloads\OlimpiaUniforme.jpg', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', 'Club'),
-('16', 'C:\Users\USUARIO\Downloads\GeorgeUniforme.jpg', 'C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Individual'),
-('17', 'C:\Users\USUARIO\Downloads\LewisUniforme.jpg', 'C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Individual'),
-('32', 'C:\Users\USUARIO\Downloads\BruceLeeUniforme.jpg', 'C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Individual'),
-('33', 'C:\Users\USUARIO\Downloads\JackieChanUniforme.jpg','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Individual'),
-('287', 'C:\Users\USUARIO\Downloads\MichaelPhelpsUniforme.jpg', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Individual'),
-('567', 'C:\Users\USUARIO\Downloads\IanThorpeUniforme.jpg', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Individual'),
-('1900', 'C:\Users\USUARIO\Downloads\BrasilUniforme.jpg',  'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Seleccion');
+INSERT INTO Equipos (IdEquipo, ImagenRepresentativa, PaisOrigen, NombreEquipo, TipoEquipo) VALUES
+('1919', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg','Uruguay', 'Uruguay', 'Seleccion'),
+('5', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', 'Club'),
+('4', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', 'Club'),
+('16', 'C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Individual'),
+('17', 'C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Individual'),
+('32', 'C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Individual'),
+('33','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Individual'),
+('287', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Individual'),
+('567', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Individual'),
+('1900',  'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Seleccion');
 
 INSERT INTO EquiposDeportistas(IdEquipo, IdPersona, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoJugador, Descripcion, NumeroJugador, TipoEquipo) VALUES
 ('1919', '0073', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo.', '15', 'Seleccion'),
