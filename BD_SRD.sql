@@ -143,6 +143,7 @@ PosicionEquipo int,
 EstadoEquipo varchar(80),
 Puntaje int,
 TipoEquipo varchar(15),
+Tipofase tinyInt not null,
 primary key (IdEquipo, NumeroFase, IdEvento)
 );
 
@@ -163,6 +164,7 @@ IdEvento int,
 Fecha date,
 NombreFase varchar(120),
 EstadoFase varchar(20),
+Tipofase tinyInt not null,
 primary key (NumeroFase, IdEvento)
 );
 
@@ -184,6 +186,7 @@ Posicion int,
 NombreEncuentro varchar(50),
 EstadoEncuentro varchar(50),
 Clima varchar(50),
+Tipoencuentro tinyInt not null,
 primary key (IdEvento, IdEncuentro)
 );
 
@@ -240,7 +243,8 @@ CREATE TABLE Encuentros (
  FechaEncuentro date not null, 
  NombreEncuentro varchar (50), 
  EstadoEncuentro varchar(25) not null, 
- Clima varchar(25)
+ Clima varchar(25),
+ TipoEncuentro tinyInt not null
 );
 
 CREATE TABLE EquiposEncuentros (
@@ -263,6 +267,7 @@ CREATE TABLE EquiposEncuentros (
  Puntuacion int, 
  Posicion int, 
  Alineacion blob,
+ TipoEncuentro tinyInt not null,
  primary key (IdEquipo, IdEncuentro)
  );
  
@@ -464,23 +469,136 @@ INSERT INTO Personas (IdPersona, Nombre, Apellido, Nacionalidad) VALUES
 ('1129', 'Ana', 'Anniston', 'Estadounidense'),
 ('2332', 'Lorenzo', 'DiCaprio', 'Italiana'),
 ('2113', 'Teresa', 'Garcia', 'Mexicana'),
+#Arbitros
 ('79', 'Lucas', 'Mariño', 'Uruguaya'),
 ('1018', 'Eusebio', 'Martinez', 'Española'),
 ('1125', 'Rita', 'Romero', 'Colombiana'),
 ('2032', 'Ignacio', 'Nuñez', 'Brasileña'),
 ('2300', 'Oriana', 'Pereira', 'Uruguaya'),
+('80', 'Andre', 'Da Costa', 'Uruguaya'),
+('34', 'Fernando', 'Buero', 'Irlandesa'),
+('1031', 'Erica', 'Filardi', 'Venezolana'),
+('6580', 'Rodrigo', 'Bartacovich', 'Rusa'),
+('6300', 'Camila', 'Bellati', 'Francesa'),
+#Futbol
 ('73', 'Federico', 'Valverde', 'Uruguaya'),
 ('1010', 'Luis', 'Suarez', 'Uruguaya'),
 ('1144', 'Fernando', 'Muslera', 'Uruguaya'),
 ('2021', 'Neymar', 'Da Silva Santos', 'Brasileña'),
-('2019', 'Lucas', 'Torreira', 'Uruguaya');
- 
+('2019', 'Lucas', 'Torreira', 'Uruguaya'),
+('2009', 'Mauro', 'Icardi', 'Argentina'),
+('2012', 'Diego', 'Forlan', 'Uruguaya'),
+('2022', 'Mario', 'Nuñez', 'Uruguaya'),
+('2050', 'Armando', 'Casita', 'Argentina'),
+('2052', 'Pepe', 'Muñoz', 'Estadounidense'),
+#Basquetbol
+('1199', 'Julio', 'Pereira', 'Brasileña'),
+('2000', 'Cesar', 'Cabral', 'Europea'),
+('2002', 'Nicolas', 'Piñeiro', 'Irlandesa'),
+('2004', 'Maicol', 'Rodriguez', 'Uruguaya'),
+('2006', 'Leticia', 'Romero', 'Boliviana'),
+#Karate
+('2034', 'Franco', 'Reverdito', 'Española'),
+('2090', 'Esther', 'Niribao', 'Ecuatoriana'),
+('2099', 'Walter', 'Tonniolo', 'Peruana'),
+('2081', 'Valentin', 'Podesta', 'Mexicana'),
+('2082', 'Natalia', 'Gimenez', 'Francesa'),
+#Natacion
+('2039', 'Alexander', 'Popov', 'Rusa'),
+('2095', 'Mark', 'Spitz', 'Chilena'),
+('2094', 'Jhonny', 'Weismuller', 'Puertoriqueña'),
+('2076', 'Inje', 'Bruijin', 'Canada'),
+('2044', 'Jenny', 'Thompson', 'Uruguaya'),
+#TiroAlArco
+('2033', 'Antonio', 'Fernandez', 'Española'),
+('2001', 'Brady', 'Ellison', 'Africana'),
+('1701', 'Kim', 'Wojin', 'Japonesa'),
+('1605', 'Adriana', 'Martin', 'Española'),
+('1606', 'Miguel', 'Luz', 'Uruguaya'),
+#Formula1
+('2055', 'Alberto', 'Ascari', 'Española'),
+('1789', 'Jackie', 'Stewart', 'Australiana'),
+('1778', 'Alain', 'Prost', 'Paraguaya'),
+('1655', 'Jim', 'Clark', 'Francesa'),
+('1490', 'Bill', 'Bukovich', 'Rusa'),
+#Golf
+('2777', 'Tiger', 'Woods', 'Estadounidense'),
+('1333', 'Lee', 'Westwood', 'Italiana'),
+('1444', 'Martin', 'Kaymer', 'Angola'),
+('1212', 'Steve', 'Stricker', 'Turca'),
+('1126', 'Phil', 'Mickelson', 'Irani'),
+#TiroAlPlato
+('2558', 'Xabier', 'Azpetia', 'India'),
+('1344', 'Pilar', 'Hudson', 'Canadiense'),
+('1414', 'Beto', 'Dembeto', 'Uruguaya'),
+('1042', 'Tony', 'Stark', 'Estadounidense'),
+('1020', 'Nick', 'Fury', 'Irlandesa'),
+#TiroConPistola
+('2554', 'Norberto', 'De la Sol', 'Mexicano'),
+('1007', 'Nicole', 'Gonzalez', 'Canadiense'),
+('1098', 'Luana', 'Britos', 'Uruguaya'),
+('1013', 'Thanos', 'Talgico', 'Venezolana'),
+('1979', 'Ricar', 'Dito', 'Ucraniana'),
+#Bolos
+('2107', 'Don', 'Carter', 'Argentino'),
+('1023', 'Julia', 'Gonzalez', 'Peruana'),
+('1030', 'Nila', 'Mento', 'Brasilera'),
+('1040', 'Toma', 'Tito', 'Caribeña'),
+('1960', 'Cristina', 'Gonzalez', 'Española'),
+#Dardos
+('2101', 'Don', 'Jose', 'Argentino'),
+('3056', 'Marisel', 'Balvin', 'Colombiana'),
+('4070', 'Jocki', 'Chon', 'China'),
+('5000', 'Norma', 'Lines', 'Estadounidense'),
+('5100', 'Maria', 'De la Cruz', 'Egipcia'),
+#TaiChi
+('3033', 'Jiffu', 'Kamada', 'Japonesa'),
+('3766', 'Po', 'Lian', 'Turco'),
+('4001', 'Tigresa', 'Ton', 'China'),
+('4999', 'Mantis', 'Tuti', 'Irani'),
+('5104', 'Mickey', 'Musca', 'Romana'),
+#Judo
+('3022', 'Pibu', 'Tito', 'Irlandesa'),
+('3762', 'Rodrigo', 'Lemon', 'Argentino'),
+('4011', 'Ivanna', 'Noquiolo', 'Brasilera'),
+('4800', 'Ruben', 'Ado', 'Noruega'),
+('5200', 'Mini', 'Mouse', 'Italiana'),
+#Taekwondo
+('3011', 'Chih Hsiung', 'Huang', 'China'),
+('3300', 'Mauro', 'Sarmiento', 'Italiana'),
+('4379', 'Maria', 'Espinosa', 'Mexicana'),
+('4602', 'Servet', 'Tazegul', 'Noruega'),
+('5250', 'Jingyu', 'Wu', 'China'),
+#MuayThai
+('4678', 'Buakaw ', 'Banchamek', 'China'),
+('1289', 'Filipović', 'Mart', 'Japonesa'),
+('6669', 'Sandoval', 'Anderson ', 'Brasilera'),
+('6969', 'Carano ', 'Ernesto ', 'Poonesia'),
+('5959', 'Dekkers', 'Ander ', 'India'),
+#Sambo
+('568', 'Shakira ', 'Gutierrez', 'Española'),
+('750', 'Juan', 'Diaz', 'Mexicana'),
+('7450', 'Bruno', 'Daniels', 'Argentina'),
+('7120', 'Dario', 'Sosa', 'Polonesia'),
+('5321', 'Andres', 'Camargo', 'Canadiense'),
+#JiuJitsu
+('520', 'Brian', 'Gomez', 'Noruega'),
+('302', 'Romeo', 'Santos', 'Argentina'),
+('7455', 'Maluma', 'Baby', 'Colombiana'),
+('7175', 'Jose', 'Jervasio', 'Indu'),
+('5375', 'Thomas', 'Shelby', 'Estadounidense');
+
 INSERT INTO Arbitros (IdPersona, Nombre, Apellido, Nacionalidad, Rol) VALUES
 ('79', 'Lucas', 'Mariño', 'Uruguaya','Arbitro Jefe'),
 ('1018', 'Eusebio', 'Martinez', 'Española', 'Arbitro Jefe'),
 ('1125', 'Rita', 'Romero', 'Colombiana', 'Arbitro Jefe'),
 ('2032', 'Ignacio', 'Nuñez', 'Brasileña', 'Arbitro Jefe'),
-('2300', 'Oriana', 'Pereira', 'Uruguaya', 'Arbitro Jefe');
+('2300', 'Oriana', 'Pereira', 'Uruguaya', 'Arbitro Jefe'),
+('80', 'Andre', 'Da Costa', 'Uruguaya', 'Arbitro Jefe'),
+('34', 'Fernando', 'Buero', 'Irlandesa', 'Arbitro Jefe'),
+('1031', 'Erica', 'Filardi', 'Venezolana', 'Arbitro Jefe'),
+('6580', 'Rodrigo', 'Bartacovich', 'Rusa', 'Arbitro Jefe'),
+('6300', 'Camila', 'Bellati', 'Francesa', 'Arbitro Jefe');
  
 INSERT INTO Deportistas (IdPersona, Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion) VALUES
 ('73', 'Federico', 'Valverde', 'Uruguaya', 'Activo', 'Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo que juega como centrocampista en el Real Madrid Club de Fútbol de la Primera División de España desde la temporada 2018-19. Es desde 2017 internacional absoluto con la selección uruguaya.'),
@@ -599,24 +717,24 @@ INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, ImagenDeporte, Destac
 ('34', '1', 'C:\Users\USUARIO\Downloads\Rugby.jpg', true, 'Rugby', 'Juegos de pelota'),
 ('35', '1', 'C:\Users\USUARIO\Downloads\Voleibol.jpg', false, 'Voleibol', 'Juegos de pelota');
 
-INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima) VALUES
-('1', '1', '1', '79', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null),
-('2', '3', '2', '1018', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado'),
-('3', '5', '4', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado'),
-('4', '2', '1', '79', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado'),
-('5', '4', '3', '2300', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null);
+INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro) VALUES
+('1', '1', '1', '79', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
+('2', '3', '2', '1018', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1'),
+('3', '5', '4', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', '1'),
+('4', '2', '1', '79', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', '1'),
+('5', '4', '3', '2300', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
 
-INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo) VALUES
-('1', '1', '1', '79', '1919', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion'),
-('1', '1', '1', '79', '1900', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion'),
-('2', '3', '2', '1018', '32', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual'),
-('2', '3', '2', '1018', '33', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual'),
-('3', '5', '4', '16', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual'),
-('3', '5', '4', '17', '2031', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual'),
-('4', '2', '1', '79', '4', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', null, '7', 'C:\Users\USUARIO\Downloads\OlimpiaAlineacion.jpg', 'Club'),
-('4', '2', '1', '79', '5', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', null, '8', 'C:\Users\USUARIO\Downloads\AguadaAlineacion.jpg', 'Club'),
-('5', '4', '3', '2300', '287', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual'),
-('5', '4', '3', '2300', '567', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual');
+INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo, Tipoencuentro) VALUES
+('1', '1', '1', '79', '1919', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion', '1'),
+('1', '1', '1', '79', '1900', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion', '1'),
+('2', '3', '2', '1018', '32', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual', '1'),
+('2', '3', '2', '1018', '33', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '16', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '17', '2031', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('4', '2', '1', '79', '4', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', null, '7', 'C:\Users\USUARIO\Downloads\OlimpiaAlineacion.jpg', 'Club', '1'),
+('4', '2', '1', '79', '5', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', null, '8', 'C:\Users\USUARIO\Downloads\AguadaAlineacion.jpg', 'Club', '1'),
+('5', '4', '3', '2300', '287', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual', '1'),
+('5', '4', '3', '2300', '567', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual', '1');
 
 INSERT INTO Round (NumeroRound, IdEncuentro, TiempoTranscurridoRound, IdPuntuacionRound, IdHito) VALUES
 ('1', '1', '00:45:00', '1', '1'),
@@ -673,18 +791,18 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
-INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima) VALUES
-('1', '1','2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia', '13:00', 'Estadio Campeon del Siglo', '2022-06-22', 'Uruguay vs Brasil', 'En juego', 'Lluvioso'),
-('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Coming soon', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null),
-('3', '4', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda', '12:00', 'Donde cayo el avion', '2026-02-16', 'Dar caridad y amor', 'En transcurso', 'LLuvia de meteoritos'),
-('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In progress', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null);
+INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro) VALUES
+('1', '1','2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia', '13:00', 'Estadio Campeon del Siglo', '2022-06-22', 'Uruguay vs Brasil', 'En juego', 'Lluvioso', '1'),
+('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Coming soon', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
+('3', '4', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda', '12:00', 'Donde cayo el avion', '2026-02-16', 'Dar caridad y amor', 'En transcurso', 'LLuvia de meteoritos', '1'),
+('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In progress', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
 
-INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha) VALUES
-('1', '1', 'En curso', 'Grupo A', '2022-12-2'),
-('2', '4', 'En curso', 'Grupo B', '2034-10-19'),
-('3', '2', 'Por venir', 'Grupo C', '2012-10-16'),
-('4', '5', 'Ya casi viene', 'Grupo D', '2029-03-16'),
-('5', '3', 'Casi casi', 'Grupo D', '2029-03-16');
+INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase) VALUES
+('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
+('2', '4', 'En curso', 'Grupo B', '2034-10-19', '1'),
+('3', '2', 'Por venir', 'Grupo C', '2012-10-16', '1'),
+('4', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1'),
+('5', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
 
 INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
 ('1', '1', '3', '1', '73' ),
@@ -692,11 +810,11 @@ INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, F
 ('3', '4', '3', '4', '2019' ),
 ('4', '5', '3', '2', '2021' );
 
-INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo) VALUES 
-('1919', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion'),
-('1900', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion'),
-('567', '2', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual'),
-('287', '2', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual');
+INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase) VALUES 
+('1919', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
+('1900', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
+('567', '2', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
+('287', '2', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
 
 INSERT INTO EventosFavoritos (IdEventosFavoritos, IdEvento, Email) VALUES
 ('1', '1', 'alexelleon2018@gmail.com'),
