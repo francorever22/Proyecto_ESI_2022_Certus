@@ -799,10 +799,10 @@ INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, 
 
 INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase) VALUES
 ('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
-('2', '4', 'En curso', 'Grupo B', '2034-10-19', '1'),
-('3', '2', 'Por venir', 'Grupo C', '2012-10-16', '1'),
-('4', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1'),
-('5', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
+('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1'),
+('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1'),
+('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1'),
+('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
 
 INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
 ('1', '1', '3', '1', '73' ),
@@ -813,8 +813,8 @@ INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, F
 INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase) VALUES 
 ('1919', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
 ('1900', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
-('567', '2', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
-('287', '2', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
+('567', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
+('287', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
 
 INSERT INTO EventosFavoritos (IdEventosFavoritos, IdEvento, Email) VALUES
 ('1', '1', 'alexelleon2018@gmail.com'),
