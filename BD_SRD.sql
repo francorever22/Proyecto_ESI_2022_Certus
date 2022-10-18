@@ -4,7 +4,7 @@ USE SRD;
 
 CREATE TABLE Publicidades
 (
-IdPublicidad int auto_increment primary key, 
+IdPublicidad int AUTO_INCREMENT PRIMARY KEY, 
 Banner blob,
 Link varchar(120),
 TituloPublicidad varchar(70)
@@ -12,7 +12,7 @@ TituloPublicidad varchar(70)
 
 CREATE TABLE Usuarios
 (
-Email varchar(70),
+Email varchar(70) PRIMARY KEY,
 NombreUsuario varchar(50) unique,
 Contraseña varchar(50),
 NumeroTelefono varchar(15),
@@ -24,30 +24,30 @@ IdEquiposFavoritos int
 
 CREATE TABLE EventosFavoritos
 (
-IdEventosFavoritos int primary key,
+IdEventosFavoritos int PRIMARY KEY,
 IdEvento int,
-Email varchar(70)
+Email varchar(70) unique
 );
 
 CREATE TABLE EncuentrosFavoritos
 (
-IdEncuentrosFavoritos int primary key,
+IdEncuentrosFavoritos int PRIMARY KEY,
 IdEncuentro int,
-Email varchar(70)
+Email varchar(70) unique
 );
 
 CREATE TABLE EquiposFavoritos
 (
-IdEquiposFavoritos int primary key,
+IdEquiposFavoritos int PRIMARY KEY,
 IdEquipo int,
-Email varchar(70)
+Email varchar(70) unique
 );
 
 CREATE TABLE PublicidadesUsuarios
 (
 IdPublicidad int,
 Email varchar(70),
-NombreUsuario varchar(50),
+NombreUsuario varchar(50) unique,
 Contraseña varchar(50),
 NumeroTelefono varchar(15),
 NivelPermisos int,
@@ -62,7 +62,7 @@ primary key (IdPublicidad, Email)
 
 CREATE TABLE Personas
 (
-IdPersona int primary key,
+IdPersona int PRIMARY KEY,
 Nombre varchar(50)not null,
 Apellido varchar(50) not null,
 Nacionalidad varchar(50) not null
@@ -75,7 +75,7 @@ IdPersona int,
 Nombre varchar(50) not null,
 Apellido varchar(50) not null,
 Nacionalidad varchar(50) not null,
-NombreUsuario varchar(50),
+NombreUsuario varchar(50) unique,
 Contraseña varchar(50),
 NumeroTelefono varchar(15),
 NivelPermisos int,
@@ -87,7 +87,7 @@ primary key (IdPersona, Email)
 
 CREATE TABLE Arbitros
 (
-IdPersona int primary key,
+IdPersona int PRIMARY KEY,
 Nombre varchar(50)not null,
 Apellido varchar(50) not null,
 Nacionalidad varchar(50) not null,
@@ -101,7 +101,7 @@ Nombre varchar(50)not null,
 Apellido varchar(50) not null,
 Nacionalidad varchar(50) not null,
 EstadoJugador varchar(50),
-Descripcion text
+Descripcion text 
 );
 
 CREATE TABLE Equipos
@@ -212,13 +212,13 @@ TiempoHito time
 );
 
 CREATE TABLE Categorias (
-IdCategoria int primary key, 
-NombreCategoria varchar(50) not null
+IdCategoria int PRIMARY KEY, 
+NombreCategoria varchar(50) not null 
 );
 
 CREATE TABLE Deportes (
- IdDeporte int primary key, 
- NombreDeporte varchar(50) not null,
+ IdDeporte int PRIMARY KEY, 
+ NombreDeporte varchar(50) not null unique,
  ImagenDeporte blob,
  Destacado bool
 );
@@ -226,15 +226,15 @@ CREATE TABLE Deportes (
 CREATE TABLE DeportesCategorizados (
  IdDeporte int,
  IdCategoria int, 
- NombreDeporte varchar(50) not null,
+ NombreDeporte varchar(50) not null unique,
  ImagenDeporte blob,
  Destacado bool, 
- NombreCategoria varchar(50) not null,
- primary key (IdDeporte, IdCategoria)
+ NombreCategoria varchar(50) not null ,
+PRIMARY KEY (IdDeporte, IdCategoria)
  );
  
 CREATE TABLE Encuentros (
- IdEncuentro int primary key,
+ IdEncuentro int PRIMARY KEY,
  IdDeporte int,
  IdCategoria int,
  IdPersona int,
@@ -268,7 +268,7 @@ CREATE TABLE EquiposEncuentros (
  Posicion int, 
  Alineacion blob,
  TipoEncuentro tinyInt not null,
- primary key (IdEquipo, IdEncuentro)
+ PRIMARY KEY (IdEquipo, IdEncuentro)
  );
  
 CREATE TABLE Round (
@@ -277,12 +277,12 @@ IdEncuentro int,
 TiempoTranscurridoRound time not null,
 IdPuntuacionRound int, 
 IdHito int,
-primary key (NumeroRound, IdEncuentro)
+PRIMARY KEY (NumeroRound, IdEncuentro)
 );
  
  
 CREATE TABLE PuntuacionRound (
-IdPuntuacionRound int primary key,
+IdPuntuacionRound int PRIMARY KEY,
 NumeroRound int, 
 IdEncuentro int,
 Puntos int,
@@ -464,167 +464,316 @@ INSERT INTO Publicidades (Banner, Link, TituloPublicidad) VALUES
 ('C:\Users\USUARIO\Videos\Volvo', 'https://www.volvocars.com/', 'Volvo');
 
 INSERT INTO Personas (IdPersona, Nombre, Apellido, Nacionalidad) VALUES
-('61', 'Alex', 'Sarasola', 'Uruguaya'),
-('1019', 'Perez', 'Gomez', 'Argentina'),
-('1129', 'Ana', 'Anniston', 'Estadounidense'),
-('2332', 'Lorenzo', 'DiCaprio', 'Italiana'),
-('2113', 'Teresa', 'Garcia', 'Mexicana'),
+('1', 'Alex', 'Sarasola', 'Uruguaya'),
+('2', 'Perez', 'Gomez', 'Argentina'),
+('3', 'Ana', 'Anniston', 'Estadounidense'),
+('4', 'Lorenzo', 'DiCaprio', 'Italiana'),
+('5', 'Teresa', 'Garcia', 'Mexicana'),
 #Arbitros
-('79', 'Lucas', 'Mariño', 'Uruguaya'),
-('1018', 'Eusebio', 'Martinez', 'Española'),
-('1125', 'Rita', 'Romero', 'Colombiana'),
-('2032', 'Ignacio', 'Nuñez', 'Brasileña'),
-('2300', 'Oriana', 'Pereira', 'Uruguaya'),
-('80', 'Andre', 'Da Costa', 'Uruguaya'),
-('34', 'Fernando', 'Buero', 'Irlandesa'),
-('1031', 'Erica', 'Filardi', 'Venezolana'),
-('6580', 'Rodrigo', 'Bartacovich', 'Rusa'),
-('6300', 'Camila', 'Bellati', 'Francesa'),
+('6', 'Lucas', 'Mariño', 'Uruguaya'),
+('7', 'Eusebio', 'Martinez', 'Española'),
+('8', 'Rita', 'Romero', 'Colombiana'),
+('9', 'Ignacio', 'Nuñez', 'Brasileña'),
+('10', 'Oriana', 'Pereira', 'Uruguaya'),
+('11', 'Andre', 'Da Costa', 'Uruguaya'),
+('12', 'Fernando', 'Buero', 'Irlandesa'),
+('13', 'Erica', 'Filardi', 'Venezolana'),
+('14', 'Rodrigo', 'Bartacovich', 'Rusa'),
+('15', 'Camila', 'Bellati', 'Francesa'),
 #Futbol
-('73', 'Federico', 'Valverde', 'Uruguaya'),
-('1010', 'Luis', 'Suarez', 'Uruguaya'),
-('1144', 'Fernando', 'Muslera', 'Uruguaya'),
-('2021', 'Neymar', 'Da Silva Santos', 'Brasileña'),
-('2019', 'Lucas', 'Torreira', 'Uruguaya'),
-('2009', 'Mauro', 'Icardi', 'Argentina'),
-('2012', 'Diego', 'Forlan', 'Uruguaya'),
-('2022', 'Mario', 'Nuñez', 'Uruguaya'),
-('2050', 'Armando', 'Casita', 'Argentina'),
-('2052', 'Pepe', 'Muñoz', 'Estadounidense'),
+('16', 'Federico', 'Valverde', 'Uruguaya'),
+('17', 'Luis', 'Suarez', 'Uruguaya'),
+('18', 'Fernando', 'Muslera', 'Uruguaya'),
+('19', 'Neymar', 'Da Silva Santos', 'Brasileña'),
+('20', 'Lucas', 'Torreira', 'Uruguaya'),
+('21', 'Mauro', 'Icardi', 'Argentina'),
+('22', 'Diego', 'Forlan', 'Uruguaya'),
+('23', 'Kylian', 'Mbappe', 'Francesa'),
+('24', 'James', 'Rodriguez', 'Colombiana'),
+('25', 'Pepe', 'Muñoz', 'Estadounidense'),
 #Basquetbol
-('1199', 'Julio', 'Pereira', 'Brasileña'),
-('2000', 'Cesar', 'Cabral', 'Europea'),
-('2002', 'Nicolas', 'Piñeiro', 'Irlandesa'),
-('2004', 'Maicol', 'Rodriguez', 'Uruguaya'),
-('2006', 'Leticia', 'Romero', 'Boliviana'),
+('26', 'Julio', 'Pereira', 'Brasileña'),
+('27', 'Cesar', 'Cabral', 'Europea'),
+('28', 'Nicolas', 'Piñeiro', 'Irlandesa'),
+('29', 'Maicol', 'Rodriguez', 'Uruguaya'),
+('30', 'Leticia', 'Romero', 'Boliviana'),
 #Karate
-('2034', 'Franco', 'Reverdito', 'Española'),
-('2090', 'Esther', 'Niribao', 'Ecuatoriana'),
-('2099', 'Walter', 'Tonniolo', 'Peruana'),
-('2081', 'Valentin', 'Podesta', 'Mexicana'),
-('2082', 'Natalia', 'Gimenez', 'Francesa'),
+('31', 'Franco', 'Reverdito', 'Española'),
+('32', 'Esther', 'Niribao', 'Ecuatoriana'),
+('33', 'Walter', 'Tonniolo', 'Peruana'),
+('34', 'Valentin', 'Podesta', 'Mexicana'),
+('35', 'Natalia', 'Gimenez', 'Italiana'),
 #Natacion
-('2039', 'Alexander', 'Popov', 'Rusa'),
-('2095', 'Mark', 'Spitz', 'Chilena'),
-('2094', 'Jhonny', 'Weismuller', 'Puertoriqueña'),
-('2076', 'Inje', 'Bruijin', 'Canada'),
-('2044', 'Jenny', 'Thompson', 'Uruguaya'),
+('36', 'Alexander', 'Popov', 'Rusa'),
+('37', 'Mark', 'Spitz', 'Chilena'),
+('38', 'Jhonny', 'Weismuller', 'Puertoriqueña'),
+('39', 'Inje', 'Bruijin', 'Canada'),
+('40', 'Jenny', 'Thompson', 'Uruguaya'),
 #TiroAlArco
-('2033', 'Antonio', 'Fernandez', 'Española'),
-('2001', 'Brady', 'Ellison', 'Africana'),
-('1701', 'Kim', 'Wojin', 'Japonesa'),
-('1605', 'Adriana', 'Martin', 'Española'),
-('1606', 'Miguel', 'Luz', 'Uruguaya'),
+('41', 'Antonio', 'Fernandez', 'Española'),
+('42', 'Brady', 'Ellison', 'Africana'),
+('43', 'Kim', 'Wojin', 'Japonesa'),
+('44', 'Adriana', 'Martin', 'Española'),
+('45', 'Miguel', 'Luz', 'Uruguaya'),
 #Formula1
-('2055', 'Alberto', 'Ascari', 'Española'),
-('1789', 'Jackie', 'Stewart', 'Australiana'),
-('1778', 'Alain', 'Prost', 'Paraguaya'),
-('1655', 'Jim', 'Clark', 'Francesa'),
-('1490', 'Bill', 'Bukovich', 'Rusa'),
+('46', 'Alberto', 'Ascari', 'Española'),
+('47', 'Jackie', 'Stewart', 'Australiana'),
+('48', 'Alain', 'Prost', 'Paraguaya'),
+('49', 'Jim', 'Clark', 'Francesa'),
+('50', 'Bill', 'Bukovich', 'Rusa'),
 #Golf
-('2777', 'Tiger', 'Woods', 'Estadounidense'),
-('1333', 'Lee', 'Westwood', 'Italiana'),
-('1444', 'Martin', 'Kaymer', 'Angola'),
-('1212', 'Steve', 'Stricker', 'Turca'),
-('1126', 'Phil', 'Mickelson', 'Irani'),
+('51', 'Tiger', 'Woods', 'Estadounidense'),
+('52', 'Lee', 'Westwood', 'Italiana'),
+('53', 'Martin', 'Kaymer', 'Angola'),
+('54', 'Steve', 'Stricker', 'Turca'),
+('55', 'Phil', 'Mickelson', 'Irani'),
 #TiroAlPlato
-('2558', 'Xabier', 'Azpetia', 'India'),
-('1344', 'Pilar', 'Hudson', 'Canadiense'),
-('1414', 'Beto', 'Dembeto', 'Uruguaya'),
-('1042', 'Tony', 'Stark', 'Estadounidense'),
-('1020', 'Nick', 'Fury', 'Irlandesa'),
+('56', 'Xabier', 'Azpetia', 'India'),
+('57', 'Pilar', 'Hudson', 'Canadiense'),
+('58', 'Beto', 'Dembeto', 'Uruguaya'),
+('59', 'Tony', 'Stark', 'Estadounidense'),
+('60', 'Nick', 'Fury', 'Irlandesa'),
 #TiroConPistola
-('2554', 'Norberto', 'De la Sol', 'Mexicano'),
-('1007', 'Nicole', 'Gonzalez', 'Canadiense'),
-('1098', 'Luana', 'Britos', 'Uruguaya'),
-('1013', 'Thanos', 'Talgico', 'Venezolana'),
-('1979', 'Ricar', 'Dito', 'Ucraniana'),
+('61', 'Norberto', 'De la Sol', 'Mexicano'),
+('62', 'Nicole', 'Gonzalez', 'Canadiense'),
+('63', 'Luana', 'Britos', 'Uruguaya'),
+('64', 'Thanos', 'Talgico', 'Venezolana'),
+('65', 'Ricar', 'Dito', 'Ucraniana'),
 #Bolos
-('2107', 'Don', 'Carter', 'Argentino'),
-('1023', 'Julia', 'Gonzalez', 'Peruana'),
-('1030', 'Nila', 'Mento', 'Brasilera'),
-('1040', 'Toma', 'Tito', 'Caribeña'),
-('1960', 'Cristina', 'Gonzalez', 'Española'),
+('66', 'Don', 'Carter', 'Argentino'),
+('67', 'Julia', 'Gonzalez', 'Peruana'),
+('68', 'Nila', 'Mento', 'Brasilera'),
+('69', 'Toma', 'Tito', 'Caribeña'),
+('70', 'Cristina', 'Gonzalez', 'Española'),
 #Dardos
-('2101', 'Don', 'Jose', 'Argentino'),
-('3056', 'Marisel', 'Balvin', 'Colombiana'),
-('4070', 'Jocki', 'Chon', 'China'),
-('5000', 'Norma', 'Lines', 'Estadounidense'),
-('5100', 'Maria', 'De la Cruz', 'Egipcia'),
+('71', 'Don', 'Jose', 'Argentino'),
+('72', 'Marisel', 'Balvin', 'Colombiana'),
+('73', 'Jocki', 'Chon', 'China'),
+('74', 'Norma', 'Lines', 'Estadounidense'),
+('75', 'Maria', 'De la Cruz', 'Egipcia'),
 #TaiChi
-('3033', 'Jiffu', 'Kamada', 'Japonesa'),
-('3766', 'Po', 'Lian', 'Turco'),
-('4001', 'Tigresa', 'Ton', 'China'),
-('4999', 'Mantis', 'Tuti', 'Irani'),
-('5104', 'Mickey', 'Musca', 'Romana'),
+('76', 'Jiffu', 'Kamada', 'Japonesa'),
+('77', 'Po', 'Lian', 'Turco'),
+('78', 'Tigresa', 'Ton', 'China'),
+('79', 'Mantis', 'Tuti', 'Irani'),
+('80', 'Mickey', 'Musca', 'Romana'),
 #Judo
-('3022', 'Pibu', 'Tito', 'Irlandesa'),
-('3762', 'Rodrigo', 'Lemon', 'Argentino'),
-('4011', 'Ivanna', 'Noquiolo', 'Brasilera'),
-('4800', 'Ruben', 'Ado', 'Noruega'),
-('5200', 'Mini', 'Mouse', 'Italiana'),
+('81', 'Pibu', 'Tito', 'Irlandesa'),
+('82', 'Rodrigo', 'Lemon', 'Argentino'),
+('83', 'Ivanna', 'Noquiolo', 'Brasilera'),
+('84', 'Ruben', 'Ado', 'Noruega'),
+('85', 'Mini', 'Mouse', 'Italiana'),
 #Taekwondo
-('3011', 'Chih Hsiung', 'Huang', 'China'),
-('3300', 'Mauro', 'Sarmiento', 'Italiana'),
-('4379', 'Maria', 'Espinosa', 'Mexicana'),
-('4602', 'Servet', 'Tazegul', 'Noruega'),
-('5250', 'Jingyu', 'Wu', 'China'),
+('86', 'Bruce', 'Lee', 'China'),
+('87', 'Jackie', 'Chan', 'Estadounidense'),
+('88', 'Maria', 'Espinosa', 'Mexicana'),
+('89', 'Servet', 'Tazegul', 'Noruega'),
+('90', 'Jingyu', 'Wu', 'China'),
 #MuayThai
-('4678', 'Buakaw ', 'Banchamek', 'China'),
-('1289', 'Filipović', 'Mart', 'Japonesa'),
-('6669', 'Sandoval', 'Anderson ', 'Brasilera'),
-('6969', 'Carano ', 'Ernesto ', 'Poonesia'),
-('5959', 'Dekkers', 'Ander ', 'India'),
+('91', 'Buakaw ', 'Banchamek', 'China'),
+('92', 'Filipović', 'Mart', 'Japonesa'),
+('93', 'Sandoval', 'Anderson ', 'Brasilera'),
+('94', 'Carano ', 'Ernesto ', 'Poonesia'),
+('95', 'Dekkers', 'Ander ', 'India'),
 #Sambo
-('568', 'Shakira ', 'Gutierrez', 'Española'),
-('750', 'Juan', 'Diaz', 'Mexicana'),
-('7450', 'Bruno', 'Daniels', 'Argentina'),
-('7120', 'Dario', 'Sosa', 'Polonesia'),
-('5321', 'Andres', 'Camargo', 'Canadiense'),
+('96', 'Shakira ', 'Gutierrez', 'Española'),
+('97', 'Juan', 'Diaz', 'Mexicana'),
+('98', 'Bruno', 'Daniels', 'Argentina'),
+('99', 'Dario', 'Sosa', 'Polonesia'),
+('100', 'Andres', 'Camargo', 'Canadiense'),
 #JiuJitsu
-('520', 'Brian', 'Gomez', 'Noruega'),
-('302', 'Romeo', 'Santos', 'Argentina'),
-('7455', 'Maluma', 'Baby', 'Colombiana'),
-('7175', 'Jose', 'Jervasio', 'Indu'),
-('5375', 'Thomas', 'Shelby', 'Estadounidense');
+('101', 'Brian', 'Gomez', 'Noruega'),
+('102', 'Romeo', 'Santos', 'Argentina'),
+('103', 'Maluma', 'Baby', 'Colombiana'),
+('104', 'Jose', 'Jervasio', 'Indu'),
+('105', 'Thomas', 'Shelby', 'Estadounidense'),
+#Kickboxing
+('106', 'Pedro', 'Picapiedra', 'Italiano'),
+('107', 'Tulio', 'Mujica', 'Uruguay'),
+('108', 'Tito', 'Bambino', 'Puertoriqueña'),
+('109', 'Ester', 'Esposito', 'Española'),
+('110', 'Melina', 'Nosebaña', 'Argentina'),
+#Jiu Jitsu Brasileño
+('111', 'Pelado', 'Caceres', 'Indu'),
+('112', 'Alu', 'Nado', 'Irlandesa'),
+('113', 'Bruno', 'Mars', 'Estadounidense'),
+('114', 'Eduardo', 'Banardo', 'Inglesa'),
+('115', 'Ricky', 'Martini', 'Bulgara'),
+#Remo
+('116', 'Remon', 'Golico', 'Ruso'),
+('117', 'Remando', 'Lejos', 'Paraguaya'),
+('118', 'Al Agua', 'Pato', 'Noruega'),
+('119', 'Me', 'Ahogo', 'Española'),
+('120', 'Rema', 'Nija', 'Uruguaya');
+
 
 INSERT INTO Arbitros (IdPersona, Nombre, Apellido, Nacionalidad, Rol) VALUES
-('79', 'Lucas', 'Mariño', 'Uruguaya','Arbitro Jefe'),
-('1018', 'Eusebio', 'Martinez', 'Española', 'Arbitro Jefe'),
-('1125', 'Rita', 'Romero', 'Colombiana', 'Arbitro Jefe'),
-('2032', 'Ignacio', 'Nuñez', 'Brasileña', 'Arbitro Jefe'),
-('2300', 'Oriana', 'Pereira', 'Uruguaya', 'Arbitro Jefe'),
-('80', 'Andre', 'Da Costa', 'Uruguaya', 'Arbitro Jefe'),
-('34', 'Fernando', 'Buero', 'Irlandesa', 'Arbitro Jefe'),
-('1031', 'Erica', 'Filardi', 'Venezolana', 'Arbitro Jefe'),
-('6580', 'Rodrigo', 'Bartacovich', 'Rusa', 'Arbitro Jefe'),
-('6300', 'Camila', 'Bellati', 'Francesa', 'Arbitro Jefe');
+('6', 'Lucas', 'Mariño', 'Uruguaya', 'Arbitro en jefe'),
+('7', 'Eusebio', 'Martinez', 'Española', 'Arbitro en jefe'),
+('8', 'Rita', 'Romero', 'Colombiana', 'Arbitro en jefe'),
+('9', 'Ignacio', 'Nuñez', 'Brasileña', 'Arbitro en jefe'),
+('10', 'Oriana', 'Pereira', 'Uruguaya', 'Arbitro en jefe'),
+('11', 'Andre', 'Da Costa', 'Uruguaya', 'Arbitro en jefe'),
+('12', 'Fernando', 'Buero', 'Irlandesa', 'Arbitro en jefe'),
+('13', 'Erica', 'Filardi', 'Venezolana', 'Arbitro en jefe'),
+('14', 'Rodrigo', 'Bartacovich', 'Rusa', 'Arbitro en jefe'),
+('15', 'Camila', 'Bellati', 'Francesa', 'Arbitro en jefe');
  
 INSERT INTO Deportistas (IdPersona, Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion) VALUES
-('73', 'Federico', 'Valverde', 'Uruguaya', 'Activo', 'Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo que juega como centrocampista en el Real Madrid Club de Fútbol de la Primera División de España desde la temporada 2018-19. Es desde 2017 internacional absoluto con la selección uruguaya.'),
-('1010', 'Luis', 'Suarez', 'Uruguaya', 'Activo', 'Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay'),
-('1144', 'Fernando', 'Muslera', 'Uruguaya', 'Activo', 'Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía.​'),
-('2021', 'Neymar', 'Da Silva Santos', 'Brasileña', 'Activo','Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil'),
-('2019', 'Lucas', 'Torreira', 'Uruguaya', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018.');
+#Futbol
+('16', 'Federico', 'Valverde', 'Uruguaya','Activo', 'Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo que juega como centrocampista en el Real Madrid Club de Fútbol de la Primera División de España desde la temporada 2018-19. Es desde 2017 internacional absoluto con la selección uruguaya.'),
+('17', 'Luis', 'Suarez', 'Uruguaya', 'Activo', 'Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay'),
+('18', 'Fernando', 'Muslera', 'Uruguaya', 'Activo', 'Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía.​'),
+('19', 'Neymar', 'Da Silva Santos', 'Brasileña', 'Activo','Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil'),
+('20', 'Lucas', 'Torreira', 'Uruguaya', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018.'),
+('21', 'Mauro', 'Icardi', 'Argentina','Activo','Mauro Icardi es un futbolista argentino. Juega como delantero y su equipo actual es el Galatasaray Spor Kulübü de la SüperLig. También es internacional con la selección argentina.​'),
+('22', 'Diego', 'Forlan', 'Uruguaya', 'Inactivo', 'Diego Forlán Corazzo es un exfutbolista y actual entrenador uruguayo. Se desempeñaba como delantero o mediapunta. Obtuvo dos Botas de Oro en las temporadas 2004-2005 y 2008-2009, ​ además del Balón de Oro al mejor jugador del Mundial 2010, ​​ como también uno de los mejores futbolistas del Villarreal Club de Fútbol'),
+('23', 'Kylian', 'Mbappe', 'Francesa', 'Activo', 'Mario Antonio Núñez Villarroel, exfutbolista chileno. Jugaba de delantero y actualmente está retirado. Es ídolo y tercer goleador histórico de O Higgins con 82 anotaciones'),
+('24', 'James', 'Rodriguez', 'Colombiana', 'Activo', 'Arma casitas desde los 12 años y juega en el barcelona de delantero, tiene 28 años el pibe.'),
+('25', 'Pepe', 'Muñoz', 'Estadounidense', 'Activo', 'Mas activo que nunca, Pepe tiene 30 años, juega en el Villareal, es vegano a muerte, miralo al pepe, vegano y jugando en el villa.'),
+#Basquetbol
+('26', 'Julio', 'Pereira', 'Brasileña', 'Activo', 'Tiene 26 años, juega en la NBA, Anda volando.'),
+('27', 'Cesar', 'Cabral', 'Europea', 'Activo', 'Tiene 78 años, juega en la NBA, no se deje engañar, el viejo cesar trapea con todos en la cancha, lo ve el Lebron y no cae todavia.'),
+('28', 'Nicolas', 'Piñeiro', 'Irlandesa', 'Activo', 'Tiene 19 años, juega en los Bulls, jovencito y bien rapidito, nana el rayo Mcqueen .'),
+('29', 'Maicol', 'Rodriguez', 'Uruguaya', 'Activo', 'Tiene 32 años, juega en los Bulls, el rey del basquet, entrenado por el mismisimo Maicol Jordan.'),
+('30', 'Leticia', 'Romero', 'Boliviana', 'Activo', 'Tiene 12 años, juega en la NBA, parece de no creer pero a esa edad y jugando en la NBA, tenes que ser muy bueno, na mentira es sobrino de Maicol Jordan, con razon lo dejaron entrar.'),
+#Karate
+('31', 'Franco', 'Reverdito', 'Española', 'Activo', 'Letal, todo un fiero, con 20 años y 80kg de puro musculo, fija el oponente y lo derriba de frente.'),
+('32', 'Esther', 'Niribao', 'Ecuatoriana', 'Activo', 'La queen, toda una fiera, derriba a los oponentes sin pensarlo.'),
+('33', 'Walter', 'Tonniolo', 'Peruana', 'Activo', 'Derriba a todos narrando la historia de como Socrates derroto a un dinosaurio que quedaba vivo con su espada magica.'),
+('34', 'Valentin', 'Podesta', 'Mexicana', 'Activo', 'El mas malo de todos, no me preguntes porque ni le preguntes a el, porque el petizo de 120kg es un toro furioso.'),
+('35', 'Natalia', 'Gimenez', 'Italiana', 'Activa', 'No muy conocida, pero re creida, la natalia que viene de italia, entrenada por el mismisimo Ratatuille o como se escriba, es de las mas peligrosas.'),
+#Natacion
+('36', 'Michael', 'Phelps', 'Rusa', 'Activo', null),
+('37', 'Ian', 'Thorpe', 'Chilena', 'Activo', null),
+('38', 'Jhonny', 'Weismuller', 'Puertoriqueña', 'Activo', null),
+('39', 'Inje', 'Bruijin', 'Canada', 'Activo', null),
+('40', 'Jenny', 'Thompson', 'Uruguaya', 'Activo', null),
+#TiroAlArco
+('41', 'Antonio', 'Fernandez', 'Española', 'Activo', null),
+('42', 'Brady', 'Ellison', 'Africana', 'Activo', null),
+('43', 'Kim', 'Wojin', 'Japonesa', 'Activo', null),
+('44', 'Adriana', 'Martin', 'Española', 'Activo', null),
+('45', 'Miguel', 'Luz', 'Uruguaya', 'Activo', null),
+#Formula1
+('46', 'George', 'Russell', 'Española', 'Activo', null),
+('47', 'Lewis', 'Hamilton', 'Australiana', 'Activo', null),
+('48', 'Alain', 'Prost', 'Paraguaya', 'Activo', null),
+('49', 'Jim', 'Clark', 'Francesa', 'Activo', null),
+('50', 'Bill', 'Bukovich', 'Rusa', 'Activo', null),
+#Golf
+('51', 'Tiger', 'Woods', 'Estadounidense', 'Activo', null),
+('52', 'Lee', 'Westwood', 'Italiana', 'Activo', null),
+('53', 'Martin', 'Kaymer', 'Angola', 'Activo', null),
+('54', 'Steve', 'Stricker', 'Turca', 'Activo', null),
+('55', 'Phil', 'Mickelson', 'Irani', 'Activo', null),
+#TiroAlPlato
+('56', 'Xabier', 'Azpetia', 'India', 'Activo', null),
+('57', 'Pilar', 'Hudson', 'Canadiense', 'Activo', null),
+('58', 'Beto', 'Dembeto', 'Uruguaya', 'Activo', null),
+('59', 'Tony', 'Stark', 'Estadounidense', 'Activo', null),
+('60', 'Nick', 'Fury', 'Irlandesa', 'Activo', null),
+#TiroConPistola
+('61', 'Norberto', 'De la Sol', 'Mexicano', 'Activo', null),
+('62', 'Nicole', 'Gonzalez', 'Canadiense', 'Activo', null),
+('63', 'Luana', 'Britos', 'Uruguaya', 'Activo', null),
+('64', 'Thanos', 'Talgico', 'Venezolana', 'Activo', null),
+('65', 'Ricar', 'Dito', 'Ucraniana', 'Activo', null),
+#Bolos
+('66', 'Don', 'Carter', 'Argentino', 'Activo', null),
+('67', 'Julia', 'Gonzalez', 'Peruana', 'Activo', null),
+('68', 'Nila', 'Mento', 'Brasilera', 'Activo', null),
+('69', 'Toma', 'Tito', 'Caribeña', 'Activo', null),
+('70', 'Cristina', 'Gonzalez', 'Española', 'Activo', null),
+#Dardos
+('71', 'Don', 'Jose', 'Argentino', 'Activo', null),
+('72', 'Marisel', 'Balvin', 'Colombiana', 'Activo', null),
+('73', 'Jocki', 'Chon', 'China', 'Activo', null),
+('74', 'Norma', 'Lines', 'Estadounidense', 'Activo', null),
+('75', 'Maria', 'De la Cruz', 'Egipcia', 'Activo', null),
+#TaiChi
+('76', 'Jiffu', 'Kamada', 'Japonesa', 'Activo', null),
+('77', 'Po', 'Lian', 'Turco', 'Activo', null),
+('78', 'Tigresa', 'Ton', 'China', 'Activo', null),
+('79', 'Mantis', 'Tuti', 'Irani', 'Activo', null),
+('80', 'Mickey', 'Musca', 'Romana', 'Activo', null),
+#Judo
+('81', 'Pibu', 'Tito', 'Irlandesa', 'Activo', null),
+('82', 'Rodrigo', 'Lemon', 'Argentino', 'Activo', null),
+('83', 'Ivanna', 'Noquiolo', 'Brasilera', 'Activo', null),
+('84', 'Ruben', 'Ado', 'Noruega', 'Activo', null),
+('85', 'Mini', 'Mouse', 'Italiana', 'Activo', null),
+#Taekwondo
+('86', 'Bruce', 'Lee', 'China', 'Activo', null),
+('87', 'Jackie', 'Chan', 'Estadounidense', 'Activo', null),
+('88', 'Maria', 'Espinosa', 'Mexicana', 'Activo', null),
+('89', 'Servet', 'Tazegul', 'Noruega', 'Activo', null),
+('90', 'Jingyu', 'Wu', 'China', 'Inactivo', null),
+#MuayThai
+('91', 'Buakaw ', 'Banchamek', 'China', 'Inactivo', null),
+('92', 'Filipović', 'Mart', 'Japonesa', 'Inactivo', null),
+('93', 'Sandoval', 'Anderson ', 'Brasilera', 'Inactivo', null),
+('94', 'Carano ', 'Ernesto ', 'Poonesia', 'Activo', null),
+('95', 'Dekkers', 'Ander ', 'India', 'Activo', null),
+#Sambo
+('96', 'Shakira ', 'Gutierrez', 'Española', 'Activo', null),
+('97', 'Juan', 'Diaz', 'Mexicana', 'Activo', null),
+('98', 'Bruno', 'Daniels', 'Argentina', 'Activo', null),
+('99', 'Dario', 'Sosa', 'Polonesia', 'Activo', null),
+('100', 'Andres', 'Camargo', 'Canadiense', 'Activo', null),
+#JiuJitsu
+('101', 'Brian', 'Gomez', 'Noruega', 'Activo', null),
+('102', 'Romeo', 'Santos', 'Argentina', 'Activo', null),
+('103', 'Maluma', 'Baby', 'Colombiana', 'Activo', null),
+('104', 'Jose', 'Jervasio', 'Indu', 'Activo', null),
+('105', 'Thomas', 'Shelby', 'Estadounidense', 'Activo', null),
+#Kickboxing
+('106', 'Pedro', 'Picapiedra', 'Italiano', 'Activo', null),
+('107', 'Tulio', 'Mujica', 'Uruguay', 'Activo', null),
+('108', 'Tito', 'Bambino', 'Puertoriqueña', 'Activo', null),
+('109', 'Ester', 'Esposito', 'Española', 'Activo', null),
+('110', 'Melina', 'Nosebaña', 'Argentina', 'Activo', null),
+#Jiu Jitsu Brasileño
+('111', 'Pelado', 'Caceres', 'Indu', 'Inactivo', null),
+('112', 'Alu', 'Nado', 'Irlandesa', 'Inactivo', null),
+('113', 'Bruno', 'Mars', 'Estadounidense', 'Activo', null),
+('114', 'Eduardo', 'Banardo', 'Inglesa', 'Activo', null),
+('115', 'Ricky', 'Martini', 'Bulgara', 'Inactivo', null),
+#Remo
+('116', 'Remon', 'Golico', 'Ruso', 'Activo', null),
+('117', 'Remando', 'Lejos', 'Paraguaya', 'Activo', null),
+('118', 'Al Agua', 'Pato', 'Noruega', 'Inactivo', null),
+('119', 'Me', 'Ahogo', 'Española', 'Inactivo', null),
+('120', 'Rema', 'Nija', 'Uruguaya', 'Activo', null);
+
 
 INSERT INTO Equipos (IdEquipo, ImagenRepresentativa, PaisOrigen, NombreEquipo, TipoEquipo) VALUES
-('1919', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg','Uruguay', 'Uruguay', 'Seleccion'),
-('5', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', 'Club'),
-('4', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', 'Club'),
-('16', 'C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Individual'),
-('17', 'C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Individual'),
-('32', 'C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Individual'),
-('33','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Individual'),
-('287', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Individual'),
-('567', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Individual'),
-('1900',  'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Seleccion');
+('1', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg','Uruguay', 'Uruguay', 'Seleccion'),
+('2', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', 'Seleccion'),
+('3', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', 'Seleccion'),
+('4', 'C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Individual'),
+('5', 'C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Individual'),
+('6', 'C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Individual'),
+('7','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Individual'),
+('8', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Individual'),
+('9', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Individual'),
+('10',  'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Seleccion');
 
 INSERT INTO EquiposDeportistas(IdEquipo, IdPersona, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoJugador, Descripcion, NumeroJugador, TipoEquipo) VALUES
-('1919', '0073', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo.', '15', 'Seleccion'),
-('1919', '1010', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay', '9', 'Seleccion'),
-('1919', '1144', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía', '1', 'Seleccion'),
-('1919', '2019', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018', '14', 'Seleccion'),
-('1900', '2021', 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Activo', 'Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil', '10', 'Seleccion');
+('1' , '16', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo.', '15', 'Seleccion'),
+('1' , '17', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay', '9', 'Seleccion'),
+('1' , '18', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía', '1', 'Seleccion'),
+('1' , '20', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018', '14', 'Seleccion'),
+('10', '19', 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Activo', 'Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil', '10', 'Seleccion'),
+('2' , '23', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', 'Activo', 'Kylian Mbappé Lottin es un futbolista francés que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1. Comenzó su carrera con el club Mónaco de la Ligue 1, haciendo su debut profesional en 2015, a los 16 años' , '10' ,'Seleccion'),
+('3' , '24', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', 'Activo', 'James David Rodríguez Rubio, conocido como James Rodríguez, es un futbolista colombiano que juega como centrocampista y su equipo actual es el Olympiacos F. C. de la Superliga de Grecia. Es internacional con la selección de Colombia.' , '10' ,'Seleccion'),
+('4' ,  '46','C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Activo', 'George William Russell es un piloto británico de automovilismo.​ Fue campeón de GP3 Series en 2017 y de Fórmula 2 en 2018. Desde 2019 hasta 2021 compitió para Williams en Fórmula 1.​ Desde 2022 es piloto de la escudería Mercedes-AMG Petronas.' , '7', 'Individual'),
+('5' ,  '47','C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Activo', 'Lewis Carl Davidson Larbalestier Hamilton​​ es un piloto británico de automovilismo. En Fórmula 1 desde 2007 hasta 2012, fue piloto de la escudería McLaren, con la cual fue campeón en 2008 y subcampeón en 2007.','9','Individual'),
+('6' ,  '86','C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Activo', 'Bruce Lee fue un artista marcial, maestro de artes marciales, actor, cineasta, filósofo y escritor estadounidense de origen hongkonés','2','Individual'),
+('7' ,  '87','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Activo', 'Chan Kong-sang, ​conocido por su nombre artístico Jackie Chan, es un artista marcial, comediante, cantante, actor, acróbata, doble de acción, coordinador de dobles de acción, director, guionista, productor y actor de voz chino.','3','Individual'),
+('8' ,  '36','C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Activo', 'Michael Fred Phelps II​ es un exnadador olímpico estadounidense​ y el deportista olímpico más condecorado de todos los tiempos, con un total de 28 medallas.​ Phelps también posee los récords de más medallas olímpicas de oro, más medallas de oro en eventos individuales y más medallas olímpicas en eventos masculinos.','5','Individual'),
+('9' ,  '37','C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Activo', 'Ian James Thorpe, AO, es un nadador australiano, apodado Thorpedo y Thorpey. Ganó cinco medallas de oro en Juegos Olímpicos, siendo la mayor marca conseguida por cualquier deportista australiano, y en 2001 se convirtió en la única persona en ganar seis medallas de oro en un solo Campeonato Mundial de Natación.​','8','Individual');
+
 
 INSERT INTO Categorias (IdCategoria, NombreCategoria) VALUES
 ('1', 'Juegos de pelota'),
@@ -682,7 +831,7 @@ INSERT INTO Deportes (IdDeporte, ImagenDeporte, Destacado, NombreDeporte) VALUES
 
 INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, ImagenDeporte, Destacado, NombreDeporte, NombreCategoria) VALUES
 ('1', '1', 'C:\Users\USUARIO\Downloads\PelotaFutbol.jpg', true, 'Futbol', 'Juegos de pelota'),
-('2', '1', 'C:\Users\USUARIO\Downloads\PelotaBasquet.jpg', true, 'Basquetbol', 'Juegos de pelota'),
+('2', '1', 'C:\Users\USUARIO\Downloads\PelotaBasquet.jpg', true, 'Basquetbol', 'Juegos de basquet'),
 ('3', '2', 'C:\Users\USUARIO\Downloads\PersonaM.jpg', false, 'Karate', 'Artes marciales'),
 ('4', '3', 'C:\Users\USUARIO\Downloads\PersonaN.jpg', true, 'Natación', 'Acuáticos'),
 ('5', '4', 'C:\Users\USUARIO\Downloads\Auto.jpg', true, 'Fórmula 1', 'Motorizados'),
@@ -718,23 +867,23 @@ INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, ImagenDeporte, Destac
 ('35', '1', 'C:\Users\USUARIO\Downloads\Voleibol.jpg', false, 'Voleibol', 'Juegos de pelota');
 
 INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro) VALUES
-('1', '1', '1', '79', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
-('2', '3', '2', '1018', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1'),
-('3', '5', '4', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', '1'),
-('4', '2', '1', '79', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', '1'),
-('5', '4', '3', '2300', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
+('1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
+('2', '3', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1'),
+('3', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1'),
+('4', '1', '1', '23', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', '1'),
+('5', '4', '3', '36', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
 
 INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo, Tipoencuentro) VALUES
-('1', '1', '1', '79', '1919', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion', '1'),
-('1', '1', '1', '79', '1900', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion', '1'),
-('2', '3', '2', '1018', '32', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual', '1'),
-('2', '3', '2', '1018', '33', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual', '1'),
-('3', '5', '4', '16', '2032', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
-('3', '5', '4', '17', '2031', '03:25', 'Av.18 de julio', '2022-09-1', 'La noche en que se escribio esto', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
-('4', '2', '1', '79', '4', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Uruguay', 'Olimpia', null, '7', 'C:\Users\USUARIO\Downloads\OlimpiaAlineacion.jpg', 'Club', '1'),
-('4', '2', '1', '79', '5', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\AguadaLogo.jpg', 'Uruguay', 'Aguada', null, '8', 'C:\Users\USUARIO\Downloads\AguadaAlineacion.jpg', 'Club', '1'),
-('5', '4', '3', '2300', '287', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual', '1'),
-('5', '4', '3', '2300', '567', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual', '1');
+('1', '1', '1', '16', '1', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion', '1'),
+('1', '1', '1', '19', '10', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion', '1'),
+('2', '3', '2', '86', '6', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual', '1'),
+('2', '3', '2', '87', '7', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '46', '4', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '47', '5', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('4', '1', '1', '23', '2', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', null, '7', 'C:\Users\USUARIO\Downloads\FranciaAlineacion.jpg', 'Seleccion', '1'),
+('4', '1', '1', '24', '3', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', null, '8', 'C:\Users\USUARIO\Downloads\ColombiaAlineacion.jpg', 'Seleccion', '1'),
+('5', '4', '3', '36', '8', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual', '1'),
+('5', '4', '3', '37', '9', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual', '1');
 
 INSERT INTO Round (NumeroRound, IdEncuentro, TiempoTranscurridoRound, IdPuntuacionRound, IdHito) VALUES
 ('1', '1', '00:45:00', '1', '1'),
@@ -805,16 +954,16 @@ INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase)
 ('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
 
 INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
-('1', '1', '3', '1', '73' ),
-('2', '3', '1', '0', '1010' ),
-('3', '4', '3', '4', '2019' ),
-('4', '5', '3', '2', '2021' );
+('1', '1', '3', '1', '16' ),
+('2', '3', '1', '0', '46' ),
+('3', '4', '3', '4', '23' ),
+('4', '5', '3', '2', '36' );
 
 INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase) VALUES 
-('1919', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
-('1900', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
-('567', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
-('287', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
+('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
+('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
+('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
+('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
 
 INSERT INTO EventosFavoritos (IdEventosFavoritos, IdEvento, Email) VALUES
 ('1', '1', 'alexelleon2018@gmail.com'),
@@ -830,20 +979,19 @@ INSERT INTO EncuentrosFavoritos (IdEncuentrosFavoritos, IdEncuentro, Email) VALU
 ('3', '4', 'analaurali@gmail.com'),
 ('4', '5', 'loloOne@gmail.com'),
 ('5', '3', 'lolaFive@gmail.com'),
-('6', '2', 'admin@certus.com'),
-('7', '4', 'admin@certus.com');
+('6', '2', 'admin@certus.com');
  
 INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
-('1', '1919', 'alexelleon2018@gmail.com'),
+('1', '1', 'alexelleon2018@gmail.com'),
 ('2', '5', 'perezgomez45@gmail.com'),
 ('3', '4', 'analaurali@gmail.com'),
-('4', '17', 'loloOne@gmail.com'),
-('5', '16', 'lolaFive@gmail.com'),
-('6', '1900', 'admin@certus.com'),
-('7', '16', 'sinclair@hotmail.com'),
-('8', '567', 'elseñordelaesquinaquevendetortafritas@gmail.com'),
-('9', '32', 'Mufasa@gmail.com'),
-('10', '33', 'simba@gmail.com');
+('4', '10', 'loloOne@gmail.com'),
+('5', '6', 'lolaFive@gmail.com'),
+('6', '1', 'admin@certus.com'),
+('7', '5', 'sinclair@hotmail.com'),
+('8', '9', 'elseñordelaesquinaquevendetortafritas@gmail.com'),
+('9', '8', 'Mufasa@gmail.com'),
+('10', '7', 'simba@gmail.com');
  
 INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
 ('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '1', '1', '1'),
@@ -871,7 +1019,7 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('Pumba@gmail.com', 'Pumba', 'troncoencimadelosinsectos', 093563423, '1', '1', '1', '1'),
 ('Rafiki@gmail.com', 'Rafiki', 'lasfrutasdelotrodiaestabansimba', null, '1', '1', '1', '1'),
 ('korino300@gmail.com', 'Hinoken', 'dragonoy300', 095243013, '2', '1', '1', '1'),
-('Bastion@gmail.com', 'Vanguard', 'torreA4', 099999999, '1', '1', '1', '1'),
+('Bastion@gmail.com', 'Vanguard', 'torreA4', 099939999, '1', '1', '1', '1'),
 ('Gaston1234@gmail.com', 'Gasty', '7261726', null, '1', '1', '1', '1'),
 ('Leonidas@gmail.com', 'Leo', 'termopilas', null, '2', '1', '1', '1'),
 ('Salazar@gmail.com', 'Salado', 'rimaters', 094527465, '1', '1', '1', '1'),
