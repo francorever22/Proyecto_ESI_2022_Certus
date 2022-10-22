@@ -127,26 +127,6 @@ TipoEquipo VARCHAR(15) NOT NULL,
 PRIMARY KEY (IdEquipo, IdPersona)
 );
 
-CREATE TABLE EquiposFases
-(
-IdEquipo INT,
-NumeroFase INT,
-IdEvento INT,
-Uniforme BLOB,
-ImagenRepresentativa BLOB,
-PaisOrigen VARCHAR(80) NOT NULL,
-NombreEquipo VARCHAR(120) NOT NULL,
-EstadoFase VARCHAR(70) NOT NULL,
-NombreFase VARCHAR(80),
-Fecha DATE,
-PosicionEquipo INT,
-EstadoEquipo VARCHAR(80),
-Puntaje INT,
-TipoEquipo VARCHAR(15),
-Tipofase TINYINT NOT NULL,
-PRIMARY KEY (IdEquipo, NumeroFase, IdEvento)
-);
-
 CREATE TABLE EstadisticasJugador
 (
 IdEstadisticasJugador INT AUTO_INCREMENT,
@@ -168,26 +148,24 @@ Tipofase TINYINT NOT NULL,
 PRIMARY KEY (NumeroFase, IdEvento)
 );
 
-CREATE TABLE EventosEncuentros
+CREATE TABLE EquiposFases
 (
+IdEquipo INT,
+NumeroFase INT,
 IdEvento INT,
-IdEncuentro INT,
-FechaEvento DATE NOT NULL,
-NombreEvento VARCHAR(70) NOT NULL,
-HoraEvento TIME NOT NULL,
-EstadoEvento VARCHAR(20) NOT NULL,
-LogoEvento BLOB,
-LugarEvento VARCHAR(50) NOT NULL,
-Hora TIME NOT NULL,
-LugarEncuentro VARCHAR(100),
-FechaEncuentro DATE,
-Puntuacion INT,
-Posicion INT,
-NombreEncuentro VARCHAR(50),
-EstadoEncuentro VARCHAR(50),
-Clima VARCHAR(50),
-Tipoencuentro TINYINT NOT NULL,
-PRIMARY KEY (IdEvento, IdEncuentro)
+Uniforme BLOB,
+ImagenRepresentativa BLOB,
+PaisOrigen VARCHAR(80) NOT NULL,
+NombreEquipo VARCHAR(120) NOT NULL,
+EstadoFase VARCHAR(70) NOT NULL,
+NombreFase VARCHAR(80),
+Fecha DATE,
+PosicionEquipo INT,
+EstadoEquipo VARCHAR(80),
+Puntaje INT,
+TipoEquipo VARCHAR(15),
+Tipofase TINYINT NOT NULL,
+PRIMARY KEY (IdEquipo, NumeroFase, IdEvento)
 );
 
 CREATE TABLE Eventos
@@ -245,6 +223,28 @@ CREATE TABLE Encuentros (
  EstadoEncuentro VARCHAR(25) NOT NULL, 
  Clima VARCHAR(25),
  TipoEncuentro TINYINT NOT NULL
+);
+
+CREATE TABLE EncuentrosFases (
+ IdEncuentro INT,
+ NumeroFase INT,
+ IdEvento INT,
+ IdDeporte INT,
+ IdCategoria INT,
+ IdPersona INT,
+ Hora TIME NOT NULL, 
+ Lugar VARCHAR(120),
+ FechaEncuentro DATE NOT NULL, 
+ NombreEncuentro VARCHAR(50), 
+ EstadoEncuentro VARCHAR(25) NOT NULL, 
+ Clima VARCHAR(25),
+ TipoEncuentro TINYINT NOT NULL,
+ Fecha DATE,
+ NombreFase VARCHAR(120),
+ EstadoFase VARCHAR(20),
+ Tipofase TINYINT NOT NULL,
+ Puntaje INT,
+ PRIMARY KEY (IdEncuentro, NumeroFase, IdEvento)
 );
 
 CREATE TABLE EquiposEncuentros (
@@ -323,9 +323,9 @@ GRANT INSERT, UPDATE, DROP ON EquiposEncuentros TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON Round TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON PuntuacionRound TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON Hito TO Usuario_C;
-GRANT INSERT, UPDATE, DROP ON EventosEncuentros TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON Fases TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON EstadisticasJugador TO Usuario_C;
+GRANT INSERT, UPDATE, DROP ON EncuentrosFases TO Usuario_C;
 GRANT INSERT, UPDATE, DROP ON EquiposFases TO Usuario_C;
 
 CREATE USER Usuario_D;
@@ -352,9 +352,9 @@ GRANT SELECT ON EquiposEncuentros TO Usuario_E;
 GRANT SELECT ON Round TO Usuario_E;
 GRANT SELECT ON PuntuacionRound TO Usuario_E;
 GRANT SELECT ON Hito TO Usuario_E;
-GRANT SELECT ON EventosEncuentros TO Usuario_E;
 GRANT SELECT ON Fases TO Usuario_E;
 GRANT SELECT ON EstadisticasJugador TO Usuario_E;
+GRANT SELECT ON EncuentrosFases TO Usuario_E;
 GRANT SELECT ON EquiposFases TO Usuario_E;
 
 
@@ -940,30 +940,29 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
-INSERT INTO EventosEncuentros(IdEvento, IdEncuentro, FechaEvento, NombreEvento, HoraEvento, EstadoEvento, LogoEvento, LugarEvento, Hora, LugarEncuentro, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro) VALUES
-('1', '1','2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia', '13:00', 'Estadio Campeon del Siglo', '2022-06-22', 'Uruguay vs Brasil', 'En juego', 'Lluvioso', '1'),
-('4', '3', '2023-09-11', 'Partidito de basquet', '13:30', 'Coming soon', 'C:\Users\USUARIO\Downloads\BasquetLogo.jpg', 'Pando', '18:00', 'Canchita de los pibes ', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
-('3', '4', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda', '12:00', 'Donde cayo el avion', '2026-02-16', 'Dar caridad y amor', 'En transcurso', 'LLuvia de meteoritos', '1'),
-('2', '5', '2027-05-12', 'Competencia de baile', '03:33', 'In progress', 'C:\Users\USUARIO\Downloads\AsociacionLogo.jpg', 'Asociación cristiana de jovenes', '19:00', 'Vaticano', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
-
-INSERT INTO Fases(NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase) VALUES
+INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase) VALUES
 ('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
 ('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1'),
 ('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1'),
 ('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1'),
 ('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
 
-INSERT INTO EstadisticasJugador(IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
-('1', '1', '3', '1', '16' ),
-('2', '3', '1', '0', '46' ),
-('3', '4', '3', '4', '23' ),
-('4', '5', '3', '2', '36' );
+INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje) VALUES
+('1', '1', '1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
+('2', '3', '1', '4', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1'),
+('3', '1', '2', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '1');
 
 INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase) VALUES 
 ('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
 ('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
 ('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
 ('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
+
+INSERT INTO EstadisticasJugador (IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
+('1', '1', '3', '1', '16' ),
+('2', '3', '1', '0', '46' ),
+('3', '4', '3', '4', '23' ),
+('4', '5', '3', '2', '36' );
 
 INSERT INTO EventosFavoritos (IdEventosFavoritos, IdEvento, Email) VALUES
 ('1', '1', 'alexelleon2018@gmail.com'),
@@ -1091,8 +1090,8 @@ SELECT NombreUsuario
 FROM Usuarios
 WHERE NivelPermisos < 2;
 
-SELECT NombreDeporte, COUNT(IdEvento)
-FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte)
+SELECT NombreDeporte, COUNT(Eventos.IdEvento)
+FROM EncuentrosFases JOIN Encuentros ON (EncuentrosFases.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) JOIN Eventos ON (EncuentrosFases.IdEvento = Eventos.IdEvento)
 WHERE EstadoEvento = 'In progress'
 GROUP BY DeportesCategorizados.IdDeporte;
 
@@ -1109,10 +1108,10 @@ WHERE IdEquipo = 1919
 ORDER BY IdEncuentro DESC limit 5;
 
 SELECT Equipos.IdEquipo, Equipos.NombreEquipo
-FROM Equipos INNER JOIN EquiposFases ON Equipos.IdEquipo = EquiposFases.IdEquipo INNER JOIN Fases ON EquiposFases.IdEvento = Fases.IdEvento INNER JOIN Eventos ON Fases.IdEvento = Eventos.IdEvento
+FROM Equipos JOIN EquiposFases ON (Equipos.IdEquipo = EquiposFases.IdEquipo) JOIN Fases ON (EquiposFases.IdEvento = Fases.IdEvento) JOIN Eventos ON (Fases.IdEvento = Eventos.IdEvento)
 WHERE NombreEvento = 'Copa Libertadores de America' AND EstadoEquipo != 'Eliminado';
 
 SELECT NombreEvento, NombreDeporte, COUNT(IdEquipo)
-FROM EventosEncuentros JOIN Encuentros ON (EventosEncuentros.IdEncuentro = Encuentros.IdEncuentro) JOIN DeportesCategorizados ON (Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro)
+FROM EncuentrosFases JOIN Eventos ON (EncuentrosFases.IdEvento = Eventos.IdEvento) JOIN DeportesCategorizados ON (EncuentrosFases.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (EncuentrosFases.IdEncuentro = EquiposEncuentros.IdEncuentro)
 WHERE TipoEquipo = 'Individual'
-GROUP BY IdEvento;
+GROUP BY Eventos.IdEvento;
