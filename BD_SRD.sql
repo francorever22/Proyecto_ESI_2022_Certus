@@ -5,288 +5,288 @@ USE SRD;
 CREATE TABLE Publicidades
 (
 IdPublicidad int AUTO_INCREMENT PRIMARY KEY, 
-Banner blob,
-Link varchar(120),
-TituloPublicidad varchar(70)
+Banner BLOB,
+Link VARCHAR(120),
+TituloPublicidad VARCHAR(70)
 );
 
 CREATE TABLE Usuarios
 (
-Email varchar(70) PRIMARY KEY,
-NombreUsuario varchar(50) unique,
-Contraseña varchar(50),
-NumeroTelefono varchar(15),
-NivelPermisos int,
-IdEventosFavoritos int,
-IdEncuentrosFavoritos int,
-IdEquiposFavoritos int 
+Email VARCHAR(70) PRIMARY KEY,
+NombreUsuario VARCHAR(50) unique,
+Contraseña VARCHAR(50),
+NumeroTelefono VARCHAR(15),
+NivelPermisos INT,
+IdEventosFavoritos INT,
+IdEncuentrosFavoritos INT,
+IdEquiposFavoritos INT 
 );
 
 CREATE TABLE EventosFavoritos
 (
-IdEventosFavoritos int PRIMARY KEY,
-IdEvento int,
-Email varchar(70) unique
+IdEventosFavoritos INT AUTO_INCREMENT PRIMARY KEY,
+IdEvento INT,
+Email VARCHAR(70) UNIQUE
 );
 
 CREATE TABLE EncuentrosFavoritos
 (
-IdEncuentrosFavoritos int PRIMARY KEY,
-IdEncuentro int,
-Email varchar(70) unique
+IdEncuentrosFavoritos INT AUTO_INCREMENT PRIMARY KEY,
+IdEncuentro INT,
+Email VARCHAR(70) UNIQUE
 );
 
 CREATE TABLE EquiposFavoritos
 (
-IdEquiposFavoritos int PRIMARY KEY,
-IdEquipo int,
-Email varchar(70) unique
+IdEquiposFavoritos INT AUTO_INCREMENT PRIMARY KEY,
+IdEquipo INT,
+Email VARCHAR(70) UNIQUE
 );
 
 CREATE TABLE PublicidadesUsuarios
 (
-IdPublicidad int,
-Email varchar(70),
-NombreUsuario varchar(50) unique,
-Contraseña varchar(50),
-NumeroTelefono varchar(15),
-NivelPermisos int,
-Banner blob,
-Link varchar(120),
-TituloPublicidad varchar(70),
-IdEventosFavoritos int,
-IdEncuentrosFavoritos int,
-IdEquiposFavoritos int, 
-primary key (IdPublicidad, Email)
+IdPublicidad INT,
+Email VARCHAR(70),
+NombreUsuario VARCHAR(50) UNIQUE,
+Contraseña VARCHAR(50),
+NumeroTelefono VARCHAR(15),
+NivelPermisos INT,
+Banner BLOB,
+Link VARCHAR(120),
+TituloPublicidad VARCHAR(70),
+IdEventosFavoritos INT,
+IdEncuentrosFavoritos INT,
+IdEquiposFavoritos INT, 
+PRIMARY KEY (IdPublicidad, Email)
 );
 
 CREATE TABLE Personas
 (
-IdPersona int PRIMARY KEY,
-Nombre varchar(50)not null,
-Apellido varchar(50) not null,
-Nacionalidad varchar(50) not null
+IdPersona INT AUTO_INCREMENT PRIMARY KEY,
+Nombre VARCHAR(50)NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
+Nacionalidad varchar(50) NOT NULL
 );
 
 CREATE TABLE UsuariosPersonas
 (
-Email varchar(70),
-IdPersona int,
-Nombre varchar(50) not null,
-Apellido varchar(50) not null,
-Nacionalidad varchar(50) not null,
-NombreUsuario varchar(50) unique,
-Contraseña varchar(50),
-NumeroTelefono varchar(15),
-NivelPermisos int,
-IdEventosFavoritos int,
-IdEncuentrosFavoritos int,
-IdEquiposFavoritos int,
-primary key (IdPersona, Email)
+Email VARCHAR(70),
+IdPersona INT,
+Nombre VARCHAR(50) NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
+Nacionalidad VARCHAR(50) not NULL,
+NombreUsuario VARCHAR(50) UNIQUE,
+Contraseña VARCHAR(50),
+NumeroTelefono VARCHAR(15),
+NivelPermisos INT,
+IdEventosFavoritos INT,
+IdEncuentrosFavoritos INT,
+IdEquiposFavoritos INT,
+PRIMARY KEY (IdPersona, Email)
 );
 
 CREATE TABLE Arbitros
 (
-IdPersona int PRIMARY KEY,
-Nombre varchar(50)not null,
-Apellido varchar(50) not null,
-Nacionalidad varchar(50) not null,
-Rol varchar(30)
+IdPersona INT PRIMARY KEY,
+Nombre VARCHAR(50) NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
+Nacionalidad VARCHAR(50) NOT NULL,
+Rol VARCHAR(30)
 );
 
 CREATE TABLE Deportistas
 (
-IdPersona int primary key,
-Nombre varchar(50)not null,
-Apellido varchar(50) not null,
-Nacionalidad varchar(50) not null,
-EstadoJugador varchar(50),
-Descripcion text 
+IdPersona INT PRIMARY KEY,
+Nombre VARCHAR(50)NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
+Nacionalidad VARCHAR(50) NOT NULL,
+EstadoJugador VARCHAR(50),
+Descripcion TEXT 
 );
 
 CREATE TABLE Equipos
 (
-IdEquipo int primary key,
-ImagenRepresentativa blob,
-PaisOrigen varchar(80) not null,
-NombreEquipo varchar(120) not null,
-TipoEquipo varchar(15) not null
+IdEquipo INT AUTO_INCREMENT PRIMARY KEY,
+ImagenRepresentativa BLOB,
+PaisOrigen VARCHAR(80) NOT NULL,
+NombreEquipo VARCHAR(120) NOT NULL,
+TipoEquipo VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE EquiposDeportistas
 (
-IdEquipo int,
-IdPersona int,
-ImagenRepresentativa blob,
-PaisOrigen varchar(80) not null,
-NombreEquipo varchar(120) not null,
-EstadoJugador varchar(70) not null,
-Descripcion text,
-NumeroJugador int,
-TipoEquipo varchar(15) not null,
-primary key (IdEquipo, IdPersona)
+IdEquipo INT,
+IdPersona INT,
+ImagenRepresentativa BLOB,
+PaisOrigen varchar(80) NOT NULL,
+NombreEquipo varchar(120) NOT NULL,
+EstadoJugador varchar(70) NOT NULL,
+Descripcion TEXT,
+NumeroJugador INT,
+TipoEquipo VARCHAR(15) NOT NULL,
+PRIMARY KEY (IdEquipo, IdPersona)
 );
 
 CREATE TABLE EquiposFases
 (
-IdEquipo int,
-NumeroFase int,
-IdEvento int,
-Uniforme blob,
-ImagenRepresentativa blob,
-PaisOrigen varchar(80) not null,
-NombreEquipo varchar(120) not null,
-EstadoFase varchar(70) not null,
-NombreFase varchar(80),
-Fecha date,
-PosicionEquipo int,
-EstadoEquipo varchar(80),
-Puntaje int,
-TipoEquipo varchar(15),
-Tipofase tinyInt not null,
-primary key (IdEquipo, NumeroFase, IdEvento)
+IdEquipo INT,
+NumeroFase INT,
+IdEvento INT,
+Uniforme BLOB,
+ImagenRepresentativa BLOB,
+PaisOrigen VARCHAR(80) NOT NULL,
+NombreEquipo VARCHAR(120) NOT NULL,
+EstadoFase VARCHAR(70) NOT NULL,
+NombreFase VARCHAR(80),
+Fecha DATE,
+PosicionEquipo INT,
+EstadoEquipo VARCHAR(80),
+Puntaje INT,
+TipoEquipo VARCHAR(15),
+Tipofase TINYINT NOT NULL,
+PRIMARY KEY (IdEquipo, NumeroFase, IdEvento)
 );
 
 CREATE TABLE EstadisticasJugador
 (
-IdEstadisticasJugador int,
-IdEncuentro int,
-Anotacion int,
-Faltas varchar(80),
-IdDeportista int,
-primary key (IdEstadisticasJugador, IdEncuentro)
+IdEstadisticasJugador INT AUTO_INCREMENT,
+IdEncuentro INT,
+Anotacion INT,
+Faltas VARCHAR(80),
+IdDeportista INT,
+PRIMARY KEY (IdEstadisticasJugador, IdEncuentro)
 );
 
 CREATE TABLE Fases
 (
-NumeroFase int,
-IdEvento int,
-Fecha date,
-NombreFase varchar(120),
-EstadoFase varchar(20),
-Tipofase tinyInt not null,
-primary key (NumeroFase, IdEvento)
+NumeroFase INT,
+IdEvento INT,
+Fecha DATE,
+NombreFase VARCHAR(120),
+EstadoFase VARCHAR(20),
+Tipofase TINYINT NOT NULL,
+PRIMARY KEY (NumeroFase, IdEvento)
 );
 
 CREATE TABLE EventosEncuentros
 (
-IdEvento int,
-IdEncuentro int,
-FechaEvento date not null,
-NombreEvento varchar(70) not null,
-HoraEvento time not null,
-EstadoEvento varchar(20) not null,
-LogoEvento blob,
-LugarEvento varchar(50) not null,
-Hora time not null,
-LugarEncuentro varchar(100),
-FechaEncuentro date,
-Puntuacion int,
-Posicion int,
-NombreEncuentro varchar(50),
-EstadoEncuentro varchar(50),
-Clima varchar(50),
-Tipoencuentro tinyInt not null,
-primary key (IdEvento, IdEncuentro)
+IdEvento INT,
+IdEncuentro INT,
+FechaEvento DATE NOT NULL,
+NombreEvento VARCHAR(70) NOT NULL,
+HoraEvento TIME NOT NULL,
+EstadoEvento VARCHAR(20) NOT NULL,
+LogoEvento BLOB,
+LugarEvento VARCHAR(50) NOT NULL,
+Hora TIME NOT NULL,
+LugarEncuentro VARCHAR(100),
+FechaEncuentro DATE,
+Puntuacion INT,
+Posicion INT,
+NombreEncuentro VARCHAR(50),
+EstadoEncuentro VARCHAR(50),
+Clima VARCHAR(50),
+Tipoencuentro TINYINT NOT NULL,
+PRIMARY KEY (IdEvento, IdEncuentro)
 );
 
 CREATE TABLE Eventos
 (
-IdEvento int,
-FechaEvento date not null,
-NombreEvento varchar(70) not null,
-HoraEvento time not null,
-EstadoEvento varchar(20) not null,
-LogoEvento blob,
-LugarEvento varchar(50) not null,
-primary key (IdEvento)
+IdEvento INT AUTO_INCREMENT,
+FechaEvento DATE NOT NULL,
+NombreEvento VARCHAR(70) NOT NULL,
+HoraEvento TIME NOT NULL,
+EstadoEvento VARCHAR(20) NOT NULL,
+LogoEvento BLOB,
+LugarEvento VARCHAR(50) NOT NULL,
+PRIMARY KEY (IdEvento)
 );
 
 CREATE TABLE Hito
 (
-IdHito int primary key,
-NumeroRound int, 
-IdEncuentro int,
-TituloHito varchar(70),
-TiempoHito time
+IdHito INT AUTO_INCREMENT PRIMARY KEY,
+NumeroRound INT, 
+IdEncuentro INT,
+TituloHito VARCHAR(70),
+TiempoHito TIME
 );
 
 CREATE TABLE Categorias (
-IdCategoria int PRIMARY KEY, 
-NombreCategoria varchar(50) not null 
+IdCategoria INT AUTO_INCREMENT PRIMARY KEY, 
+NombreCategoria VARCHAR(50) NOT NULL 
 );
 
 CREATE TABLE Deportes (
- IdDeporte int PRIMARY KEY, 
- NombreDeporte varchar(50) not null unique,
- ImagenDeporte blob,
- Destacado bool
+ IdDeporte INT AUTO_INCREMENT PRIMARY KEY, 
+ NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
+ ImagenDeporte BLOB,
+ Destacado BOOL
 );
  
 CREATE TABLE DeportesCategorizados (
- IdDeporte int,
- IdCategoria int, 
- NombreDeporte varchar(50) not null unique,
- ImagenDeporte blob,
- Destacado bool, 
- NombreCategoria varchar(50) not null ,
+ IdDeporte INT,
+ IdCategoria INT, 
+ NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
+ ImagenDeporte BLOB,
+ Destacado BOOL, 
+ NombreCategoria VARCHAR(50) NOT NULL,
 PRIMARY KEY (IdDeporte, IdCategoria)
  );
  
 CREATE TABLE Encuentros (
- IdEncuentro int PRIMARY KEY,
- IdDeporte int,
- IdCategoria int,
- IdPersona int,
- Hora time not null, 
- Lugar varchar(120),
- FechaEncuentro date not null, 
- NombreEncuentro varchar (50), 
- EstadoEncuentro varchar(25) not null, 
- Clima varchar(25),
- TipoEncuentro tinyInt not null
+ IdEncuentro INT AUTO_INCREMENT PRIMARY KEY,
+ IdDeporte INT,
+ IdCategoria INT,
+ IdPersona INT,
+ Hora TIME NOT NULL, 
+ Lugar VARCHAR(120),
+ FechaEncuentro DATE NOT NULL, 
+ NombreEncuentro VARCHAR(50), 
+ EstadoEncuentro VARCHAR(25) NOT NULL, 
+ Clima VARCHAR(25),
+ TipoEncuentro TINYINT NOT NULL
 );
 
 CREATE TABLE EquiposEncuentros (
- IdEquipo int, 
- IdEncuentro int,
- IdDeporte int,
- IdCategoria int,
- IdPersona int,
- Uniforme blob,
- ImagenRepresentativa blob,
- PaisOrigen varchar(80) not null,
- NombreEquipo varchar(120) not null,
- TipoEquipo varchar(15) not null,
- Hora time not null, 
- Lugar varchar(120),
- FechaEncuentro date not null,
- NombreEncuentro varchar (50),
- EstadoEncuentro varchar(25) not null,
- Clima varchar(25), 
- Puntuacion int, 
- Posicion int, 
- Alineacion blob,
- TipoEncuentro tinyInt not null,
+ IdEquipo INT, 
+ IdEncuentro INT,
+ IdDeporte INT,
+ IdCategoria INT,
+ IdPersona INT,
+ Uniforme BLOB,
+ ImagenRepresentativa BLOB,
+ PaisOrigen VARCHAR(80) NOT NULL,
+ NombreEquipo VARCHAR(120) NOT NULL,
+ TipoEquipo VARCHAR(15) NOT NULL,
+ Hora TIME NOT NULL, 
+ Lugar VARCHAR(120),
+ FechaEncuentro DATE NOT NULL,
+ NombreEncuentro VARCHAR (50),
+ EstadoEncuentro VARCHAR(25) NOT NULL,
+ Clima VARCHAR(25), 
+ Puntuacion INT, 
+ Posicion INT, 
+ Alineacion BLOB,
+ TipoEncuentro TINYINT NOT NULL,
  PRIMARY KEY (IdEquipo, IdEncuentro)
  );
  
 CREATE TABLE Round (
-NumeroRound int, 
-IdEncuentro int,
-TiempoTranscurridoRound time not null,
-IdPuntuacionRound int, 
-IdHito int,
+NumeroRound INT, 
+IdEncuentro INT,
+TiempoTranscurridoRound TIME NOT NULL,
+IdPuntuacionRound INT, 
+IdHito INT,
 PRIMARY KEY (NumeroRound, IdEncuentro)
 );
  
  
 CREATE TABLE PuntuacionRound (
-IdPuntuacionRound int PRIMARY KEY,
-NumeroRound int, 
-IdEncuentro int,
-Puntos int,
-IdEquipo int not null
+IdPuntuacionRound INT AUTO_INCREMENT PRIMARY KEY,
+NumeroRound INT, 
+IdEncuentro INT,
+Puntos INT,
+IdEquipo INT NOT NULL
 );
 
 
