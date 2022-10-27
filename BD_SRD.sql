@@ -14,7 +14,7 @@ CREATE TABLE Usuarios
 (
 Email VARCHAR(70) PRIMARY KEY,
 NombreUsuario VARCHAR(50) unique,
-Contraseña VARCHAR(50),
+Contraseña VARCHAR(200),
 NumeroTelefono VARCHAR(15),
 NivelPermisos INT,
 IdEventosFavoritos INT,
@@ -145,6 +145,7 @@ Fecha DATE,
 NombreFase VARCHAR(120),
 EstadoFase VARCHAR(20),
 Tipofase TINYINT NOT NULL,
+TamañoGrupos INT,
 PRIMARY KEY (NumeroFase, IdEvento)
 );
 
@@ -165,6 +166,7 @@ EstadoEquipo VARCHAR(80),
 Puntaje INT,
 TipoEquipo VARCHAR(15),
 Tipofase TINYINT NOT NULL,
+TamañoGrupos INT,
 PRIMARY KEY (IdEquipo, NumeroFase, IdEvento)
 );
 
@@ -244,6 +246,8 @@ CREATE TABLE EncuentrosFases (
  EstadoFase VARCHAR(20),
  Tipofase TINYINT NOT NULL,
  Puntaje INT,
+ Posicion INT,
+ TamañoGrupos INT,
  PRIMARY KEY (IdEncuentro, NumeroFase, IdEvento)
 );
 
@@ -290,12 +294,12 @@ IdEquipo INT NOT NULL
 );
 
 
-
 DROP USER IF EXISTS Usuario_A;
 DROP USER IF EXISTS Usuario_B;
 DROP USER IF EXISTS Usuario_C;
 DROP USER IF EXISTS Usuario_D;
 DROP USER IF EXISTS Usuario_E;
+
 
 CREATE USER Usuario_A;
 GRANT INSERT, UPDATE, DROP, CREATE ON Usuario TO Usuario_A;
@@ -362,62 +366,98 @@ GRANT SELECT ON EquiposFases TO Usuario_E;
 ALTER TABLE Usuarios 
 ADD CONSTRAINT FK_UsuariosEventosFavoritos 
 FOREIGN KEY (IdEventosFavoritos) 
-REFERENCES EventosFavoritos(IdEventosFavoritos);
+REFERENCES EventosFavoritos(IdEventosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE Usuarios 
 ADD CONSTRAINT FK_UsuariosEncuentrosFavoritos 
 FOREIGN KEY (IdEncuentrosFavoritos) 
-REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos);
+REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE Usuarios 
 ADD CONSTRAINT FK_UsuariosEquiposFavoritos 
 FOREIGN KEY (IdEquiposFavoritos) 
-REFERENCES EquiposFavoritos(IdEquiposFavoritos);
+REFERENCES EquiposFavoritos(IdEquiposFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE EventosFavoritos
 ADD CONSTRAINT FK_EventosFavoritosEventos
 FOREIGN KEY (IdEvento) 
-REFERENCES Eventos(IdEvento);
+REFERENCES Eventos(IdEvento)
+ON DELETE CASCADE;
 
 ALTER TABLE EncuentrosFavoritos
 ADD CONSTRAINT FK_EncuentrosFavoritosEncuentros
 FOREIGN KEY (IdEncuentro) 
-REFERENCES Encuentros(IdEncuentro);
+REFERENCES Encuentros(IdEncuentro)
+ON DELETE CASCADE;
 
 ALTER TABLE EquiposFavoritos
 ADD CONSTRAINT FK_EquiposFavoritosEquipos
 FOREIGN KEY (IdEquipo) 
-REFERENCES Equipos(IdEquipo);
+REFERENCES Equipos(IdEquipo)
+ON DELETE CASCADE;
 
 ALTER TABLE PublicidadesUsuarios
 ADD CONSTRAINT FK_PublicidadesUsuariosEventosFavoritos 
 FOREIGN KEY (IdEventosFavoritos) 
-REFERENCES EventosFavoritos(IdEventosFavoritos);
+REFERENCES EventosFavoritos(IdEventosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE PublicidadesUsuarios
 ADD CONSTRAINT FK_PublicidadesUsuariosEncuentrosFavoritos 
 FOREIGN KEY (IdEncuentrosFavoritos) 
-REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos);
+REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE PublicidadesUsuarios 
 ADD CONSTRAINT FK_PublicidadesUsuariosEquiposFavoritos 
 FOREIGN KEY (IdEquiposFavoritos) 
-REFERENCES EquiposFavoritos(IdEquiposFavoritos);
+REFERENCES EquiposFavoritos(IdEquiposFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE UsuariosPersonas
 ADD CONSTRAINT FK_UsuariosPersonasEventosFavoritos 
 FOREIGN KEY (IdEventosFavoritos) 
-REFERENCES EventosFavoritos(IdEventosFavoritos);
+REFERENCES EventosFavoritos(IdEventosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE UsuariosPersonas
 ADD CONSTRAINT FK_UsuariosPersonasEncuentrosFavoritos 
 FOREIGN KEY (IdEncuentrosFavoritos) 
-REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos);
+REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos)
+ON DELETE CASCADE;
 
 ALTER TABLE UsuariosPersonas 
 ADD CONSTRAINT FK_UsuariosPersonasEquiposFavoritos 
 FOREIGN KEY (IdEquiposFavoritos) 
-REFERENCES EquiposFavoritos(IdEquiposFavoritos);
+REFERENCES EquiposFavoritos(IdEquiposFavoritos)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposDeportistas
+ADD CONSTRAINT FK_EquiposDeportistasEquipos
+FOREIGN KEY (IdEquipo)
+REFERENCES Equipos(IdEquipo)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposDeportistas
+ADD CONSTRAINT FK_EquiposDeportistasDeportistas
+FOREIGN KEY (IdPersona)
+REFERENCES Deportistas(IdPersona)
+ON DELETE CASCADE;
+
+ALTER TABLE DeportesCategorizados
+ADD CONSTRAINT FK_DeportesCategorizadosDeportes
+FOREIGN KEY (IdDeporte)
+REFERENCES Deportes(IdDeporte)
+ON DELETE CASCADE;
+
+ALTER TABLE DeportesCategorizados
+ADD CONSTRAINT FK_DeportesCategorizadosCategorias
+FOREIGN KEY (IdCategoria)
+REFERENCES Categorias(IdCategoria)
+ON DELETE CASCADE;
 
 ALTER TABLE PuntuacionRound
 ADD CONSTRAINT FK_PuntuacionRoundRound
@@ -940,23 +980,23 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
-INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase) VALUES
-('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
-('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1'),
-('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1'),
-('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1'),
-('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1');
+INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase, TamañoGrupos) VALUES
+('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1', '2'),
+('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1', '1'),
+('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1', '2'),
+('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1', '2'),
+('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1', '2');
 
-INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje) VALUES
-('1', '1', '1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1'),
-('2', '3', '1', '4', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1'),
-('3', '1', '2', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '1');
+INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamañoGrupos) VALUES
+('1', '1', '1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1', '0', '1', '2'),
+('2', '3', '1', '4', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1', '0', '1', '2'),
+('3', '1', '2', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2');
 
-INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase) VALUES 
-('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
-('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1'),
-('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1'),
-('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1');
+INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase, TamañoGrupos) VALUES 
+('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1', '2'),
+('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1', '2'),
+('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2'),
+('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2');
 
 INSERT INTO EstadisticasJugador (IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
 ('1', '1', '3', '1', '16' ),
@@ -998,7 +1038,7 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
 ('loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', '4', '4', '4'),
 ('lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', '5', '5', '5'),
-('admin@certus.com', 'Administrador', '122333', null, '4', '6', '1', '6'),
+('admin@certus.com', 'Administrador', 'VS5CDbf6VrwLLxubdW0qRg==', null, '4', '6', '1', '6'),
 ('sinclair@hotmail.com', 'Simond', 'Badminton', 097862376, '2', '1', '1', '1'),
 ('subdito1@gmail.com', 'Subdito1', 'sub1', null, '3', '1', '1', '1'),
 ('señorarandom@gmail.com', 'Señora Random', 'haygentequerealmenteseponeestetipodenombres', 099999999, '1', '1', '1', '1'),
