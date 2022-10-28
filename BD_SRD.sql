@@ -97,7 +97,7 @@ Rol VARCHAR(30)
 CREATE TABLE Deportistas
 (
 IdPersona INT PRIMARY KEY,
-Nombre VARCHAR(50)NOT NULL,
+Nombre VARCHAR(50) NOT NULL,
 Apellido VARCHAR(50) NOT NULL,
 Nacionalidad VARCHAR(50) NOT NULL,
 EstadoJugador VARCHAR(50),
@@ -121,8 +121,9 @@ ImagenRepresentativa BLOB,
 PaisOrigen varchar(80) NOT NULL,
 NombreEquipo varchar(120) NOT NULL,
 EstadoJugador varchar(70) NOT NULL,
+Nombre VARCHAR(50) NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
 Descripcion TEXT,
-NumeroJugador INT,
 TipoEquipo VARCHAR(15) NOT NULL,
 PRIMARY KEY (IdEquipo, IdPersona)
 );
@@ -154,7 +155,6 @@ CREATE TABLE EquiposFases
 IdEquipo INT,
 NumeroFase INT,
 IdEvento INT,
-Uniforme BLOB,
 ImagenRepresentativa BLOB,
 PaisOrigen VARCHAR(80) NOT NULL,
 NombreEquipo VARCHAR(120) NOT NULL,
@@ -257,7 +257,6 @@ CREATE TABLE EquiposEncuentros (
  IdDeporte INT,
  IdCategoria INT,
  IdPersona INT,
- Uniforme BLOB,
  ImagenRepresentativa BLOB,
  PaisOrigen VARCHAR(80) NOT NULL,
  NombreEquipo VARCHAR(120) NOT NULL,
@@ -462,12 +461,37 @@ ON DELETE CASCADE;
 ALTER TABLE PuntuacionRound
 ADD CONSTRAINT FK_PuntuacionRoundRound
 FOREIGN KEY (NumeroRound, IdEncuentro)
-REFERENCES Round(NumeroRound, IdEncuentro);
+REFERENCES Round(NumeroRound, IdEncuentro)
+ON DELETE CASCADE;
 
 ALTER TABLE Hito
 ADD CONSTRAINT FK_HitoRound
 FOREIGN KEY (NumeroRound, IdEncuentro)
-REFERENCES Round(NumeroRound, IdEncuentro);
+REFERENCES Round(NumeroRound, IdEncuentro)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposEncuentros
+ADD CONSTRAINT FK_EquiposEncuentrosEncuentros
+FOREIGN KEY (IdEncuentro)
+REFERENCES Encuentros(IdEncuentro)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposEncuentros
+ADD CONSTRAINT FK_EquiposEncuentrosEquipos
+FOREIGN KEY (IdEquipo)
+REFERENCES Equipos(IdEquipo)
+ON DELETE CASCADE;
+
+ALTER TABLE Round
+ADD CONSTRAINT FK_RoundEncuentros
+FOREIGN KEY (IdEncuentro)
+REFERENCES Encuentros(IdEncuentro)
+ON DELETE CASCADE;
+
+ALTER TABLE Encuentros
+ADD CONSTRAINT FK_EncuentrosArbitros
+FOREIGN KEY (IdPersona)
+REFERENCES Arbitros(IdPersona);
 
 ALTER TABLE EstadisticasJugador
 ADD CONSTRAINT FK_EstadisticasJugadorDeportistas
@@ -799,20 +823,20 @@ INSERT INTO Equipos (IdEquipo, ImagenRepresentativa, PaisOrigen, NombreEquipo, T
 ('9', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Individual'),
 ('10',  'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Seleccion');
 
-INSERT INTO EquiposDeportistas(IdEquipo, IdPersona, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoJugador, Descripcion, NumeroJugador, TipoEquipo) VALUES
-('1' , '16', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo.', '15', 'Seleccion'),
-('1' , '17', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay', '9', 'Seleccion'),
-('1' , '18', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo','Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía', '1', 'Seleccion'),
-('1' , '20', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Activo', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018', '14', 'Seleccion'),
-('10', '19', 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Activo', 'Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil', '10', 'Seleccion'),
-('2' , '23', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', 'Activo', 'Kylian Mbappé Lottin es un futbolista francés que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1. Comenzó su carrera con el club Mónaco de la Ligue 1, haciendo su debut profesional en 2015, a los 16 años' , '10' ,'Seleccion'),
-('3' , '24', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', 'Activo', 'James David Rodríguez Rubio, conocido como James Rodríguez, es un futbolista colombiano que juega como centrocampista y su equipo actual es el Olympiacos F. C. de la Superliga de Grecia. Es internacional con la selección de Colombia.' , '10' ,'Seleccion'),
-('4' ,  '46','C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Activo', 'George William Russell es un piloto británico de automovilismo.​ Fue campeón de GP3 Series en 2017 y de Fórmula 2 en 2018. Desde 2019 hasta 2021 compitió para Williams en Fórmula 1.​ Desde 2022 es piloto de la escudería Mercedes-AMG Petronas.' , '7', 'Individual'),
-('5' ,  '47','C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Activo', 'Lewis Carl Davidson Larbalestier Hamilton​​ es un piloto británico de automovilismo. En Fórmula 1 desde 2007 hasta 2012, fue piloto de la escudería McLaren, con la cual fue campeón en 2008 y subcampeón en 2007.','9','Individual'),
-('6' ,  '86','C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Activo', 'Bruce Lee fue un artista marcial, maestro de artes marciales, actor, cineasta, filósofo y escritor estadounidense de origen hongkonés','2','Individual'),
-('7' ,  '87','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Activo', 'Chan Kong-sang, ​conocido por su nombre artístico Jackie Chan, es un artista marcial, comediante, cantante, actor, acróbata, doble de acción, coordinador de dobles de acción, director, guionista, productor y actor de voz chino.','3','Individual'),
-('8' ,  '36','C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Activo', 'Michael Fred Phelps II​ es un exnadador olímpico estadounidense​ y el deportista olímpico más condecorado de todos los tiempos, con un total de 28 medallas.​ Phelps también posee los récords de más medallas olímpicas de oro, más medallas de oro en eventos individuales y más medallas olímpicas en eventos masculinos.','5','Individual'),
-('9' ,  '37','C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Activo', 'Ian James Thorpe, AO, es un nadador australiano, apodado Thorpedo y Thorpey. Ganó cinco medallas de oro en Juegos Olímpicos, siendo la mayor marca conseguida por cualquier deportista australiano, y en 2001 se convirtió en la única persona en ganar seis medallas de oro en un solo Campeonato Mundial de Natación.​','8','Individual');
+INSERT INTO EquiposDeportistas(IdEquipo, IdPersona, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoJugador, Nombre, Apellido, Descripcion, TipoEquipo) VALUES
+('1' , '16', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Playing', 'Federico', 'Valverde', 'Federico Santiago Valverde Dipetta, conocido deportivamente como Valverde, es un futbolista uruguayo.', 'Seleccion'),
+('1' , '17', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Playing', 'Luis', 'Suarez', 'Luis Alberto Suárez Díaz es un futbolista uruguayo que juega como delantero en el Club Nacional de Football del Campeonato Uruguayo de Primera División Profesional, y en la Selección de fútbol de Uruguay', 'Seleccion'),
+('1' , '18', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Playing', 'Fernando', 'Muslera', 'Néstor Fernando Muslera Micol es un futbolista uruguayo nacido en Argentina. Juega de guardameta en el Galatasaray de la Superliga de Turquía', 'Seleccion'),
+('1' , '20', 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', 'Playing', 'Lucas', 'Torreira', 'Lucas Sebastián Torreira di Pascua es un futbolista uruguayo que juega como centrocampista en el Galatasaray S. K. de la Superliga de Turquía.​ Es internacional absoluto con Uruguay desde 2018', 'Seleccion'),
+('10', '19', 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', 'Playing', 'Neymar', 'Da Silva Santos', 'Neymar da Silva Santos Júnior, conocido como Neymar Júnior o simplemente Neymar, es un futbolista brasileño que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1 de Francia, y en la selección de fútbol de Brasil', 'Seleccion'),
+('2' , '23', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', 'Playing', 'Kylian', 'Mbappe', 'Kylian Mbappé Lottin es un futbolista francés que juega como delantero en el Paris Saint-Germain F. C. de la Ligue 1. Comenzó su carrera con el club Mónaco de la Ligue 1, haciendo su debut profesional en 2015, a los 16 años', 'Seleccion'),
+('3' , '24', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', 'Playing', 'James', 'Rodriguez', 'James David Rodríguez Rubio, conocido como James Rodríguez, es un futbolista colombiano que juega como centrocampista y su equipo actual es el Olympiacos F. C. de la Superliga de Grecia. Es internacional con la selección de Colombia.', 'Seleccion'),
+('4' , '46','C:\Users\USUARIO\Downloads\GeorgeLogo.jpg','Inglaterra', 'George Russell', 'Playing', 'George', 'Russell', 'George William Russell es un piloto británico de automovilismo.​ Fue campeón de GP3 Series en 2017 y de Fórmula 2 en 2018. Desde 2019 hasta 2021 compitió para Williams en Fórmula 1.​ Desde 2022 es piloto de la escudería Mercedes-AMG Petronas.', 'Individual'),
+('5' , '47','C:\Users\USUARIO\Downloads\LewisLogo.jpg', 'Inglaterra', 'Lewis Hamilton', 'Playing', 'Lewis', 'Hamilton', 'Lewis Carl Davidson Larbalestier Hamilton​​ es un piloto británico de automovilismo. En Fórmula 1 desde 2007 hasta 2012, fue piloto de la escudería McLaren, con la cual fue campeón en 2008 y subcampeón en 2007.', 'Individual'),
+('6' , '86','C:\Users\USUARIO\Downloads\BruceLeeLogo.jpg', 'Estados Unidos', 'Bruce Lee', 'Playing', 'Bruce', 'Lee', 'Bruce Lee fue un artista marcial, maestro de artes marciales, actor, cineasta, filósofo y escritor estadounidense de origen hongkonés', 'Individual'),
+('7' , '87','C:\Users\USUARIO\Downloads\JackieChanLogo.jpg',  'China', 'Jackie Chan', 'Playing', 'Jackie', 'Chan', 'Chan Kong-sang, ​conocido por su nombre artístico Jackie Chan, es un artista marcial, comediante, cantante, actor, acróbata, doble de acción, coordinador de dobles de acción, director, guionista, productor y actor de voz chino.', 'Individual'),
+('8' , '36','C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'Playing', 'Michael', 'Phelps', 'Michael Fred Phelps II​ es un exnadador olímpico estadounidense​ y el deportista olímpico más condecorado de todos los tiempos, con un total de 28 medallas.​ Phelps también posee los récords de más medallas olímpicas de oro, más medallas de oro en eventos individuales y más medallas olímpicas en eventos masculinos.', 'Individual'),
+('9' , '37','C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Australia', 'Ian Thorpe', 'Playing', 'Ian', 'Thorpe', 'Ian James Thorpe, AO, es un nadador australiano, apodado Thorpedo y Thorpey. Ganó cinco medallas de oro en Juegos Olímpicos, siendo la mayor marca conseguida por cualquier deportista australiano, y en 2001 se convirtió en la única persona en ganar seis medallas de oro en un solo Campeonato Mundial de Natación.​', 'Individual');
 
 
 INSERT INTO Categorias (IdCategoria, NombreCategoria) VALUES
@@ -906,24 +930,24 @@ INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, ImagenDeporte, Destac
 ('34', '1', 'C:\Users\USUARIO\Downloads\Rugby.jpg', true, 'Rugby', 'Juegos de pelota'),
 ('35', '1', 'C:\Users\USUARIO\Downloads\Voleibol.jpg', false, 'Voleibol', 'Juegos de pelota');
 
-INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro) VALUES
-('1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
-('2', '3', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1'),
-('3', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1'),
-('4', '1', '1', '23', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', '1'),
-('5', '4', '3', '36', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
+INSERT INTO Encuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, TipoEncuentro) VALUES
+('1', '1', '1', '6', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1'),
+('2', '3', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1'),
+('3', '5', '4', '8', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1'),
+('4', '1', '1', '9', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', '1'),
+('5', '4', '3', '10', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, '1');
 
-INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo, Tipoencuentro) VALUES
-('1', '1', '1', '16', '1', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion', '1'),
-('1', '1', '1', '19', '10', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion', '1'),
-('2', '3', '2', '86', '6', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual', '1'),
-('2', '3', '2', '87', '7', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual', '1'),
-('3', '5', '4', '46', '4', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
-('3', '5', '4', '47', '5', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
-('4', '1', '1', '23', '2', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', null, '7', 'C:\Users\USUARIO\Downloads\FranciaAlineacion.jpg', 'Seleccion', '1'),
-('4', '1', '1', '24', '3', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', null, '8', 'C:\Users\USUARIO\Downloads\ColombiaAlineacion.jpg', 'Seleccion', '1'),
-('5', '4', '3', '36', '8', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual', '1'),
-('5', '4', '3', '37', '9', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual', '1');
+INSERT INTO EquiposEncuentros (IdEncuentro, IdDeporte, IdCategoria, IdPersona, IdEquipo, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, ImagenRepresentativa, PaisOrigen, NombreEquipo, Puntuacion, Posicion, Alineacion, TipoEquipo, TipoEncuentro) VALUES
+('1', '1', '1', '6', '1', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\UruguayLogo.jpg', 'Uruguay', 'Uruguay', '1', '1', 'C:\Users\USUARIO\Downloads\UruguayAlineacion.jpg', 'Seleccion', '1'),
+('1', '1', '1', '6', '10', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\BrasilLogo.jpg', 'Brasil', 'Brasil', '3', '2', 'C:\Users\USUARIO\Downloads\BrasilAlineacion.jpg', 'Seleccion', '1'),
+('2', '3', '2', '7', '6', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\BruceLee.jpg', 'Estados Unidos','Bruce Lee', '4', null, null, 'Individual', '1'),
+('2', '3', '2', '7', '7', '19:22', 'Lucha Karate', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', 'C:\Users\USUARIO\Downloads\JackieChan.jpg', 'China', 'Jackie Chan', null, '3', 'C:\Users\USUARIO\Downloads\ChinaAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '8', '4', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'George Russell', null, '4', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('3', '5', '4', '8', '5', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', 'C:\Users\USUARIO\Downloads\OlimpiaLogo.jpg', 'Inglaterra', 'Lewis Hamilton', null, '5', 'C:\Users\USUARIO\Downloads\CarreraAlineacion.jpg', 'Individual', '1'),
+('4', '1', '1', '9', '2', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\FranciaLogo.jpg', 'Francia', 'Francia', null, '7', 'C:\Users\USUARIO\Downloads\FranciaAlineacion.jpg', 'Seleccion', '1'),
+('4', '1', '1', '9', '3', '16:44', 'Estadio peñarol', '2021-04-30', 'Amistoso', 'Finished', 'Soleado', 'C:\Users\USUARIO\Downloads\ColombiaLogo.jpg', 'Colombia', 'Colombia', null, '8', 'C:\Users\USUARIO\Downloads\ColombiaAlineacion.jpg', 'Seleccion', '1'),
+('5', '4', '3', '10', '8', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\MichaelPhelps.jpg', 'Estados Unidos', 'Michael Phelps', null, null, 'C:\Users\USUARIO\Downloads\NatacionAlineacion.jpg','Individual', '1'),
+('5', '4', '3', '10', '9', '03:33', 'Asociación cristiana de jovenes', '2022-12-12', 'Competición de natación', 'Coming soon', null, 'C:\Users\USUARIO\Downloads\IanThorpe.jpg', 'Australia', 'Ian Thorpe', null, null, 'C:\Users\USUARIO\Downloads\AustraliaAlineacion.jpg','Individual', '1');
 
 INSERT INTO Round (NumeroRound, IdEncuentro, TiempoTranscurridoRound, IdPuntuacionRound, IdHito) VALUES
 ('1', '1', '00:45:00', '1', '1'),
@@ -987,10 +1011,10 @@ INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase
 ('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1', '2'),
 ('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1', '2');
 
-INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, Tipoencuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamañoGrupos) VALUES
-('1', '1', '1', '1', '1', '16', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1', '0', '1', '2'),
-('2', '3', '1', '4', '2', '86', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1', '0', '1', '2'),
-('3', '1', '2', '5', '4', '46', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2');
+INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, TipoEncuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamañoGrupos) VALUES
+('1', '1', '1', '1', '1', '6', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1', '0', '1', '2'),
+('2', '3', '1', '4', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1', '0', '1', '2'),
+('3', '1', '2', '5', '4', '8', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2');
 
 INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase, TamañoGrupos) VALUES 
 ('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1', '2'),
@@ -1138,7 +1162,7 @@ GROUP BY DeportesCategorizados.IdDeporte;
 SELECT Alineacion
 FROM EquiposEncuentros;
 
-SELECT Nombre, Apellido, MAX(Anotacion)
+SELECT Deportistas.Nombre, Deportistas.Apellido, MAX(Anotacion)
 FROM EstadisticasJugador JOIN Encuentros ON EstadisticasJugador.IdEncuentro = Encuentros.IdEncuentro JOIN EquiposEncuentros ON (Encuentros.IdEncuentro = EquiposEncuentros.IdEncuentro) JOIN Equipos ON EquiposEncuentros.IdEquipo = Equipos.IdEquipo JOIN EquiposDeportistas ON Equipos.IdEquipo = EquiposDeportistas.IdEquipo JOIN Deportistas ON (EquiposDeportistas.IdPersona = Deportistas.IdPersona)
 GROUP BY EquiposDeportistas.IdEquipo;
 
