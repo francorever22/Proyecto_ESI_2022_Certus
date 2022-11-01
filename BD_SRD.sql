@@ -146,7 +146,8 @@ Fecha DATE,
 NombreFase VARCHAR(120),
 EstadoFase VARCHAR(20),
 Tipofase TINYINT NOT NULL,
-TamañoGrupos INT,
+TamanoGrupos INT,
+CantidadGrupos INT,
 PRIMARY KEY (NumeroFase, IdEvento)
 );
 
@@ -166,7 +167,8 @@ EstadoEquipo VARCHAR(80),
 Puntaje INT,
 TipoEquipo VARCHAR(15),
 Tipofase TINYINT NOT NULL,
-TamañoGrupos INT,
+TamanoGrupos INT,
+CantidadGrupos INT,
 PRIMARY KEY (IdEquipo, NumeroFase, IdEvento)
 );
 
@@ -247,7 +249,8 @@ CREATE TABLE EncuentrosFases (
  Tipofase TINYINT NOT NULL,
  Puntaje INT,
  Posicion INT,
- TamañoGrupos INT,
+TamanoGrupos INT,
+CantidadGrupos INT,
  PRIMARY KEY (IdEncuentro, NumeroFase, IdEvento)
 );
 
@@ -1004,23 +1007,23 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
-INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase, TamañoGrupos) VALUES
-('1', '1', 'En curso', 'Grupo A', '2022-12-2', '1', '2'),
-('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1', '1'),
-('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1', '2'),
-('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1', '2'),
-('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1', '2');
+INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase, TamanoGrupos, CantidadGrupos) VALUES
+('1', '1', 'En curso', 'Grupo A', '2022-12-2', '2', '2', '1'),
+('1', '4', 'En curso', 'Grupo B', '2034-10-19', '1', '1', '1'),
+('1', '2', 'Por venir', 'Grupo C', '2012-10-16', '1', '2', '1'),
+('1', '5', 'Ya casi viene', 'Grupo D', '2029-03-16', '1', '2', '1'),
+('1', '3', 'Casi casi', 'Grupo D', '2029-03-16', '1', '2', '1');
 
-INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, TipoEncuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamañoGrupos) VALUES
-('1', '1', '1', '1', '1', '6', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '1', '0', '1', '2'),
-('2', '3', '1', '4', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '1', '0', '1', '2'),
-('3', '1', '2', '5', '4', '8', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2');
+INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, TipoEncuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamanoGrupos, CantidadGrupos) VALUES
+('1', '1', '1', '1', '1', '6', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '2', '0', '1', '2', '1'),
+('2', '3', '1', '4', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '2', '0', '1', '2', '1'),
+('3', '1', '2', '5', '4', '8', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2', '1');
 
-INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase, TamañoGrupos) VALUES 
-('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1', '2'),
-('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '1', '2'),
-('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2'),
-('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2');
+INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase, TamanoGrupos, CantidadGrupos) VALUES 
+('1', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoUruguayLogo.jpg', 'Uruguay', 'Uruguay', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '2', '2', '1'),
+('10', '1', '1', 'C:\Users\USUARIO\Downloads\EquipoBrasilLogo.jpg', 'Brasil', 'Brasil', 'En curso', 'Grupo A', '2022-12-2', '1', 'Jugando', null, 'Seleccion', '2', '2', '1'),
+('9', '1', '3', 'C:\Users\USUARIO\Downloads\IanThorpeLogo.jpg', 'Autralia', 'Ian Thorpe', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2', '1'),
+('8', '1', '3', 'C:\Users\USUARIO\Downloads\MichaelPhelpsLogo.jpg', 'Estados Unidos', 'Michael Phelps', 'En curso', 'Grupo B', '2022-10-2', '1', 'Jugando', null, 'Individual', '1', '2', '1');
 
 INSERT INTO EstadisticasJugador (IdEstadisticasJugador, IdEncuentro, Anotacion, Faltas, IdDeportista) VALUES
 ('1', '1', '3', '1', '16' ),
@@ -1056,7 +1059,7 @@ INSERT INTO EquiposFavoritos (IdEquiposFavoritos, IdEquipo, Email) VALUES
 ('9', '8', 'Mufasa@gmail.com'),
 ('10', '7', 'simba@gmail.com');
  
-INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
+INSERT INTO Usuarios (Email, NombreUsuario, Contrasena, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) values
 ('alexelleon2018@gmail.com', 'Alex001', 'Nomeacuerdomucho1234*', '092038170', '2', '1', '1', '1'),
 ('perezgomez45@gmail.com', 'perezito2233', 'estudiomucho90<<', '099456743', '1', '2', '2', '2'),
 ('analaurali@gmail.com', 'Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
@@ -1109,7 +1112,7 @@ INSERT INTO Usuarios (Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPe
 ('Lucas6@gmail.com', 'Lucas6', 'Elsexto', 096666666, '1', '1', '1', '1'),
 ('Fiss@gmail.com', 'Freeze', 'Freezer', 093247242, '1', '1', '1', '1');
 
-INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
+INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contrasena, NumeroTelefono, NivelPermisos, Banner, Link, TituloPublicidad, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('1', 'loloOne@gmail.com', 'Elfaraon03', 'faraon03-', '092345221', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '4', '4', '4'),
 ('1', 'lolaFive@gmail.com', 'TheQueen121', 'fordescort1967>', '095567451', '1', 'C:\Users\USUARIO\Downloads\Apple', 'https://www.apple.com/', 'Apple', '5', '5', '5'),
 ('2', 'Tramontina@gmail.com', 'Tramontina', '826592659', 091657365, '1', 'C:\Users\USUARIO\Pictures\Camera Roll', 'https://www.samsung.com/uy/', 'Samsung', '1', '1', '1'),
@@ -1131,7 +1134,7 @@ INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contraseñ
 ('15', 'koala@gmail.com', 'koala', 'panda', 093053242, '1', 'C:\Users\USUARIO\Videos\Bimbo', 'https://www.grupobimbo.com/', 'Bimbo', '1', '1', '1'),
 ('16', 'Desmond@gmail.com', 'Des', 'mond', 094636342, '1', 'C:\Users\USUARIO\Videos\Mercedes', 'https://www.mercedes-benz.com.uy/', 'Mercedes', '1', '1', '1');
  
-INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contraseña, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
+INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contrasena, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
 ('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '1', '1', '1'),
 ('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '2', '2', '2'),
 ('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
