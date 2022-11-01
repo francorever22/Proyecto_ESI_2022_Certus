@@ -124,7 +124,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(198, 4);
+            this.lblName.Location = new System.Drawing.Point(180, 4);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 4;
@@ -132,7 +132,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(397, 4);
+            this.lblDate.Location = new System.Drawing.Point(379, 4);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(0, 15);
             this.lblDate.TabIndex = 2;
@@ -140,7 +140,7 @@
             // lblHour
             // 
             this.lblHour.AutoSize = true;
-            this.lblHour.Location = new System.Drawing.Point(465, 4);
+            this.lblHour.Location = new System.Drawing.Point(447, 4);
             this.lblHour.Name = "lblHour";
             this.lblHour.Size = new System.Drawing.Size(0, 15);
             this.lblHour.TabIndex = 1;
@@ -148,7 +148,7 @@
             // lblState
             // 
             this.lblState.AutoSize = true;
-            this.lblState.Location = new System.Drawing.Point(549, 4);
+            this.lblState.Location = new System.Drawing.Point(531, 4);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(0, 15);
             this.lblState.TabIndex = 5;

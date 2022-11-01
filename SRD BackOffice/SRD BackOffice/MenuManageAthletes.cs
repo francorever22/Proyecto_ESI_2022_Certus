@@ -14,7 +14,7 @@
         private void CargarDeportistas()
         {
             int x = 0;
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
+            var deportistas = Logica.GetDeportistas(1, null);
             int count = deportistas.Count;
             foreach (var deportista in deportistas)
             {
@@ -71,7 +71,7 @@
                     pic1.Location = new Point(440, 7);
                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic1.Image = Properties.Resources.cruz;
-                    pic1.Click += (sender, EventArgs) => { Delete(sender, EventArgs, deportistas, deportista, p1); };
+                    pic1.Click += (sender, EventArgs) => { Delete(sender, EventArgs, deportista.IdPersona, p1); };
 
                     PictureBox pic2 = new PictureBox(); //Boton modificar
 
@@ -80,9 +80,9 @@
                     pic2.Location = new Point(428, 7);
                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic2.Image = Properties.Resources.pluma;
-                    pic2.Click += (sender, EventArgs) => { Modify(sender, EventArgs, deportistas.IndexOf(deportista)); };
+                    pic2.Click += (sender, EventArgs) => { Modify(sender, EventArgs, deportista.IdPersona); };
 
-                    this.panelContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
+                    panelContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
                     p1.Controls.Add(pic2);
                     p1.Controls.Add(pic1);
                     p1.Controls.Add(l1);
@@ -95,14 +95,14 @@
 
         private void btnSportsManagerCerrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             MainMenu main = new MainMenu();
             main.StartPosition = FormStartPosition.CenterParent;
             main.ShowDialog();
-            this.Close();
+            Close();
         }
 
-        private void Delete(object sender, EventArgs e, List<Deportista> list, Deportista d, Panel p)
+        private void Delete(object sender, EventArgs e, int id, Panel p)
         {
             DialogResult dialogResult1 = MessageBox.Show("Do you really want to delete this?", "Delete athlete", MessageBoxButtons.YesNo);
             if (dialogResult1 == DialogResult.Yes)
@@ -110,33 +110,35 @@
                 DialogResult dialogResult2 = MessageBox.Show("Are you really sure?", "DELETE athlete", MessageBoxButtons.YesNo);
                 if (dialogResult2 == DialogResult.Yes)
                 {
-                    list.Remove(d);
-                    Logica.SerializeDeportistas(list);
-                    p.Dispose();
+                    try
+                    {
+                        Logica.Delete("Deportistas", "IdPersona", id + "");
+                        p.Dispose();
+                        MessageBox.Show("Successfully eliminated");
+                    }
+                    catch { MessageBox.Show("Error"); }
                 }
             }
         }
 
         private void Modify(object sender, EventArgs e, int index)
         {
-            this.Hide();
+            Hide();
             MenuCrearDeportista crearDeportista = new MenuCrearDeportista(index);
             crearDeportista.StartPosition = FormStartPosition.CenterParent;
             crearDeportista.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e, string busqueda)
         {
             panelContenedor.Controls.Clear();
 
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
+            var deportistas = Logica.GetDeportistas(2, busqueda);
             int count = 0;
 
             foreach (var deportista in deportistas)
             {
-                if (busqueda == Convert.ToString(deportista.IdPersona) || (deportista.Nombre+" "+deportista.Apellido).Contains(busqueda) || deportista.Nacionalidad.Contains(busqueda))
-                {
                     Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
                     p1.Dock = DockStyle.Top;
@@ -188,7 +190,7 @@
                     pic1.Location = new Point(440, 7);
                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic1.Image = Properties.Resources.cruz;
-                    pic1.Click += (sender, EventArgs) => { Delete(sender, EventArgs, deportistas, deportista, p1); };
+                    pic1.Click += (sender, EventArgs) => { Delete(sender, EventArgs, deportista.IdPersona, p1); };
 
                     PictureBox pic2 = new PictureBox(); //Boton modificar
 
@@ -199,13 +201,12 @@
                     pic2.Image = Properties.Resources.pluma;
                     pic2.Click += (sender, EventArgs) => { Modify(sender, EventArgs, deportistas.IndexOf(deportista)); };
 
-                    this.panelContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
+                    panelContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
                     p1.Controls.Add(pic2);
                     p1.Controls.Add(pic1);
                     p1.Controls.Add(l1);
                     p1.Controls.Add(l2);
                     p1.Controls.Add(l3);
-                }
             }
         }
 

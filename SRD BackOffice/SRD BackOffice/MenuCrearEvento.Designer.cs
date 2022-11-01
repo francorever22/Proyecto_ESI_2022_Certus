@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panelFases = new System.Windows.Forms.Panel();
+            this.btnLinkedMatchs = new System.Windows.Forms.Button();
+            this.btnLinkMatch = new System.Windows.Forms.Button();
+            this.picReset = new System.Windows.Forms.PictureBox();
             this.lblEstadoFase = new System.Windows.Forms.Label();
             this.cbxEstadoFase = new System.Windows.Forms.ComboBox();
             this.panelEquipos = new System.Windows.Forms.Panel();
@@ -64,13 +67,21 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnEventCerrar = new System.Windows.Forms.Button();
             this.panelBuscadorEquipos = new System.Windows.Forms.Panel();
+            this.panelEncuentros = new System.Windows.Forms.Panel();
+            this.btnCerrarEncuentros = new System.Windows.Forms.Button();
+            this.panelContenedorEncuentros = new System.Windows.Forms.Panel();
             this.panelFases.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEventSelected)).BeginInit();
             this.panelEvent.SuspendLayout();
+            this.panelEncuentros.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelFases
             // 
+            this.panelFases.Controls.Add(this.btnLinkedMatchs);
+            this.panelFases.Controls.Add(this.btnLinkMatch);
+            this.panelFases.Controls.Add(this.picReset);
             this.panelFases.Controls.Add(this.lblEstadoFase);
             this.panelFases.Controls.Add(this.cbxEstadoFase);
             this.panelFases.Controls.Add(this.panelEquipos);
@@ -91,6 +102,35 @@
             this.panelFases.Name = "panelFases";
             this.panelFases.Size = new System.Drawing.Size(820, 434);
             this.panelFases.TabIndex = 0;
+            // 
+            // btnLinkedMatchs
+            // 
+            this.btnLinkedMatchs.Location = new System.Drawing.Point(193, 135);
+            this.btnLinkedMatchs.Name = "btnLinkedMatchs";
+            this.btnLinkedMatchs.Size = new System.Drawing.Size(138, 25);
+            this.btnLinkedMatchs.TabIndex = 53;
+            this.btnLinkedMatchs.Text = "List of linked matchs";
+            this.btnLinkedMatchs.UseVisualStyleBackColor = true;
+            // 
+            // btnLinkMatch
+            // 
+            this.btnLinkMatch.Location = new System.Drawing.Point(32, 135);
+            this.btnLinkMatch.Name = "btnLinkMatch";
+            this.btnLinkMatch.Size = new System.Drawing.Size(138, 25);
+            this.btnLinkMatch.TabIndex = 52;
+            this.btnLinkMatch.Text = "Link match";
+            this.btnLinkMatch.UseVisualStyleBackColor = true;
+            // 
+            // picReset
+            // 
+            this.picReset.BackgroundImage = global::SRD_BackOffice.Properties.Resources.recargar;
+            this.picReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picReset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picReset.Location = new System.Drawing.Point(664, 140);
+            this.picReset.Name = "picReset";
+            this.picReset.Size = new System.Drawing.Size(20, 20);
+            this.picReset.TabIndex = 51;
+            this.picReset.TabStop = false;
             // 
             // lblEstadoFase
             // 
@@ -447,9 +487,37 @@
             this.panelBuscadorEquipos.Size = new System.Drawing.Size(352, 312);
             this.panelBuscadorEquipos.TabIndex = 27;
             // 
+            // panelEncuentros
+            // 
+            this.panelEncuentros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelEncuentros.Controls.Add(this.btnCerrarEncuentros);
+            this.panelEncuentros.Controls.Add(this.panelContenedorEncuentros);
+            this.panelEncuentros.Location = new System.Drawing.Point(258, 146);
+            this.panelEncuentros.Name = "panelEncuentros";
+            this.panelEncuentros.Size = new System.Drawing.Size(291, 234);
+            this.panelEncuentros.TabIndex = 28;
+            // 
+            // btnCerrarEncuentros
+            // 
+            this.btnCerrarEncuentros.Location = new System.Drawing.Point(263, 3);
+            this.btnCerrarEncuentros.Name = "btnCerrarEncuentros";
+            this.btnCerrarEncuentros.Size = new System.Drawing.Size(25, 25);
+            this.btnCerrarEncuentros.TabIndex = 53;
+            this.btnCerrarEncuentros.Text = "X";
+            this.btnCerrarEncuentros.UseVisualStyleBackColor = true;
+            this.btnCerrarEncuentros.Click += new System.EventHandler(this.btnCerrarEncuentros_Click);
+            // 
+            // panelContenedorEncuentros
+            // 
+            this.panelContenedorEncuentros.Location = new System.Drawing.Point(0, 36);
+            this.panelContenedorEncuentros.Name = "panelContenedorEncuentros";
+            this.panelContenedorEncuentros.Size = new System.Drawing.Size(290, 197);
+            this.panelContenedorEncuentros.TabIndex = 54;
+            // 
             // MenuCrearEvento
             // 
             this.ClientSize = new System.Drawing.Size(819, 539);
+            this.Controls.Add(this.panelEncuentros);
             this.Controls.Add(this.panelBuscadorEquipos);
             this.Controls.Add(this.btnEventCerrar);
             this.Controls.Add(this.lblTitle);
@@ -459,9 +527,11 @@
             this.Name = "MenuCrearEvento";
             this.panelFases.ResumeLayout(false);
             this.panelFases.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEventSelected)).EndInit();
             this.panelEvent.ResumeLayout(false);
             this.panelEvent.PerformLayout();
+            this.panelEncuentros.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,5 +575,11 @@
         private ComboBox cbxEstadoFase;
         private Label lblEstado;
         private ComboBox cbxEstadoEvento;
+        private PictureBox picReset;
+        private Button btnLinkedMatchs;
+        private Button btnLinkMatch;
+        private Panel panelEncuentros;
+        private Button btnCerrarEncuentros;
+        private Panel panelContenedorEncuentros;
     }
 }

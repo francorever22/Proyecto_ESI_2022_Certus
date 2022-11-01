@@ -16,8 +16,7 @@
             SetIdioma();
 
             this.index = index;
-            var categorias = Logica.DeserializeCategorias(Logica.GetJson("DinamicJson\\Categorias.json"));
-            Categoria categoria = categorias[index];
+            var categoria = Logica.GetCategorias(4, ""+index)[0];
 
             txtCategoryName.Text = categoria.nombreCategoria;
             btnCategoryAgregar.Text = "Modify";
@@ -28,18 +27,18 @@
         {
             if (modify == false)
             {
-                this.Hide();
+                Hide();
                 MainMenu main = new MainMenu();
                 main.StartPosition = FormStartPosition.CenterParent;
                 main.ShowDialog();
-                this.Close();
+                Close();
             } else
             {
-                this.Hide();
+                Hide();
                 MenuManageSports manageSports = new MenuManageSports();
                 manageSports.StartPosition = FormStartPosition.CenterParent;
                 manageSports.ShowDialog();
-                this.Close();
+                Close();
             }
         }
 
@@ -47,36 +46,23 @@
         {
             if (modify == false)
             {
-                bool exist = false;
-                try
+                if (txtCategoryName.Text != "")
                 {
-                    if (txtCategoryName.Text != "")
+                    try
                     {
-                        var categorias = Logica.DeserializeCategorias(Logica.GetJson("DinamicJson\\Categorias.json"));
-                        foreach (var c in categorias)
+                        string nombreCategoria = txtCategoryName.Text;
+                        if (Logica.CheckIfExist("Categorias", "NombreCategoria", nombreCategoria) == 0)
                         {
-                            if (c.nombreCategoria == txtCategoryName.Text)
+                            Logica.InsertCategoria(nombreCategoria);
+                            if (Program.language == "EN")
                             {
-                                exist = true;
+                                MessageBox.Show("The category was created correctly");
                             }
-                        }
-                        if (exist == false)
-                        {
-                            Categoria newCategory = new Categoria();
-                            newCategory.nombreCategoria = txtCategoryName.Text;
-                            if (categorias != null)
+                            else if (Program.language == "ES")
                             {
-                                categorias.Add(newCategory);
-                                Logica.SerializeCategorias(categorias);
+                                MessageBox.Show("La categoria a sido creada correctamente");
                             }
-                            else
-                            {
-                                List<Categoria> list = new List<Categoria>();
-                                Logica.SerializeCategorias(list);
-                            }
-                            MessageBox.Show("New category created correctly");
-                        }
-                        else
+                        } else
                         {
                             if (Program.language == "EN")
                             {
@@ -84,56 +70,81 @@
                             }
                             else if (Program.language == "ES")
                             {
-                                MessageBox.Show("La categoría ya existe");
+                                MessageBox.Show("La categoria ya existe");
                             }
                         }
-                    }
-                    else
+                    } catch
                     {
                         if (Program.language == "EN")
                         {
-                            MessageBox.Show("There are filds incomplete");
+                            MessageBox.Show("There was an error in the process");
                         }
                         else if (Program.language == "ES")
                         {
-                            MessageBox.Show("Quedan espacios vacios por rellenar");
+                            MessageBox.Show("Hubo un error en el proceso");
                         }
                     }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("There was an error in the process");
+                    if (Program.language == "EN")
+                    {
+                        MessageBox.Show("There are filds incomplete");
+                    }
+                    else if (Program.language == "ES")
+                    {
+                        MessageBox.Show("Quedan espacios vacios por rellenar");
+                    }
                 }
             } else
             {
                 if (txtCategoryName.Text != "")
                 {
-                    var categorias = Logica.DeserializeCategorias(Logica.GetJson("DinamicJson\\Categorias.json"));
-                    Categoria categoria = categorias[index];
-                    if (txtCategoryName.Text != categoria.nombreCategoria)
-                    {
                         DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify category", MessageBoxButtons.YesNo);
-                        if (dialogResult1 == DialogResult.Yes)
-                        {
-                            categoria.nombreCategoria = txtCategoryName.Text;
-                            categorias[index] = categoria;
-                            Logica.SerializeCategorias(categorias);
-
-                            this.Hide();
-                            MenuManageSports manageSports = new MenuManageSports();
-                            manageSports.StartPosition = FormStartPosition.CenterParent;
-                            manageSports.ShowDialog();
-                            this.Close();
-                        }
-                    } else
+                    if (dialogResult1 == DialogResult.Yes)
                     {
-                        if (Program.language == "EN")
+                        try
                         {
-                            MessageBox.Show("The entered name equals the previous one");
+                            string nombreCategoria = txtCategoryName.Text;
+                            if (Logica.CheckIfExist("Categorias", "NombreCategoria", nombreCategoria) == 0)
+                            {
+                                Logica.UpdateCategoria(index, nombreCategoria);
+                                if (Program.language == "EN")
+                                {
+                                    MessageBox.Show("The category was modified correctly");
+                                }
+                                else if (Program.language == "ES")
+                                {
+                                    MessageBox.Show("La categoria a sido modificada correctamente");
+                                }
+                                Hide();
+                                MenuManageSports manageSports = new MenuManageSports();
+                                manageSports.StartPosition = FormStartPosition.CenterParent;
+                                manageSports.ShowDialog();
+                                Close();
+                            }
+                            else
+                            {
+                                if (Program.language == "EN")
+                                {
+                                    MessageBox.Show("The category already exist");
+                                }
+                                else if (Program.language == "ES")
+                                {
+                                    MessageBox.Show("La categoria ya existe");
+                                }
+                            }
                         }
-                        else if (Program.language == "ES")
+                        catch
                         {
-                            MessageBox.Show("El nombre ingresado es el mismo que el anterior");
+                            if (Program.language == "EN")
+                            {
+                                MessageBox.Show("There was an error in the process");
+                            }
+                            else if (Program.language == "ES")
+                            {
+                                MessageBox.Show("Hubo un error en el proceso");
+                            }
                         }
                     }
                 } else

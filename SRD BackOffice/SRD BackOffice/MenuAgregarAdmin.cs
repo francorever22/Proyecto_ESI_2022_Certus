@@ -10,86 +10,76 @@
 
         private void btnAddminCerrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             MainMenu main = new MainMenu();
             main.StartPosition = FormStartPosition.CenterParent;
             main.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void btnAddminAdd_Click(object sender, EventArgs e)
         {
-            bool exist = false;
             String msg = "";
-            try
+            if (txtAddminEmail.Text != "" && txtAddminPassword.Text != "" && txtAddminUsername.Text != "" && txtConfirmPassword.Text != "")
             {
-                if (txtAddminEmail.Text != "" && txtAddminPassword.Text != "" && txtAddminUsername.Text != "" && txtConfirmPassword.Text != "")
+                if (txtAddminPassword.Text == txtConfirmPassword.Text)
                 {
-                    if (txtAddminPassword.Text == txtConfirmPassword.Text)
+                    try
                     {
-                        var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                        foreach (var u in usuarios)
+                        string nombreUsuario = txtAddminUsername.Text,
+                            email = txtAddminEmail.Text,
+                            contraseña = Logica.EncriptarContraseña(txtAddminPassword.Text, "Certus_SRD");
+                        int nivelPermisos = 3;
+                        if (Logica.CheckIfExist("Usuarios", "Email", email) == 0 && 
+                            Logica.CheckIfExist("Usuarios", "NombreUsuario", nombreUsuario) == 0)
                         {
-                            if (u.nombreUsuario == txtAddminUsername.Text)
+                            Logica.InsertUsuario(email, nombreUsuario, contraseña, nivelPermisos);
+                            if (Program.language == "EN")
                             {
-                                exist = true;
-                                if (Program.language == "EN")
-                                {
-                                    msg = "The user already exist";
-                                }
-                                else if (Program.language == "ES")
-                                {
-                                    msg = "El usuario ya existe";
-                                }
+                                MessageBox.Show("New administrator created correctly");
                             }
-                            if (u.email == txtAddminEmail.Text)
+                            else if (Program.language == "ES")
                             {
-                                exist = true;
-                                if (Program.language == "EN")
-                                {
-                                    msg = "The email is already registered";
-                                }
-                                else if (Program.language == "ES")
-                                {
-                                    msg = "El email ya esta registrado";
-                                }
+                                MessageBox.Show("Nuevo administrador creado correctamente");
                             }
-                        }
-                        if (exist == false)
-                        {
-                            Usuario newAdmin = new Usuario();
-                            newAdmin.nombreUsuario = txtAddminUsername.Text;
-                            newAdmin.email = txtAddminEmail.Text;
-                            newAdmin.contrasena = txtAddminPassword.Text;
-                            newAdmin.nivelPermisos = 3;
-                            newAdmin.numeroTelefono = null;
-                            usuarios.Add(newAdmin);
-                            Logica.SerializeUsers(usuarios);
-                            MessageBox.Show("New administrator created correctly");
                         } else
                         {
-                            MessageBox.Show(msg);
+                            if (Program.language == "EN")
+                            {
+                                MessageBox.Show("The user already exist");
+                            }
+                            else if (Program.language == "ES")
+                            {
+                                MessageBox.Show("El usuario ya existe");
+                            }
                         }
-                    }
-                    else
+                    } catch
                     {
-                        MessageBox.Show("The passwords dosn't match");
+                        if (Program.language == "EN")
+                        {
+                            MessageBox.Show("There was an error in the process");
+                        }
+                        else if (Program.language == "ES")
+                        {
+                            MessageBox.Show("Hubo un error en el proceso");
+                        }
                     }
                 }
                 else
                 {
-                    if (Program.language == "EN")
-                    {
-                        MessageBox.Show("There are filds incomplete");
-                    } else if (Program.language == "ES")
-                    {
-                        MessageBox.Show("Quedan espacios vacios por rellenar");
-                    }
+                    MessageBox.Show("The passwords dosn't match");
                 }
             }
-            catch
+            else
             {
-                MessageBox.Show("There was an error in the process");
+                if (Program.language == "EN")
+                {
+                    MessageBox.Show("There are filds incomplete");
+                }
+                else if (Program.language == "ES")
+                {
+                    MessageBox.Show("Quedan espacios vacios por rellenar");
+                }
             }
         }
 

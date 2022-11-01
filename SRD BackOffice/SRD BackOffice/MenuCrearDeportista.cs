@@ -18,8 +18,7 @@
             InitializeComponent();
             SetIdioma();
 
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
-            Deportista deportista = deportistas[index];
+            var deportista = Logica.GetDeportistas(3, ""+index)[0];
 
             txtNombre.Text = deportista.Nombre;
             txtApellido.Text = deportista.Apellido;
@@ -34,11 +33,11 @@
 
         private void btnSportCerrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             MainMenu main = new MainMenu();
             main.StartPosition = FormStartPosition.CenterParent;
             main.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void btnSportAdd_Click(object sender, EventArgs e)
@@ -49,30 +48,22 @@
                 {
                     if (txtNombre.Text != "" && cbxEstado != null && txtApellido.Text != "" && txtNacionalidad.Text != "")
                     {
-                        var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
-                        Deportista deportista = new Deportista();
+                        string Nombre = txtNombre.Text,
+                               Apellido = txtApellido.Text,
+                               Nacionalidad = txtNacionalidad.Text,
+                               EstadoJugador = cbxEstado.Text,
+                               Descripcion = txtDescripcion.Text;
 
-                        Random r = new Random();
-
-                        deportista.IdPersona = r.Next(0, 9999);
-                        deportista.Nombre = txtNombre.Text;
-                        deportista.Apellido = txtApellido.Text;
-                        deportista.Nacionalidad = txtNacionalidad.Text;
-                        deportista.EstadoJugador = cbxEstado.Text;
-                        deportista.Descripcion = txtDescripcion.Text;
-
-                        if (deportistas != null)
+                        Logica.InsertPersona(Nombre, Apellido, Nacionalidad);
+                        Logica.InsertDeportista(Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion);
+                        if (Program.language == "EN")
                         {
-                            deportistas.Add(deportista);
-                            Logica.SerializeDeportistas(deportistas);
+                            MessageBox.Show("New athlete created correctly");
                         }
-                        else
+                        else if (Program.language == "ES")
                         {
-                            List<Deportista> list = new List<Deportista>();
-                            list.Add(deportista);
-                            Logica.SerializeDeportistas(list);
+                            MessageBox.Show("Nuevo deportista creado correctamente");
                         }
-                        MessageBox.Show("New athlete created correctly");
                     }
                     else
                     {
@@ -94,42 +85,40 @@
             {
                 if (txtNombre.Text != "" && cbxEstado != null && txtApellido.Text != "" && txtNacionalidad.Text != "")
                 {
-                    var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
-                    Deportista deportista = deportistas[index];
-
-                    if (!(txtNombre.Text == deportista.Nombre &&
-                        txtApellido.Text == deportista.Apellido &&
-                        txtNacionalidad.Text == deportista.Nacionalidad &&
-                        txtDescripcion.Text == deportista.Descripcion &&
-                        cbxEstado.Text == deportista.EstadoJugador))
-                    {
                         DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify athlete", MessageBoxButtons.YesNo);
-                        if (dialogResult1 == DialogResult.Yes)
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        string Nombre = txtNombre.Text,
+                               Apellido = txtApellido.Text,
+                               Nacionalidad = txtNacionalidad.Text,
+                               EstadoJugador = cbxEstado.Text,
+                               Descripcion = txtDescripcion.Text;
+
+                        Logica.UpdatePersona(index, Nombre, Apellido, Nacionalidad);
+                        Logica.UpdateDeportista(index, Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion);
+                        if (Program.language == "EN")
                         {
-                            deportista.Nombre = txtNombre.Text;
-                            deportista.Apellido = txtApellido.Text;
-                            deportista.Nacionalidad = txtNacionalidad.Text;
-                            deportista.EstadoJugador = cbxEstado.Text;
-                            deportista.Descripcion = txtDescripcion.Text;
-
-                            Logica.SerializeDeportistas(deportistas);
-
-                            this.Hide();
-                            MenuManageAthletes manageAthletes = new MenuManageAthletes();
-                            manageAthletes.StartPosition = FormStartPosition.CenterParent;
-                            manageAthletes.ShowDialog();
-                            this.Close();
+                            MessageBox.Show("Athlete modified correctly");
                         }
+                        else if (Program.language == "ES")
+                        {
+                            MessageBox.Show("Deportista modificado correctamente");
+                        }
+                        Hide();
+                        MenuManageAthletes manageAthletes = new MenuManageAthletes();
+                        manageAthletes.StartPosition = FormStartPosition.CenterParent;
+                        manageAthletes.ShowDialog();
+                        Close();
                     }
                     else
                     {
                         if (Program.language == "EN")
                         {
-                            MessageBox.Show("The entered data equals the previous one");
+                            MessageBox.Show("There are filds incomplete");
                         }
                         else if (Program.language == "ES")
                         {
-                            MessageBox.Show("La información ingresada es la misma que la anterior");
+                            MessageBox.Show("Quedan espacios vacios por rellenar");
                         }
                     }
                 }

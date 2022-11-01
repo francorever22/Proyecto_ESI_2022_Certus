@@ -2,12 +2,13 @@
 {
     public partial class MenuCrearEvento : Form
     {
-        bool modify, startModify = false;
-        String eqName;
+        bool modify, startModify = false, avoid = false;
+        string eqName, encName;
         Bitmap imagenCargada = null;
-        int index, cantFases = 1, faseSeleccionada = 1, groupAmount = 1, groupSize = 2, eqId, lblId = 0, txtId = 0;
+        int index, cantFases = 1, faseSeleccionada = 1, groupAmount = 1, groupSize = 2, eqId, lblId = 0, txtId = 0, txtPos = 0, tipoFase = 1, encId;
         List<Fase> fases = new List<Fase>();
-        List<int> equipos = new List<int>();
+        List<EquiposFases> equiposFases = new List<EquiposFases>();
+        List<EncuentrosFases> encuentrosFases = new List<EncuentrosFases>();
         List<Control> controls = new List<Control>();
 
         public MenuCrearEvento()
@@ -15,27 +16,20 @@
             InitializeComponent();
             SetIdioma();
 
-            this.txtFechaFase.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, this.txtFechaFase); };
-            this.txtFechaFase.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, this.txtFechaFase); };
-            this.btnGoEvent.Click += (sender, EventArgs) => { btnGoEvent_Click(sender, EventArgs); };
-            this.btnPlusFases.Click += (sender, EventArgs) => { btnPlusFases_Click(sender, EventArgs); };
-            this.btnMinusFases.Click += (sender, EventArgs) => { btnminusFases_Click(sender, EventArgs); };
-            this.cbxFase.SelectedIndexChanged += (sender, EventArgs) => { cbxFase_SelectedIndexChanged(sender, EventArgs); };
-            this.cbxTipoFase.SelectedIndexChanged += (sender, EventArgs) => { cbxTipoFase_SelectedIndexChanged(sender, EventArgs); };
-            this.btnSelectImage.Click += (sender, EventArgs) => { btnSelectImage_Click(sender, EventArgs); };
-            this.btnGoFases.Click += (sender, EventArgs) => { btnGoFases_Click(sender, EventArgs); };
-            this.txtHoraEvento.Enter += (sender, EventArgs) => { txtHora_Enter(sender, EventArgs, this.txtHoraEvento); };
-            this.txtHoraEvento.Leave += (sender, EventArgs) => { txtHora_Leave(sender, EventArgs, this.txtHoraEvento); };
-            this.txtFechaEvento.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, this.txtFechaEvento); };
-            this.txtFechaEvento.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, this.txtFechaEvento); };
-            this.btnEventCerrar.Click += (sender, EventArgs) => { btnEventCerrar_Click(sender, EventArgs); };
+            SetControls();
 
             fases.Add(new Fase());
 
-            cbxTipoFase.SelectedIndex = 0;
+            btnLinkedMatchs.Click += (sender, EventArgs) => { btnListEncuentros_Click(sender, EventArgs); };
+            btnLinkMatch.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, 0, txtId, txtPos, true); };
+
+            cbxTipoFase.SelectedIndex = 1;
             cbxFase.SelectedIndex = 0;
+            btnLinkedMatchs.Hide();
+            btnLinkMatch.Hide();
             panelFases.Hide();
             panelBuscadorEquipos.Hide();
+            panelEncuentros.Hide();
         }
 
         public MenuCrearEvento(int index)
@@ -45,40 +39,43 @@
 
             this.index = index;
             modify = true;
+            avoid = true;
             startModify = true;
             btnAddEvent.Text = "Modify";
             txtFechaEvento.ForeColor = Color.Black;
             txtFechaFase.ForeColor = Color.Black;
             txtHoraEvento.ForeColor = Color.Black;
 
-            this.txtFechaFase.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, this.txtFechaFase); };
-            this.txtFechaFase.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, this.txtFechaFase); };
-            this.btnGoEvent.Click += (sender, EventArgs) => { btnGoEvent_Click(sender, EventArgs); };
-            this.btnPlusFases.Click += (sender, EventArgs) => { btnPlusFases_Click(sender, EventArgs); };
-            this.btnMinusFases.Click += (sender, EventArgs) => { btnminusFases_Click(sender, EventArgs); };
-            this.cbxFase.SelectedIndexChanged += (sender, EventArgs) => { cbxFase_SelectedIndexChanged(sender, EventArgs); };
-            this.cbxTipoFase.SelectedIndexChanged += (sender, EventArgs) => { cbxTipoFase_SelectedIndexChanged(sender, EventArgs); };
-            this.btnSelectImage.Click += (sender, EventArgs) => { btnSelectImage_Click(sender, EventArgs); };
-            this.btnGoFases.Click += (sender, EventArgs) => { btnGoFases_Click(sender, EventArgs); };
-            this.txtHoraEvento.Enter += (sender, EventArgs) => { txtHora_Enter(sender, EventArgs, this.txtHoraEvento); };
-            this.txtHoraEvento.Leave += (sender, EventArgs) => { txtHora_Leave(sender, EventArgs, this.txtHoraEvento); };
-            this.txtFechaEvento.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, this.txtFechaEvento); };
-            this.txtFechaEvento.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, this.txtFechaEvento); };
-            this.btnEventCerrar.Click += (sender, EventArgs) => { btnEventCerrar_Click(sender, EventArgs); };
+            SetControls();
 
-            var eventos = Logica.DeserializeEventos(Logica.GetJson("DinamicJson\\Eventos.json"));
-            Evento evento = eventos[index];
+            var evento = Logica.GetEventos(4, "" + index)[0];
 
             txtNombreEvento.Text = evento.NombreEvento;
-            txtHoraEvento.Text = evento.HoraEvento;
-            txtFechaEvento.Text = evento.FechaEvento;
+            try
+            {
+                txtHoraEvento.Text = evento.HoraEvento.Substring(0, evento.HoraEvento.Length - 3);
+            } catch { }
+            try
+            {
+                txtFechaEvento.Text = evento.FechaEvento.Substring(0, evento.FechaEvento.Length - 8);
+            } catch { }
             txtlugarEvento.Text = evento.Lugar;
             cbxEstadoEvento.Text = evento.EstadoEvento;
+
+            evento.Fases = Logica.GetFases(2, ""+index);
+
+            btnLinkedMatchs.Click += (sender, EventArgs) => { btnListEncuentros_Click(sender, EventArgs); };
+            btnLinkMatch.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, 0, txtId, txtPos, true); };
+
             cantFases = evento.Fases.Count();
             txtCantFases.Text = "" + cantFases;
             int c = 1;
             foreach (var f in evento.Fases)
             {
+                f.EquiposParticipantes = Logica.GetEquiposFases(1, "" + index, ""+c);
+                if (f.EquiposParticipantes == null) { f.EquiposParticipantes = new List<EquiposFases>(); }
+                f.EncuentrosParticipantes = Logica.GetEncuentrosFases(1, "" + index, ""+c);
+                if (f.EncuentrosParticipantes == null) { f.EncuentrosParticipantes = new List<EncuentrosFases>(); }
                 fases.Add(f);
                 if (c > 1)
                 {
@@ -89,77 +86,119 @@
 
             Fase fase = fases[0];
 
-            txtFechaFase.Text = fase.FechaFase;
+            try
+            {
+                txtFechaFase.Text = fase.FechaFase.Substring(0, fase.FechaFase.Length - 8);
+            } catch { }
             txtNombreFase.Text = fase.NombreFase;
             cbxEstadoFase.Text = fase.EstadoFase;
-            equipos = fase.IdEquiposParticipantes;
+            groupSize = fase.TamañoGrupos;
+            groupAmount = fase.CantidadGrupos;
+
+            equiposFases = fase.EquiposParticipantes;
+            encuentrosFases = fase.EncuentrosParticipantes;
 
             cbxFase.SelectedIndex = 0;
             cbxTipoFase.SelectedIndex = fase.TipoFase - 1;
             panelFases.Hide();
             panelBuscadorEquipos.Hide();
+            panelEncuentros.Hide();
         }
 
-        private void cbxFase_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxFase_SelectedIndexChanged(object sender, EventArgs e) //Cambia la fase
         {
-            try
+
+            if (startModify == false)
             {
-                if (startModify == false)
+                //Guarda los datos de la fase anterior
+                Fase fase = new Fase();
+
+                fase.NumeroFase = faseSeleccionada;
+                fase.FechaFase = txtFechaFase.Text;
+                fase.NombreFase = txtNombreFase.Text;
+                fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
+                fase.EquiposParticipantes = equiposFases;
+                fase.EncuentrosParticipantes = encuentrosFases;
+                fase.TamañoGrupos = groupSize;
+                fase.CantidadGrupos = groupAmount;
+                fase.EstadoFase = cbxEstadoFase.Text;
+
+                fases.RemoveAt(faseSeleccionada - 1);
+                fases.Insert(faseSeleccionada - 1, fase);
+                faseSeleccionada = Convert.ToInt32(cbxFase.Text);
+
+                //Carga los datos de la fase seleccionada si es que tenia datos
+                fase = fases[faseSeleccionada - 1];
+
+                txtNombreFase.Text = Convert.ToString(fase.NombreFase);
+                groupSize = fase.TamañoGrupos;
+                groupAmount = fase.CantidadGrupos;
+                if (fase.FechaFase == "" || fase.FechaFase == "DD/MM/YYYY")
                 {
-                    Fase fase = new Fase();
-                    fase.NumeroFase = faseSeleccionada;
-                    fase.FechaFase = txtFechaFase.Text;
-                    fase.NombreFase = txtNombreFase.Text;
-                    fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
-                    fase.IdEquiposParticipantes = equipos;
-
-                    fases.RemoveAt(faseSeleccionada - 1);
-                    fases.Insert(faseSeleccionada - 1, fase);
-                    faseSeleccionada = Convert.ToInt32(cbxFase.Text);
-
-                    fase = fases[faseSeleccionada - 1];
-
-                    txtNombreFase.Text = Convert.ToString(fase.NombreFase);
-                    if (fase.FechaFase == "" || fase.FechaFase == "DD/MM/YYYY")
-                    {
-                        txtFechaFase.Text = "DD/MM/YYYY";
-                        txtFechaFase.ForeColor = Color.DimGray;
-                    }
-                    else
-                    {
-                        txtFechaFase.Text = fase.FechaFase;
-                        txtFechaFase.ForeColor = Color.Black;
-                    }
-                    if (fase.IdEquiposParticipantes != null)
-                    {
-                        equipos = fase.IdEquiposParticipantes;
-                    }
-                    else { equipos = new List<int>(); }
-                    if (fase.TipoFase == 0) { cbxTipoFase.SelectedIndex = 1; cbxTipoFase.SelectedIndex = 0; }
-                    else
-                    {
-                        if (cbxTipoFase.Text == Convert.ToString(fase.TipoFase))
-                        {
-                            cbxTipoFase.SelectedIndex = 1;
-                            cbxTipoFase.SelectedIndex = 0;
-                        }
-                        cbxTipoFase.SelectedIndex = fase.TipoFase - 1;
-                    }
-                } else
-                {
-                    startModify = false;
+                    txtFechaFase.Text = "DD/MM/YYYY";
+                    txtFechaFase.ForeColor = Color.DimGray;
                 }
-            } catch (Exception ex) { MessageBox.Show(ex.Message); }
+                else
+                {
+                    string fechaFase = fase.FechaFase;
+                    try
+                    {
+                        if (CambiarFormatoFecha(fechaFase) == true)
+                        {
+                            fechaFase = fechaFase.Substring(0, fechaFase.Length - 8);
+                        }
+                    } catch { }
+                    txtFechaFase.Text = fechaFase;
+                    txtFechaFase.ForeColor = Color.Black;
+                }
+
+                if (fase.EquiposParticipantes != null)
+                {
+                    equiposFases = fase.EquiposParticipantes;
+                }
+                else { equiposFases = new List<EquiposFases>(); }
+
+                if (fase.EncuentrosParticipantes != null)
+                {
+                    encuentrosFases = fase.EncuentrosParticipantes;
+                }
+                else { encuentrosFases = new List<EncuentrosFases>(); }
+
+                if (fase.TipoFase == 0) { avoid = true; cbxTipoFase.SelectedIndex = 1; avoid = true; cbxTipoFase.SelectedIndex = 0; }
+                else
+                {
+                    if (cbxTipoFase.Text == Convert.ToString(fase.TipoFase))
+                    {
+                        avoid = true;
+                        cbxTipoFase.SelectedIndex = 1;
+                        avoid = true;
+                        cbxTipoFase.SelectedIndex = 0;
+                    }
+                    avoid = true;
+                    cbxTipoFase.SelectedIndex = fase.TipoFase - 1;
+                }
+            } else
+            {
+                startModify = false;
+            }
         }
 
         private void cbxTipoFase_SelectedIndexChanged(object sender, EventArgs e)
         {
             panelEquipos.Controls.Clear();
+            if (avoid == false)
+            {
+                Reset();
+            }
             switch (cbxTipoFase.Text)
             {
-                case "1": //LLaves
-                    int p = 8, count = 0;
-                    var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
+                case "1": //LLaves //Actualmete no funcional
+
+                    avoid = false;
+                    btnLinkMatch.Hide();
+                    btnLinkedMatchs.Hide();
+                    tipoFase = 1;
+                    int p = 8, count = 0, actuals = encuentrosFases.Count();
                     for (int t = 0; t < 4; t++)
                     {
                         for (int i = 0; i < p; i++)
@@ -172,74 +211,58 @@
                             p1.TabIndex = 0;
                             p1.Location = new Point(275 * t, 75 * i);
 
-                            this.panelEquipos.Controls.Add(p1);
+                            Label lbl1 = new Label();
 
-                            for (int j = 0; j < 2; j++)
+                            lbl1.Size = new Size(190, 15);
+                            lbl1.Location = new Point(5, 16);
+                            lbl1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+
+                            TextBox txtID = new TextBox();
+                            TextBox txtPos = new TextBox();
+                            txtPos.Text = "" + t;
+
+                            if (actuals > 0 && count < actuals)
                             {
-                                Panel p2 = new Panel();
-
-                                p2.Size = new Size(225, 25);
-                                p2.BorderStyle = BorderStyle.FixedSingle;
-                                p2.BackColor = Color.FromArgb(255, 255, 248);
-                                p2.TabIndex = 0;
-                                p2.Location = new Point(0, 25 * j);
-
-                                Label lbl1 = new Label();
-
-                                lbl1.Size = new Size(190, 15);
-                                lbl1.Location = new Point(5, 5);
-                                controls.Add(lbl1);
-
-                                TextBox txtID = new TextBox();
-
-                                txtID.Text = "";
-                                controls.Add(txtID);
-
-                                if (equipos != null)
+                                if (encuentrosFases[count].PosicionEquipo == t)
                                 {
-                                    foreach (var eq in equipos)
-                                    {
-                                        try
-                                        {
-                                            if (eq.IdEquipo == this.equipos[count])
-                                            {
-                                                txtID.Text = "" + eq.IdEquipo;
-                                                lbl1.Text = eq.NombreEquipo;
-                                            }
-                                        } catch { }
-                                    }
+                                    lbl1.Text = encuentrosFases[count].Nombre;
+                                    txtID.Text = "" + encuentrosFases[count].IdEncuentro;
+                                    count++;
                                 }
-
-                                PictureBox pic1 = new PictureBox(); //Boton eliminar
-
-                                pic1.BorderStyle = BorderStyle.FixedSingle;
-                                pic1.Size = new Size(12, 12);
-                                pic1.Location = new Point(212, 7);
-                                pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                pic1.Image = Properties.Resources.cruz;
-                                pic1.Click += (sender, EventArgs) => { DeleteTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID)); };
-
-                                PictureBox pic2 = new PictureBox(); //Boton agregar
-
-                                pic2.BorderStyle = BorderStyle.FixedSingle;
-                                pic2.Size = new Size(12, 12);
-                                pic2.Location = new Point(200, 7);
-                                pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                                pic2.Image = Properties.Resources.mas;
-                                pic2.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID)); };
-
-                                p1.Controls.Add(p2);
-                                p2.Controls.Add(pic2);
-                                p2.Controls.Add(pic1);
-                                p2.Controls.Add(lbl1);
-
-                                count++;
+                                else
+                                {
+                                    txtID.Text = "";
+                                }
                             }
+                            else
+                            {
+                                txtID.Text = "";
+                            }
+
+                            controls.Add(lbl1);
+                            controls.Add(txtID);
+                            controls.Add(txtPos);
+
+                            PictureBox pic2 = new PictureBox(); //Boton agregar
+
+                            pic2.BorderStyle = BorderStyle.FixedSingle;
+                            pic2.Size = new Size(12, 12);
+                            pic2.Location = new Point(200, 19);
+                            pic2.SizeMode = PictureBoxSizeMode.StretchImage;
+                            pic2.Image = Properties.Resources.mas;
+                            pic2.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID), controls.IndexOf(txtPos), false); };
+
+                            panelEquipos.Controls.Add(p1);
+                            p1.Controls.Add(pic2);
+                            p1.Controls.Add(lbl1);
                         }
                         p /= 2;
                     }
                     break;
                 case "2": //Grupos
+                    btnLinkMatch.Show();
+                    btnLinkedMatchs.Show();
+                    tipoFase = 2;
                     Panel p3 = new Panel();
 
                     p3.Location = new Point(5, 60);
@@ -260,7 +283,7 @@
                     txtGroupSize.Location = new Point(120, 30);
                     txtGroupSize.ReadOnly = true;
                     txtGroupSize.Size = new Size(27, 25);
-                    txtGroupSize.Text = "2";
+                    txtGroupSize.Text = ""+groupSize;
                     txtGroupSize.TextAlign = HorizontalAlignment.Center;
 
                     Button btnSizePlus = new Button();
@@ -293,7 +316,7 @@
                     txtGroupAmount.Location = new Point(30, 30);
                     txtGroupAmount.ReadOnly = true;
                     txtGroupAmount.Size = new Size(27, 25);
-                    txtGroupAmount.Text = "1";
+                    txtGroupAmount.Text = ""+groupAmount;
                     txtGroupAmount.TextAlign = HorizontalAlignment.Center;
 
                     Button btnAmountPlus = new Button();
@@ -312,21 +335,33 @@
                     btnAmountMinus.TextAlign = ContentAlignment.TopCenter;
                     btnAmountMinus.Click += (sender, EventArgs) => { Minus(sender, EventArgs, 1, txtGroupAmount, p3); };
 
-                    this.panelEquipos.Controls.Add(btnAmountPlus);
-                    this.panelEquipos.Controls.Add(btnAmountMinus);
-                    this.panelEquipos.Controls.Add(btnSizeMinus);
-                    this.panelEquipos.Controls.Add(btnSizePlus);
-                    this.panelEquipos.Controls.Add(txtGroupAmount);
-                    this.panelEquipos.Controls.Add(txtGroupSize);
-                    this.panelEquipos.Controls.Add(lbl2);
-                    this.panelEquipos.Controls.Add(lbl3);
-                    this.panelEquipos.Controls.Add(p3);
+                    panelEquipos.Controls.Add(btnAmountPlus);
+                    panelEquipos.Controls.Add(btnAmountMinus);
+                    panelEquipos.Controls.Add(btnSizeMinus);
+                    panelEquipos.Controls.Add(btnSizePlus);
+                    panelEquipos.Controls.Add(txtGroupAmount);
+                    panelEquipos.Controls.Add(txtGroupSize);
+                    panelEquipos.Controls.Add(lbl2);
+                    panelEquipos.Controls.Add(lbl3);
+                    panelEquipos.Controls.Add(p3);
 
-                    groupSize = 2;
+                    if (avoid == false)
+                    {
+                        groupSize = 2;
+                        groupAmount = 1;
+                    }
 
                     PhasesGroups(p3);
                     break;
                 case "3": //Desparejo
+                    btnLinkMatch.Hide();
+                    btnLinkedMatchs.Hide();
+                    tipoFase = 3;
+                    if (avoid != true)
+                    {
+                        groupSize = 2;
+                        groupAmount = 2;
+                    }
                     Panel p4 = new Panel();
 
                     p4.Location = new Point(5, 60);
@@ -347,7 +382,7 @@
                     txtPairsAmount.Location = new Point(30, 30);
                     txtPairsAmount.ReadOnly = true;
                     txtPairsAmount.Size = new Size(27, 25);
-                    txtPairsAmount.Text = "1";
+                    txtPairsAmount.Text = ""+groupAmount;
                     txtPairsAmount.TextAlign = HorizontalAlignment.Center;
 
                     Button btnAmountPPlus = new Button();
@@ -366,15 +401,18 @@
                     btnAmountPMinus.TextAlign = ContentAlignment.TopCenter;
                     btnAmountPMinus.Click += (sender, EventArgs) => { Minus(sender, EventArgs, 1, txtPairsAmount, p4); };
 
-                    this.panelEquipos.Controls.Add(lbl4);
-                    this.panelEquipos.Controls.Add(p4);
-                    this.panelEquipos.Controls.Add(txtPairsAmount);
-                    this.panelEquipos.Controls.Add(btnAmountPPlus);
-                    this.panelEquipos.Controls.Add(btnAmountPMinus);
+                    panelEquipos.Controls.Add(lbl4);
+                    panelEquipos.Controls.Add(p4);
+                    panelEquipos.Controls.Add(txtPairsAmount);
+                    panelEquipos.Controls.Add(btnAmountPPlus);
+                    panelEquipos.Controls.Add(btnAmountPMinus);
 
                     PhasesGroups(p4);
                     break;
                 case "4": //Posición
+                    btnLinkMatch.Show();
+                    btnLinkedMatchs.Show();
+                    tipoFase = 4;
                     Panel p5 = new Panel();
 
                     p5.Location = new Point(5, 60);
@@ -414,17 +452,24 @@
                     btnSizeTMinus.TextAlign = ContentAlignment.TopCenter;
                     btnSizeTMinus.Click += (sender, EventArgs) => { Minus(sender, EventArgs, 2, txtTableSize, p5); };
 
-                    this.panelEquipos.Controls.Add(lbl5);
-                    this.panelEquipos.Controls.Add(p5);
-                    this.panelEquipos.Controls.Add(txtTableSize);
-                    this.panelEquipos.Controls.Add(btnSizeTPlus);
-                    this.panelEquipos.Controls.Add(btnSizeTMinus);
+                    panelEquipos.Controls.Add(lbl5);
+                    panelEquipos.Controls.Add(p5);
+                    panelEquipos.Controls.Add(txtTableSize);
+                    panelEquipos.Controls.Add(btnSizeTPlus);
+                    panelEquipos.Controls.Add(btnSizeTMinus);
 
-                    groupAmount = 1;
+                    if (avoid != true)
+                    {
+                        groupSize = 2;
+                        groupAmount = 1;
+                    }
 
                     PhasesGroups(p5);
                     break;
                 case "5": //Eliminatorias
+                    btnLinkMatch.Show();
+                    btnLinkedMatchs.Show();
+                    tipoFase = 5;
                     Panel p6 = new Panel();
 
                     p6.Location = new Point(5, 60);
@@ -464,13 +509,17 @@
                     btnSizeEMinus.TextAlign = ContentAlignment.TopCenter;
                     btnSizeEMinus.Click += (sender, EventArgs) => { Minus(sender, EventArgs, 2, txtTableESize, p6); };
 
-                    this.panelEquipos.Controls.Add(lbl6);
-                    this.panelEquipos.Controls.Add(p6);
-                    this.panelEquipos.Controls.Add(txtTableESize);
-                    this.panelEquipos.Controls.Add(btnSizeEPlus);
-                    this.panelEquipos.Controls.Add(btnSizeEMinus);
+                    panelEquipos.Controls.Add(lbl6);
+                    panelEquipos.Controls.Add(p6);
+                    panelEquipos.Controls.Add(txtTableESize);
+                    panelEquipos.Controls.Add(btnSizeEPlus);
+                    panelEquipos.Controls.Add(btnSizeEMinus);
 
-                    groupAmount = 1;
+                    if (avoid != true)
+                    {
+                        groupSize = 2;
+                        groupAmount = 1;
+                    }
 
                     PhasesGroups(p6);
                     break;
@@ -604,11 +653,13 @@
             }
         }
 
-        private void LookTeam_Click(object sender, EventArgs e, int lblI, int txtId)
+        private void LookTeam_Click(object sender, EventArgs e, int lblI, int txtId, int txtPos, bool enc)
         {
+            panelBuscadorEquipos.Controls.Clear();
             panelBuscadorEquipos.Show();
             this.lblId = lblI;
             this.txtId = txtId;
+            this.txtPos = txtPos;
 
             TextBox buscador = new TextBox();
 
@@ -673,74 +724,185 @@
             btn1.FlatStyle = FlatStyle.Flat;
             btn1.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             btn1.Text = "Add";
-            btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, eqName, eqId); };
 
-            btnBuscar.Click += (sender, EventArgs) => { BuscarEquipo(sender, EventArgs, buscador.Text, panelContenedor); };
+            btnBuscar.Click += (sender, EventArgs) => { BuscarEquipo(sender, EventArgs, buscador.Text, panelContenedor, enc); };
 
-            this.panelBuscadorEquipos.Controls.Add(panelPrincipal);
-            this.panelBuscadorEquipos.Controls.Add(buscador);
-            this.panelBuscadorEquipos.Controls.Add(btnBuscar);
-            this.panelBuscadorEquipos.Controls.Add(btn1);
+            panelBuscadorEquipos.Controls.Add(panelPrincipal);
+            panelBuscadorEquipos.Controls.Add(buscador);
+            panelBuscadorEquipos.Controls.Add(btnBuscar);
+            panelBuscadorEquipos.Controls.Add(btn1);
             panelPrincipal.Controls.Add(panelLabels);
             panelPrincipal.Controls.Add(panelContenedor);
             panelLabels.Controls.Add(lblEquipo);
             panelLabels.Controls.Add(lblOrigen);
             panelLabels.Controls.Add(lblId);
 
-            var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
-            int count = 0;
-
-            foreach (var eq in equipos)
+            if (enc == true)
             {
-                Panel p1 = new Panel();
+                var encuentros = Logica.GetEncuentros(1, null);
 
-                p1.Location = new Point(0, 25 * count);
-                p1.Size = new Size(334, 25);
+                foreach (var en in encuentros)
+                {
+                    Panel p1 = new Panel();
 
-                Label lbl1 = new Label();
+                    p1.Location = new Point(0, 0);
+                    p1.Size = new Size(334, 25);
+                    p1.Dock = DockStyle.Top;
 
-                lbl1.Text = ""+eq.IdEquipo;
-                lbl1.Size = new Size(40, 25);
-                lbl1.Location = new Point(0, 0);
-                lbl1.BorderStyle = BorderStyle.FixedSingle;
-                lbl1.TextAlign = ContentAlignment.MiddleCenter;
+                    Label lbl1 = new Label();
 
-                Label lbl2 = new Label();
+                    lbl1.Text = "" + en.IdEncuentro;
+                    lbl1.Size = new Size(40, 25);
+                    lbl1.Location = new Point(0, 0);
+                    lbl1.BorderStyle = BorderStyle.FixedSingle;
+                    lbl1.TextAlign = ContentAlignment.MiddleCenter;
 
-                lbl2.Text = eq.NombreEquipo;
-                lbl2.Size = new Size(200, 25);
-                lbl2.Location = new Point(40, 0);
-                lbl2.BorderStyle = BorderStyle.FixedSingle;
-                lbl2.TextAlign = ContentAlignment.MiddleCenter;
+                    Label lbl2 = new Label();
 
-                Label lbl3 = new Label();
+                    lbl2.Text = "" + en.Nombre;
+                    lbl2.Size = new Size(200, 25);
+                    lbl2.Location = new Point(40, 0);
+                    lbl2.BorderStyle = BorderStyle.FixedSingle;
+                    lbl2.TextAlign = ContentAlignment.MiddleCenter;
 
-                lbl3.Text = "" + eq.PaisOrigen;
-                lbl3.Size = new Size(82, 25);
-                lbl3.Location = new Point(240, 0);
-                lbl3.BorderStyle = BorderStyle.FixedSingle;
-                lbl3.AutoSize = false;
-                lbl3.TextAlign = ContentAlignment.MiddleCenter;
+                    Label lbl3 = new Label();
 
-                Button btn2 = new Button();
+                    lbl3.Text = "" + en.Fecha;
+                    lbl3.Size = new Size(82, 25);
+                    lbl3.Location = new Point(240, 0);
+                    lbl3.BorderStyle = BorderStyle.FixedSingle;
+                    lbl3.AutoSize = false;
+                    lbl3.TextAlign = ContentAlignment.MiddleCenter;
 
-                btn2.BackColor = Color.Red;
-                btn2.Size = new Size(12, 12);
-                btn2.Location = new Point(322, 7);
-                btn2.FlatStyle = FlatStyle.Flat;
-                btn2.Click += (sender, EventArgs) => { BtnChange(sender, EventArgs, btn2, panelContenedor, eq.NombreEquipo, eq.IdEquipo); };
+                    Button btn2 = new Button();
 
-                panelContenedor.Controls.Add(p1);
-                p1.Controls.Add(btn2);
-                p1.Controls.Add(lbl3);
-                p1.Controls.Add(lbl2);
-                p1.Controls.Add(lbl1);
+                    btn2.BackColor = Color.Red;
+                    btn2.Size = new Size(12, 12);
+                    btn2.Location = new Point(322, 7);
+                    btn2.FlatStyle = FlatStyle.Flat;
+                    btn2.Click += (sender, EventArgs) => { BtnChange(sender, EventArgs, btn2, panelContenedor, en.Nombre, en.IdEncuentro, true); };
 
-                count++;
+                    panelContenedor.Controls.Add(p1);
+                    p1.Controls.Add(btn2);
+                    p1.Controls.Add(lbl3);
+                    p1.Controls.Add(lbl2);
+                    p1.Controls.Add(lbl1);
+                }
+                btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, encName, encId, enc); };
+            }
+            else
+            {
+                if (tipoFase == 2 || tipoFase == 4 || tipoFase == 5)
+                {
+                    var equipos = Logica.GetEquipos(1, null);
+
+                    foreach (var eq in equipos)
+                    {
+                        Panel p1 = new Panel();
+
+                        p1.Location = new Point(0, 0);
+                        p1.Size = new Size(334, 25);
+                        p1.Dock = DockStyle.Top;
+
+                        Label lbl1 = new Label();
+
+                        lbl1.Text = "" + eq.IdEquipo;
+                        lbl1.Size = new Size(40, 25);
+                        lbl1.Location = new Point(0, 0);
+                        lbl1.BorderStyle = BorderStyle.FixedSingle;
+                        lbl1.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl2 = new Label();
+
+                        lbl2.Text = eq.NombreEquipo;
+                        lbl2.Size = new Size(200, 25);
+                        lbl2.Location = new Point(40, 0);
+                        lbl2.BorderStyle = BorderStyle.FixedSingle;
+                        lbl2.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl3 = new Label();
+
+                        lbl3.Text = "" + eq.PaisOrigen;
+                        lbl3.Size = new Size(82, 25);
+                        lbl3.Location = new Point(240, 0);
+                        lbl3.BorderStyle = BorderStyle.FixedSingle;
+                        lbl3.AutoSize = false;
+                        lbl3.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Button btn2 = new Button();
+
+                        btn2.BackColor = Color.Red;
+                        btn2.Size = new Size(12, 12);
+                        btn2.Location = new Point(322, 7);
+                        btn2.FlatStyle = FlatStyle.Flat;
+                        btn2.Click += (sender, EventArgs) => { BtnChange(sender, EventArgs, btn2, panelContenedor, eq.NombreEquipo, eq.IdEquipo, false); };
+
+                        panelContenedor.Controls.Add(p1);
+                        p1.Controls.Add(btn2);
+                        p1.Controls.Add(lbl3);
+                        p1.Controls.Add(lbl2);
+                        p1.Controls.Add(lbl1);
+                    }
+                    btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, eqName, eqId, enc); };
+                }
+                else if (tipoFase == 1 || tipoFase == 3)
+                {
+                    enc = true;
+                    var encuentros = Logica.GetEncuentros(1, null);
+
+                    foreach (var en in encuentros)
+                    {
+                        Panel p1 = new Panel();
+
+                        p1.Location = new Point(0, 0);
+                        p1.Size = new Size(334, 25);
+                        p1.Dock = DockStyle.Top;
+
+                        Label lbl1 = new Label();
+
+                        lbl1.Text = "" + en.IdEncuentro;
+                        lbl1.Size = new Size(40, 25);
+                        lbl1.Location = new Point(0, 0);
+                        lbl1.BorderStyle = BorderStyle.FixedSingle;
+                        lbl1.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl2 = new Label();
+
+                        lbl2.Text = en.Nombre;
+                        lbl2.Size = new Size(200, 25);
+                        lbl2.Location = new Point(40, 0);
+                        lbl2.BorderStyle = BorderStyle.FixedSingle;
+                        lbl2.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl3 = new Label();
+
+                        lbl3.Text = "" + en.Fecha;
+                        lbl3.Size = new Size(82, 25);
+                        lbl3.Location = new Point(240, 0);
+                        lbl3.BorderStyle = BorderStyle.FixedSingle;
+                        lbl3.AutoSize = false;
+                        lbl3.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Button btn2 = new Button();
+
+                        btn2.BackColor = Color.Red;
+                        btn2.Size = new Size(12, 12);
+                        btn2.Location = new Point(322, 7);
+                        btn2.FlatStyle = FlatStyle.Flat;
+                        btn2.Click += (sender, EventArgs) => { BtnChange(sender, EventArgs, btn2, panelContenedor, en.Nombre, en.IdEncuentro, true); };
+
+                        panelContenedor.Controls.Add(p1);
+                        p1.Controls.Add(btn2);
+                        p1.Controls.Add(lbl3);
+                        p1.Controls.Add(lbl2);
+                        p1.Controls.Add(lbl1);
+                    }
+                    btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, encName, encId, enc); };
+                }
             }
         }
 
-        private void BtnChange(object sender, EventArgs e, Button b, Panel p, string name, int id)
+        private void BtnChange(object sender, EventArgs e, Button b, Panel p, string name, int id, bool enc)
         {
             List<Panel> panels = new List<Panel>();
             List<Button> buttons = new List<Button>();
@@ -768,11 +930,18 @@
                 bu.BackColor = Color.Red;
             }
             b.BackColor = Color.Green;
-            eqName = name;
-            eqId = id;
+            if (enc == true)
+            {
+                encName = name;
+                encId = id;
+            } else
+            {
+                eqName = name;
+                eqId = id;
+            }
         }
 
-        private void btnAddEvent_Click(object sender, EventArgs e)
+        private void btnAddEvent_Click(object sender, EventArgs e) //Agrega todos los datos del evento a la BD
         {
             if (modify == false)
             {
@@ -781,80 +950,167 @@
                 fase.FechaFase = txtFechaFase.Text;
                 fase.NombreFase = txtNombreFase.Text;
                 fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
-                fase.IdEquiposParticipantes = equipos;
+                fase.EquiposParticipantes = equiposFases;
+                fase.EncuentrosParticipantes = encuentrosFases;
                 fase.EstadoFase = cbxEstadoFase.Text;
+                fase.TamañoGrupos = groupSize;
+                fase.CantidadGrupos = groupAmount;
 
                 fases.RemoveAt(faseSeleccionada - 1);
                 fases.Insert(faseSeleccionada - 1, fase);
 
-                var eventos = Logica.DeserializeEventos(Logica.GetJson("DinamicJson\\Eventos.json"));
-                Evento evento = new Evento();
-
-                Random r = new Random();
-
-                evento.IdEvento = r.Next(1, 10000);
-                evento.FechaEvento = txtFechaEvento.Text;
-                evento.NombreEvento = txtNombreEvento.Text;
-                evento.HoraEvento = txtHoraEvento.Text;
-                evento.EstadoEvento = cbxEstadoEvento.Text;
-                evento.Lugar = txtlugarEvento.Text;
-                //evento.LogoEvento = imgEventSelected.Image;
-                evento.Fases = fases;
-
-                if (eventos != null)
+                try
                 {
-                    eventos.Add(evento);
-                    Logica.SerializeEventos(eventos);
-                }
-                else
-                {
-                    eventos = new List<Evento>();
-                    eventos.Add(evento);
-                    Logica.SerializeEventos(eventos);
-                }
-                MessageBox.Show("Event added correctly");
+                    string[] fechaEventoArray = txtFechaEvento.Text.Split("/");
+                    string fechaEvento = fechaEventoArray[2] + "-" + fechaEventoArray[1] + "-" + fechaEventoArray[0];
+
+                    string nombreEvento = txtNombreEvento.Text,
+                           horaEvento = txtHoraEvento.Text,
+                           estadoEvento = cbxEstadoEvento.Text,
+                           lugar = txtlugarEvento.Text;
+                    //evento.LogoEvento = imgEventSelected.Image;
+
+                    Logica.InsertEvento(nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, null);
+
+                    int idEvento = Logica.GetEventos(3, nombreEvento)[0].IdEvento;
+
+                    foreach (var f in fases)
+                    {
+                        string[] fechaFaseArray = f.FechaFase.Split("/");
+                        string fechaFase = fechaFaseArray[2] + "-" + fechaFaseArray[1] + "-" + fechaFaseArray[0];
+
+                        Logica.InsertFase(f.NumeroFase, idEvento, f.EstadoFase, f.NombreFase, fechaFase, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+
+                        foreach(var eqF in f.EquiposParticipantes)
+                        {
+                            Equipo eq = Logica.GetEquipos(3, ""+eqF.IdEquipo)[0];
+
+                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
+                                eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+                        }
+                        foreach(var enF in f.EncuentrosParticipantes)
+                        {
+                            Encuentro en = Logica.GetEncuentros(4, ""+enF.IdEncuentro)[0];
+
+                            Logica.InsertEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
+                        }
+                    }
+
+                    MessageBox.Show("Event added correctly");
+                    Hide();
+                    MainMenu main = new MainMenu();
+                    main.StartPosition = FormStartPosition.CenterParent;
+                    main.ShowDialog();
+                    Close();
+                } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
             } else
             {
                 if (txtFechaEvento.Text != "" && txtFechaFase.Text != "" && txtHoraEvento.Text != "" && txtlugarEvento.Text != "" && txtNombreEvento.Text != "" && txtNombreFase.Text != "")
                 {
-                    var eventos = Logica.DeserializeEventos(Logica.GetJson("DinamicJson\\Eventos.json"));
-                    Evento evento = eventos[index];
-                    if (!(txtNombreEvento.Text == evento.NombreEvento &&
-                        txtHoraEvento.Text == evento.HoraEvento &&
-                        txtlugarEvento.Text == evento.Lugar &&
-                        cbxEstadoEvento.Text == evento.EstadoEvento &&
-                        fases == evento.Fases))
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify event", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
                     {
-                        DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify event", MessageBoxButtons.YesNo);
-                        if (dialogResult1 == DialogResult.Yes)
-                        {
-                            evento.FechaEvento = txtFechaEvento.Text;
-                            evento.NombreEvento = txtNombreEvento.Text;
-                            evento.HoraEvento = txtHoraEvento.Text;
-                            evento.EstadoEvento = cbxEstadoEvento.Text;
-                            evento.Lugar = txtlugarEvento.Text;
+                        string[] fechaFaseArray = txtFechaFase.Text.Split("/");
+                        string fechaFase = fechaFaseArray[2] + "-" + fechaFaseArray[1] + "-" + fechaFaseArray[0];
+
+                        Fase fase = new Fase();
+                        fase.NumeroFase = faseSeleccionada;
+                        fase.FechaFase = fechaFase;
+                        fase.NombreFase = txtNombreFase.Text;
+                        fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
+                        fase.EquiposParticipantes = equiposFases;
+                        fase.EncuentrosParticipantes = encuentrosFases;
+                        fase.EstadoFase = cbxEstadoFase.Text;
+                        fase.TamañoGrupos = groupSize;
+                        fase.CantidadGrupos = groupAmount;
+
+                        fases.RemoveAt(faseSeleccionada - 1);
+                        fases.Insert(faseSeleccionada - 1, fase);
+
+                        
+                            string[] fechaEventoArray = txtFechaEvento.Text.Split("/");
+                            string fechaEvento = fechaEventoArray[2] + "-" + fechaEventoArray[1] + "-" + fechaEventoArray[0];
+
+                            string nombreEvento = txtNombreEvento.Text,
+                                   horaEvento = txtHoraEvento.Text,
+                                   estadoEvento = cbxEstadoEvento.Text,
+                                   lugar = txtlugarEvento.Text;
                             //evento.LogoEvento = imgEventSelected.Image;
-                            evento.Fases = fases;
 
-                            Logica.SerializeEventos(eventos);
+                            Logica.UpdateEvento(index, nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, null);
 
-                            this.Hide();
+                            int idEvento = Logica.GetEventos(3, nombreEvento)[0].IdEvento;
+
+                            foreach (var f in fases)
+                            {
+                            string fechaFase1 = f.FechaFase;
+                            try
+                            {
+                                string[] fechaFaseArray1 = fechaFase1.Split("/");
+                                fechaFase1 = fechaFaseArray1[2] + "-" + fechaFaseArray1[1] + "-" + fechaFaseArray1[0];
+                            } catch { }
+
+                            if (Logica.CheckIfExist("Fases", "NumeroFase", ""+f.NumeroFase, "IdEvento", ""+idEvento) == 1)
+                                {
+                                    Logica.UpdateFase(f.NumeroFase, idEvento, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+
+                                    foreach (var eqF in f.EquiposParticipantes)
+                                    {
+                                        Equipo eq = Logica.GetEquipos(3, "" + eqF.IdEquipo)[0];
+
+                                        if (Logica.CheckIfExist("EquiposFases", "NumeroFase", "" + f.NumeroFase, "IdEvento", "" + idEvento, "IdEquipo", "" + eqF.IdEquipo) == 1)
+                                        {
+                                            Logica.UpdateEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                            eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
+                                            eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+                                        } else
+                                        {
+                                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                            eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
+                                            eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+                                        }
+                                    }
+                                    foreach (var enF in f.EncuentrosParticipantes)
+                                    {
+                                        Encuentro en = Logica.GetEncuentros(4, "" + enF.IdEncuentro)[0];
+
+                                        if (Logica.CheckIfExist("EncuentrosFases", "NumeroFase", "" + f.NumeroFase, "IdEvento", "" + idEvento, "IdEncuentro", "" + enF.IdEncuentro) == 1)
+                                        {
+                                            Logica.UpdateEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
+                                        } else
+                                        {
+                                            Logica.InsertEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
+                                        }
+                                    }
+                                } else
+                                {
+                                    Logica.InsertFase(f.NumeroFase, idEvento, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+
+                                    foreach (var eqF in f.EquiposParticipantes)
+                                    {
+                                        Equipo eq = Logica.GetEquipos(3, "" + eqF.IdEquipo)[0];
+
+                                        Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                            eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
+                                            eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
+                                    }
+                                    foreach (var enF in f.EncuentrosParticipantes)
+                                    {
+                                        Encuentro en = Logica.GetEncuentros(4, "" + enF.IdEncuentro)[0];
+
+                                        Logica.InsertEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
+                                    }
+                                }
+                            }
+
+                            MessageBox.Show("Event modified correctly");
+                            Hide();
                             MenuManageEvents manageEvents = new MenuManageEvents();
                             manageEvents.StartPosition = FormStartPosition.CenterParent;
                             manageEvents.ShowDialog();
-                            this.Close();
-                        }
-                    }
-                    else
-                    {
-                        if (Program.language == "EN")
-                        {
-                            MessageBox.Show("The entered data equals the previous one");
-                        }
-                        else if (Program.language == "ES")
-                        {
-                            MessageBox.Show("La información ingresada es la misma que la anterior");
-                        }
+                            Close();
+                        
                     }
                 }
                 else
@@ -871,25 +1127,25 @@
             }
         }
 
-        private void BuscarEquipo(object sender, EventArgs e, string busqueda, Panel p)
+        private void BuscarEquipo(object sender, EventArgs e, string busqueda, Panel p, bool enc)
         {
             p.Controls.Clear();
 
-            var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
-            int count = 0;
-
-            foreach (var eq in equipos)
+            if (enc == true)
             {
-                if (busqueda == Convert.ToString(eq.IdEquipo) || eq.NombreEquipo.Contains(busqueda) || eq.PaisOrigen.Contains(busqueda))
+                var encuentros = Logica.GetEncuentros(2, busqueda);
+
+                foreach (var en in encuentros)
                 {
                     Panel p1 = new Panel();
 
-                    p1.Location = new Point(0, 25 * count);
+                    p1.Location = new Point(0, 0);
                     p1.Size = new Size(334, 25);
+                    p1.Dock = DockStyle.Top;
 
                     Label lbl1 = new Label();
 
-                    lbl1.Text = "" + eq.IdEquipo;
+                    lbl1.Text = "" + en.IdEncuentro;
                     lbl1.Size = new Size(40, 25);
                     lbl1.Location = new Point(0, 0);
                     lbl1.BorderStyle = BorderStyle.FixedSingle;
@@ -897,7 +1153,7 @@
 
                     Label lbl2 = new Label();
 
-                    lbl2.Text = eq.NombreEquipo;
+                    lbl2.Text = en.Nombre;
                     lbl2.Size = new Size(200, 25);
                     lbl2.Location = new Point(40, 0);
                     lbl2.BorderStyle = BorderStyle.FixedSingle;
@@ -905,7 +1161,7 @@
 
                     Label lbl3 = new Label();
 
-                    lbl3.Text = "" + eq.PaisOrigen;
+                    lbl3.Text = "" + en.Fecha;
                     lbl3.Size = new Size(82, 25);
                     lbl3.Location = new Point(240, 0);
                     lbl3.BorderStyle = BorderStyle.FixedSingle;
@@ -918,42 +1174,170 @@
                     btn1.FlatStyle = FlatStyle.Flat;
                     btn1.BackgroundImageLayout = ImageLayout.Stretch;
                     btn1.BackgroundImage = Properties.Resources.mas;
-                    btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, eq.NombreEquipo, eq.IdEquipo); };
+                    btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, en.Nombre, en.IdEncuentro, enc); };
 
                     p.Controls.Add(p1);
                     p1.Controls.Add(btn1);
                     p1.Controls.Add(lbl3);
                     p1.Controls.Add(lbl2);
                     p1.Controls.Add(lbl1);
-
-                    count++;
                 }
             }
-        }
-
-        private void DeleteTeam_Click(object sender, EventArgs e, int lbl, int idT)
-        {
-            var lbl1 = controls[lbl];
-            var id = controls[idT];
-            lbl1.Text = "";
-            foreach(var eq in equipos)
+            else
             {
-                if (eq == Convert.ToInt32(id.Text))
+                if (tipoFase == 2 || tipoFase == 4 || tipoFase == 5)
                 {
-                    equipos.Remove(eq);
-                    return;
+                    var equipos = Logica.GetEquipos(2, busqueda);
+
+                    foreach (var eq in equipos)
+                    {
+                        Panel p1 = new Panel();
+
+                        p1.Location = new Point(0, 0);
+                        p1.Size = new Size(334, 25);
+                        p1.Dock = DockStyle.Top;
+
+                        Label lbl1 = new Label();
+
+                        lbl1.Text = "" + eq.IdEquipo;
+                        lbl1.Size = new Size(40, 25);
+                        lbl1.Location = new Point(0, 0);
+                        lbl1.BorderStyle = BorderStyle.FixedSingle;
+                        lbl1.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl2 = new Label();
+
+                        lbl2.Text = eq.NombreEquipo;
+                        lbl2.Size = new Size(200, 25);
+                        lbl2.Location = new Point(40, 0);
+                        lbl2.BorderStyle = BorderStyle.FixedSingle;
+                        lbl2.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl3 = new Label();
+
+                        lbl3.Text = "" + eq.PaisOrigen;
+                        lbl3.Size = new Size(82, 25);
+                        lbl3.Location = new Point(240, 0);
+                        lbl3.BorderStyle = BorderStyle.FixedSingle;
+                        lbl3.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Button btn1 = new Button();
+
+                        btn1.Size = new Size(12, 12);
+                        btn1.Location = new Point(322, 7);
+                        btn1.FlatStyle = FlatStyle.Flat;
+                        btn1.BackgroundImageLayout = ImageLayout.Stretch;
+                        btn1.BackgroundImage = Properties.Resources.mas;
+                        btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, eq.NombreEquipo, eq.IdEquipo, enc); };
+
+                        p.Controls.Add(p1);
+                        p1.Controls.Add(btn1);
+                        p1.Controls.Add(lbl3);
+                        p1.Controls.Add(lbl2);
+                        p1.Controls.Add(lbl1);
+                    }
+                }
+                else if (tipoFase == 1 || tipoFase == 3)
+                {
+                    var encuentros = Logica.GetEncuentros(2, busqueda);
+                    enc = true;
+
+                    foreach (var en in encuentros)
+                    {
+                        Panel p1 = new Panel();
+
+                        p1.Location = new Point(0, 0);
+                        p1.Size = new Size(334, 25);
+                        p1.Dock = DockStyle.Top;
+
+                        Label lbl1 = new Label();
+
+                        lbl1.Text = "" + en.IdEncuentro;
+                        lbl1.Size = new Size(40, 25);
+                        lbl1.Location = new Point(0, 0);
+                        lbl1.BorderStyle = BorderStyle.FixedSingle;
+                        lbl1.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl2 = new Label();
+
+                        lbl2.Text = en.Nombre;
+                        lbl2.Size = new Size(200, 25);
+                        lbl2.Location = new Point(40, 0);
+                        lbl2.BorderStyle = BorderStyle.FixedSingle;
+                        lbl2.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Label lbl3 = new Label();
+
+                        lbl3.Text = "" + en.Fecha;
+                        lbl3.Size = new Size(82, 25);
+                        lbl3.Location = new Point(240, 0);
+                        lbl3.BorderStyle = BorderStyle.FixedSingle;
+                        lbl3.TextAlign = ContentAlignment.MiddleCenter;
+
+                        Button btn1 = new Button();
+
+                        btn1.Size = new Size(12, 12);
+                        btn1.Location = new Point(322, 7);
+                        btn1.FlatStyle = FlatStyle.Flat;
+                        btn1.BackgroundImageLayout = ImageLayout.Stretch;
+                        btn1.BackgroundImage = Properties.Resources.mas;
+                        btn1.Click += (sender, EventArgs) => { AddTeam(sender, EventArgs, en.Nombre, en.IdEncuentro, enc); };
+
+                        p.Controls.Add(p1);
+                        p1.Controls.Add(btn1);
+                        p1.Controls.Add(lbl3);
+                        p1.Controls.Add(lbl2);
+                        p1.Controls.Add(lbl1);
+                    }
                 }
             }
-            id.Text = "";
         }
 
-        private void AddTeam(object sender, EventArgs e, string name, int id)
+        private void btnCerrarEncuentros_Click(object sender, EventArgs e)
         {
-            var lbl1 = controls[lblId];
-            var txt = controls[txtId];
-            lbl1.Text = name;
-            txt.Text = ""+id;
-            equipos.Add(id);
+            panelEncuentros.Hide();
+        }
+
+        private void DeleteTeam_Click(object sender, EventArgs e)
+        {
+            equiposFases.Clear();
+            encuentrosFases.Clear();
+            cbxTipoFase_SelectedIndexChanged(sender, e);
+        }
+
+        private void Reset()
+        {
+            equiposFases.Clear();
+            encuentrosFases.Clear();
+        }
+
+        private void AddTeam(object sender, EventArgs e, string name, int id, bool enc)
+        {
+            if (enc == true)
+            {
+                if (tipoFase == 1 || tipoFase == 3)
+                {
+                    var lbl1 = controls[lblId];
+                    var txt = controls[txtId];
+                    lbl1.Text = name;
+                    txt.Text = "" + id;
+                }
+                if (tipoFase == 1)
+                {
+                    int pos = Convert.ToInt32(controls[txtPos].Text);
+                    encuentrosFases.Add(new EncuentrosFases() { IdEncuentro = id, Nombre = name, NumeroFase = faseSeleccionada, PosicionEquipo = pos });
+                } else
+                {
+                    encuentrosFases.Add(new EncuentrosFases() { IdEncuentro = id, Nombre = name, NumeroFase = faseSeleccionada });
+                }
+            } else
+            {
+                var lbl1 = controls[lblId];
+                var txt = controls[txtId];
+                lbl1.Text = name;
+                txt.Text = "" + id;
+                equiposFases.Add(new EquiposFases() { IdEquipo = id, NombreEquipo = name, NumeroFase = faseSeleccionada });
+            }
 
             panelBuscadorEquipos.Hide();
         }
@@ -997,11 +1381,67 @@
             }
         }
 
+        private void btnListEncuentros_Click(object sender, EventArgs e)
+        {
+            panelContenedorEncuentros.Controls.Clear();
+            panelEncuentros.Show();
+
+            foreach(var enF in encuentrosFases)
+            {
+                var encuentro = Logica.GetEncuentros(4, ""+enF.IdEncuentro)[0];
+
+                Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
+
+                p1.Dock = DockStyle.Top;
+                p1.BorderStyle = BorderStyle.None;
+                p1.BackColor = Color.FromArgb(255, 255, 248);
+                p1.Size = new Size(290, 25);
+                p1.TabIndex = 0;
+
+                Label l2 = new Label(); //Nombre del encuentro
+
+                l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l2.TextAlign = ContentAlignment.MiddleCenter;
+                l2.Size = new Size(258, 25);
+                l2.AutoSize = false;
+                l2.BackColor = Color.FromArgb(255, 255, 248);
+                l2.BorderStyle = BorderStyle.FixedSingle;
+                l2.Location = new Point(0, 0);
+                l2.Text = encuentro.Nombre;
+
+                PictureBox pic1 = new PictureBox(); //Boton eliminar
+
+                pic1.BorderStyle = BorderStyle.FixedSingle;
+                pic1.Size = new Size(12, 12);
+                pic1.Location = new Point(258, 7);
+                pic1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pic1.Image = Properties.Resources.cruz;
+                pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, encuentro, p1); };
+
+                panelContenedorEncuentros.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
+                p1.Controls.Add(pic1);
+                p1.Controls.Add(l2);
+            }
+        }
+
+        private void Delete_Click(object sender, EventArgs e, Encuentro enc, Panel p)
+        {
+            encuentrosFases.RemoveAll(r => r.IdEncuentro == enc.IdEncuentro);
+            p.Dispose();
+        }
+
         private void PhasesGroups(Panel p)
         {
             p.Controls.Clear();
+            if (avoid == true)
+            {
+                avoid = false;
+            }
+            else
+            {
+                Reset();
+            }
             int x = 0, y = 0, count = 0;
-            var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
             for (int i = 1; i < groupAmount + 1; i++)
             {
                 Panel p1 = new Panel();
@@ -1022,75 +1462,171 @@
                 p.Controls.Add(p1);
                 p1.Controls.Add(lbl2);
 
-                for (int j = 1; j < groupSize + 1; j++)
+                if (tipoFase == 3)
                 {
                     Panel p2 = new Panel();
 
-                    p2.Size = new Size(225, 25);
+                    p2.Size = new Size(225, 50);
                     p2.BorderStyle = BorderStyle.FixedSingle;
                     p2.BackColor = Color.FromArgb(255, 255, 248);
                     p2.TabIndex = 0;
-                    p2.Location = new Point(x, y + 25 * j);
+                    p2.Location = new Point(x, y + 25);
 
                     Label lbl1 = new Label();
 
-                    lbl1.Size = new Size(190, 15);
-                    lbl1.Location = new Point(5, 5);
-                    controls.Add(lbl1);
+                    lbl1.Size = new Size(190, 20);
+                    lbl1.Location = new Point(5, 16);
+                    lbl1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
 
                     TextBox txtID = new TextBox();
 
                     txtID.Text = "";
-                    controls.Add(txtID);
 
-                    if (modify == true)
+                    if (count < encuentrosFases.Count())
                     {
-                        foreach (var eq in equipos)
-                        {
-                            try
-                            {
-                                if (eq.IdEquipo == this.equipos[count])
-                                {
-                                    txtID.Text = "" + eq.IdEquipo;
-                                    lbl1.Text = eq.NombreEquipo;
-                                }
-                            }
-                            catch { }
-                        }
+                        txtID.Text = "" + encuentrosFases[count].IdEncuentro;
+                        lbl1.Text = encuentrosFases[count].Nombre;
+                        count++;
                     }
 
-                    PictureBox pic1 = new PictureBox(); //Boton eliminar
-
-                    pic1.BorderStyle = BorderStyle.FixedSingle;
-                    pic1.Size = new Size(12, 12);
-                    pic1.Location = new Point(212, 7);
-                    pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pic1.Image = Properties.Resources.cruz;
-                    pic1.Click += (sender, EventArgs) => { DeleteTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID)); };
+                    controls.Add(lbl1);
+                    controls.Add(txtID);
 
                     PictureBox pic2 = new PictureBox(); //Boton agregar
 
                     pic2.BorderStyle = BorderStyle.FixedSingle;
                     pic2.Size = new Size(12, 12);
-                    pic2.Location = new Point(200, 7);
+                    pic2.Location = new Point(200, 19);
                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic2.Image = Properties.Resources.mas;
-                    pic2.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID)); };
+                    pic2.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID), 0, true); };
 
                     p.Controls.Add(p2);
                     p2.Controls.Add(lbl1);
-                    p2.Controls.Add(pic1);
                     p2.Controls.Add(pic2);
+                }
+                else
+                {
+                    for (int j = 1; j < groupSize + 1; j++)
+                    {
+                        Panel p2 = new Panel();
+
+                        p2.Size = new Size(225, 25);
+                        p2.BorderStyle = BorderStyle.FixedSingle;
+                        p2.BackColor = Color.FromArgb(255, 255, 248);
+                        p2.TabIndex = 0;
+                        p2.Location = new Point(x, y + 25 * j);
+
+                        Label lbl1 = new Label();
+
+                        lbl1.Size = new Size(190, 15);
+                        lbl1.Location = new Point(5, 5);
+
+                        TextBox txtID = new TextBox();
+
+                        txtID.Text = "";
+
+                        if (tipoFase == 4)
+                        {
+                            CheckBox chk = new CheckBox();
+
+                            chk.Size = new Size(12, 12);
+                            chk.Location = new Point(186, 7);
+                            chk.FlatStyle = FlatStyle.Flat;
+                            chk.CheckedChanged += (sender, EventArgs) => { EliminateTeam(sender, EventArgs, controls.IndexOf(txtID), chk.Checked); };
+
+
+                            if (count < equiposFases.Count())
+                            {
+                                if (equiposFases[count].EstadoEquipo == "Eliminated")
+                                {
+                                    chk.CheckState = CheckState.Checked;
+                                }
+                            }
+
+                            lbl1.Size = new Size(185, 15);
+                            p2.Controls.Add(chk);
+
+                        } else if (tipoFase == 5)
+                        {
+                            TextBox txtPosicion = new TextBox();
+
+                            txtPosicion.Size = new Size(30, 15);
+                            txtPosicion.Location = new Point(169, 0);
+                            txtPosicion.Leave += (sender, EventArgs) => { ChangeTeamPosition(sender, EventArgs, controls.IndexOf(txtID), txtPosicion.Text); };
+
+                            if (modify == true)
+                            {
+                                if (count < equiposFases.Count())
+                                {
+                                    txtPosicion.Text = "" + equiposFases[count].PosicionEquipo;
+                                }
+                            }
+
+                            lbl1.Size = new Size(168, 15);
+                            p2.Controls.Add(txtPosicion);
+                        }
+
+                        if (count < equiposFases.Count())
+                        {
+                            txtID.Text = "" + equiposFases[count].IdEquipo;
+                            lbl1.Text = equiposFases[count].NombreEquipo;
+                            count++;
+                        }
+
+                        controls.Add(lbl1);
+                        controls.Add(txtID);
+
+                        PictureBox pic2 = new PictureBox(); //Boton agregar
+
+                        pic2.BorderStyle = BorderStyle.FixedSingle;
+                        pic2.Size = new Size(12, 12);
+                        pic2.Location = new Point(200, 7);
+                        pic2.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pic2.Image = Properties.Resources.mas;
+                        pic2.Click += (sender, EventArgs) => { LookTeam_Click(sender, EventArgs, controls.IndexOf(lbl1), controls.IndexOf(txtID), 0, false); };
+
+                        p.Controls.Add(p2);
+                        p2.Controls.Add(lbl1);
+                        p2.Controls.Add(pic2);
+                    }
                 }
                 if (i % 2 != 0 || i == 1)
                 {
-                    y = (groupSize + 1) * 25 + 50 ;
+                    y = (groupSize + 1) * 25 + 50;
                 }
                 else
                 {
                     y = 0; x += 250;
                 }
             }
+        }
+
+        private void EliminateTeam(object sender, EventArgs e, int txtId, bool check)
+        {
+            try
+            {
+                int id = Convert.ToInt32(controls[txtId].Text);
+                var eq = equiposFases.Find(r => r.IdEquipo == id);
+                if (check == true)
+                {
+                    eq.EstadoEquipo = "Eliminated";
+                }
+                else
+                {
+                    eq.EstadoEquipo = "Playing";
+                }
+            } catch { }
+        }
+
+        private void ChangeTeamPosition(object sender, EventArgs e, int txtId, string pos)
+        {
+            try
+            {
+                int id = Convert.ToInt32(controls[txtId].Text);
+                var eq = equiposFases.Find(r => r.IdEquipo == id);
+                eq.PosicionEquipo = Convert.ToInt32(pos);
+            } catch { }
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado
@@ -1154,6 +1690,30 @@
                     btnSelectImage.Text = "Seleccionar imagen";
                     break;
             }
+        }
+
+        bool CambiarFormatoFecha(String user, String value = ":")
+        {
+            return user.Contains(value);
+        }
+
+        private void SetControls()
+        {
+            txtFechaFase.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, txtFechaFase); };
+            txtFechaFase.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, txtFechaFase); };
+            btnGoEvent.Click += (sender, EventArgs) => { btnGoEvent_Click(sender, EventArgs); };
+            btnPlusFases.Click += (sender, EventArgs) => { btnPlusFases_Click(sender, EventArgs); };
+            btnMinusFases.Click += (sender, EventArgs) => { btnminusFases_Click(sender, EventArgs); };
+            cbxFase.SelectedIndexChanged += (sender, EventArgs) => { cbxFase_SelectedIndexChanged(sender, EventArgs); };
+            cbxTipoFase.SelectedIndexChanged += (sender, EventArgs) => { cbxTipoFase_SelectedIndexChanged(sender, EventArgs); };
+            btnSelectImage.Click += (sender, EventArgs) => { btnSelectImage_Click(sender, EventArgs); };
+            btnGoFases.Click += (sender, EventArgs) => { btnGoFases_Click(sender, EventArgs); };
+            txtHoraEvento.Enter += (sender, EventArgs) => { txtHora_Enter(sender, EventArgs, txtHoraEvento); };
+            txtHoraEvento.Leave += (sender, EventArgs) => { txtHora_Leave(sender, EventArgs, txtHoraEvento); };
+            txtFechaEvento.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, txtFechaEvento); };
+            txtFechaEvento.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, txtFechaEvento); };
+            btnEventCerrar.Click += (sender, EventArgs) => { btnEventCerrar_Click(sender, EventArgs); };
+            picReset.Click += (sender, EventArgs) => { DeleteTeam_Click(sender, EventArgs); };
         }
     }
 }

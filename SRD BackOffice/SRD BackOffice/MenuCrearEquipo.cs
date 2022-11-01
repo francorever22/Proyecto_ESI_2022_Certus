@@ -6,12 +6,14 @@
         bool modify = false;
         string member;
         int index, idMember;
-        List<int> miembros = new List<int>();
+        List<EquiposDeportistas> miembros = new List<EquiposDeportistas>();
 
         public MenuCrearEquipo()
         {
             InitializeComponent();
             SetIdioma();
+
+            picReset.Click += (sender, eventArgs) => { KickMember(sender, eventArgs); };
 
             panelBuscadorEquipos.Hide();
         }
@@ -20,12 +22,15 @@
         {
             InitializeComponent();
             SetIdioma();
+
+            picReset.Click += (sender, eventArgs) => { KickMember(sender, eventArgs); };
+
             panelBuscadorEquipos.Hide();
             this.index = index;
             modify = true;
 
-            var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
-            Equipo equipo = equipos[index];
+            var equipo = Logica.GetEquipos(3, ""+index)[0];
+            equipo.Miembros = Logica.GetEquiposDeportistas(3, "" + index);
 
             btnSportAdd.Text = "Modify";
             picTeam.Image = equipo.ImagenRepresentativa;
@@ -34,77 +39,57 @@
             cbxTipo.SelectedItem = equipo.TipoEquipo;
             if (equipo.Miembros == null)
             {
-                miembros = new List<int>();
+                miembros = new List<EquiposDeportistas>();
             } else
             {
                 miembros = equipo.Miembros;
             }
 
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
-
             foreach (var m in miembros)
             {
-                foreach (var d in deportistas)
-                {
-                    if (m == d.IdPersona)
-                    {
-                        Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
+                Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
-                        p1.Dock = DockStyle.Top;
-                        p1.BorderStyle = BorderStyle.None;
-                        p1.BackColor = Color.FromArgb(255, 255, 248);
-                        p1.Size = new Size(416, 25);
-                        p1.TabIndex = 0;
+                p1.Dock = DockStyle.Top;
+                p1.BorderStyle = BorderStyle.None;
+                p1.BackColor = Color.FromArgb(255, 255, 248);
+                p1.Size = new Size(416, 25);
+                p1.TabIndex = 0;
 
-                        Label l1 = new Label(); //ID del deportista
+                Label l1 = new Label(); //ID del deportista
 
-                        l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                        l1.Text = "" + d.IdPersona;
-                        l1.TextAlign = ContentAlignment.MiddleCenter;
-                        l1.Size = new Size(80, 25);
-                        l1.AutoSize = false;
-                        l1.BackColor = Color.FromArgb(255, 255, 248);
-                        l1.BorderStyle = BorderStyle.FixedSingle;
-                        l1.Location = new Point(0, 0);
+                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l1.Text = "" + m.IdPersona;
+                l1.TextAlign = ContentAlignment.MiddleCenter;
+                l1.Size = new Size(80, 25);
+                l1.AutoSize = false;
+                l1.BackColor = Color.FromArgb(255, 255, 248);
+                l1.BorderStyle = BorderStyle.FixedSingle;
+                l1.Location = new Point(0, 0);
 
-                        Label l2 = new Label(); //Nombre del deportista
+                Label l2 = new Label(); //Nombre del deportista
 
-                        l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                        l2.Text = d.Nombre+" "+d.Apellido;
-                        l2.TextAlign = ContentAlignment.MiddleLeft;
-                        l2.Size = new Size(324, 25);
-                        l2.AutoSize = false;
-                        l2.BackColor = Color.FromArgb(255, 255, 248);
-                        l2.BorderStyle = BorderStyle.FixedSingle;
-                        l2.Location = new Point(80, 0);
+                l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l2.Text = m.Nombre + " " + m.Apellido;
+                l2.TextAlign = ContentAlignment.MiddleLeft;
+                l2.Size = new Size(336, 25);
+                l2.AutoSize = false;
+                l2.BackColor = Color.FromArgb(255, 255, 248);
+                l2.BorderStyle = BorderStyle.FixedSingle;
+                l2.Location = new Point(80, 0);
 
-                        PictureBox pic1 = new PictureBox(); //Boton eliminar
-
-                        pic1.BorderStyle = BorderStyle.FixedSingle;
-                        pic1.Size = new Size(12, 12);
-                        pic1.Location = new Point(404, 7);
-                        pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pic1.Image = Properties.Resources.cruz;
-                        pic1.Click += (sender, EventArgs) => { KickMember(sender, EventArgs, miembros.IndexOf(m), p1); };
-
-                        panelPlayers.Controls.Add(p1);
-                        p1.Controls.Add(pic1);
-                        p1.Controls.Add(l1);
-                        p1.Controls.Add(l2);
-
-                        return;
-                    }
-                }
+                panelPlayers.Controls.Add(p1);
+                p1.Controls.Add(l1);
+                p1.Controls.Add(l2);
             }
         }
 
         private void btnSportCerrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             MainMenu main = new MainMenu();
             main.StartPosition = FormStartPosition.CenterParent;
             main.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void btnSportAdd_Click(object sender, EventArgs e)
@@ -116,29 +101,31 @@
                 {
                     if (txtNombre.Text != "" && cbxTipo != null && txtPais.Text != "")
                     {
-                        var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
-                        Equipo equipo = new Equipo();
-
-                        Random r = new Random();
-
-                        equipo.IdEquipo = r.Next(1, 9999);
-                        equipo.NombreEquipo = txtNombre.Text;
-                        equipo.PaisOrigen = txtPais.Text;
-                        equipo.TipoEquipo = cbxTipo.Text;
-                        equipo.Miembros = miembros;
-
-                        if (equipos != null)
+                        try
                         {
-                            equipos.Add(equipo);
-                            Logica.SerializeEquipos(equipos);
-                        }
-                        else
-                        {
-                            List<Equipo> list = new List<Equipo>();
-                            list.Add(equipo);
-                            Logica.SerializeEquipos(list);
-                        }
-                        MessageBox.Show("New team created correctly");
+                            string nombreEquipo = txtNombre.Text,
+                                   paisOrigen = txtPais.Text,
+                                   tipoEquipo = cbxTipo.Text;
+                            Byte[] imagenEquipo = null;
+
+                            Logica.InsertEquipo(nombreEquipo, paisOrigen, tipoEquipo, imagenEquipo);
+
+                            int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
+
+                            foreach (var m in miembros)
+                            {
+                                Logica.InsertEquiposDeportistas(idEquipo, m.IdPersona);
+                            }
+
+                            if (Program.language == "EN")
+                            {
+                                MessageBox.Show("New team created correctly");
+                            }
+                            else if (Program.language == "ES")
+                            {
+                                MessageBox.Show("Nuevo equipo creado correctamente");
+                            }
+                        } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
                     }
                     else
                     {
@@ -160,40 +147,62 @@
             {
                 if (txtNombre.Text != "" && picTeam != null && txtPais != null)
                 {
-                    var equipos = Logica.DeserializeEquipos(Logica.GetJson("DinamicJson\\Equipos.json"));
-                    Equipo equipo = equipos[index];
-                    if (!(txtNombre.Text == equipo.NombreEquipo &&
-                        txtPais.Text == equipo.PaisOrigen &&
-                        cbxTipo.Text == equipo.TipoEquipo &&
-                        miembros == equipo.Miembros))
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify sport", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
                     {
-                        DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify sport", MessageBoxButtons.YesNo);
-                        if (dialogResult1 == DialogResult.Yes)
+                        try
                         {
-                            equipo.NombreEquipo = txtNombre.Text;
-                            equipo.PaisOrigen = txtPais.Text;
-                            equipo.TipoEquipo = cbxTipo.Text;
-                            equipo.Miembros = miembros;
+                            string nombreEquipo = txtNombre.Text,
+                                   paisOrigen = txtPais.Text,
+                                   tipoEquipo = cbxTipo.Text;
+                            Byte[] imagenEquipo = null;
 
-                            Logica.SerializeEquipos(equipos);
+                            Logica.UpdateEquipo(index, nombreEquipo, paisOrigen, tipoEquipo, imagenEquipo);
 
-                            this.Hide();
+                            int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
+
+                            foreach (var m in miembros)
+                            {
+                                if (Logica.CheckIfExist("EquiposDeportistas", "IdEquipo", ""+idEquipo, "IdPersona", ""+m.IdPersona) == 0)
+                                {
+                                    Logica.InsertEquiposDeportistas(idEquipo, m.IdPersona);
+                                } else
+                                {
+                                    Logica.UpdateEquiposDeportistas(idEquipo, m.IdPersona);
+                                }
+                            }
+
+                            foreach (var eD in Logica.GetEquiposDeportistas(3, ""+idEquipo))
+                            {
+                                bool match = false;
+                                foreach (var m in miembros)
+                                {
+                                    if (eD.IdPersona == m.IdPersona)
+                                    {
+                                        match = true;
+                                    }
+                                }
+                                if (match == false)
+                                {
+                                    Logica.Delete("EquiposDeportistas", "IdEquipo", "" + idEquipo, "IdPersona", "" + eD.IdPersona);
+                                }
+                            }
+
+                            if (Program.language == "EN")
+                            {
+                                MessageBox.Show("The team was modified correctly");
+                            }
+                            else if (Program.language == "ES")
+                            {
+                                MessageBox.Show("El equipo a sido modificado correctamente");
+                            }
+                            Hide();
                             MenuManageTeams manageTeams = new MenuManageTeams();
                             manageTeams.StartPosition = FormStartPosition.CenterParent;
                             manageTeams.ShowDialog();
-                            this.Close();
+                            Close();
                         }
-                    }
-                    else
-                    {
-                        if (Program.language == "EN")
-                        {
-                            MessageBox.Show("The entered data equals the previous one");
-                        }
-                        else if (Program.language == "ES")
-                        {
-                            MessageBox.Show("La información ingresada es la misma que la anterior");
-                        }
+                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
                     }
                 }
                 else
@@ -317,17 +326,17 @@
 
             btnBuscar.Click += (sender, EventArgs) => { BuscarDeportista(sender, EventArgs, buscador.Text, panelContenedor); };
 
-            this.panelBuscadorEquipos.Controls.Add(panelPrincipal);
-            this.panelBuscadorEquipos.Controls.Add(buscador);
-            this.panelBuscadorEquipos.Controls.Add(btnBuscar);
-            this.panelBuscadorEquipos.Controls.Add(btn1);
+            panelBuscadorEquipos.Controls.Add(panelPrincipal);
+            panelBuscadorEquipos.Controls.Add(buscador);
+            panelBuscadorEquipos.Controls.Add(btnBuscar);
+            panelBuscadorEquipos.Controls.Add(btn1);
             panelPrincipal.Controls.Add(panelLabels);
             panelPrincipal.Controls.Add(panelContenedor);
             panelLabels.Controls.Add(lblDeportista);
             panelLabels.Controls.Add(lblOrigen);
             panelLabels.Controls.Add(lblId);
 
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
+            var deportistas = Logica.GetDeportistas(1, null);
             int count = 0;
 
             foreach (var d in deportistas)
@@ -416,7 +425,7 @@
         {
             p.Controls.Clear();
 
-            var deportistas = Logica.DeserializeDeportistas(Logica.GetJson("DinamicJson\\Deportistas.json"));
+            var deportistas = Logica.GetDeportistas(2, busqueda);
             int count = 0;
 
             foreach (var d in deportistas)
@@ -474,7 +483,7 @@
 
         private void AddMember(object sender, EventArgs e)
         {
-            miembros.Add(idMember);
+            miembros.Add(new EquiposDeportistas() { IdPersona = idMember });
 
             Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
@@ -500,33 +509,23 @@
             l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             l2.Text = member;
             l2.TextAlign = ContentAlignment.MiddleLeft;
-            l2.Size = new Size(324, 25);
+            l2.Size = new Size(336, 25);
             l2.AutoSize = false;
             l2.BackColor = Color.FromArgb(255, 255, 248);
             l2.BorderStyle = BorderStyle.FixedSingle;
             l2.Location = new Point(80, 0);
 
-            PictureBox pic1 = new PictureBox(); //Boton eliminar
-
-            pic1.BorderStyle = BorderStyle.FixedSingle;
-            pic1.Size = new Size(12, 12);
-            pic1.Location = new Point(404, 7);
-            pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pic1.Image = Properties.Resources.cruz;
-            pic1.Click += (sender, EventArgs) => { KickMember(sender, EventArgs, miembros.IndexOf(idMember), p1); };
-
             panelPlayers.Controls.Add(p1);
-            p1.Controls.Add(pic1);
             p1.Controls.Add(l1);
             p1.Controls.Add(l2);
 
             panelBuscadorEquipos.Hide();
         }
 
-        private void KickMember(object sender, EventArgs e, int member, Panel p)
+        private void KickMember(object sender, EventArgs e)
         {
-            miembros.RemoveAt(member);
-            p.Dispose();
+            miembros.Clear();
+            panelPlayers.Controls.Clear();
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado

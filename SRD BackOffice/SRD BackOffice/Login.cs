@@ -97,29 +97,27 @@
                 bool match = false, boss = false;
                 String user = txtUsuario.Text;
                 String password = txtContraseña.Text;
-                var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                if (usuarios != null)
+                if (EsEmail(user))
                 {
-                    if (EsEmail(user))
+                    if (Logica.CheckIfExist("Usuarios", "Email", user) == 1)
                     {
-                        foreach (var usuario in usuarios)
+                        var u = Logica.GetUsuarios(6, user)[0];
+                        if (Logica.DesencriptarContraseña(u.contrasena, "Certus_SRD") == password)
                         {
-                            if (usuario.email == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
-                            {
-                                match = true;
-                                if (usuario.nivelPermisos == 4) { boss = true; }
-                            }
+                            match = true;
+                            if (u.nivelPermisos == 4) { boss = true; }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (Logica.CheckIfExist("Usuarios", "NombreUsuario", user) == 1)
                     {
-                        foreach (var usuario in usuarios)
+                        var u = Logica.GetUsuarios(6, user)[0];
+                        if (Logica.DesencriptarContraseña(u.contrasena, "Certus_SRD") == password)
                         {
-                            if (usuario.nombreUsuario == user && usuario.contrasena == password && usuario.nivelPermisos >= 3)
-                            {
-                                match = true;
-                                if (usuario.nivelPermisos == 4) { boss = true; }
-                            }
+                            match = true;
+                            if (u.nivelPermisos == 4) { boss = true; }
                         }
                     }
                 }
@@ -127,19 +125,19 @@
                 if (match == true)
                 {
                     if (boss == true) { Program.boss = true; }
-                    this.Hide();
+                    Hide();
                     MainMenu main = new MainMenu();
                     main.StartPosition = FormStartPosition.CenterParent;
                     main.ShowDialog();
-                    this.Close();
+                    Close();
                 } else
                 {
                     MessageBox.Show("Access denied");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Error: "+ex.Message);
             }
         }
 
