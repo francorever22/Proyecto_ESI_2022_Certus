@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-internal class Deporte
+﻿public class Deporte
 {
-    public String? nombreDeporte { get; set; }
+    public int idDeporte { get; set; }
+    public string nombreDeporte { get; set; }
     public Bitmap imagenDeporte { get; set; }
-    public String? categoriaDeporte { get; set; }
+    public string categoriaDeporte { get; set; }
     public Boolean deportePopular { get; set; }
+}
+
+public class DeportesCategorizados
+{
+     public int IdDeporte { get; set; }
+     public int IdCategoria { get; set; }
+     public string NombreDeporte { get; set; }
+     public Bitmap ImagenDeporte { get; set; }
+     public Boolean Destacado { get; set; }
+     public string NombreCategoria { get; set; }
 }
