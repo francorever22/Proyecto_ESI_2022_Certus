@@ -2,8 +2,6 @@ namespace Sistema_de_Resultados_Deportivos
 {
     internal static class Program
     {
-        public static DB_Connection DB = new DB_Connection();
-
         public static Usuario user = new Usuario()
         {
             nombreUsuario = "Guest",
@@ -11,7 +9,9 @@ namespace Sistema_de_Resultados_Deportivos
             contrasena = null,
             nivelPermisos = 0,
             numeroTelefono = null,
-            deportesFavoritos = null
+            encuentrosFavoritos = null,
+            eventosFavoritos = null,
+            equiposFavoritos = null
         };
 
         /// <summary>
@@ -20,7 +20,6 @@ namespace Sistema_de_Resultados_Deportivos
         [STAThread]
         static void Main()
         {
-            DB.DB_Manager(0);
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
@@ -30,6 +29,9 @@ namespace Sistema_de_Resultados_Deportivos
         public static void login(Usuario u)
         {
             user = u;
+            user.encuentrosFavoritos = Logica.GetEncuentrosFavoritos(2, u.email);
+            user.eventosFavoritos = Logica.GetEventosFavoritos(2, u.email);
+            user.equiposFavoritos = Logica.GetEquiposFavoritos(2, u.email);
             if (user.nivelPermisos > 1)
             {
                 Principal.AlterPrincipal(1, 0, 0);
@@ -47,7 +49,9 @@ namespace Sistema_de_Resultados_Deportivos
                 contrasena = null,
                 nivelPermisos = 0,
                 numeroTelefono = null,
-                deportesFavoritos = null
+                encuentrosFavoritos = null,
+                eventosFavoritos = null,
+                equiposFavoritos = null
             };
             Principal.AlterPrincipal(0, 0, 0);
         }

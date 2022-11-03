@@ -234,6 +234,20 @@ namespace SRD_BackOffice
             return puntuacionRounds;
         }
 
+        public static List<PuntuacionRound> GetPuntuacionRounds(int x, int constraint1, int constraint2, int constraint3)
+        {
+            List<PuntuacionRound> puntuacionRounds = null;
+
+            switch (x)
+            {
+                case 1:
+                    puntuacionRounds = db.SelectPuntuacionRound($"SELECT * FROM PuntuacionRound WHERE IdEncuentro = '{constraint1}' AND " +
+                        $"NumeroRound = '{constraint2}' AND IdEquipo = '{constraint3}'");
+                    break;
+            }
+            return puntuacionRounds;
+        }
+
         public static List<Evento> GetEventos(int x, string constraint)
         {
             List<Evento> eventos = null;
@@ -601,8 +615,8 @@ namespace SRD_BackOffice
 
         public static void UpdateRound(int nRound, int idEncuentro, string tiempo, int idPR, int idH)
         {
-            db.ExecuteSql($"UPDATE Round SET TiempoTranscurridoRound = '{tiempo}', IdPuntuacionRound = '{idPR}', IdHito = '{idH}'" +
-                $"WHERE IdEncuentro = {idEncuentro} AND NumeroRound = {nRound}");
+            db.ExecuteSql($"UPDATE Round SET TiempoTranscurridoRound = '{tiempo}', IdPuntuacionRound = '{idPR}', IdHito = '{idH}' " +
+                $"WHERE IdEncuentro = '{idEncuentro}' AND NumeroRound = '{nRound}'");
         }
 
         public static void UpdateEquipo(int id, string nom, string origen, string tipo, Byte[] img)

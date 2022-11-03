@@ -4,12 +4,13 @@
     {
         private static Users form = null;
         bool editingName, editingEmail, editingPhone;
-        Usuario u = Program.user;
+        Usuario u = null;
         public Users()
         {
             InitializeComponent();
             form = this;
             panelChangePassword.Hide();
+            u = Program.user;
             CargarUsuario();
             SetIdioma();
             SetTheme();
@@ -33,8 +34,9 @@
                     btnEditPhone.Hide();
                 }
             }
-            foreach (var f in u.deportesFavoritos)
+            foreach (var ef in u.encuentrosFavoritos)
             {
+                var enc = Logica.GetEncuentros(4, ""+ef.idEncuentro)[0];
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -46,7 +48,7 @@
 
                 l1.ReadOnly = true;
                 l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"{f}";
+                l1.Text = $"{enc.Nombre}";
                 l1.TextAlign = HorizontalAlignment.Center;
                 l1.Size = new Size(257, 25);
                 l1.AutoSize = false;
@@ -58,15 +60,89 @@
                 {
                     case false: //Tema claro
                         l1.ForeColor = Color.Black;
-                        l1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
                         break;
                     case true: //Tema oscuro
-                        l1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
                         l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
                         break;
                 }
 
-                this.panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
+                panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
+                p1.Controls.Add(l1);
+            }
+            foreach (var ef in u.eventosFavoritos)
+            {
+                var eve = Logica.GetEventos(4, "" + ef.idEvento)[0];
+                Panel p1 = new Panel();
+
+                p1.Dock = DockStyle.Top;
+                p1.BorderStyle = BorderStyle.None;
+                p1.Size = new Size(265, 25);
+                p1.TabIndex = 0;
+
+                TextBox l1 = new TextBox();
+
+                l1.ReadOnly = true;
+                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l1.Text = $"{eve.NombreEvento}";
+                l1.TextAlign = HorizontalAlignment.Center;
+                l1.Size = new Size(257, 25);
+                l1.AutoSize = false;
+                l1.BorderStyle = BorderStyle.FixedSingle;
+                l1.Location = new Point(0, 0);
+                l1.TabIndex = 3;
+
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false: //Tema claro
+                        l1.ForeColor = Color.Black;
+                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        break;
+                    case true: //Tema oscuro
+                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        break;
+                }
+
+                panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
+                p1.Controls.Add(l1);
+            }
+            foreach (var ef in u.equiposFavoritos)
+            {
+                var eq = Logica.GetEquipos(3, "" + ef.idEquipo)[0];
+                Panel p1 = new Panel();
+
+                p1.Dock = DockStyle.Top;
+                p1.BorderStyle = BorderStyle.None;
+                p1.Size = new Size(265, 25);
+                p1.TabIndex = 0;
+
+                TextBox l1 = new TextBox();
+
+                l1.ReadOnly = true;
+                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l1.Text = $"{eq.NombreEquipo}";
+                l1.TextAlign = HorizontalAlignment.Center;
+                l1.Size = new Size(257, 25);
+                l1.AutoSize = false;
+                l1.BorderStyle = BorderStyle.FixedSingle;
+                l1.Location = new Point(0, 0);
+                l1.TabIndex = 3;
+
+                switch (AjustesDeUsuario.darkTheme)
+                {
+                    case false: //Tema claro
+                        l1.ForeColor = Color.Black;
+                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        break;
+                    case true: //Tema oscuro
+                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        break;
+                }
+
+                panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
                 p1.Controls.Add(l1);
             }
         }
@@ -74,9 +150,27 @@
         {
             if (editingEmail == true)
             {
-                txtEmail.ReadOnly = true;
-                editingEmail = false;
-                btnEditarEmail.Image = Properties.Resources.pluma;
+                if (txtEmail.Text == u.email)
+                {
+                    txtEmail.ReadOnly = true;
+                    editingEmail = false;
+                    btnEditarEmail.Image = Properties.Resources.pluma;
+                }
+                else
+                {
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Change email", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Logica.UpdateUsuario(txtEmail.Text, u.nombreUsuario);
+                        u.email = txtEmail.Text;
+                    } else
+                    {
+                        txtEmail.Text = u.email;
+                    }
+                    txtEmail.ReadOnly = true;
+                    editingEmail = false;
+                    btnEditarEmail.Image = Properties.Resources.pluma;
+                }
             }
             else
             {
@@ -90,9 +184,26 @@
         {
             if (editingName == true)
             {
-                txtUser.ReadOnly = true;
-                editingName = false;
-                btnEditarUsuario.Image = Properties.Resources.pluma;
+                if (txtUser.Text == u.nombreUsuario)
+                {
+                    txtUser.ReadOnly = true;
+                    editingName = false;
+                    btnEditarUsuario.Image = Properties.Resources.pluma;
+                } else
+                {
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Change user name", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Logica.UpdateUsuario(u.email, txtUser.Text, u.contrasena, u.numeroTelefono, u.nivelPermisos);
+                        u.nombreUsuario = txtUser.Text;
+                    } else
+                    {
+                        txtUser.Text = u.nombreUsuario;
+                    }
+                    txtUser.ReadOnly = true;
+                    editingName = false;
+                    btnEditarUsuario.Image = Properties.Resources.pluma;
+                }
             }
             else
             {
@@ -119,7 +230,7 @@
 
         private void btnEditPhone_Click(object sender, EventArgs e)
         {
-            if (txtPhoneNumber.Text == "" || txtPhoneNumber.Text == u.numeroTelefono)
+            if (txtPhoneNumber.Text == "")
             {
                 txtPhoneNumber.ReadOnly = true;
                 editingPhone = false;
@@ -130,9 +241,28 @@
             }
             else if (editingPhone == true)
             {
-                txtPhoneNumber.ReadOnly = true;
-                editingPhone = false;
-                btnEditPhone.Image = Properties.Resources.pluma;
+                if (txtPhoneNumber.Text == u.nombreUsuario)
+                {
+                    txtPhoneNumber.ReadOnly = true;
+                    editingName = false;
+                    btnEditPhone.Image = Properties.Resources.pluma;
+                }
+                else
+                {
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Change phone number", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Logica.UpdateUsuario(u.email, u.nombreUsuario, u.contrasena, txtPhoneNumber.Text, u.nivelPermisos);
+                        u.numeroTelefono = txtPhoneNumber.Text;
+                    }
+                    else
+                    {
+                        txtPhoneNumber.Text = u.numeroTelefono;
+                    }
+                    txtPhoneNumber.ReadOnly = true;
+                    editingName = false;
+                    btnEditPhone.Image = Properties.Resources.pluma;
+                }
             } else
             {
                 txtPhoneNumber.ReadOnly = false;
@@ -179,6 +309,59 @@
                         form.SetIdioma();
                     }
                     break;
+            }
+        }
+
+        private void btnAcceptNewPassword_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.Text == txtRepeatPassword.Text)
+            {
+                string password = Logica.EncriptarContraseña(txtPassword.Text, "Certus_SRD");
+                if (password != u.contrasena)
+                {
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Change password", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Logica.UpdateUsuario(u.email, u.nombreUsuario, password, u.numeroTelefono, u.nivelPermisos);
+                        txtPassword.Text = "";
+                        txtRepeatPassword.Text = "";
+                        panelChangePassword.Hide();
+                    }
+                } else
+                {
+                    if (AjustesDeUsuario.language == "EN")
+                    {
+                        MessageBox.Show("Your new password can't be the same as the previous one");
+                    }
+                    else if (AjustesDeUsuario.language == "ES")
+                    {
+                        MessageBox.Show("Tu nueva contraseña no puede ser igual a la anterior");
+                    }
+                }
+            }
+            else
+            {
+                if (AjustesDeUsuario.language == "EN")
+                {
+                    MessageBox.Show("The passwords don't match");
+                }
+                else if (AjustesDeUsuario.language == "ES")
+                {
+                    MessageBox.Show("Las contraseñas no coinciden");
+                }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Delete account", MessageBoxButtons.YesNo);
+            if (dialogResult1 == DialogResult.Yes)
+            {
+                DialogResult dialogResult2 = MessageBox.Show("Are you really sure of this?", "DELETE ACCOUNT", MessageBoxButtons.YesNo);
+                if (dialogResult2 == DialogResult.Yes)
+                {
+                    Logica.Delete("Usuarios", "Email", u.email);
+                }
             }
         }
 

@@ -18,7 +18,7 @@ namespace Sistema_de_Resultados_Deportivos
             InitializeComponent();
             form = this;
             lblCategorias.Text = cat;
-            int x = (this.Size.Width - lblCategorias.Size.Width) / 2;
+            int x = (Size.Width - lblCategorias.Size.Width) / 2;
             lblCategorias.Location = new Point(x, lblCategorias.Location.Y);
             SetTheme();
             CargarDeportes();
@@ -29,53 +29,51 @@ namespace Sistema_de_Resultados_Deportivos
             panelDeportes.Controls.Clear();
             int x = 12;
             int y = 0;
-            var deportes = Logica.DeserializeDeportes(Logica.GetJson("DinamicJson\\Deportes.json"));
+            var deportes = Logica.GetDeportes(6, lblCategorias.Text);
             foreach (var deporte in deportes)
             {
-                if (deporte.categoriaDeporte == lblCategorias.Text)
+
+                Panel p1 = new Panel();
+                p1.BorderStyle = BorderStyle.None;
+                p1.Size = new Size(150, 150);
+                p1.TabIndex = 0;
+                p1.Location = new Point(x, y);
+
+                Button b1 = new Button(); //Crea el boton que permitira acceder al deporte
+                b1.Dock = DockStyle.Fill;
+                b1.FlatStyle = FlatStyle.Flat;
+                b1.Location = new Point(0, 0);
+                b1.Size = new Size(563, 60);
+                b1.TabIndex = 10;
+                b1.Font = new("Montserrat", 10F, FontStyle.Regular, GraphicsUnit.Point);
+                b1.UseVisualStyleBackColor = true;
+                b1.TextAlign = ContentAlignment.BottomCenter;
+                b1.Image = null;
+                b1.Text = deporte.NombreDeporte;
+                b1.BackColor = AjustesDeUsuario.btnBack;
+                b1.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
+                b1.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
+                b1.ForeColor = AjustesDeUsuario.foreColor;
+
+                panelDeportes.Controls.Add(p1); //Agrega los controles al panelCategorias
+                p1.Controls.Add(b1);
+
+                if (x == 12)
                 {
-                    Panel p1 = new Panel();
-                    p1.BorderStyle = BorderStyle.None;
-                    p1.Size = new Size(150, 150);
-                    p1.TabIndex = 0;
-                    p1.Location = new Point(x, y);
-
-                    Button b1 = new Button(); //Crea el boton que permitira acceder al deporte
-                    b1.Dock = DockStyle.Fill;
-                    b1.FlatStyle = FlatStyle.Flat;
-                    b1.Location = new Point(0, 0);
-                    b1.Size = new Size(563, 60);
-                    b1.TabIndex = 10;
-                    b1.Font = new ("Montserrat", 10F, FontStyle.Regular, GraphicsUnit.Point);
-                    b1.UseVisualStyleBackColor = true;
-                    b1.TextAlign = ContentAlignment.BottomCenter;
-                    b1.Image = null;
-                    b1.Text = deporte.nombreDeporte;
-                    b1.BackColor = AjustesDeUsuario.btnBack;
-                    b1.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
-                    b1.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
-                    b1.ForeColor = AjustesDeUsuario.foreColor;
-
-                    this.panelDeportes.Controls.Add(p1); //Agrega los controles al panelCategorias
-                    p1.Controls.Add(b1);
-
-                    if (x == 12)
-                    {
-                        x = 190;
-                    }
-                    else if (x == 190)
-                    {
-                        x = 370;
-                    }
-                    else if (x == 370)
-                    {
-                        x = 550;
-                    }
-                    else if (x == 550)
-                    {
-                        y += 190;
-                        x = 12;
-                    }
+                    x = 190;
+                }
+                else if (x == 190)
+                {
+                    x = 370;
+                }
+                else if (x == 370)
+                {
+                    x = 550;
+                }
+                else if (x == 550)
+                {
+                    y += 190;
+                    x = 12;
                 }
             }
         }

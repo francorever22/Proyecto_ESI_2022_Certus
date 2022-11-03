@@ -3,24 +3,57 @@
     public partial class Frm_Encuentros : Form
     {
         private static Frm_Encuentros form = null;
-        public Frm_Encuentros()
+        int id;
+        Encuentro encuentro = new Encuentro();
+        List<EquiposEncuentros> equiposEncuentro = new List<EquiposEncuentros>();
+        List<Equipo> equipos = new List<Equipo>();
+        List<EquiposEncuentros> lastMatchsEq1 = new List<EquiposEncuentros>();
+        List<EquiposEncuentros> lastMatchsEq2 = new List<EquiposEncuentros>();
+        List<Round> rounds = new List<Round>();
+        List<Hito> hitos = new List<Hito>();
+        Arbitro arbitro = new Arbitro();
+        public Frm_Encuentros(int id)
         {
             InitializeComponent();
+            this.id = id;
             SetTheme();
             SetIdioma();
             form = this;
 
-            llbTeam2.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, this.llbTeam2); };
-            llbTeam2.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, this.llbTeam2); };
+            llbTeam2.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llbTeam2); };
+            llbTeam2.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llbTeam2); };
             llbTeam1.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llbTeam1); };
             llbTeam1.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llbTeam1); };
 
-            llbTeam1.Text = "Team1";
+            encuentro = Logica.GetEncuentros(4, ""+id)[0];
+            arbitro = Logica.GetArbitros(3, ""+encuentro.IdPersona)[0];
+            equiposEncuentro = Logica.GetEquiposEncuentros(2, "" + id);
+            int count = 0, amount = 0;
+            foreach (var eq in equiposEncuentro)
+            {
+                equipos.Add(Logica.GetEquipos(3, "" + eq.IdEquipo)[0]);
+                equipos[count].Miembros = Logica.GetEquiposDeportistas(3, ""+eq.IdEquipo);
+                if (equipos[count].Miembros.Count() > amount) { amount = equipos[count].Miembros.Count(); }
+                count++;
+            }
+            if (encuentro.TipoEncuentro == 1 || encuentro.TipoEncuentro == 3)
+            {
+                lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equipos[0].IdEquipo);
+                lastMatchsEq2 = Logica.GetEquiposEncuentros(3, "" + equipos[1].IdEquipo);
+            } else if (encuentro.TipoEncuentro == 2 || encuentro.TipoEncuentro == 4)
+            {
+                lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equiposEncuentro.Find(e => e.Posicion == 1).IdEquipo);
+            }
+            hitos = Logica.GetHitos(3, id, 0);
+            rounds = Logica.GetRounds(2, ""+id);
 
-            CargarContenedor('A', 1, 11);
+            llbTeam1.Text = equipos[0].NombreEquipo;
+            llbTeam2.Text = equipos[1].NombreEquipo;
+
+            CargarContenedor(encuentro.TipoEncuentro, 1, amount);
         }
 
-        private void CargarContenedor(char a, int b, int c) //Carga los controles de panelContenedor
+        private void CargarContenedor(int a, int b, int c) //Carga los controles de panelContenedor
         {
             int e = 1;
             int big = 0;
@@ -28,7 +61,7 @@
 
             switch (a)
             {
-                case 'A':
+                case 1:
                     switch (b)
                     {
                         case 1: // Jugadores
@@ -62,13 +95,13 @@
                                 p3.Location = new Point(0, c * 25);
                             }
 
-                            this.panelContenedor.Controls.Add(p1);
-                            this.panelContenedor.Controls.Add(p2);
-                            this.panelContenedor.Controls.Add(p3);
+                            panelContenedor.Controls.Add(p1);
+                            panelContenedor.Controls.Add(p2);
+                            panelContenedor.Controls.Add(p3);
 
-                            for (int i = 0; i < 2; i++)
+                            for (int i = 0; i < equipos.Count(); i++)
                             {
-                                for (int j = 1; j < c+1; j++)
+                                for (int j = 1; j < equipos[i].Miembros.Count()+1; j++)
                                 {
                                     Panel p4 = new Panel();
 
@@ -81,7 +114,7 @@
                                     LinkLabel llb = new LinkLabel(); //Deportista
 
                                     llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    llb.Text = $"Leonel Messi";
+                                    llb.Text = equipos[i].Miembros[j - 1].Nombre+" "+ equipos[i].Miembros[j - 1].Apellido;
                                     llb.Size = new Size(200, 25);
                                     llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
                                     llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
@@ -95,20 +128,7 @@
                                     llb.TabIndex = 3;
                                     llb.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb); };
                                     llb.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb); };
-                                    llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs); };
-
-                                    Label l2 = new Label(); //Data
-
-                                    l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Text = $"{j}";
-                                    l2.RightToLeft = RightToLeft.Yes;
-                                    l2.Dock = DockStyle.Right;
-                                    l2.Size = new Size(65, 25);
-                                    l2.AutoSize = false;
-                                    l2.BorderStyle = BorderStyle.None;
-                                    l2.Location = new Point(0, 0);
-                                    l2.TabIndex = 3;
-                                    l2.ForeColor = AjustesDeUsuario.foreColor;
+                                    llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, equipos[i].Miembros[c - 1].IdPersona); };
 
                                     if (i == 1)
                                     {
@@ -118,12 +138,11 @@
                                         p2.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(llb);
-                                    p4.Controls.Add(l2);
                                 }
 
                                 Label l3 = new Label(); //Lugar
                                 l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                l3.Text = $"Lugar";
+                                l3.Text = encuentro.Lugar;
                                 l3.Size = new Size(200, 25);
                                 l3.TextAlign = ContentAlignment.MiddleCenter;
                                 l3.AutoSize = false;
@@ -134,7 +153,7 @@
 
                                 Label l4 = new Label(); //Clima
                                 l4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                l4.Text = $"Clima";
+                                l4.Text = encuentro.Clima;
                                 l4.Size = new Size(200, 25);
                                 l4.TextAlign = ContentAlignment.MiddleCenter;
                                 l4.AutoSize = false;
@@ -145,7 +164,7 @@
 
                                 Label l5 = new Label(); //Arbitro
                                 l5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                l5.Text = $"Arbitro";
+                                l5.Text = arbitro.Nombre+" "+arbitro.Apellido;
                                 l5.Size = new Size(200, 25);
                                 l5.TextAlign = ContentAlignment.MiddleCenter;
                                 l5.Location = new Point(p3.Width - l4.Width, 12);
@@ -186,12 +205,15 @@
                             p8.TabIndex = 0;
                             p8.BackColor = AjustesDeUsuario.panel;
 
-                            this.panelContenedor.Controls.Add(p7);
-                            this.panelContenedor.Controls.Add(p8);
+                            panelContenedor.Controls.Add(p7);
+                            panelContenedor.Controls.Add(p8);
 
-                            for (int i = 0; i < 2; i++)
+                            for (int i = 0; i < equipos.Count(); i++)
                             {
-                                for (int j = 0; j < 10; j++)
+                                List<EquiposEncuentros> eqEnc;
+                                if (i == 0) { eqEnc = lastMatchsEq1; } else { eqEnc = lastMatchsEq2; }
+                                
+                                foreach (var enc in eqEnc)
                                 {
                                     Panel p4 = new Panel();
 
@@ -208,30 +230,10 @@
                                     p4.TabIndex = 0;
                                     p4.BackColor = AjustesDeUsuario.panel;
 
-                                    PictureBox pic1 = new PictureBox();
-
-                                    pic1.InitialImage = null;
-                                    pic1.BackColor = Color.Transparent;
-                                    pic1.Size = new Size(40, 40);
-                                    pic1.Location = new Point(10, 5);
-                                    pic1.TabIndex = 1;
-                                    pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic1.Image = Properties.Resources.barcelona;
-
-                                    PictureBox pic2 = new PictureBox();
-
-                                    pic2.InitialImage = null;
-                                    pic2.BackColor = Color.Transparent;
-                                    pic2.Size = new Size(40, 40);
-                                    pic2.Location = new Point(295, 5);
-                                    pic2.TabIndex = 1;
-                                    pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    pic2.Image = Properties.Resources.barcelona;
-
                                     Label l2 = new Label();
 
                                     l2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Text = $"{j} - {j}";
+                                    l2.Text = enc.Nombre;
                                     if (i == 1)
                                     {
                                         l2.Size = new Size((l2.Text.Length * 10), 25);
@@ -246,10 +248,8 @@
                                     l2.TabIndex = 3;
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };
+                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };;
 
                                     if (i == 1)
                                     {
@@ -260,15 +260,16 @@
                                         p8.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(l2);
-                                    p4.Controls.Add(pic2);
-                                    p4.Controls.Add(pic1);
                                 }
                             }
                             break;
 
                         case 4: // Resumen
-                            for (int i = 0; i < 3; i++)
+                            for (int i = 1; i < rounds.Count() + 1; i++)
                             {
+                                var hitos = this.hitos.FindAll(h => h.NumeroRound == i);
+                                List<Hito> SortedHitos = hitos.OrderBy(h => h.TiempoHito).ToList();
+
                                 Label l1 = new Label();
 
                                 l1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
@@ -284,92 +285,69 @@
                                     l1.Location = new Point(0, 0);
                                 } else
                                 {
-                                    l1.Location = new Point(0, c * 25 * i + (25 * (i - 1)));
+                                    l1.Location = new Point(0, c * 25 * (i - 1) + (25 * (i - 1)));
                                 }
-
 
                                 Panel p5 = new Panel();
 
                                 p5.BorderStyle = BorderStyle.None;
                                 p5.Size = new Size(344, c * 25);
-                                p5.Location = new Point(0, c * 25 * i + (25 * i));
+                                p5.Location = new Point(0, c * 25 * (i - 1) + (25 * i));
                                 p5.TabIndex = 0;
                                 p5.BackColor = AjustesDeUsuario.panel;
 
-                                Panel p6 = new Panel();
+                                panelContenedor.Controls.Add(l1);
+                                panelContenedor.Controls.Add(p5);
 
-                                p6.BorderStyle = BorderStyle.None;
-                                p6.Size = new Size(344, c * 25);
-                                p6.Location = new Point(344, c * 25 * i + (25 * i));
-                                p6.TabIndex = 0;
-                                p6.BackColor = AjustesDeUsuario.panel;
-
-                                this.panelContenedor.Controls.Add(l1);
-                                this.panelContenedor.Controls.Add(p5);
-                                this.panelContenedor.Controls.Add(p6);
-
-                                for (int j = 0; j < c; j++)
+                                int y = 0;
+                                foreach (var h in SortedHitos)
                                 {
                                     Label l2 = new Label();
 
                                     l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Text = $"{j}'";
-                                    l2.Size = new Size(25, 25);
-                                    l2.AutoSize = true;
+                                    l2.Text = $"{h.TiempoHito}'";
+                                    l2.Size = new Size(66, 25);
+                                    l2.AutoSize = false;
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.TabIndex = 3;
+                                    l2.Location = new Point(0, 25 * y);
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
 
                                     Label l3 = new Label();
 
                                     l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l3.Text = $"Gol";
+                                    l3.Text = $"{h.TituloHito}";
                                     l3.Size = new Size(65, 25);
                                     l3.AutoSize = true;
                                     l3.BorderStyle = BorderStyle.None;
                                     l3.TabIndex = 3;
                                     l3.ForeColor = AjustesDeUsuario.foreColor;
+                                    l3.Location = new Point(l2.Width, 25 * y);
 
-                                    if (e == 1)
-                                    {
-                                        l2.Location = new Point(0, 25 * j);
-                                        l3.Location = new Point(l2.Width, 25 * j);
-
-                                        p5.Controls.Add(l2);
-                                        p5.Controls.Add(l3);
-                                        e = 2;
-                                    } else
-                                    {
-                                        l2.RightToLeft = RightToLeft.Yes;
-                                        l2.Location = new Point(344 - l2.Width / 2, 25 * j);
-                                        l3.RightToLeft = RightToLeft.Yes;
-                                        l3.Location = new Point(344 - (l2.Width + l3.Width) / 2, 25 * j);
-
-                                        p6.Controls.Add(l2);
-                                        p6.Controls.Add(l3);
-                                        e = 1;
-                                    }
+                                    p5.Controls.Add(l2);
+                                    p5.Controls.Add(l3);
+                                    y++;
                                 }
                             }
                             break;
                     }
                 break;
 
-                case 'B':
+                case 3:
                     switch (b)
                     {
                         case 1: // Jugadores
-                            for (int j = 1; j < c+1; j++)
+                            for (int j = 1; j < equipos.Count() + 1; j++)
                             {
                                 Panel p4 = new Panel();
-                                
+
                                 p4.BorderStyle = BorderStyle.FixedSingle;
                                 p4.TabIndex = 0;
                                 p4.BackColor = AjustesDeUsuario.panel;
 
                                 LinkLabel llb = new LinkLabel();
 
-                                llb.Text = $"Leonel Messi";
+                                llb.Text = equipos[j - 1].Miembros[0].Nombre + " " + equipos[j - 1].Miembros[0].Apellido;
                                 llb.Size = new Size(200, 25);
                                 llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
                                 llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
@@ -384,11 +362,11 @@
                                 llb.TabIndex = 3;
                                 llb.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb); };
                                 llb.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb); };
-                                llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs); };
+                                llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, equipos[j - 1].Miembros[0].IdPersona); };
 
                                 Label l2 = new Label(); //Posición
 
-                                l2.Text = $"{j}º";
+                                l2.Text = $"{equiposEncuentro[j - 1].Posicion}º";
                                 l2.RightToLeft = RightToLeft.Yes;
                                 l2.Dock = DockStyle.Right;
                                 l2.Size = new Size(65, 25);
@@ -398,36 +376,20 @@
                                 l2.Location = new Point(0, 0);
                                 l2.TabIndex = 3;
                                 l2.ForeColor = AjustesDeUsuario.foreColor;
-
-                                if (j == 1)
+                                if (c > 11)
                                 {
-                                    if (c > 11)
-                                    {
-                                        p4.Size = new Size(707, 50);
-                                    }
-                                    else
-                                    {
-                                        p4.Size = new Size(724, 50);
-                                    }
-                                    p4.Location = new Point(0, 0);
-                                    llb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+                                    p4.Size = new Size(707, 25);
                                 }
                                 else
                                 {
-                                    if (c > 11)
-                                    {
-                                        p4.Size = new Size(707, 25);
-                                    } else
-                                    {
-                                        p4.Size = new Size(724, 25);
-                                    }
-                                    p4.Location = new Point(0, j*25);
-                                    llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                                    p4.Size = new Size(724, 25);
                                 }
 
-                                this.panelContenedor.Controls.Add(p4);
+                                p4.Location = new Point(0, (j - 1) * 25);
+                                llb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+                                l2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+
+                                panelContenedor.Controls.Add(p4);
                                 p4.Controls.Add(llb);
                                 p4.Controls.Add(l2);
                             }
@@ -447,7 +409,7 @@
 
                             Label l3 = new Label(); //Lugar
                             l3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                            l3.Text = $"Lugar";
+                            l3.Text = encuentro.Lugar;
                             l3.Size = new Size(200, 25);
                             l3.TextAlign = ContentAlignment.MiddleCenter;
                             l3.AutoSize = false;
@@ -458,7 +420,7 @@
 
                             Label l4 = new Label(); //Clima
                             l4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                            l4.Text = $"Clima";
+                            l4.Text = encuentro.Clima;
                             l4.Size = new Size(200, 25);
                             l4.TextAlign = ContentAlignment.MiddleCenter;
                             l4.AutoSize = false;
@@ -469,7 +431,7 @@
 
                             Label l5 = new Label(); //Arbitro
                             l5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                            l5.Text = $"Arbitro";
+                            l5.Text = arbitro.Nombre+" "+arbitro.Apellido;
                             l5.Size = new Size(200, 25);
                             l5.TextAlign = ContentAlignment.MiddleCenter;
                             l5.Location = new Point(p3.Width - l4.Width, 12);
@@ -479,7 +441,7 @@
                             l5.TabIndex = 3;
                             l5.ForeColor = AjustesDeUsuario.foreColor;
 
-                            this.panelContenedor.Controls.Add(p3);
+                            panelContenedor.Controls.Add(p3);
                             p3.Controls.Add(l3);
                             p3.Controls.Add(l4);
                             p3.Controls.Add(l5);
@@ -494,7 +456,7 @@
                             lineup.Image = null;
                             break;
                         case 3: // Últimos 10 encuentros (del ganador)
-                            for (int j = 0; j < 10; j++)
+                            foreach (var l in lastMatchsEq1)
                             {
                                 Panel p4 = new Panel();
 
@@ -512,12 +474,12 @@
                                 pic1.Location = new Point(10, 5);
                                 pic1.TabIndex = 1;
                                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                pic1.Image = Properties.Resources.barcelona;
+                                pic1.Image = l.ImagenRepresentativa;
 
                                 Label l2 = new Label();
 
                                 l2.Font = new Font("Segoe UI", 12.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                l2.Text = $"Carrera final de la copa del mundo";
+                                l2.Text = l.Nombre;
                                 l2.Size = new Size(600, 25);
                                 l2.TextAlign = ContentAlignment.MiddleCenter;
                                 l2.BorderStyle = BorderStyle.None;
@@ -525,19 +487,22 @@
                                 l2.TabIndex = 3;
                                 l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
+                                p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
+                                l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
+                                pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
 
-                                this.panelContenedor.Controls.Add(p4);
+                                panelContenedor.Controls.Add(p4);
                                 p4.Controls.Add(l2);
                                 p4.Controls.Add(pic1);
                             }
                             break;
 
                         case 4: // Resumen
-                            for (int i = 1; i < 4; i++)
+                            for (int i = 1; i < rounds.Count() + 1; i++)
                             {
+                                var hitos = this.hitos.FindAll(h => h.NumeroRound == i);
+                                List<Hito> SortedHitos = hitos.OrderBy(h => h.TiempoHito).ToList();
+
                                 Label l1 = new Label();
 
                                 l1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
@@ -560,7 +525,7 @@
 
                                 Panel p5 = new Panel();
 
-                                p5.BorderStyle = BorderStyle.None;
+                                p5.BorderStyle = BorderStyle.FixedSingle;
                                 p5.Size = new Size(707, c * 25);
                                 p5.TabIndex = 0;
                                 p5.BackColor = AjustesDeUsuario.panel;
@@ -574,17 +539,18 @@
                                     p5.Location = new Point(0, c * 25 * (i - 1) + (25 * i));
                                 }
 
-                                this.panelContenedor.Controls.Add(l1);
-                                this.panelContenedor.Controls.Add(p5);
+                                panelContenedor.Controls.Add(l1);
+                                panelContenedor.Controls.Add(p5);
 
-                                for (int j = 0; j < c; j++)
+                                int y = 0;
+                                foreach (var h in SortedHitos)
                                 {
                                     Label l2 = new Label();
 
                                     l2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l2.Text = $"{j}'";
-                                    l2.Size = new Size(25, 25);
-                                    l2.AutoSize = true;
+                                    l2.Text = $"{h.TiempoHito}'";
+                                    l2.Size = new Size(66, 25);
+                                    l2.AutoSize = false;
                                     l2.BorderStyle = BorderStyle.None;
                                     l2.TabIndex = 3;
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
@@ -592,24 +558,25 @@
                                     Label l6 = new Label();
 
                                     l6.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                                    l6.Text = $"Hito";
+                                    l6.Text = h.TituloHito;
                                     l6.Size = new Size(65, 25);
                                     l6.AutoSize = true;
                                     l6.BorderStyle = BorderStyle.None;
                                     l6.TabIndex = 3;
                                     l6.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    l2.Location = new Point(0, 25 * j);
-                                    l6.Location = new Point(l2.Width, 25 * j);
+                                    l2.Location = new Point(0, 25 * y);
+                                    l6.Location = new Point(l2.Width, 25 * y);
 
                                     p5.Controls.Add(l2);
                                     p5.Controls.Add(l6);
+                                    y++;
                                 }
                             }
                             break;
                     }
                     break;
-                case 'C':
+                case 2:
                     switch (b)
                     {
                         case 1: // Jugadores
@@ -681,9 +648,9 @@
                             l7.Location = new Point(0, 0);
                             l7.ForeColor = AjustesDeUsuario.foreColor;
 
-                            this.panelContenedor.Controls.Add(p8);
-                            this.panelContenedor.Controls.Add(p9);
-                            this.panelContenedor.Controls.Add(p10);
+                            panelContenedor.Controls.Add(p8);
+                            panelContenedor.Controls.Add(p9);
+                            panelContenedor.Controls.Add(p10);
                             p8.Controls.Add(l1);
                             p9.Controls.Add(l8);
                             p10.Controls.Add(l7);
@@ -774,10 +741,10 @@
                                 p3.Location = new Point(0, c * 25);
                             }
 
-                            this.panelContenedor.Controls.Add(l2);
-                            this.panelContenedor.Controls.Add(p1);
-                            this.panelContenedor.Controls.Add(p2);
-                            this.panelContenedor.Controls.Add(p3);
+                            panelContenedor.Controls.Add(l2);
+                            panelContenedor.Controls.Add(p1);
+                            panelContenedor.Controls.Add(p2);
+                            panelContenedor.Controls.Add(p3);
 
                             for (int i = 1; i < 3; i++)
                             {
@@ -808,7 +775,7 @@
                                     llb.TabIndex = 3;
                                     llb.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb); };
                                     llb.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb); };
-                                    llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs); };
+                                    llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, 1); };
 
                                     Label l6 = new Label(); //Data
 
@@ -901,8 +868,8 @@
                             p12.TabIndex = 0;
                             p12.BackColor = AjustesDeUsuario.panel;
 
-                            this.panelContenedor.Controls.Add(p7);
-                            this.panelContenedor.Controls.Add(p12);
+                            panelContenedor.Controls.Add(p7);
+                            panelContenedor.Controls.Add(p12);
 
                             for (int i = 0; i < 2; i++)
                             {
@@ -961,10 +928,10 @@
                                     l6.TabIndex = 3;
                                     l6.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    l6.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    l6.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
 
                                     if (i == 1)
                                     {
@@ -1019,9 +986,9 @@
                                 p6.TabIndex = 0;
                                 p6.BackColor = AjustesDeUsuario.panel;
 
-                                this.panelContenedor.Controls.Add(l6);
-                                this.panelContenedor.Controls.Add(p5);
-                                this.panelContenedor.Controls.Add(p6);
+                                panelContenedor.Controls.Add(l6);
+                                panelContenedor.Controls.Add(p5);
+                                panelContenedor.Controls.Add(p6);
 
                                 for (int j = 0; j < c; j++)
                                 {
@@ -1071,7 +1038,7 @@
                     }
                     break;
 
-                case 'D':
+                case 4:
                     btnAlineamiento.Hide();
                     btnJugadores.Hide();
                     btnResumen.Size = new Size(362, 30);
@@ -1126,7 +1093,7 @@
                     l13.TabIndex = 3;
                     l13.ForeColor = AjustesDeUsuario.foreColor;
 
-                    this.panelPrincipal.Controls.Add(p11);
+                    panelPrincipal.Controls.Add(p11);
                     p11.Controls.Add(l14);
                     p11.Controls.Add(l12);
                     p11.Controls.Add(l13);
@@ -1150,8 +1117,8 @@
                             p8.TabIndex = 0;
                             p8.BackColor = AjustesDeUsuario.panel;
 
-                            this.panelContenedor.Controls.Add(p7);
-                            this.panelContenedor.Controls.Add(p8);
+                            panelContenedor.Controls.Add(p7);
+                            panelContenedor.Controls.Add(p8);
 
                             for (int i = 0; i < 2; i++)
                             {
@@ -1210,10 +1177,10 @@
                                     l2.TabIndex = 3;
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                                    pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    pic2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
+                                    pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, 1); };
 
                                     if (i == 1)
                                     {
@@ -1230,8 +1197,10 @@
                             }
                             break;
                         case 4: //Resumen
-                            for (int i = 1; i < 4; i++)
+                            for (int i = 1; i < rounds.Count() + 1; i++)
                             {
+                                var hitos = this.hitos.FindAll(h => h.NumeroRound == i);
+
                                 Label l1 = new Label();
 
                                 l1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
@@ -1267,8 +1236,8 @@
                                     p5.Location = new Point(0, c * 25 * (i - 1) + (25 * i));
                                 }
 
-                                this.panelContenedor.Controls.Add(l1);
-                                this.panelContenedor.Controls.Add(p5);
+                                panelContenedor.Controls.Add(l1);
+                                panelContenedor.Controls.Add(p5);
 
                                 for (int j = 0; j < c; j++)
                                 {
@@ -1315,34 +1284,34 @@
             l.LinkColor = AjustesDeUsuario.foreColor;
         }
 
-        private void llb_Click(object sender, EventArgs e)
+        private void llb_Click(object sender, EventArgs e, int id)
         {
             Principal.AlterPrincipal(2, 6, 0);
         }
 
         private void btnJugadores_Click(object sender, EventArgs e)
         {
-            CargarContenedor('A', 1, 12);
+            CargarContenedor(encuentro.TipoEncuentro, 1, 12);
         }
 
         private void btnAlineamiento_Click(object sender, EventArgs e)
         {
-            CargarContenedor('A', 2, 0);
+            CargarContenedor(encuentro.TipoEncuentro, 2, 0);
         }
 
         private void btnUltimosEncuentros_Click(object sender, EventArgs e)
         {
-            CargarContenedor('A', 3, 0);
+            CargarContenedor(encuentro.TipoEncuentro, 3, 0);
         }
 
         private void btnResumen_Click(object sender, EventArgs e)
         {
-            CargarContenedor('A', 4, 10);
+            CargarContenedor(encuentro.TipoEncuentro, 4, 10);
         }
 
-        private void UltimoEncuentro_Click(object sender, EventArgs e)
+        private void UltimoEncuentro_Click(object sender, EventArgs e, int id)
         {
-            Principal.AlterPrincipal(0, 5, 0);
+            Principal.AlterPrincipal(id, 5, 0);
         }
 
         private void llbTeam1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

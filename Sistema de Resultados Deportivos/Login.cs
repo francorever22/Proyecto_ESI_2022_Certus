@@ -215,8 +215,6 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            bool exist = false;
-            String msg = "";
             switch (registrarse)
             {
                 case true:
@@ -224,48 +222,47 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         if (txtCorreo.Text != "" && txtContraseña.Text != "" && txtUsuario.Text != "")
                         {
-                            var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                            foreach (var u in usuarios)
+                            try
                             {
-                                if (u.nombreUsuario == txtUsuario.Text)
+                                string nombreUsuario = txtUsuario.Text,
+                                    email = txtCorreo.Text,
+                                    contraseña = Logica.EncriptarContraseña(txtContraseña.Text, "Certus_SRD");
+                                int nivelPermisos = 1;
+                                if (Logica.CheckIfExist("Usuarios", "Email", email) == 0 &&
+                                    Logica.CheckIfExist("Usuarios", "NombreUsuario", nombreUsuario) == 0)
                                 {
-                                    exist = true;
+                                    Logica.InsertUsuario(email, nombreUsuario, contraseña, nivelPermisos);
                                     if (AjustesDeUsuario.language == "EN")
                                     {
-                                        msg = "The user already exist";
+                                        MessageBox.Show("New user created correctly");
                                     }
                                     else if (AjustesDeUsuario.language == "ES")
                                     {
-                                        msg = "El usuario ya existe";
+                                        MessageBox.Show("Nuevo usuario creado correctamente");
                                     }
                                 }
-                                if (u.email == txtCorreo.Text)
+                                else
                                 {
-                                    exist = true;
                                     if (AjustesDeUsuario.language == "EN")
                                     {
-                                        msg = "The email is already registered";
+                                        MessageBox.Show("The user already exist");
                                     }
                                     else if (AjustesDeUsuario.language == "ES")
                                     {
-                                        msg = "El email ya esta registrado";
+                                        MessageBox.Show("El usuario ya existe");
                                     }
                                 }
                             }
-                            if (exist == false)
+                            catch
                             {
-                                Usuario newUser = new Usuario();
-                                newUser.nombreUsuario = txtUsuario.Text;
-                                newUser.email = txtCorreo.Text;
-                                newUser.contrasena = txtContraseña.Text;
-                                newUser.nivelPermisos = 1;
-                                newUser.numeroTelefono = null;
-                                usuarios.Add(newUser);
-                                Logica.SerializeUsers(usuarios);
-                                MessageBox.Show("New administrator created correctly");
-                            } else
-                            {
-                                MessageBox.Show(msg);
+                                if (AjustesDeUsuario.language == "EN")
+                                {
+                                    MessageBox.Show("There was an error in the process");
+                                }
+                                else if (AjustesDeUsuario.language == "ES")
+                                {
+                                    MessageBox.Show("Hubo un error en el proceso");
+                                }
                             }
                         }
                         else
@@ -290,31 +287,71 @@ namespace Sistema_de_Resultados_Deportivos
                     {
                         Usuario uLog = new Usuario();
                         bool match = false;
-                        String user = txtUsuario.Text;
-                        String password = txtContraseña.Text;
-                        var usuarios = Logica.DeserializeUsers(Logica.GetJson("DinamicJson\\Usuarios.json"));
-                        if (usuarios != null)
+                        string user = txtUsuario.Text;
+                        string password = txtContraseña.Text;
+                        if (EsEmail(user))
                         {
-                            if (EsEmail(user))
+                            if (Logica.CheckIfExist("Usuarios", "Email", user) == 1)
                             {
-                                foreach (var usuario in usuarios)
+                                var u = Logica.GetUsuarios(2, user)[0];
+                                if (Logica.DesencriptarContraseña(u.contrasena, "Certus_SRD") == password)
                                 {
-                                    if (usuario.email == user && usuario.contrasena == password)
+                                    match = true;
+                                    uLog = u;
+                                } else
+                                {
+                                    if (AjustesDeUsuario.language == "EN")
                                     {
-                                        match = true;
-                                        uLog = usuario;
+                                        MessageBox.Show("Incorrect password");
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        MessageBox.Show("Contraseña incorrecta");
+                                    }
+                                }
+                            } else
+                            {
+                                if (AjustesDeUsuario.language == "EN")
+                                {
+                                    MessageBox.Show("The user does no exist");
+                                }
+                                else if (AjustesDeUsuario.language == "ES")
+                                {
+                                    MessageBox.Show("El usuario no existe");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Logica.CheckIfExist("Usuarios", "NombreUsuario", user ) == 1)
+                            {
+                                var u = Logica.GetUsuarios(2, user)[0];
+                                if (Logica.DesencriptarContraseña(u.contrasena, "Certus_SRD") == password)
+                                {
+                                    match = true;
+                                    uLog = u;
+                                }
+                                else
+                                {
+                                    if (AjustesDeUsuario.language == "EN")
+                                    {
+                                        MessageBox.Show("Incorrect password");
+                                    }
+                                    else if (AjustesDeUsuario.language == "ES")
+                                    {
+                                        MessageBox.Show("Contraseña incorrecta");
                                     }
                                 }
                             }
                             else
                             {
-                                foreach (var usuario in usuarios)
+                                if (AjustesDeUsuario.language == "EN")
                                 {
-                                    if (usuario.nombreUsuario == user && usuario.contrasena == password)
-                                    {
-                                        match = true;
-                                        uLog = usuario;
-                                    }
+                                    MessageBox.Show("The user does no exist");
+                                }
+                                else if (AjustesDeUsuario.language == "ES")
+                                {
+                                    MessageBox.Show("El usuario no existe");
                                 }
                             }
                         }
@@ -328,14 +365,10 @@ namespace Sistema_de_Resultados_Deportivos
                             {
                                 MessageBox.Show("Se a logeado existosamente");
                             }
-                            Principal.AlterPrincipal(1, 3, 0); //Make
+                            Principal.AlterPrincipal(1, 3, 0);
                             Program.login(uLog);
                             Parent.Hide();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Access denied");
+                            Close();
                         }
                     }
                     catch
@@ -349,7 +382,7 @@ namespace Sistema_de_Resultados_Deportivos
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Parent.Hide();
-            this.Close();
+            Close();
         }
 
         private void customToggleButton1_CheckedChanged(object sender, EventArgs e)

@@ -158,6 +158,7 @@
             // 
             // panelCategorias
             // 
+            this.panelCategorias.AutoScroll = true;
             this.panelCategorias.BackColor = System.Drawing.Color.Transparent;
             this.panelCategorias.Location = new System.Drawing.Point(63, 60);
             this.panelCategorias.Name = "panelCategorias";
@@ -174,6 +175,7 @@
             // 
             // panelPublicidad1
             // 
+            this.panelPublicidad1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelPublicidad1.Location = new System.Drawing.Point(55, 115);
             this.panelPublicidad1.Name = "panelPublicidad1";
             this.panelPublicidad1.Size = new System.Drawing.Size(150, 500);
@@ -181,6 +183,7 @@
             // 
             // panelPublicidad2
             // 
+            this.panelPublicidad2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelPublicidad2.Location = new System.Drawing.Point(977, 115);
             this.panelPublicidad2.Name = "panelPublicidad2";
             this.panelPublicidad2.Size = new System.Drawing.Size(150, 500);
@@ -356,6 +359,7 @@
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

@@ -135,6 +135,7 @@
             this.btnDelete.Size = new System.Drawing.Size(165, 32);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // lblUser
             // 
@@ -204,6 +205,7 @@
             this.btnAcceptNewPassword.Size = new System.Drawing.Size(109, 27);
             this.btnAcceptNewPassword.TabIndex = 15;
             this.btnAcceptNewPassword.UseVisualStyleBackColor = true;
+            this.btnAcceptNewPassword.Click += new System.EventHandler(this.btnAcceptNewPassword_Click);
             // 
             // label3
             // 
@@ -261,9 +263,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 492);
+            this.Controls.Add(this.panelChangePassword);
             this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.btnEditPhone);
-            this.Controls.Add(this.panelChangePassword);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.lblUser);

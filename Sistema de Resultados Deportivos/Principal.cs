@@ -61,9 +61,9 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void CargarCategorias()
         {
-            this.panelCategorias.Controls.Clear();
+            panelCategorias.Controls.Clear();
             int x = 0;
-            var categorias = Logica.DeserializeCategorias(Logica.GetJson("DinamicJson\\Categorias.json"));
+            var categorias = Logica.GetCategorias(1, null);
             foreach (var c in categorias)
             {
                 Button b1 = new Button(); //Crea el boton que permitira acceder a la categoria
@@ -82,7 +82,7 @@ namespace Sistema_de_Resultados_Deportivos
                 b1.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
                 b1.ForeColor = AjustesDeUsuario.foreColor;
 
-                this.panelCategorias.Controls.Add(b1);
+                panelCategorias.Controls.Add(b1);
 
                 if (x < 580)
                 {
@@ -90,7 +90,7 @@ namespace Sistema_de_Resultados_Deportivos
                 }
                 else { x = 602; }
             }
-            this.panelCategorias.Size = new System.Drawing.Size(214, x);
+            panelCategorias.Size = new Size(214, x);
         }
 
         private void toggleSubMenu(int x) //Muestra o oculta los submenus
@@ -142,21 +142,21 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
-        private void openEncuentros()
+        private void openEncuentros(int id)
         {
-            this.panelChico.Controls.Clear();
-            Form encu = new Frm_Encuentros();
+            panelChico.Controls.Clear();
+            Form encu = new Frm_Encuentros(id);
             encu.TopLevel = false;
-            this.panelChico.Controls.Add(encu);
+            panelChico.Controls.Add(encu);
             encu.Show();
         }
 
         private void openEventos()
         {
-            this.panelChico.Controls.Clear();
+            panelChico.Controls.Clear();
             Form eve = new Frm_Eventos();
             eve.TopLevel = false;
-            this.panelChico.Controls.Add(eve);
+            panelChico.Controls.Add(eve);
             eve.Show();
         }
 
@@ -271,7 +271,7 @@ namespace Sistema_de_Resultados_Deportivos
                 case 5:
                     if (form != null)
                     {
-                        form.openEncuentros();
+                        form.openEncuentros(x);
                     }
                     break;
                 case 6:
@@ -346,7 +346,7 @@ namespace Sistema_de_Resultados_Deportivos
                 panelChico.Controls.Clear();
                 Form news = new Frm_Noticias();
                 news.TopLevel = false;
-                this.panelChico.Controls.Add(news);
+                panelChico.Controls.Add(news);
                 news.Show();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -354,10 +354,10 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            this.panelChico.Controls.Clear();
+            panelChico.Controls.Clear();
             Form buscador = new BuscadorDeEncuentros();
             buscador.TopLevel = false;
-            this.panelChico.Controls.Add(buscador);
+            panelChico.Controls.Add(buscador);
             buscador.Show();
         }
         
@@ -365,7 +365,7 @@ namespace Sistema_de_Resultados_Deportivos
         {
             if (notifyIcon.Visible == true)
             {
-                this.Show();
+                Show();
                 notifyIcon.Visible = false;
             }
             MessageBox.Show("It works! :D");

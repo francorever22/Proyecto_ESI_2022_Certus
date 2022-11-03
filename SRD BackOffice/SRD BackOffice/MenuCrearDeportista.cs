@@ -110,17 +110,6 @@
                         manageAthletes.ShowDialog();
                         Close();
                     }
-                    else
-                    {
-                        if (Program.language == "EN")
-                        {
-                            MessageBox.Show("There are filds incomplete");
-                        }
-                        else if (Program.language == "ES")
-                        {
-                            MessageBox.Show("Quedan espacios vacios por rellenar");
-                        }
-                    }
                 }
                 else
                 {

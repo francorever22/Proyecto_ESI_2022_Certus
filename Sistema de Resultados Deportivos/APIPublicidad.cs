@@ -13,8 +13,8 @@ namespace Sistema_de_Resultados_Deportivos
 {
     public partial class APIPublicidad : Form
     {
-        String link = "";
-        String imgPath = "";
+        string link = "";
+        string imgPath = "";
         Random r = new Random();
         int x = 0;
         public APIPublicidad()

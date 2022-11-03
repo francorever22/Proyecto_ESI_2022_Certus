@@ -88,7 +88,7 @@
 
                     l6.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
                     l6.TextAlign = ContentAlignment.MiddleCenter;
-                    l6.Size = new Size(110, 25);
+                    l6.Size = new Size(90, 25);
                     l6.BorderStyle = BorderStyle.FixedSingle;
                     l6.BackColor = Color.FromArgb(255, 255, 248);
                     l6.AutoSize = false;
@@ -99,7 +99,7 @@
 
                     pic1.BorderStyle = BorderStyle.FixedSingle;
                     pic1.Size = new Size(12, 12);
-                    pic1.Location = new Point(634, 7);
+                    pic1.Location = new Point(614, 7);
                     pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic1.Image = Properties.Resources.cruz;
                     pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, evento.IdEvento, p1); };
@@ -108,7 +108,7 @@
 
                     pic2.BorderStyle = BorderStyle.FixedSingle;
                     pic2.Size = new Size(12, 12);
-                    pic2.Location = new Point(622, 7);
+                    pic2.Location = new Point(602, 7);
                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic2.Image = Properties.Resources.pluma;
                     pic2.Click += (sender, EventArgs) => { Modify_Click(sender, EventArgs, evento.IdEvento); };

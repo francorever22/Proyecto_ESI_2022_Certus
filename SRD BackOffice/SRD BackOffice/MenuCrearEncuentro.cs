@@ -2,7 +2,7 @@
 {
     public partial class MenuCrearEncuentro : Form
     {
-        bool modify = false;
+        bool modify = false, avoid = false;
         string name;
         int id, actualRound = 1, cantRounds = 1, tipoEncuentro, index;
         List<int> equipos = new List<int>();
@@ -58,6 +58,15 @@
             panelAgregarArbitro.Hide();
             panelNuevoHito.Hide();
             panelListaHitos.Hide();
+            switch (Program.language)
+            {
+                case "EN":
+                    btnAddEncuentro.Text = "Modify";
+                    break;
+                case "ES":
+                    btnAddEncuentro.Text = "Modificar";
+                    break;
+            }
 
             txtFechaEncuentro.Enter += (sender, EventArgs) => { txtFecha_Enter(sender, EventArgs, txtFechaEncuentro); };
             txtFechaEncuentro.Leave += (sender, EventArgs) => { txtFecha_Leave(sender, EventArgs, txtFechaEncuentro); };
@@ -91,12 +100,14 @@
             foreach (var r in Rounds)
             {
                 rounds.Add(r);
+                cbxActualRound.Items.Add(r.NumeroRound);
             }
             var EquiposEncuentros = Logica.GetEquiposEncuentros(2, ""+index);
             foreach (var eE in EquiposEncuentros)
             {
                 equiposEncuentros.Add(eE);
             }
+            avoid = true;
             var encuentro = Logica.GetEncuentros(4, ""+index)[0];
             var arbitro = Logica.GetArbitros(3, ""+encuentro.IdPersona)[0];
 
@@ -104,11 +115,10 @@
             txtCantRounds.Text = $"{rounds.Count()}";
             txtLugarEncuentro.Text = encuentro.Lugar;
             txtNombreEncuentro.Text = encuentro.Nombre;
-            cbxActualRound.SelectedItem = actualRound;
             cbxClimaEncuentro.SelectedItem = encuentro.Clima;
             cbxDeporteEncuentro.SelectedItem = Logica.GetDeportes(5, ""+encuentro.IdDeporte)[0].NombreDeporte;
             cbxEstadoEncuentro.SelectedItem = encuentro.Estado;
-            cbxTipoEncuentro.SelectedItem = encuentro.TipoEncuentro;
+            cbxTipoEncuentro.SelectedIndex = encuentro.TipoEncuentro - 1;
             string tiempoTrancurridoRound = rounds.FirstOrDefault(r => r.NumeroRound == 1).TiempoTranscurridoRound;
             if (tiempoTrancurridoRound == null || tiempoTrancurridoRound == "")
             {
@@ -119,6 +129,7 @@
                 txtTiempoTranscurridoRound.Text = tiempoTrancurridoRound;
                 txtTiempoTranscurridoRound.ForeColor = Color.Black;
             }
+            cbxActualRound.SelectedItem = actualRound;
             if (encuentro.Fecha == null || encuentro.Fecha == "")
             {
                 txtFechaEncuentro.Text = "DD/MM/YYYY";
@@ -137,6 +148,7 @@
                 txtHoraEncuentro.Text = encuentro.Hora.Substring(0, encuentro.Hora.Length - 3);
                 txtHoraEncuentro.ForeColor = Color.Black;
             }
+            CargarEquipos();
         }
 
         private void txtFecha_Enter(object sender, EventArgs e, TextBox t)
@@ -183,19 +195,19 @@
         {
             if (modify == false)
             {
-                this.Hide();
+                Hide();
                 MainMenu main = new MainMenu();
                 main.StartPosition = FormStartPosition.CenterParent;
                 main.ShowDialog();
-                this.Close();
+                Close();
             }
             else
             {
-                this.Hide();
+                Hide();
                 MenuManageEncuentros manageEncuentros = new MenuManageEncuentros();
                 manageEncuentros.StartPosition = FormStartPosition.CenterParent;
                 manageEncuentros.ShowDialog();
-                this.Close();
+                Close();
             }
         }
 
@@ -215,7 +227,7 @@
             btnCerrar.Size = new Size(21, 21);
             btnCerrar.Text = "X";
             btnCerrar.UseVisualStyleBackColor = true;
-            btnCerrar.Click += new EventHandler(this.btnCerrarBuscador_Click);
+            btnCerrar.Click += new EventHandler(btnCerrarBuscador_Click);
 
             TextBox buscador = new TextBox();
 
@@ -612,8 +624,8 @@
                         txt1.Location = new Point(418, 0);
                         txt1.Size = new Size(39, 25);
                         txt1.Text = "";
-                        txt1.Leave += (sener, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt1.Text); };
-                        txt1.KeyPress += (sener, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+                        txt1.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt1.Text); };
+                        txt1.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt1);
                         break;
@@ -625,8 +637,8 @@
                         txt2.Location = new Point(418, 0);
                         txt2.Size = new Size(39, 25);
                         txt2.Text = "";
-                        txt2.Leave += (sener, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt2.Text); };
-                        txt2.KeyPress += (sener, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+                        txt2.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt2.Text); };
+                        txt2.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         TextBox txt3 = new TextBox();
 
@@ -635,8 +647,8 @@
                         txt3.Location = new Point(457, 0);
                         txt3.Size = new Size(39, 25);
                         txt3.Text = "";
-                        txt3.Leave += (sener, EventArgs) => { EditTeamScore(sender, EventArgs, 2, id, txt3.Text); };
-                        txt3.KeyPress += (sener, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+                        txt3.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 2, id, txt3.Text); };
+                        txt3.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt2);
                         p1.Controls.Add(txt3);
@@ -649,8 +661,8 @@
                         txt4.Location = new Point(430, 0);
                         txt4.Size = new Size(25, 25);
                         txt4.Text = "";
-                        txt4.Leave += (sener, EventArgs) => { EditTeamScore(sender, EventArgs, 3, id, txt4.Text); };
-                        txt4.KeyPress += (sener, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+                        txt4.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 3, id, txt4.Text); };
+                        txt4.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt4);
                         break;
@@ -659,7 +671,7 @@
 
                         chk1.Location = new Point(426, 2);
                         chk1.Size = new Size(23, 23);
-                        chk1.CheckedChanged += (sener, EventArgs) => { EditTeamScore(sender, EventArgs, 4, id, chk1.Checked.ToString()); };
+                        chk1.CheckedChanged += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 4, id, chk1.Checked.ToString()); };
 
                         p1.Controls.Add(chk1);
                         break;
@@ -972,7 +984,13 @@
                     lblPointsPerRound.Visible = false;
                     break;
             }
-            KickMember(sender, e);
+            if (avoid == false)
+            {
+                KickMember(sender, e);
+            } else
+            {
+                avoid = false;
+            }
         }
 
         private void btnCerrarBuscador_Click(object sender, EventArgs e)
@@ -1014,6 +1032,12 @@
 
         private void btnAddEncuentro_Click(object sender, EventArgs e)
         {
+            Round round = new Round();
+            round.NumeroRound = actualRound;
+            round.TiempoTranscurridoRound = txtTiempoTranscurridoRound.Text;
+
+            rounds.RemoveAt(actualRound - 1);
+            rounds.Insert(actualRound - 1, round);
             if (modify == false)
             {
                 bool exist = false;
@@ -1179,7 +1203,13 @@
 
                             foreach (var eE in equiposEncuentros)
                             {
-                                Logica.UpdateEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                                if (Logica.CheckIfExist("EquiposEncuentros", "IdEncuentro", idEncuentro+"", "IdEquipo", eE.IdEquipo+"") == 1)
+                                {
+                                    Logica.UpdateEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                                } else
+                                {
+                                    Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                                }
                             }
 
                             foreach (var r in Logica.GetRounds(2, ""+idEncuentro))
@@ -1215,9 +1245,9 @@
                                 MessageBox.Show("El encuentro a sido modificado correctamente");
                             }
                             Hide();
-                            MenuManageTeams manageTeams = new MenuManageTeams();
-                            manageTeams.StartPosition = FormStartPosition.CenterParent;
-                            manageTeams.ShowDialog();
+                            MenuManageEncuentros manageMatchs = new MenuManageEncuentros();
+                            manageMatchs.StartPosition = FormStartPosition.CenterParent;
+                            manageMatchs.ShowDialog();
                             Close();
                         }
                         catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
@@ -1265,6 +1295,119 @@
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void CargarEquipos()
+        {
+            foreach (var eq in equiposEncuentros)
+            {
+                Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
+
+                p1.Dock = DockStyle.Top;
+                p1.BorderStyle = BorderStyle.None;
+                p1.BackColor = Color.FromArgb(255, 255, 248);
+                p1.Size = new Size(451, 25);
+                p1.TabIndex = 0;
+
+                Label l1 = new Label(); //Nombre del equipo
+
+                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                l1.Text = eq.NombreEquipo;
+                l1.TextAlign = ContentAlignment.MiddleLeft;
+                l1.Size = new Size(268, 25);
+                l1.AutoSize = false;
+                l1.BackColor = Color.FromArgb(255, 255, 248);
+                l1.BorderStyle = BorderStyle.FixedSingle;
+                l1.Location = new Point(0, 0);
+
+                Button btn1 = new Button(); //Seleccionar alineamiento del equipo
+
+                btn1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                btn1.Cursor = Cursors.Hand;
+                btn1.FlatAppearance.BorderColor = Color.DimGray;
+                btn1.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+                btn1.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+                btn1.Location = new Point(268, 0);
+                btn1.Text = "Select alignment";
+                btn1.Size = new Size(150, 25);
+                btn1.UseVisualStyleBackColor = true;
+                btn1.Click += (sender, EventArgs) => { btnSelectImage_Click(sender, EventArgs); };
+
+                switch (tipoEncuentro)
+                {
+                    case 1: //Puntos
+                        TextBox txt1 = new TextBox();
+
+                        txt1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        txt1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                        txt1.Location = new Point(418, 0);
+                        txt1.Size = new Size(39, 25);
+                        txt1.Text = ""+eq.Puntuacion;
+                        txt1.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, eq.IdEquipo, txt1.Text); };
+                        txt1.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+
+                        p1.Controls.Add(txt1);
+                        break;
+                    case 2: //Sets
+                        TextBox txt2 = new TextBox();
+
+                        txt2.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        txt2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                        txt2.Location = new Point(418, 0);
+                        txt2.Size = new Size(39, 25);
+                        txt2.Text = ""+eq.Puntuacion;
+                        txt2.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, eq.IdEquipo, txt2.Text); };
+                        txt2.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+
+                        var pR = puntuacionRounds.Find(p => p.IdEquipos == eq.IdEquipo && p.NumeroRound == 1);
+
+                        TextBox txt3 = new TextBox();
+
+                        txt3.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        txt3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                        txt3.Location = new Point(457, 0);
+                        txt3.Size = new Size(39, 25);
+                        txt3.Text = ""+pR.Puntos;
+                        txt3.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 2, eq.IdEquipo, txt3.Text); };
+                        txt3.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+
+                        p1.Controls.Add(txt2);
+                        p1.Controls.Add(txt3);
+                        break;
+                    case 3: //Position
+                        TextBox txt4 = new TextBox();
+
+                        txt4.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        txt4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                        txt4.Location = new Point(430, 0);
+                        txt4.Size = new Size(25, 25);
+                        txt4.Text = ""+eq.Posicion;
+                        txt4.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 3, eq.IdEquipo, txt4.Text); };
+                        txt4.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
+
+                        p1.Controls.Add(txt4);
+                        break;
+                    case 4: //Winner
+                        CheckBox chk1 = new CheckBox();
+
+                        chk1.Location = new Point(426, 2);
+                        chk1.Size = new Size(23, 23);
+                        if (eq.Posicion == 1)
+                        {
+                            chk1.CheckState = CheckState.Checked;
+                        }
+                        chk1.CheckedChanged += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 4, eq.IdEquipo, chk1.Checked.ToString()); };
+
+                        p1.Controls.Add(chk1);
+                        break;
+                }
+
+                panelEquiposContenedor.Controls.Add(p1);
+                p1.Controls.Add(btn1);
+                p1.Controls.Add(l1);
+
+                panelBuscador.Hide();
             }
         }
 

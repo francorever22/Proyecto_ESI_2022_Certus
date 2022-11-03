@@ -74,6 +74,7 @@
             this.btnBuscar.Size = new System.Drawing.Size(27, 27);
             this.btnBuscar.TabIndex = 0;
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // panelTabla
             // 
@@ -134,6 +135,7 @@
             this.btnProximamente.Size = new System.Drawing.Size(144, 27);
             this.btnProximamente.TabIndex = 3;
             this.btnProximamente.UseVisualStyleBackColor = true;
+            this.btnProximamente.Click += new System.EventHandler(this.btnProximamente_Click);
             // 
             // btnTerminados
             // 
@@ -144,6 +146,7 @@
             this.btnTerminados.Size = new System.Drawing.Size(144, 27);
             this.btnTerminados.TabIndex = 2;
             this.btnTerminados.UseVisualStyleBackColor = true;
+            this.btnTerminados.Click += new System.EventHandler(this.btnTerminados_Click);
             // 
             // btnEnVivo
             // 
@@ -154,6 +157,7 @@
             this.btnEnVivo.Size = new System.Drawing.Size(144, 27);
             this.btnEnVivo.TabIndex = 1;
             this.btnEnVivo.UseVisualStyleBackColor = true;
+            this.btnEnVivo.Click += new System.EventHandler(this.btnEnVivo_Click);
             // 
             // btnTodos
             // 
@@ -164,6 +168,7 @@
             this.btnTodos.Size = new System.Drawing.Size(144, 27);
             this.btnTodos.TabIndex = 0;
             this.btnTodos.UseVisualStyleBackColor = true;
+            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
             // 
             // BuscadorDeEncuentros
             // 
@@ -180,6 +185,7 @@
             this.panelTabla.ResumeLayout(false);
             this.panelDiferenciador.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
