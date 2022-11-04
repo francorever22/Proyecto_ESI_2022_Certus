@@ -199,12 +199,12 @@ namespace Sistema_de_Resultados_Deportivos
             toggleSubMenu(1);
         }
 
-        private void InfoEquipos_Jugadores(int type)
+        private void InfoEquipos_Jugadores(int type, int id)
         {
-            Form info = new Frm_EquiposJugadores(type);
+            Form info = new Frm_EquiposJugadores(type, id);
             info.TopLevel = false;
             info.TopMost = true;
-            this.panelSettings.Controls.Add(info);
+            panelSettings.Controls.Add(info);
             info.Show();
             panelSettings.Show();
         }
@@ -277,7 +277,7 @@ namespace Sistema_de_Resultados_Deportivos
                 case 6:
                     if (form != null)
                     {
-                        form.InfoEquipos_Jugadores(x);
+                        form.InfoEquipos_Jugadores(x, z);
                     }
                     break;
                 case 7:

@@ -138,11 +138,11 @@
                     l4.TextAlign = ContentAlignment.MiddleCenter;
                     l4.TabIndex = 5;
                     l4.ForeColor = AjustesDeUsuario.foreColor;
-                    if (enc.TipoEncuentro == 1 || enc.TipoEncuentro == 3)
+                    if (enc.TipoEncuentro == 1 || enc.TipoEncuentro == 2)
                     {
                         l4.Text = eqEnc[0].Puntuacion + " - " + eqEnc[1].Puntuacion;
                     }
-                    else if (enc.TipoEncuentro == 2 || enc.TipoEncuentro == 4)
+                    else if (enc.TipoEncuentro == 3 || enc.TipoEncuentro == 4)
                     {
                         l4.Text = "";
                     }

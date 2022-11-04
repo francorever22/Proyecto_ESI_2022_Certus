@@ -614,6 +614,8 @@
                 btn1.UseVisualStyleBackColor = true;
                 btn1.Click += (sender, EventArgs) => { btnSelectImage_Click(sender, EventArgs); };
 
+                int idEq = id;
+
                 switch (tipoEncuentro)
                 {
                     case 1: //Puntos
@@ -624,7 +626,7 @@
                         txt1.Location = new Point(418, 0);
                         txt1.Size = new Size(39, 25);
                         txt1.Text = "";
-                        txt1.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt1.Text); };
+                        txt1.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, idEq, txt1.Text); };
                         txt1.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt1);
@@ -637,7 +639,7 @@
                         txt2.Location = new Point(418, 0);
                         txt2.Size = new Size(39, 25);
                         txt2.Text = "";
-                        txt2.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, id, txt2.Text); };
+                        txt2.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 1, idEq, txt2.Text); };
                         txt2.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         TextBox txt3 = new TextBox();
@@ -647,7 +649,7 @@
                         txt3.Location = new Point(457, 0);
                         txt3.Size = new Size(39, 25);
                         txt3.Text = "";
-                        txt3.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 2, id, txt3.Text); };
+                        txt3.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 2, idEq, txt3.Text); };
                         txt3.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt2);
@@ -661,7 +663,7 @@
                         txt4.Location = new Point(430, 0);
                         txt4.Size = new Size(25, 25);
                         txt4.Text = "";
-                        txt4.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 3, id, txt4.Text); };
+                        txt4.Leave += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 3, idEq, txt4.Text); };
                         txt4.KeyPress += (sender, EventArgs) => { PointsAcceptsOnlyNumbers(sender, EventArgs); };
 
                         p1.Controls.Add(txt4);
@@ -671,7 +673,7 @@
 
                         chk1.Location = new Point(426, 2);
                         chk1.Size = new Size(23, 23);
-                        chk1.CheckedChanged += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 4, id, chk1.Checked.ToString()); };
+                        chk1.CheckedChanged += (sender, EventArgs) => { EditTeamScore(sender, EventArgs, 4, idEq, chk1.Checked.ToString()); };
 
                         p1.Controls.Add(chk1);
                         break;
@@ -697,10 +699,10 @@
             switch (x)
             {
                 case 1:
-                    equiposEncuentros.FirstOrDefault(e => e.IdEquipo == id).Puntuacion = Convert.ToInt32(input);
+                    equiposEncuentros.Find(e => e.IdEquipo == id).Puntuacion = Convert.ToInt32(input);
                     break;
                 case 2:
-                    if (puntuacionRounds.FirstOrDefault(e => e.IdEquipos == id && e.NumeroRound == actualRound) == null)
+                    if (puntuacionRounds.Find(e => e.IdEquipos == id && e.NumeroRound == actualRound) == null)
                     {
                         puntuacionRounds.Add(new PuntuacionRound()
                         {
@@ -711,20 +713,20 @@
                     }
                     else
                     {
-                        puntuacionRounds.FirstOrDefault(e => e.IdEquipos == id && e.NumeroRound == actualRound).Puntos = Convert.ToInt32(input);
+                        puntuacionRounds.Find(e => e.IdEquipos == id && e.NumeroRound == actualRound).Puntos = Convert.ToInt32(input);
                     }
                     break;
                 case 3:
-                    equiposEncuentros.FirstOrDefault(e => e.IdEquipo == id).Posicion = Convert.ToInt32(input);
+                    equiposEncuentros.Find(e => e.IdEquipo == id).Posicion = Convert.ToInt32(input);
                     break;
                 case 4:
                     if (input == "True")
                     {
-                        equiposEncuentros.FirstOrDefault(e => e.IdEquipo == id).Posicion = 1;
+                        equiposEncuentros.Find(e => e.IdEquipo == id).Posicion = 1;
                     }
                     else
                     {
-                        equiposEncuentros.FirstOrDefault(e => e.IdEquipo == id).Posicion = 0;
+                        equiposEncuentros.Find(e => e.IdEquipo == id).Posicion = 0;
                     }
                     break;
             }

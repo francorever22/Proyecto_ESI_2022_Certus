@@ -629,6 +629,12 @@ namespace Sistema_de_Resultados_Deportivos
                 $"('{nom}', '{origen}', '{tipo}', '{null}')");
         }
 
+        public static void InsertEquiposFavoritos(string email, int equipo)
+        {
+            db.ExecuteSql($"INSERT INTO EquiposFavoritos (IdEquipo, Email) VALUES " +
+                $"('{equipo}', '{email}')");
+        }
+
         public static void InsertEquiposDeportistas(int idEq, int IdD)
         {
             Equipo e = GetEquipos(3, $"{idEq}")[0];

@@ -42,7 +42,7 @@
             this.lblMarcador = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lblSets = new System.Windows.Forms.Label();
+            this.lblState = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.panelTeam2.SuspendLayout();
@@ -131,19 +131,18 @@
             // 
             // llbTeam2
             // 
-            this.llbTeam2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.llbTeam2.ActiveLinkColor = System.Drawing.Color.Black;
+            this.llbTeam2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.llbTeam2.DisabledLinkColor = System.Drawing.Color.Black;
-            this.llbTeam2.LinkColor = System.Drawing.Color.Black;
-            this.llbTeam2.VisitedLinkColor = System.Drawing.Color.Black;
             this.llbTeam2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llbTeam2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.llbTeam2.LinkColor = System.Drawing.Color.Black;
             this.llbTeam2.Location = new System.Drawing.Point(0, 0);
             this.llbTeam2.Name = "llbTeam2";
             this.llbTeam2.Size = new System.Drawing.Size(362, 35);
             this.llbTeam2.TabIndex = 1;
             this.llbTeam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.llbTeam2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbTeam2_LinkClicked);
+            this.llbTeam2.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // panelTeam1
             // 
@@ -167,14 +166,14 @@
             this.llbTeam1.TabIndex = 0;
             this.llbTeam1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.llbTeam1.VisitedLinkColor = System.Drawing.Color.Black;
-            this.llbTeam1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbTeam1_LinkClicked);
             // 
             // lblMarcador
             // 
             this.lblMarcador.AutoSize = true;
+            this.lblMarcador.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblMarcador.Location = new System.Drawing.Point(362, 48);
             this.lblMarcador.Name = "lblMarcador";
-            this.lblMarcador.Size = new System.Drawing.Size(0, 15);
+            this.lblMarcador.Size = new System.Drawing.Size(0, 25);
             this.lblMarcador.TabIndex = 1;
             // 
             // pictureBox1
@@ -195,20 +194,20 @@
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
-            // lblSets
+            // lblState
             // 
-            this.lblSets.AutoSize = true;
-            this.lblSets.Location = new System.Drawing.Point(362, 86);
-            this.lblSets.Name = "lblSets";
-            this.lblSets.Size = new System.Drawing.Size(0, 15);
-            this.lblSets.TabIndex = 4;
+            this.lblState.AutoSize = true;
+            this.lblState.Location = new System.Drawing.Point(362, 86);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(0, 15);
+            this.lblState.TabIndex = 4;
             // 
             // Frm_Encuentros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 552);
-            this.Controls.Add(this.lblSets);
+            this.Controls.Add(this.lblState);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblMarcador);
@@ -243,6 +242,6 @@
         private Button btnJugadores;
         private LinkLabel llbTeam2;
         private LinkLabel llbTeam1;
-        private Label lblSets;
+        private Label lblState;
     }
 }

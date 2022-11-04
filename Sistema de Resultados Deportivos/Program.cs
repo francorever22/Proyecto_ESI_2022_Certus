@@ -55,5 +55,12 @@ namespace Sistema_de_Resultados_Deportivos
             };
             Principal.AlterPrincipal(0, 0, 0);
         }
+
+        public static void refreshFavorites()
+        {
+            user.encuentrosFavoritos = Logica.GetEncuentrosFavoritos(2, user.email);
+            user.eventosFavoritos = Logica.GetEventosFavoritos(2, user.email);
+            user.equiposFavoritos = Logica.GetEquiposFavoritos(2, user.email);
+        }
     }
 }
