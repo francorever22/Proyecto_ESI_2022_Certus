@@ -13,7 +13,7 @@ TituloPublicidad VARCHAR(70)
 CREATE TABLE Usuarios
 (
 Email VARCHAR(70) PRIMARY KEY,
-NombreUsuario VARCHAR(50) unique,
+NombreUsuario VARCHAR(50) UNIQUE,
 Contrasena VARCHAR(200),
 NumeroTelefono VARCHAR(15),
 NivelPermisos INT,
@@ -26,21 +26,21 @@ CREATE TABLE EventosFavoritos
 (
 IdEventosFavoritos INT AUTO_INCREMENT PRIMARY KEY,
 IdEvento INT,
-Email VARCHAR(70) UNIQUE
+Email VARCHAR(70)
 );
 
 CREATE TABLE EncuentrosFavoritos
 (
 IdEncuentrosFavoritos INT AUTO_INCREMENT PRIMARY KEY,
 IdEncuentro INT,
-Email VARCHAR(70) UNIQUE
+Email VARCHAR(70)
 );
 
 CREATE TABLE EquiposFavoritos
 (
 IdEquiposFavoritos INT AUTO_INCREMENT PRIMARY KEY,
 IdEquipo INT,
-Email VARCHAR(70) UNIQUE
+Email VARCHAR(70)
 );
 
 CREATE TABLE PublicidadesUsuarios
@@ -195,7 +195,7 @@ TiempoHito TIME
 
 CREATE TABLE Categorias (
 IdCategoria INT AUTO_INCREMENT PRIMARY KEY, 
-NombreCategoria VARCHAR(50) NOT NULL 
+NombreCategoria VARCHAR(50) UNIQUE NOT NULL 
 );
 
 CREATE TABLE Deportes (
@@ -364,24 +364,6 @@ GRANT SELECT ON EncuentrosFases TO Usuario_E;
 GRANT SELECT ON EquiposFases TO Usuario_E;
 
 
-
-ALTER TABLE Usuarios 
-ADD CONSTRAINT FK_UsuariosEventosFavoritos 
-FOREIGN KEY (IdEventosFavoritos) 
-REFERENCES EventosFavoritos(IdEventosFavoritos)
-ON DELETE CASCADE;
-
-ALTER TABLE Usuarios 
-ADD CONSTRAINT FK_UsuariosEncuentrosFavoritos 
-FOREIGN KEY (IdEncuentrosFavoritos) 
-REFERENCES EncuentrosFavoritos(IdEncuentrosFavoritos)
-ON DELETE CASCADE;
-
-ALTER TABLE Usuarios 
-ADD CONSTRAINT FK_UsuariosEquiposFavoritos 
-FOREIGN KEY (IdEquiposFavoritos) 
-REFERENCES EquiposFavoritos(IdEquiposFavoritos)
-ON DELETE CASCADE;
 
 ALTER TABLE EventosFavoritos
 ADD CONSTRAINT FK_EventosFavoritosEventos
