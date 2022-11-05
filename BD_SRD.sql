@@ -123,6 +123,7 @@ NombreEquipo varchar(120) NOT NULL,
 EstadoJugador varchar(70) NOT NULL,
 Nombre VARCHAR(50) NOT NULL,
 Apellido VARCHAR(50) NOT NULL,
+Nacionalidad VARCHAR(50) NOT NULL,
 Descripcion TEXT,
 TipoEquipo VARCHAR(15) NOT NULL,
 PRIMARY KEY (IdEquipo, IdPersona)
@@ -140,11 +141,11 @@ PRIMARY KEY (IdEstadisticasJugador, IdEncuentro)
 
 CREATE TABLE Fases
 (
-NumeroFase INT,
 IdEvento INT,
+NumeroFase INT,
 Fecha DATE,
 NombreFase VARCHAR(120),
-EstadoFase VARCHAR(20),
+EstadoFase VARCHAR(20) NOT NULL,
 Tipofase TINYINT NOT NULL,
 TamanoGrupos INT,
 CantidadGrupos INT,
@@ -159,8 +160,8 @@ IdEvento INT,
 ImagenRepresentativa BLOB,
 PaisOrigen VARCHAR(80) NOT NULL,
 NombreEquipo VARCHAR(120) NOT NULL,
-EstadoFase VARCHAR(70) NOT NULL,
-NombreFase VARCHAR(80),
+EstadoFase VARCHAR(20) NOT NULL,
+NombreFase VARCHAR(120),
 Fecha DATE,
 PosicionEquipo INT,
 EstadoEquipo VARCHAR(80),
@@ -199,21 +200,21 @@ NombreCategoria VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE Deportes (
- IdDeporte INT AUTO_INCREMENT PRIMARY KEY, 
- NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
- ImagenDeporte BLOB,
- Destacado BOOL
+IdDeporte INT AUTO_INCREMENT PRIMARY KEY, 
+NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
+ImagenDeporte BLOB,
+Destacado BOOL
 );
  
 CREATE TABLE DeportesCategorizados (
- IdDeporte INT,
- IdCategoria INT, 
- NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
- ImagenDeporte BLOB,
- Destacado BOOL, 
- NombreCategoria VARCHAR(50) NOT NULL,
+IdDeporte INT,
+IdCategoria INT, 
+NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
+ImagenDeporte BLOB,
+Destacado BOOL,
+NombreCategoria VARCHAR(50) NOT NULL,
 PRIMARY KEY (IdDeporte, IdCategoria)
- );
+);
  
 CREATE TABLE Encuentros (
  IdEncuentro INT AUTO_INCREMENT PRIMARY KEY,
@@ -230,28 +231,28 @@ CREATE TABLE Encuentros (
 );
 
 CREATE TABLE EncuentrosFases (
- IdEncuentro INT,
- NumeroFase INT,
- IdEvento INT,
- IdDeporte INT,
- IdCategoria INT,
- IdPersona INT,
- Hora TIME NOT NULL, 
- Lugar VARCHAR(120),
- FechaEncuentro DATE NOT NULL, 
- NombreEncuentro VARCHAR(50), 
- EstadoEncuentro VARCHAR(25) NOT NULL, 
- Clima VARCHAR(25),
- TipoEncuentro TINYINT NOT NULL,
- Fecha DATE,
- NombreFase VARCHAR(120),
- EstadoFase VARCHAR(20),
- Tipofase TINYINT NOT NULL,
- Puntaje INT,
- Posicion INT,
+IdEncuentro INT,
+NumeroFase INT,
+IdEvento INT,
+IdDeporte INT,
+IdCategoria INT,
+IdPersona INT,
+Hora TIME NOT NULL, 
+Lugar VARCHAR(120),
+FechaEncuentro DATE NOT NULL, 
+NombreEncuentro VARCHAR(50), 
+EstadoEncuentro VARCHAR(25) NOT NULL, 
+Clima VARCHAR(25),
+TipoEncuentro TINYINT NOT NULL,
+Fecha DATE,
+NombreFase VARCHAR(120),
+EstadoFase VARCHAR(20),
+Tipofase TINYINT NOT NULL,
+Puntaje INT,
+Posicion INT,
 TamanoGrupos INT,
 CantidadGrupos INT,
- PRIMARY KEY (IdEncuentro, NumeroFase, IdEvento)
+PRIMARY KEY (IdEncuentro, NumeroFase, IdEvento)
 );
 
 CREATE TABLE EquiposEncuentros (
@@ -465,6 +466,30 @@ ALTER TABLE EquiposEncuentros
 ADD CONSTRAINT FK_EquiposEncuentrosEquipos
 FOREIGN KEY (IdEquipo)
 REFERENCES Equipos(IdEquipo)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposFases
+ADD CONSTRAINT FK_EquiposFasesNumeroFase
+FOREIGN KEY (NumeroFase)
+REFERENCES Fases(NumeroFase)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposFases
+ADD CONSTRAINT FK_EquiposFasesEquipos
+FOREIGN KEY (IdEquipo)
+REFERENCES Equipos(IdEquipo)
+ON DELETE CASCADE;
+
+ALTER TABLE EncuentrosFases
+ADD CONSTRAINT FK_EncuentrosFasesNumeroFase
+FOREIGN KEY (NumeroFase)
+REFERENCES Fases(NumeroFase)
+ON DELETE CASCADE;
+
+ALTER TABLE EncuentrosFases
+ADD CONSTRAINT FK_EncuentrosFasesEncuentros
+FOREIGN KEY (IdEncuentro)
+REFERENCES Encuentros(IdEncuentro)
 ON DELETE CASCADE;
 
 ALTER TABLE Round
@@ -998,7 +1023,7 @@ INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase
 
 INSERT INTO EncuentrosFases (IdEncuentro, NumeroFase, IdEvento, IdDeporte, IdCategoria, IdPersona, Hora, Lugar, FechaEncuentro, NombreEncuentro, EstadoEncuentro, Clima, TipoEncuentro, EstadoFase, NombreFase, Fecha, Tipofase, Puntaje, Posicion, TamanoGrupos, CantidadGrupos) VALUES
 ('1', '1', '1', '1', '1', '6', '13:30', 'Estadio centenario', '2022-12-17', 'Especial de navidad', 'Coming soon', null, '1', 'En curso', 'Grupo A', '2022-12-2', '2', '0', '1', '2', '1'),
-('2', '3', '1', '4', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '2', '0', '1', '2', '1'),
+('2', '1', '1', '4', '2', '7', '19:22', 'Dojo escondido entre los arbustos', '1978-06-5', 'Amistoso, pero no mucho', 'Finished', 'Nublado', '1', 'En curso', 'Grupo B', '2034-10-19', '2', '0', '1', '2', '1'),
 ('3', '1', '2', '5', '4', '8', '03:25', 'Av.18 de julio', '2022-09-1', 'Campeonato Mundial de formula1', 'In progress', 'Despejado', '1', 'Por venir', 'Grupo C', '2012-10-16', '3', '0', '1', '2', '1');
 
 INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, Tipofase, TamanoGrupos, CantidadGrupos) VALUES 
@@ -1153,7 +1178,7 @@ GROUP BY EquiposDeportistas.IdEquipo;
 
 SELECT Puntuacion
 FROM EquiposEncuentros
-WHERE IdEquipo = 1919
+WHERE IdEquipo = 1
 ORDER BY IdEncuentro DESC limit 5;
 
 SELECT Equipos.IdEquipo, Equipos.NombreEquipo
