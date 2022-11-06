@@ -512,6 +512,9 @@ ALTER TABLE Usuarios
 ADD CONSTRAINT CHK_Usuarios_NivelPermisos
 CHECK (NivelPermisos >= 1 AND NivelPermisos <= 4);
 
+ALTER TABLE EncuentrosFases
+ADD UNIQUE INDEX DuplicadosEncuentrosFases (IdEncuentro);
+
 
 
 INSERT INTO Publicidades (Banner, Link, TituloPublicidad) VALUES
