@@ -6,7 +6,7 @@
     public string HoraEvento { get; set; }
     public string EstadoEvento { get; set; }
     public string Lugar { get; set; }
-    public Bitmap LogoEvento { get; set; }
+    public string LogoEvento { get; set; }
     public List<Fase> Fases { get; set; }
 }
 
@@ -28,7 +28,7 @@ public class EquiposFases
     public int IdEquipo { get; set; }
     public int NumeroFase { get; set; }
     public int IdEvento { get; set; }
-    public Image ImagenRepresentativa { get; set; }
+    public string ImagenRepresentativa { get; set; }
     public string PaisOrigen { get; set; }
     public string NombreEquipo { get; set; }
     public string EstadoFase { get; set; }

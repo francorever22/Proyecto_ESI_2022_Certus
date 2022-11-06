@@ -63,12 +63,12 @@ public class EquiposEncuentros
     public string Estado { get; set; }
     public string Clima { get; set; }
     public int TipoEncuentro { get; set; }
-    public Bitmap ImagenRepresentativa { get; set; }
+    public string ImagenRepresentativa { get; set; }
     public string PaisOrigen { get; set; }
     public string NombreEquipo { get; set; }
     public string TipoEquipo { get; set; }
     public List<int> Miembros { get; set; }
     public int Puntuacion { get; set; }
     public int Posicion { get; set; }
-    public Image Alineacion { get; set; }
+    public string Alineacion { get; set; }
 }

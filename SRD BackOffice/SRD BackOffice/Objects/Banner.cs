@@ -3,5 +3,5 @@
     public int IdBanner { get; set; }
     public string TitleBanner { get; set; }
     public string Link { get; set; }
-    public Image BannerImage { get; set; }
+    public string BannerImage { get; set; }
 }

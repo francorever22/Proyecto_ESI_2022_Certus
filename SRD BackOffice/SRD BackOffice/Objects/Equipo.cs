@@ -1,7 +1,7 @@
 ﻿public class Equipo
 {
     public int IdEquipo { get; set; }
-    public Bitmap ImagenRepresentativa { get; set; }
+    public string ImagenRepresentativa { get; set; }
     public string PaisOrigen { get; set; }
     public string NombreEquipo { get; set; }
     public string TipoEquipo { get; set; }
@@ -12,7 +12,7 @@ public class EquiposDeportistas
 {
     public int IdEquipo { get; set; }
     public int IdPersona { get; set; }
-    public Bitmap ImagenRepresentativa { get; set; }
+    public string ImagenRepresentativa { get; set; }
     public string PaisOrigen { get; set; }
     public string NombreEquipo { get; set; }
     public string TipoEquipo { get; set; }
