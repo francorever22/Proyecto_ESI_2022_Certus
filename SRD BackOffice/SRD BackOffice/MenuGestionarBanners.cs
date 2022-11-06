@@ -1,4 +1,6 @@
-﻿namespace SRD_BackOffice
+﻿using System.Drawing.Imaging;
+
+namespace SRD_BackOffice
 {
     public partial class MenuGestionarBanners : Form
     {
@@ -105,16 +107,27 @@
                     {
                         string titleBanner = txtBannerTitle.Text,
                                link = txtBannerLink.Text;
-                        byte[] bannerImage = null;
-                        // banner.BannerImage = image; Requiere dividir la imagen en un array de bytes para poder ser guardada
+                        Bitmap bannerImage = new Bitmap(image);
 
-                        Logica.InsertBanner(titleBanner, link, bannerImage);
+                        Directory.CreateDirectory(@"C:\Certus\SRD\Banners");
+                        string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.bmp";
+                        using (MemoryStream memory = new MemoryStream())
+                        {
+                            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                            {
+                                bannerImage.Save(memory, ImageFormat.Bmp);
+                                byte[] bytes = memory.ToArray();
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+
+                        Logica.InsertBanner(titleBanner, link, FilePath);
                         MessageBox.Show("Banner added correctly");
                         CargarBanners();
                     }
                     catch
                     {
-                        MessageBox.Show("Error");
+                        MessageBox.Show("Error"); return;
                     }
                 }
                 else
@@ -140,10 +153,21 @@
                         {
                             string titleBanner = txtBannerTitle.Text,
                                    link = txtBannerLink.Text;
-                            byte[] bannerImage = null;
-                            // banner.BannerImage = image; Requiere dividir la imagen en un array de bytes para poder ser guardada
+                            Bitmap bannerImage = new Bitmap(image);
 
-                            Logica.UpdateBanner(index, titleBanner, link, bannerImage);
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Banners");
+                            string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.gif";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    bannerImage.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
+
+                            Logica.UpdateBanner(index, titleBanner, link, FilePath);
                             MessageBox.Show("Banner modified correctly");
                             CargarBanners();
 
@@ -156,7 +180,7 @@
                         }
                         catch
                         {
-                            MessageBox.Show("Error");
+                            MessageBox.Show("Error"); return;
                         }
                     }
                 }
@@ -230,8 +254,11 @@
 
             txtBannerTitle.Text = banner.TitleBanner;
             txtBannerLink.Text = banner.Link;
-            //imgBannerSelected.Image = banner.BannerImage;
-            //image = banner.BannerImage;
+            try
+            {
+                image = new Bitmap(banner.BannerImage);
+            } catch { }
+            imgBannerSelected.Image = image;
             btnAddBanner.Text = "Modify";
         }
 

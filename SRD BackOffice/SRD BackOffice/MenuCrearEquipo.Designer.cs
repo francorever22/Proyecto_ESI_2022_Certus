@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCrearEquipo));
             this.panelAgregarDeporte = new System.Windows.Forms.Panel();
+            this.picReset = new System.Windows.Forms.PictureBox();
             this.panelBuscadorEquipos = new System.Windows.Forms.Panel();
             this.picAddPlayer = new System.Windows.Forms.PictureBox();
             this.lblPlayers = new System.Windows.Forms.Label();
@@ -50,11 +52,10 @@
             this.cbxTipo = new System.Windows.Forms.ComboBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblSportTitle = new System.Windows.Forms.Label();
-            this.picReset = new System.Windows.Forms.PictureBox();
             this.panelAgregarDeporte.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAddPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTeam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picReset)).BeginInit();
             this.SuspendLayout();
             // 
             // panelAgregarDeporte
@@ -86,6 +87,17 @@
             this.panelAgregarDeporte.Name = "panelAgregarDeporte";
             this.panelAgregarDeporte.Size = new System.Drawing.Size(481, 561);
             this.panelAgregarDeporte.TabIndex = 10;
+            // 
+            // picReset
+            // 
+            this.picReset.BackgroundImage = global::SRD_BackOffice.Properties.Resources.recargar;
+            this.picReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picReset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picReset.Location = new System.Drawing.Point(440, 310);
+            this.picReset.Name = "picReset";
+            this.picReset.Size = new System.Drawing.Size(20, 20);
+            this.picReset.TabIndex = 51;
+            this.picReset.TabStop = false;
             // 
             // panelBuscadorEquipos
             // 
@@ -294,17 +306,6 @@
             this.lblSportTitle.Size = new System.Drawing.Size(0, 55);
             this.lblSportTitle.TabIndex = 8;
             // 
-            // picReset
-            // 
-            this.picReset.BackgroundImage = global::SRD_BackOffice.Properties.Resources.recargar;
-            this.picReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picReset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picReset.Location = new System.Drawing.Point(440, 310);
-            this.picReset.Name = "picReset";
-            this.picReset.Size = new System.Drawing.Size(20, 20);
-            this.picReset.TabIndex = 51;
-            this.picReset.TabStop = false;
-            // 
             // MenuCrearEquipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -312,13 +313,14 @@
             this.ClientSize = new System.Drawing.Size(481, 561);
             this.Controls.Add(this.panelAgregarDeporte);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCrearEquipo";
             this.Text = "AdministradorAPP";
             this.panelAgregarDeporte.ResumeLayout(false);
             this.panelAgregarDeporte.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAddPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTeam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picReset)).EndInit();
             this.ResumeLayout(false);
 
         }

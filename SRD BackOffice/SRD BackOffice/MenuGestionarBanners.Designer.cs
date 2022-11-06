@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuGestionarBanners));
             this.panelMangeBanners = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -252,6 +253,7 @@
             this.ClientSize = new System.Drawing.Size(907, 605);
             this.Controls.Add(this.panelMangeBanners);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuGestionarBanners";
             this.Text = "AdministradorAPP";
             this.panelMangeBanners.ResumeLayout(false);

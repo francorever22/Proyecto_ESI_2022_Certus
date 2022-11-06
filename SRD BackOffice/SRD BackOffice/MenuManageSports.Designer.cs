@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuManageSports));
             this.panelManageSports = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelDeportesContenedor = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -43,8 +46,6 @@
             this.lblCategories = new System.Windows.Forms.Label();
             this.btnSportsManagerCerrar = new System.Windows.Forms.Button();
             this.lblSportsManagerTitle = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtBuscador = new System.Windows.Forms.TextBox();
             this.panelManageSports.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -67,6 +68,23 @@
             this.panelManageSports.Name = "panelManageSports";
             this.panelManageSports.Size = new System.Drawing.Size(676, 541);
             this.panelManageSports.TabIndex = 11;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBuscar.Location = new System.Drawing.Point(475, 92);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // txtBuscador
+            // 
+            this.txtBuscador.Location = new System.Drawing.Point(166, 93);
+            this.txtBuscador.Name = "txtBuscador";
+            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
+            this.txtBuscador.TabIndex = 28;
             // 
             // panel2
             // 
@@ -209,23 +227,6 @@
             this.lblSportsManagerTitle.Size = new System.Drawing.Size(0, 55);
             this.lblSportsManagerTitle.TabIndex = 8;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackgroundImage = global::SRD_BackOffice.Properties.Resources.lupa;
-            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBuscar.Location = new System.Drawing.Point(475, 92);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
-            this.btnBuscar.TabIndex = 29;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // txtBuscador
-            // 
-            this.txtBuscador.Location = new System.Drawing.Point(166, 93);
-            this.txtBuscador.Name = "txtBuscador";
-            this.txtBuscador.Size = new System.Drawing.Size(309, 23);
-            this.txtBuscador.TabIndex = 28;
-            // 
             // MenuManageSports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -233,6 +234,7 @@
             this.ClientSize = new System.Drawing.Size(676, 541);
             this.Controls.Add(this.panelManageSports);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuManageSports";
             this.Text = "AdministradorAPP";
             this.panelManageSports.ResumeLayout(false);
@@ -244,6 +246,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
 

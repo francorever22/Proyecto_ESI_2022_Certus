@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCrearDeporte));
             this.panelAgregarDeporte = new System.Windows.Forms.Panel();
             this.btnSportCerrar = new System.Windows.Forms.Button();
             this.btnSportAdd = new System.Windows.Forms.Button();
@@ -203,6 +204,7 @@
             this.ClientSize = new System.Drawing.Size(481, 561);
             this.Controls.Add(this.panelAgregarDeporte);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCrearDeporte";
             this.Text = "AdministradorAPP";
             this.panelAgregarDeporte.ResumeLayout(false);

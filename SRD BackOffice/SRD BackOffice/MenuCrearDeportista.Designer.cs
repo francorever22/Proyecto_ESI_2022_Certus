@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCrearDeportista));
             this.panelAgregarDeporte = new System.Windows.Forms.Panel();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
@@ -207,6 +208,7 @@
             this.ClientSize = new System.Drawing.Size(481, 561);
             this.Controls.Add(this.panelAgregarDeporte);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCrearDeportista";
             this.Text = "AdministradorAPP";
             this.panelAgregarDeporte.ResumeLayout(false);

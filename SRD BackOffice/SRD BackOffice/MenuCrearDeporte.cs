@@ -1,4 +1,6 @@
-﻿namespace SRD_BackOffice
+﻿using System.Drawing.Imaging;
+
+namespace SRD_BackOffice
 {
     public partial class MenuCrearDeporte : Form
     {
@@ -22,6 +24,8 @@
         {
             InitializeComponent();
             SetIdioma();
+            this.index = index;
+            modify = true;
 
             var categorias = Logica.GetCategorias(1, null);
             foreach (var c in categorias)
@@ -32,13 +36,15 @@
             var deporte = Logica.GetDeportes(5, ""+index)[0];
 
             btnSportAdd.Text = "Modify";
+            MessageBox.Show(deporte.ImagenDeporte);
+            try
+            {
+                imagenCargada = new Bitmap(deporte.ImagenDeporte);
+            } catch { }
             txtSportName.Text = deporte.NombreDeporte;
             cbxSportCategory.SelectedItem = deporte.NombreCategoria;
-            imgSportSelected.Image = deporte.ImagenDeporte;
+            imgSportSelected.Image = imagenCargada;
             tgbSportPopular.Checked = deporte.Destacado;
-
-            this.index = index;
-            modify = true;
         }
 
         private void btnSportCerrar_Click(object sender, EventArgs e)
@@ -59,16 +65,27 @@
                     string nombreDeporte = txtSportName.Text,
                            categoriaDeporte = cbxSportCategory.Text;
                     bool destacado = tgbSportPopular.Checked;
-                    Bitmap imagenDeporte = imagenCargada;
+                    Bitmap imagenDeporte = new Bitmap(imagenCargada);
                     int idCategoria = Logica.GetCategorias(3, categoriaDeporte)[0].idCategoria,
                         idDeporte;
                     if (Logica.CheckIfExist("Deportes", "NombreDeporte", nombreDeporte) == 0)
                     {
                         try
                         {
-                            Logica.InsertDeporte(nombreDeporte, null, destacado);
-                            idDeporte = Logica.GetDeportes(4, null)[0].IdDeporte;
-                            Logica.InsertDeporteCategorizado(idDeporte, idCategoria, nombreDeporte, categoriaDeporte, null, destacado);
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Deportes");
+                            string FilePath = $@"C:\\Certus\\SRD\\Deportes\\{nombreDeporte}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenDeporte.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
+                            Logica.InsertDeporte(nombreDeporte, FilePath, destacado);
+                            idDeporte = Logica.GetDeporte(1, nombreDeporte)[0].idDeporte;
+                            Logica.InsertDeporteCategorizado(idDeporte, idCategoria, nombreDeporte, categoriaDeporte, FilePath, destacado);
                             if (Program.language == "EN")
                             {
                                 MessageBox.Show("New sport created correctly");
@@ -78,7 +95,7 @@
                                 MessageBox.Show("Nuevo deporte creado correactamente");
                             }
                         }
-                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
                     }
                     else
                     {
@@ -113,15 +130,26 @@
                         string nombreDeporte = txtSportName.Text,
                                categoriaDeporte = cbxSportCategory.Text;
                         bool destacado = tgbSportPopular.Checked;
-                        Bitmap imagenDeporte = imagenCargada;
+                        Bitmap imagenDeporte = new Bitmap(imagenCargada);
                         int idCategoria = Logica.GetCategorias(3, categoriaDeporte)[0].idCategoria,
                             idDeporte;
                         if (Logica.CheckIfExist("Deportes", "NombreDeporte", nombreDeporte) == 0)
                         {
                             try
                             {
-                                Logica.UpdateDeporte(index, nombreDeporte, null, destacado);
-                                Logica.UpdateDeporteCategorizado(index, idCategoria, nombreDeporte, categoriaDeporte, null, destacado);
+                                Directory.CreateDirectory(@"C:\Certus\SRD\Deportes");
+                                string FilePath = $@"C:\\Certus\\SRD\\Deportes\\{nombreDeporte}.bmp";
+                                using (MemoryStream memory = new MemoryStream())
+                                {
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        imagenDeporte.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
+                                }
+                                Logica.UpdateDeporte(index, nombreDeporte, FilePath, destacado);
+                                Logica.UpdateDeporteCategorizado(index, idCategoria, nombreDeporte, categoriaDeporte, FilePath, destacado);
                                 if (Program.language == "EN")
                                 {
                                     MessageBox.Show("Sport modified correctly");
@@ -136,7 +164,7 @@
                                 manageSports.ShowDialog();
                                 Close();
                             }
-                            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
                         }
                         else
                         {

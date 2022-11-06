@@ -30,6 +30,21 @@ namespace SRD_BackOffice
                 case 5:
                     deportes = db.SelectDeportes($"SELECT * FROM DeportesCategorizados WHERE IdDeporte = '{constraint}'");
                     break;
+                case 6:
+                    deportes = db.SelectDeportes("SELECT * FROM DeportesCategorizados LIMIT 15");
+                    break;
+            }
+            return deportes;
+        }
+
+        public static List<Deporte> GetDeporte(int x, string constraint)
+        {
+            List<Deporte> deportes = new List<Deporte>();
+            switch (x)
+            {
+                case 1:
+                    deportes = db.SelectDeporte($"SELECT * FROM Deportes WHERE NombreDeporte = '{constraint}'");
+                    break;
             }
             return deportes;
         }
@@ -50,6 +65,9 @@ namespace SRD_BackOffice
                     break;
                 case 4:
                     categorias = db.SelectCategorias($"SELECT * FROM Categorias WHERE IdCategoria = '{constraint}'");
+                    break;
+                case 5:
+                    categorias = db.SelectCategorias("SELECT * FROM Categorias LIMIT 15");
                     break;
             }
             return categorias;
@@ -411,7 +429,7 @@ namespace SRD_BackOffice
 
         #region Insert
 
-        public static void InsertBanner(string title, string link, byte[] banner)
+        public static void InsertBanner(string title, string link, string banner)
         {
             db.ExecuteSql($"INSERT INTO Publicidades (Banner, Link, TituloPublicidad) VALUES " +
                 $"('{banner}', '{link}', '{title}')");
@@ -428,13 +446,13 @@ namespace SRD_BackOffice
                 $"'{nomUser}', '{pw}', {np})");
         }
 
-        public static void InsertDeporte(string nomDeporte, Byte[] image, bool destacado)
+        public static void InsertDeporte(string nomDeporte, string image, bool destacado)
         {
             db.ExecuteSql($"INSERT INTO Deportes (NombreDeporte, ImagenDeporte, Destacado) VALUES " +
                 $"('{nomDeporte}', '{image}', {destacado})");
         }
 
-        public static void InsertDeporteCategorizado(int idDeporte, int idCategoria, string nomDeporte, string nomCategoria, Byte[] image, bool destacado)
+        public static void InsertDeporteCategorizado(int idDeporte, int idCategoria, string nomDeporte, string nomCategoria, string image, bool destacado)
         {
             db.ExecuteSql($"INSERT INTO DeportesCategorizados (IdDeporte, IdCategoria, NombreDeporte, ImagenDeporte, Destacado, NombreCategoria) VALUES " +
                 $"({idDeporte}, {idCategoria}, '{nomDeporte}', '{image}', {destacado}, '{nomCategoria}')");
@@ -490,10 +508,10 @@ namespace SRD_BackOffice
                 $"({nRound}, {idEncuentro}, '{tiempo}', {idPR}, {idH})");
         }
 
-        public static void InsertEquipo(string nom, string origen, string tipo, Byte[] img)
+        public static void InsertEquipo(string nom, string origen, string tipo, string img)
         {
             db.ExecuteSql($"INSERT INTO Equipos (NombreEquipo, PaisOrigen, TipoEquipo, ImagenRepresentativa) VALUES " +
-                $"('{nom}', '{origen}', '{tipo}', '{null}')");
+                $"('{nom}', '{origen}', '{tipo}', '{img}')");
         }
 
         public static void InsertEquiposDeportistas(int idEq, int IdD)
@@ -503,11 +521,11 @@ namespace SRD_BackOffice
 
             db.ExecuteSql($"INSERT INTO EquiposDeportistas(IdEquipo, IdPersona, ImagenRepresentativa, PaisOrigen, " +
                 $"NombreEquipo, Nombre, Apellido, EstadoJugador, Descripcion, TipoEquipo) VALUES " +
-                $"({idEq}, {IdD}, '{null}', '{e.PaisOrigen}', '{e.NombreEquipo}', '{d.Nombre}', '{d.Apellido}', '{d.EstadoJugador}', " +
+                $"({idEq}, {IdD}, '{e.ImagenRepresentativa}', '{e.PaisOrigen}', '{e.NombreEquipo}', '{d.Nombre}', '{d.Apellido}', '{d.EstadoJugador}', " +
                 $"'{d.Descripcion}', '{e.TipoEquipo}')");
         }
 
-        public static void InsertEquiposEncuentros(int idEncuentro, int idEquipo, int puntuacion, int posicion, Image alineacion)
+        public static void InsertEquiposEncuentros(int idEncuentro, int idEquipo, int puntuacion, int posicion, string alineacion)
         {
             Encuentro e = GetEncuentros(4, $"{idEncuentro}")[0];
             Equipo eq = GetEquipos(3, $"{idEquipo}")[0];
@@ -520,7 +538,7 @@ namespace SRD_BackOffice
                 $"'{eq.NombreEquipo}', {puntuacion}, {posicion}, '{alineacion}', '{eq.TipoEquipo}', '{e.TipoEncuentro}')");
         }
 
-        public static void InsertEvento(string nom, string fecha, string hora, string estado, string lugar, byte[] logo)
+        public static void InsertEvento(string nom, string fecha, string hora, string estado, string lugar, string logo)
         {
             db.ExecuteSql($"INSERT INTO Eventos (NombreEvento, FechaEvento, HoraEvento, EstadoEvento, LugarEvento, LogoEvento) " +
                 $"VALUES ('{nom}', '{fecha}', '{hora}', '{estado}', '{lugar}', '{logo}')");
@@ -532,7 +550,7 @@ namespace SRD_BackOffice
                 $"({numero}, {idEvento}, '{estado}', '{nombre}', '{fecha}', {tipo}, {tGrupos}, {cGrupos})");
         }
 
-        public static void InsertEquiposFases(int idEq, int nFase, int idEve, byte[] imagenEq, string pais, string nomEq, string estadoEq, int posicionEq, int puntaje, string tipoEq, string estadoFase, string nomFase, string fechaFase, int tipoFase, int tamaño, int cant)
+        public static void InsertEquiposFases(int idEq, int nFase, int idEve, string imagenEq, string pais, string nomEq, string estadoEq, int posicionEq, int puntaje, string tipoEq, string estadoFase, string nomFase, string fechaFase, int tipoFase, int tamaño, int cant)
         {
             db.ExecuteSql($"INSERT INTO EquiposFases(IdEquipo, NumeroFase, IdEvento, ImagenRepresentativa, PaisOrigen, " +
                 $"NombreEquipo, EstadoFase, NombreFase, Fecha, PosicionEquipo, EstadoEquipo, Puntaje, TipoEquipo, " +
@@ -555,7 +573,7 @@ namespace SRD_BackOffice
 
         #region Update
 
-        public static void UpdateBanner(int id, string title, string link, byte[] banner)
+        public static void UpdateBanner(int id, string title, string link, string banner)
         {
             db.ExecuteSql($"Update Publicidades SET Banner = '{banner}', Link = '{link}', TituloPublicidad = '{title}'" +
                 $"WHERE IdPublicidad = {id}");
@@ -566,13 +584,13 @@ namespace SRD_BackOffice
             db.ExecuteSql($"UPDATE Categorias SET NombreCategoria = '{nombreCategoria}' WHERE IdCategoria = {id}");
         }
 
-        public static void UpdateDeporte(int id, string nomDeporte, Byte[] image, bool destacado)
+        public static void UpdateDeporte(int id, string nomDeporte, string image, bool destacado)
         {
             db.ExecuteSql($"UPDATE Deportes SET NombreDeporte = '{nomDeporte}', ImagenDeporte = '{image}', Destacado = {destacado} WHERE " +
                 $"IdDeporte = '{id}'");
         }
 
-        public static void UpdateDeporteCategorizado(int idDeporte, int idCategoria, string nomDeporte, string nomCategoria, Byte[] image, bool destacado)
+        public static void UpdateDeporteCategorizado(int idDeporte, int idCategoria, string nomDeporte, string nomCategoria, string image, bool destacado)
         {
             db.ExecuteSql($"UPDATE DeportesCategorizados SET IdCategoria = '{idCategoria}', NombreDeporte = '{nomDeporte}', ImagenDeporte = '{image}', " +
                 $"Destacado = {destacado}, NombreCategoria = '{nomCategoria}' WHERE IdDeporte = '{idDeporte}'");
@@ -619,10 +637,10 @@ namespace SRD_BackOffice
                 $"WHERE IdEncuentro = '{idEncuentro}' AND NumeroRound = '{nRound}'");
         }
 
-        public static void UpdateEquipo(int id, string nom, string origen, string tipo, Byte[] img)
+        public static void UpdateEquipo(int id, string nom, string origen, string tipo, string img)
         {
             db.ExecuteSql($"UPDATE Equipos SET NombreEquipo = '{nom}', PaisOrigen = '{origen}', TipoEquipo = '{tipo}', " +
-                $"ImagenRepresentativa = '{null}' WHERE IdEquipo = '{id}'");
+                $"ImagenRepresentativa = '{img}' WHERE IdEquipo = '{id}'");
         }
 
         public static void UpdateEquiposDeportistas(int idEq, int IdD)
@@ -630,12 +648,12 @@ namespace SRD_BackOffice
             Equipo e = GetEquipos(3, $"{idEq}")[0];
             Deportista d = GetDeportistas(3, $"{IdD}")[0];
 
-            db.ExecuteSql($"UPDATE EquiposDeportistas SET ImagenRepresentativa = '{null}', PaisOrigen = '{e.PaisOrigen}', " +
+            db.ExecuteSql($"UPDATE EquiposDeportistas SET ImagenRepresentativa = '{e.ImagenRepresentativa}', PaisOrigen = '{e.PaisOrigen}', " +
                 $"NombreEquipo = '{e.NombreEquipo}', Nombre = '{d.Nombre}', Apellido = '{d.Apellido}', EstadoJugador = '{d.EstadoJugador}', Descripcion = '{d.Descripcion}', " +
                 $"TipoEquipo = '{e.TipoEquipo}' WHERE IdEquipo = {idEq} AND IdPersona = {IdD}");
         }
 
-        public static void UpdateEquiposEncuentros(int idEncuentro, int idEquipo, int puntuacion, int posicion, Image alineacion)
+        public static void UpdateEquiposEncuentros(int idEncuentro, int idEquipo, int puntuacion, int posicion, string alineacion)
         {
             Encuentro e = GetEncuentros(4, $"{idEncuentro}")[0];
             Equipo eq = GetEquipos(3, $"{idEquipo}")[0];
@@ -649,7 +667,7 @@ namespace SRD_BackOffice
                 $"WHERE IdEncuentro = {idEncuentro} AND IdEquipo = {idEquipo}");
         }
 
-        public static void UpdateEvento(int id, string nom, string fecha, string hora, string estado, string lugar, byte[] logo)
+        public static void UpdateEvento(int id, string nom, string fecha, string hora, string estado, string lugar, string logo)
         {
             db.ExecuteSql($"UPDATE Eventos SET NombreEvento = '{nom}', FechaEvento = '{fecha}', HoraEvento = '{hora}', EstadoEvento = '{estado}', " +
                 $"LugarEvento = '{lugar}', LogoEvento = '{logo}' WHERE IdEvento = '{id}'");
@@ -661,7 +679,7 @@ namespace SRD_BackOffice
                 $"{tGrupos}, CantidadGrupos = {cGrupos} WHERE IdEvento = {idEvento} AND NumeroFase = {numero}");
         }
 
-        public static void UpdateEquiposFases(int idEq, int nFase, int idEve, byte[] imagenEq, string pais, string nomEq, string estadoEq, int posicionEq, int puntaje, string tipoEq, string estadoFase, string nomFase, string fechaFase, int tipoFase, int tamaño, int cant)
+        public static void UpdateEquiposFases(int idEq, int nFase, int idEve, string imagenEq, string pais, string nomEq, string estadoEq, int posicionEq, int puntaje, string tipoEq, string estadoFase, string nomFase, string fechaFase, int tipoFase, int tamaño, int cant)
         {
             db.ExecuteSql($"UPDATE EquiposFases SET ImagenRepresentativa = '{imagenEq}', PaisOrigen = '{pais}', " +
                 $"NombreEquipo = '{nomEq}', EstadoFase = '{estadoFase}', NombreFase = '{nomFase}', Fecha = '{fechaFase}', " +

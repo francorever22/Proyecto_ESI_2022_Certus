@@ -79,7 +79,7 @@
                 }
                 catch
                 {
-                    MessageBox.Show("Error");
+                    MessageBox.Show("Error"); return;
                 }
             } else
             {
@@ -88,27 +88,30 @@
                         DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify athlete", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
                     {
-                        string Nombre = txtNombre.Text,
-                               Apellido = txtApellido.Text,
-                               Nacionalidad = txtNacionalidad.Text,
-                               EstadoJugador = cbxEstado.Text,
-                               Descripcion = txtDescripcion.Text;
+                        try
+                        {
+                            string Nombre = txtNombre.Text,
+                                   Apellido = txtApellido.Text,
+                                   Nacionalidad = txtNacionalidad.Text,
+                                   EstadoJugador = cbxEstado.Text,
+                                   Descripcion = txtDescripcion.Text;
 
-                        Logica.UpdatePersona(index, Nombre, Apellido, Nacionalidad);
-                        Logica.UpdateDeportista(index, Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion);
-                        if (Program.language == "EN")
-                        {
-                            MessageBox.Show("Athlete modified correctly");
-                        }
-                        else if (Program.language == "ES")
-                        {
-                            MessageBox.Show("Deportista modificado correctamente");
-                        }
-                        Hide();
-                        MenuManageAthletes manageAthletes = new MenuManageAthletes();
-                        manageAthletes.StartPosition = FormStartPosition.CenterParent;
-                        manageAthletes.ShowDialog();
-                        Close();
+                            Logica.UpdatePersona(index, Nombre, Apellido, Nacionalidad);
+                            Logica.UpdateDeportista(index, Nombre, Apellido, Nacionalidad, EstadoJugador, Descripcion);
+                            if (Program.language == "EN")
+                            {
+                                MessageBox.Show("Athlete modified correctly");
+                            }
+                            else if (Program.language == "ES")
+                            {
+                                MessageBox.Show("Deportista modificado correctamente");
+                            }
+                            Hide();
+                            MenuManageAthletes manageAthletes = new MenuManageAthletes();
+                            manageAthletes.StartPosition = FormStartPosition.CenterParent;
+                            manageAthletes.ShowDialog();
+                            Close();
+                        } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
                     }
                 }
                 else

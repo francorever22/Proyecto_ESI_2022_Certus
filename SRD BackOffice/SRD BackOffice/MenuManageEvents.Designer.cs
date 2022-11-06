@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuManageEvents));
             this.panelManageEvents = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscador = new System.Windows.Forms.TextBox();
@@ -194,6 +195,7 @@
             this.ClientSize = new System.Drawing.Size(676, 541);
             this.Controls.Add(this.panelManageEvents);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuManageEvents";
             this.Text = "AdministradorAPP";
             this.panelManageEvents.ResumeLayout(false);

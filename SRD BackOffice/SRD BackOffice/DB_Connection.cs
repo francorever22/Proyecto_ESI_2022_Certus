@@ -116,7 +116,7 @@ public class DB_Connection
                     deporte.NombreCategoria = $"{dataReader.GetString("NombreCategoria")}";
                 } catch { }
                 try {
-                    //deporte.ImagenDeporte = $"{dataReader.GetString("ImagenDeporte")}";
+                    deporte.ImagenDeporte = $"{dataReader.GetString("ImagenDeporte")}";
                 } catch { }
                 try {
                     deporte.Destacado = Convert.ToBoolean($"{dataReader.GetString("Destacado")}");
@@ -124,6 +124,54 @@ public class DB_Connection
                 try {
                     deporte.IdCategoria = Convert.ToInt32($"{dataReader.GetString("IdCategoria")}");
                 } catch { }
+
+                deportes.Add(deporte);
+            }
+
+            dataReader.Close();
+            Connection_Close();
+
+            return deportes;
+        }
+        else
+        {
+            Connection_Close();
+            return deportes;
+        }
+    }
+
+    public List<Deporte> SelectDeporte(string query)
+    {
+        List<Deporte> deportes = new List<Deporte>();
+
+        if (Connection_Open() == true)
+        {
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                Deporte deporte = new Deporte();
+                try
+                {
+                    deporte.idDeporte = Convert.ToInt32($"{dataReader.GetString("IdDeporte")}");
+                }
+                catch { }
+                try
+                {
+                    deporte.nombreDeporte = $"{dataReader.GetString("NombreDeporte")}";
+                }
+                catch { }
+                try
+                {
+                    deporte.imagenDeporte = $"{dataReader.GetString("ImagenDeporte")}";
+                }
+                catch { }
+                try
+                {
+                    deporte.deportePopular = Convert.ToBoolean($"{dataReader.GetString("Destacado")}");
+                }
+                catch { }
 
                 deportes.Add(deporte);
             }
@@ -187,7 +235,7 @@ public class DB_Connection
                 Banner banner = new Banner();
                 banner.IdBanner = Convert.ToInt32($"{dataReader.GetString("IdPublicidad")}");
                 try {
-                    //banner.BannerImage = $"{dataReader.GetString("Banner")}";
+                    banner.BannerImage = $"{dataReader.GetString("Banner")}";
                 } catch { }
                 try {
                     banner.Link = $"{dataReader.GetString("Link")}";
@@ -647,7 +695,7 @@ public class DB_Connection
                     evento.Lugar = $"{dataReader.GetString("LugarEvento")}";
                 } catch { }
                 try {
-                    //evento.LogoEvento = $"{dataReader.GetString("FechaEncuentro")}";
+                    evento.LogoEvento = $"{dataReader.GetString("FechaEncuentro")}";
                 } catch { }
 
                 eventos.Add(evento);
@@ -789,7 +837,7 @@ public class DB_Connection
                 catch { }
                 try
                 {
-                    //eqFase.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
+                    eqFase.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
                 }
                 catch { }
                 try
@@ -973,7 +1021,7 @@ public class DB_Connection
                     } catch { }
                     try
                     {
-                        //equipo.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
+                        equipo.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
                     }
                     catch { }
 
@@ -1028,7 +1076,7 @@ public class DB_Connection
                     catch { }
                     try
                     {
-                        //equipoDeportista.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
+                        equipoDeportista.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
                     }
                     catch { }
                     try
@@ -1168,12 +1216,12 @@ public class DB_Connection
                 catch { }
                 try
                 {
-                    //equipo.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
+                    equipoEncuentro.ImagenRepresentativa = $"{dataReader.GetString("ImagenRepresentativa")}";
                 }
                 catch { }
                 try
                 {
-                    //equipoEncuentro.Alineacion = $"{dataReader.GetString("Alineacion")}";
+                    equipoEncuentro.Alineacion = $"{dataReader.GetString("Alineacion")}";
                 }
                 catch { }
                 try

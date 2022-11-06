@@ -1,4 +1,6 @@
-﻿namespace SRD_BackOffice
+﻿using System.Drawing.Imaging;
+
+namespace SRD_BackOffice
 {
     public partial class MenuCrearEncuentro : Form
     {
@@ -107,6 +109,10 @@
             {
                 equiposEncuentros.Add(eE);
             }
+            try
+            {
+                alineacion = new Bitmap(equiposEncuentros[0].Alineacion);
+            } catch { }
             avoid = true;
             var encuentro = Logica.GetEncuentros(4, ""+index)[0];
             var arbitro = Logica.GetArbitros(3, ""+encuentro.IdPersona)[0];
@@ -807,20 +813,16 @@
                     alineacion = new Bitmap(open.FileName);
                     int wid = alineacion.Width;
                     int hei = alineacion.Height;
-                    if (wid == 150 || hei == 500)
-                    {
-
-                    }
-                    else
+                    if (!(wid == 150 || hei == 150))
                     {
                         alineacion = null;
                         if (Program.language == "EN")
                         {
-                            MessageBox.Show("The banner has to have the sizes 150x500 pixels");
+                            MessageBox.Show("The banner has to have the sizes 150x150 pixels");
                         }
                         else if (Program.language == "ES")
                         {
-                            MessageBox.Show("El banner debe tener las medidas 150x500 pixeles");
+                            MessageBox.Show("El banner debe tener las medidas 150x150 pixeles");
                         }
                     }
                 }
@@ -1059,10 +1061,23 @@
                                nombre = txtNombreEncuentro.Text,
                                estado = cbxEstadoEncuentro.Text,
                                clima = cbxClimaEncuentro.Text;
+                        Bitmap imagenAlineacion = new Bitmap(alineacion);
 
                         Logica.InsertEncuentro(nomDeporte, nomArbitro, hora, lugar, fecha, nombre, estado, clima, tipoEncuentro);
 
                         int idEncuentro = Logica.GetEncuentros(3, nombre)[0].IdEncuentro;
+
+                        Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
+                        string FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
+                        using (MemoryStream memory = new MemoryStream())
+                        {
+                            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                            {
+                                imagenAlineacion.Save(memory, ImageFormat.Bmp);
+                                byte[] bytes = memory.ToArray();
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
 
                         foreach (var ro in rounds)
                         {
@@ -1093,7 +1108,7 @@
 
                         foreach (var eE in equiposEncuentros)
                         {
-                            Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                            Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, FilePath);
                         }
 
                         if (Program.language == "EN")
@@ -1104,7 +1119,7 @@
                         {
                             MessageBox.Show("El encuentro a sido creado correctamente");
                         }
-                    } catch (Exception ex) { MessageBox.Show("Error: "+ex.Message); }
+                    } catch (Exception ex) { MessageBox.Show("Error: "+ex.Message); return; }
                 }
                 else
                 {
@@ -1139,10 +1154,23 @@
                                    nombre = txtNombreEncuentro.Text,
                                    estado = cbxEstadoEncuentro.Text,
                                    clima = cbxClimaEncuentro.Text;
+                            Bitmap imagenAlineacion = new Bitmap(alineacion);
 
                             Logica.UpdateEncuentro(index, nomDeporte, nomArbitro, hora, lugar, fecha, nombre, estado, clima, tipoEncuentro);
 
                             int idEncuentro = Logica.GetEncuentros(3, nombre)[0].IdEncuentro;
+
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
+                            string FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenAlineacion.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
 
                             foreach (var ro in rounds)
                             {
@@ -1207,10 +1235,10 @@
                             {
                                 if (Logica.CheckIfExist("EquiposEncuentros", "IdEncuentro", idEncuentro+"", "IdEquipo", eE.IdEquipo+"") == 1)
                                 {
-                                    Logica.UpdateEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                                    Logica.UpdateEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, FilePath);
                                 } else
                                 {
-                                    Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, eE.Alineacion);
+                                    Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, FilePath);
                                 }
                             }
 
@@ -1252,7 +1280,7 @@
                             manageMatchs.ShowDialog();
                             Close();
                         }
-                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
                     }
                 }
                 else

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCrearCategoria));
             this.panelAgregarCategoria = new System.Windows.Forms.Panel();
             this.btnCategoryCerrar = new System.Windows.Forms.Button();
             this.btnCategoryAgregar = new System.Windows.Forms.Button();
@@ -39,12 +40,12 @@
             // 
             // panelAgregarCategoria
             // 
+            this.panelAgregarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
             this.panelAgregarCategoria.Controls.Add(this.btnCategoryCerrar);
             this.panelAgregarCategoria.Controls.Add(this.btnCategoryAgregar);
             this.panelAgregarCategoria.Controls.Add(this.lblCategoryName);
             this.panelAgregarCategoria.Controls.Add(this.txtCategoryName);
             this.panelAgregarCategoria.Controls.Add(this.lblCategoryTitle);
-            this.panelAgregarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
             this.panelAgregarCategoria.Location = new System.Drawing.Point(-1, -1);
             this.panelAgregarCategoria.Name = "panelAgregarCategoria";
             this.panelAgregarCategoria.Size = new System.Drawing.Size(495, 294);
@@ -86,22 +87,25 @@
             this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblCategoryName.Location = new System.Drawing.Point(19, 153);
             this.lblCategoryName.Name = "lblCategoryName";
-            this.lblCategoryName.Size = new System.Drawing.Size(145, 21);
+            this.lblCategoryName.Size = new System.Drawing.Size(0, 21);
             this.lblCategoryName.TabIndex = 12;
             // 
             // txtCategoryName
             // 
             this.txtCategoryName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtCategoryName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCategoryName.Location = new System.Drawing.Point(0, 0);
             this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Size = new System.Drawing.Size(100, 25);
             this.txtCategoryName.TabIndex = 9;
             // 
             // lblCategoryTitle
             // 
             this.lblCategoryTitle.AutoSize = true;
             this.lblCategoryTitle.Font = new System.Drawing.Font("Montserrat", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCategoryTitle.Location = new System.Drawing.Point(0, 0);
             this.lblCategoryTitle.Name = "lblCategoryTitle";
-            this.lblCategoryTitle.Size = new System.Drawing.Size(294, 55);
+            this.lblCategoryTitle.Size = new System.Drawing.Size(0, 55);
             this.lblCategoryTitle.TabIndex = 8;
             // 
             // MenuCrearCategoria
@@ -111,11 +115,13 @@
             this.ClientSize = new System.Drawing.Size(495, 294);
             this.Controls.Add(this.panelAgregarCategoria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCrearCategoria";
             this.Text = "AdministradorAPP";
             this.panelAgregarCategoria.ResumeLayout(false);
             this.panelAgregarCategoria.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
 

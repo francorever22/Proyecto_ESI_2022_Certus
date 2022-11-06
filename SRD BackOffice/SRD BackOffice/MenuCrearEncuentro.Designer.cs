@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCrearEncuentro));
             this.cbxEstadoEncuentro = new System.Windows.Forms.ComboBox();
             this.cbxClimaEncuentro = new System.Windows.Forms.ComboBox();
             this.cbxDeporteEncuentro = new System.Windows.Forms.ComboBox();
@@ -848,6 +849,7 @@
             this.Controls.Add(this.txtNombreEncuentro);
             this.Controls.Add(this.cbxClimaEncuentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCrearEncuentro";
             this.panelEquipos.ResumeLayout(false);
             this.panelEquiposLabels.ResumeLayout(false);

@@ -1,4 +1,6 @@
-﻿namespace SRD_BackOffice
+﻿using System.Drawing.Imaging;
+
+namespace SRD_BackOffice
 {
     public partial class MenuCrearEvento : Form
     {
@@ -61,6 +63,11 @@
             } catch { }
             txtlugarEvento.Text = evento.Lugar;
             cbxEstadoEvento.Text = evento.EstadoEvento;
+            try
+            {
+                imagenCargada = new Bitmap(evento.LogoEvento);
+            } catch { }
+            imgEventSelected.Image = imagenCargada;
 
             evento.Fases = Logica.GetFases(2, ""+index);
 
@@ -552,19 +559,19 @@
         {
             if (modify == false)
             {
-                this.Hide();
+                Hide();
                 MainMenu main = new MainMenu();
                 main.StartPosition = FormStartPosition.CenterParent;
                 main.ShowDialog();
-                this.Close();
+                Close();
             }
             else
             {
-                this.Hide();
+                Hide();
                 MenuManageEvents manageEvents = new MenuManageEvents();
                 manageEvents.StartPosition = FormStartPosition.CenterParent;
                 manageEvents.ShowDialog();
-                this.Close();
+                Close();
             }
         }
 
@@ -968,9 +975,21 @@
                            horaEvento = txtHoraEvento.Text,
                            estadoEvento = cbxEstadoEvento.Text,
                            lugar = txtlugarEvento.Text;
-                    //evento.LogoEvento = imgEventSelected.Image;
+                    Bitmap imagenEvento = new Bitmap(imagenCargada);
 
-                    Logica.InsertEvento(nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, null);
+                    Directory.CreateDirectory(@"C:\Certus\SRD\Eventos");
+                    string FilePath = $@"C:\\Certus\\SRD\\Eventos\\{nombreEvento + lugar + fechaEvento}.bmp";
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            imagenEvento.Save(memory, ImageFormat.Bmp);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+
+                    Logica.InsertEvento(nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, FilePath);
 
                     int idEvento = Logica.GetEventos(3, nombreEvento)[0].IdEvento;
 
@@ -985,7 +1004,7 @@
                         {
                             Equipo eq = Logica.GetEquipos(3, ""+eqF.IdEquipo)[0];
 
-                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, eq.ImagenRepresentativa,
                                 eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
                                 eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
                         }
@@ -1003,7 +1022,7 @@
                     main.StartPosition = FormStartPosition.CenterParent;
                     main.ShowDialog();
                     Close();
-                } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
             } else
             {
                 if (txtFechaEvento.Text != "" && txtFechaFase.Text != "" && txtHoraEvento.Text != "" && txtlugarEvento.Text != "" && txtNombreEvento.Text != "" && txtNombreFase.Text != "")
@@ -1011,24 +1030,26 @@
                     DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify event", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
                     {
-                        string[] fechaFaseArray = txtFechaFase.Text.Split("/");
-                        string fechaFase = fechaFaseArray[2] + "-" + fechaFaseArray[1] + "-" + fechaFaseArray[0];
+                        try
+                        {
+                            string[] fechaFaseArray = txtFechaFase.Text.Split("/");
+                            string fechaFase = fechaFaseArray[2] + "-" + fechaFaseArray[1] + "-" + fechaFaseArray[0];
 
-                        Fase fase = new Fase();
-                        fase.NumeroFase = faseSeleccionada;
-                        fase.FechaFase = fechaFase;
-                        fase.NombreFase = txtNombreFase.Text;
-                        fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
-                        fase.EquiposParticipantes = equiposFases;
-                        fase.EncuentrosParticipantes = encuentrosFases;
-                        fase.EstadoFase = cbxEstadoFase.Text;
-                        fase.TamañoGrupos = groupSize;
-                        fase.CantidadGrupos = groupAmount;
+                            Fase fase = new Fase();
+                            fase.NumeroFase = faseSeleccionada;
+                            fase.FechaFase = fechaFase;
+                            fase.NombreFase = txtNombreFase.Text;
+                            fase.TipoFase = Convert.ToInt32(cbxTipoFase.Text);
+                            fase.EquiposParticipantes = equiposFases;
+                            fase.EncuentrosParticipantes = encuentrosFases;
+                            fase.EstadoFase = cbxEstadoFase.Text;
+                            fase.TamañoGrupos = groupSize;
+                            fase.CantidadGrupos = groupAmount;
 
-                        fases.RemoveAt(faseSeleccionada - 1);
-                        fases.Insert(faseSeleccionada - 1, fase);
+                            fases.RemoveAt(faseSeleccionada - 1);
+                            fases.Insert(faseSeleccionada - 1, fase);
 
-                        
+
                             string[] fechaEventoArray = txtFechaEvento.Text.Split("/");
                             string fechaEvento = fechaEventoArray[2] + "-" + fechaEventoArray[1] + "-" + fechaEventoArray[0];
 
@@ -1036,22 +1057,35 @@
                                    horaEvento = txtHoraEvento.Text,
                                    estadoEvento = cbxEstadoEvento.Text,
                                    lugar = txtlugarEvento.Text;
-                            //evento.LogoEvento = imgEventSelected.Image;
+                            Bitmap imagenEvento = new Bitmap(imagenCargada);
 
-                            Logica.UpdateEvento(index, nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, null);
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Eventos");
+                            string FilePath = $@"C:\\Certus\\SRD\\Eventos\\{nombreEvento + lugar + fechaEvento}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenEvento.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
+
+                            Logica.UpdateEvento(index, nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, FilePath);
 
                             int idEvento = Logica.GetEventos(3, nombreEvento)[0].IdEvento;
 
                             foreach (var f in fases)
                             {
-                            string fechaFase1 = f.FechaFase;
-                            try
-                            {
-                                string[] fechaFaseArray1 = fechaFase1.Split("/");
-                                fechaFase1 = fechaFaseArray1[2] + "-" + fechaFaseArray1[1] + "-" + fechaFaseArray1[0];
-                            } catch { }
+                                string fechaFase1 = f.FechaFase;
+                                try
+                                {
+                                    string[] fechaFaseArray1 = fechaFase1.Split("/");
+                                    fechaFase1 = fechaFaseArray1[2] + "-" + fechaFaseArray1[1] + "-" + fechaFaseArray1[0];
+                                }
+                                catch { }
 
-                            if (Logica.CheckIfExist("Fases", "NumeroFase", ""+f.NumeroFase, "IdEvento", ""+idEvento) == 1)
+                                if (Logica.CheckIfExist("Fases", "NumeroFase", "" + f.NumeroFase, "IdEvento", "" + idEvento) == 1)
                                 {
                                     Logica.UpdateFase(f.NumeroFase, idEvento, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
 
@@ -1061,12 +1095,13 @@
 
                                         if (Logica.CheckIfExist("EquiposFases", "NumeroFase", "" + f.NumeroFase, "IdEvento", "" + idEvento, "IdEquipo", "" + eqF.IdEquipo) == 1)
                                         {
-                                            Logica.UpdateEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                            Logica.UpdateEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, eq.ImagenRepresentativa,
                                             eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
                                             eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
-                                        } else
+                                        }
+                                        else
                                         {
-                                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                            Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, eq.ImagenRepresentativa,
                                             eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
                                             eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
                                         }
@@ -1078,12 +1113,14 @@
                                         if (Logica.CheckIfExist("EncuentrosFases", "NumeroFase", "" + f.NumeroFase, "IdEvento", "" + idEvento, "IdEncuentro", "" + enF.IdEncuentro) == 1)
                                         {
                                             Logica.UpdateEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
-                                        } else
+                                        }
+                                        else
                                         {
                                             Logica.InsertEncuentrosFases(en.IdEncuentro, f.NumeroFase, idEvento, en.IdDeporte, en.IdCategoria, en.IdPersona, en.Hora, en.Lugar, en.Fecha, en.Nombre, en.Estado, en.Clima, en.TipoEncuentro, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, enF.Puntaje, enF.PosicionEquipo, f.TamañoGrupos, f.CantidadGrupos);
                                         }
                                     }
-                                } else
+                                }
+                                else
                                 {
                                     Logica.InsertFase(f.NumeroFase, idEvento, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
 
@@ -1091,7 +1128,7 @@
                                     {
                                         Equipo eq = Logica.GetEquipos(3, "" + eqF.IdEquipo)[0];
 
-                                        Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, null /* Imagen del equipo */,
+                                        Logica.InsertEquiposFases(eq.IdEquipo, f.NumeroFase, idEvento, eq.ImagenRepresentativa,
                                             eq.PaisOrigen, eq.NombreEquipo, eqF.EstadoEquipo, eqF.PosicionEquipo, eqF.Puntaje,
                                             eq.TipoEquipo, f.EstadoFase, f.NombreFase, fechaFase1, f.TipoFase, f.TamañoGrupos, f.CantidadGrupos);
                                     }
@@ -1110,7 +1147,7 @@
                             manageEvents.StartPosition = FormStartPosition.CenterParent;
                             manageEvents.ShowDialog();
                             Close();
-                        
+                        } catch (Exception ex) { MessageBox.Show("Error: "+ex.Message); return; }
                     }
                 }
                 else

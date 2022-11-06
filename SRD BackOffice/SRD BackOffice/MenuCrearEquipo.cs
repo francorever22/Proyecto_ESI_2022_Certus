@@ -1,4 +1,6 @@
-﻿namespace SRD_BackOffice
+﻿using System.Drawing.Imaging;
+
+namespace SRD_BackOffice
 {
     public partial class MenuCrearEquipo : Form
     {
@@ -31,9 +33,13 @@
 
             var equipo = Logica.GetEquipos(3, ""+index)[0];
             equipo.Miembros = Logica.GetEquiposDeportistas(3, "" + index);
-
+            
             btnSportAdd.Text = "Modify";
-            picTeam.Image = equipo.ImagenRepresentativa;
+            try
+            {
+                imagenCargada = new Bitmap(equipo.ImagenRepresentativa);
+            } catch { }
+            picTeam.Image = imagenCargada;
             txtNombre.Text = equipo.NombreEquipo;
             txtPais.Text = equipo.PaisOrigen;
             cbxTipo.SelectedItem = equipo.TipoEquipo;
@@ -106,9 +112,21 @@
                             string nombreEquipo = txtNombre.Text,
                                    paisOrigen = txtPais.Text,
                                    tipoEquipo = cbxTipo.Text;
-                            Byte[] imagenEquipo = null;
+                            Bitmap imagenEquipo = new Bitmap(imagenCargada);
 
-                            Logica.InsertEquipo(nombreEquipo, paisOrigen, tipoEquipo, imagenEquipo);
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
+                            string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenEquipo.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
+
+                            Logica.InsertEquipo(nombreEquipo, paisOrigen, tipoEquipo, FilePath);
 
                             int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
 
@@ -141,7 +159,7 @@
                 }
                 catch
                 {
-                    MessageBox.Show("Error");
+                    MessageBox.Show("Error"); return;
                 }
             } else
             {
@@ -155,9 +173,21 @@
                             string nombreEquipo = txtNombre.Text,
                                    paisOrigen = txtPais.Text,
                                    tipoEquipo = cbxTipo.Text;
-                            Byte[] imagenEquipo = null;
+                            Bitmap imagenEquipo = new Bitmap(imagenCargada);
 
-                            Logica.UpdateEquipo(index, nombreEquipo, paisOrigen, tipoEquipo, imagenEquipo);
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
+                            string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenEquipo.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
+                            }
+
+                            Logica.UpdateEquipo(index, nombreEquipo, paisOrigen, tipoEquipo, FilePath);
 
                             int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
 
@@ -202,7 +232,7 @@
                             manageTeams.ShowDialog();
                             Close();
                         }
-                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                        catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return; }
                     }
                 }
                 else

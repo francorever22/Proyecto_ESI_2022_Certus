@@ -14,13 +14,13 @@
         {
             InitializeComponent();
             SetIdioma();
-
             this.index = index;
+            modify = true;
+
             var categoria = Logica.GetCategorias(4, ""+index)[0];
 
             txtCategoryName.Text = categoria.nombreCategoria;
             btnCategoryAgregar.Text = "Modify";
-            modify = true;
         }
 
         private void btnCategoryCerrar_Click(object sender, EventArgs e)
@@ -83,6 +83,7 @@
                         {
                             MessageBox.Show("Hubo un error en el proceso");
                         }
+                        return;
                     }
                 }
                 else
@@ -145,6 +146,7 @@
                             {
                                 MessageBox.Show("Hubo un error en el proceso");
                             }
+                            return;
                         }
                     }
                 } else
