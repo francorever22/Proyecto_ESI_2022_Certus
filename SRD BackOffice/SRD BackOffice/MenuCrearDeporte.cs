@@ -36,7 +36,6 @@ namespace SRD_BackOffice
             var deporte = Logica.GetDeportes(5, ""+index)[0];
 
             btnSportAdd.Text = "Modify";
-            MessageBox.Show(deporte.ImagenDeporte);
             try
             {
                 imagenCargada = new Bitmap(deporte.ImagenDeporte);

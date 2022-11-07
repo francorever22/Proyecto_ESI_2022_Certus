@@ -30,7 +30,7 @@ namespace SRD_BackOffice
             int x = 0;
             panelBannersContenedor.Controls.Clear();
             var banners = Logica.GetBanners(1, null);
-            int count = banners.Count;
+            int count = banners.Count();
             foreach (var banner in banners)
             {
                 if (x >= count - 15)
@@ -271,6 +271,7 @@ namespace SRD_BackOffice
 
             foreach (var banner in banners)
             {
+                int id = banner.IdBanner;
                 Panel p1 = new Panel(); //Crea el panel donde apareceran los controles
 
                 p1.Dock = DockStyle.Top;
@@ -312,7 +313,7 @@ namespace SRD_BackOffice
                 pic1.Location = new Point(355, 7);
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                 pic1.Image = Properties.Resources.cruz;
-                pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, banner.IdBanner, p1); };
+                pic1.Click += (sender, EventArgs) => { Delete_Click(sender, EventArgs, id, p1); };
 
                 PictureBox pic2 = new PictureBox(); //Boton modificar
                 
@@ -321,7 +322,7 @@ namespace SRD_BackOffice
                 pic2.Location = new Point(343, 7);
                 pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                 pic2.Image = Properties.Resources.pluma;
-                pic2.Click += (sender, EventArgs) => { ModifyBanner_Click(sender, EventArgs, banners.IndexOf(banner)); };
+                pic2.Click += (sender, EventArgs) => { ModifyBanner_Click(sender, EventArgs, id); };
 
                 panelBannersContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
                 p1.Controls.Add(pic2);

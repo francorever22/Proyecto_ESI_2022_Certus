@@ -1061,21 +1061,29 @@ namespace SRD_BackOffice
                                nombre = txtNombreEncuentro.Text,
                                estado = cbxEstadoEncuentro.Text,
                                clima = cbxClimaEncuentro.Text;
-                        Bitmap imagenAlineacion = new Bitmap(alineacion);
+                        Bitmap imagenAlineacion = null;
+                        try
+                        {
+                            imagenAlineacion = new Bitmap(alineacion);
+                        } catch { }
 
                         Logica.InsertEncuentro(nomDeporte, nomArbitro, hora, lugar, fecha, nombre, estado, clima, tipoEncuentro);
 
                         int idEncuentro = Logica.GetEncuentros(3, nombre)[0].IdEncuentro;
 
-                        Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
-                        string FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
-                        using (MemoryStream memory = new MemoryStream())
+                        string FilePath = null;
+                        if (imagenAlineacion != null)
                         {
-                            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                            Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
+                            FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
+                            using (MemoryStream memory = new MemoryStream())
                             {
-                                imagenAlineacion.Save(memory, ImageFormat.Bmp);
-                                byte[] bytes = memory.ToArray();
-                                fs.Write(bytes, 0, bytes.Length);
+                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    imagenAlineacion.Save(memory, ImageFormat.Bmp);
+                                    byte[] bytes = memory.ToArray();
+                                    fs.Write(bytes, 0, bytes.Length);
+                                }
                             }
                         }
 
@@ -1154,30 +1162,40 @@ namespace SRD_BackOffice
                                    nombre = txtNombreEncuentro.Text,
                                    estado = cbxEstadoEncuentro.Text,
                                    clima = cbxClimaEncuentro.Text;
-                            Bitmap imagenAlineacion = new Bitmap(alineacion);
+                            Bitmap imagenAlineacion = null;
+                            try
+                            {
+                                imagenAlineacion = new Bitmap(alineacion);
+                            }
+                            catch { }
 
                             Logica.UpdateEncuentro(index, nomDeporte, nomArbitro, hora, lugar, fecha, nombre, estado, clima, tipoEncuentro);
 
                             int idEncuentro = Logica.GetEncuentros(3, nombre)[0].IdEncuentro;
 
-                            Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
-                            string FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
-                            using (MemoryStream memory = new MemoryStream())
+                            string FilePath = null;
+                            if (imagenAlineacion != null)
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
+                                FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
+                                using (MemoryStream memory = new MemoryStream())
                                 {
-                                    imagenAlineacion.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        imagenAlineacion.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
                                 }
                             }
 
                             foreach (var ro in rounds)
                             {
-                                if (Logica.CheckIfExist("Round", "NumeroRound", ""+ro.NumeroRound, "IdEncuentro", ""+idEncuentro) == 1)
+                                if (Logica.CheckIfExist("Round", "NumeroRound", "" + ro.NumeroRound, "IdEncuentro", "" + idEncuentro) == 1)
                                 {
                                     Logica.UpdateRound(ro.NumeroRound, idEncuentro, ro.TiempoTranscurridoRound, 0, 0);
-                                } else
+                                }
+                                else
                                 {
                                     Logica.InsertRound(ro.NumeroRound, idEncuentro, ro.TiempoTranscurridoRound, 0, 0);
                                 }
@@ -1185,10 +1203,11 @@ namespace SRD_BackOffice
 
                             foreach (var h in hitos)
                             {
-                                if (Logica.CheckIfExist("Hito", "IdHito", ""+h.IdHito) == 1)
+                                if (Logica.CheckIfExist("Hito", "IdHito", "" + h.IdHito) == 1)
                                 {
                                     Logica.UpdateHito(h.IdHito, h.NumeroRound, idEncuentro, h.TituloHito, h.TiempoHito);
-                                } else
+                                }
+                                else
                                 {
                                     Logica.InsertHito(h.NumeroRound, idEncuentro, h.TituloHito, h.TiempoHito);
                                 }
@@ -1199,7 +1218,8 @@ namespace SRD_BackOffice
                                 if (Logica.CheckIfExist("PuntuacionRound", "IdPuntuacionRound", "" + pR.IdPuntuacionRound) == 1)
                                 {
                                     Logica.UpdatePuntuacionRound(pR.IdPuntuacionRound, pR.NumeroRound, idEncuentro, pR.Puntos, pR.IdEquipos);
-                                } else
+                                }
+                                else
                                 {
                                     Logica.InsertPuntuacionRound(pR.NumeroRound, idEncuentro, pR.Puntos, pR.IdEquipos);
                                 }
@@ -1213,15 +1233,17 @@ namespace SRD_BackOffice
                                     {
                                         foreach (var h in Logica.GetHitos(2, idEncuentro, ro.NumeroRound))
                                         {
-                                            if (Logica.CheckIfExist("Round", "NumeroRound", "" + ro.NumeroRound, "IdEncuentro", "" + idEncuentro, "IdPuntuacionRound", "" + pR.IdPuntuacionRound, "IdHito", ""+h.IdHito) == 1)
+                                            if (Logica.CheckIfExist("Round", "NumeroRound", "" + ro.NumeroRound, "IdEncuentro", "" + idEncuentro, "IdPuntuacionRound", "" + pR.IdPuntuacionRound, "IdHito", "" + h.IdHito) == 1)
                                             {
                                                 Logica.UpdateRound(ro.NumeroRound, idEncuentro, ro.TiempoTranscurridoRound, pR.IdPuntuacionRound, h.IdHito);
-                                            } else
+                                            }
+                                            else
                                             {
                                                 Logica.InsertRound(ro.NumeroRound, idEncuentro, ro.TiempoTranscurridoRound, pR.IdPuntuacionRound, h.IdHito);
                                             }
                                         }
-                                    } else
+                                    }
+                                    else
                                     {
                                         foreach (var h in Logica.GetHitos(2, idEncuentro, ro.NumeroRound))
                                         {
@@ -1233,16 +1255,17 @@ namespace SRD_BackOffice
 
                             foreach (var eE in equiposEncuentros)
                             {
-                                if (Logica.CheckIfExist("EquiposEncuentros", "IdEncuentro", idEncuentro+"", "IdEquipo", eE.IdEquipo+"") == 1)
+                                if (Logica.CheckIfExist("EquiposEncuentros", "IdEncuentro", idEncuentro + "", "IdEquipo", eE.IdEquipo + "") == 1)
                                 {
                                     Logica.UpdateEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, FilePath);
-                                } else
+                                }
+                                else
                                 {
                                     Logica.InsertEquiposEncuentros(idEncuentro, eE.IdEquipo, eE.Puntuacion, eE.Posicion, FilePath);
                                 }
                             }
 
-                            foreach (var r in Logica.GetRounds(2, ""+idEncuentro))
+                            foreach (var r in Logica.GetRounds(2, "" + idEncuentro))
                             {
                                 if (r.NumeroRound > cantRounds)
                                 {
@@ -1250,7 +1273,7 @@ namespace SRD_BackOffice
                                 }
                             }
 
-                            foreach (var eE in Logica.GetEquiposEncuentros(2, ""+idEncuentro))
+                            foreach (var eE in Logica.GetEquiposEncuentros(2, "" + idEncuentro))
                             {
                                 bool match = false;
                                 foreach (var eq in equiposEncuentros)
@@ -1262,7 +1285,7 @@ namespace SRD_BackOffice
                                 }
                                 if (match == false)
                                 {
-                                    Logica.Delete("EquiposEncuentros", "IdEncuentro", "" + idEncuentro, "IdEquipo", ""+eE.IdEquipo);
+                                    Logica.Delete("EquiposEncuentros", "IdEncuentro", "" + idEncuentro, "IdEquipo", "" + eE.IdEquipo);
                                 }
                             }
 

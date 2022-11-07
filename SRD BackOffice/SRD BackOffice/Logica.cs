@@ -664,7 +664,7 @@ namespace SRD_BackOffice
                 $"ImagenRepresentativa = '{eq.ImagenRepresentativa}', PaisOrigen = '{eq.PaisOrigen}', " +
                 $"NombreEquipo = '{eq.NombreEquipo}', Puntuacion = '{puntuacion}', Posicion = '{posicion}', " +
                 $"Alineacion = '{alineacion}', TipoEquipo = '{eq.TipoEquipo}', Tipoencuentro = '{e.TipoEncuentro}' " +
-                $"WHERE IdEncuentro = {idEncuentro} AND IdEquipo = {idEquipo}");
+                $"WHERE IdEncuentro = '{idEncuentro}' AND IdEquipo = '{idEquipo}'");
         }
 
         public static void UpdateEvento(int id, string nom, string fecha, string hora, string estado, string lugar, string logo)

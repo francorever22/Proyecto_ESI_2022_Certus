@@ -107,43 +107,40 @@ namespace SRD_BackOffice
                 {
                     if (txtNombre.Text != "" && cbxTipo != null && txtPais.Text != "")
                     {
-                        try
+                        string nombreEquipo = txtNombre.Text,
+                               paisOrigen = txtPais.Text,
+                               tipoEquipo = cbxTipo.Text;
+                        Bitmap imagenEquipo = new Bitmap(imagenCargada);
+
+                        Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
+                        string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
+                        using (MemoryStream memory = new MemoryStream())
                         {
-                            string nombreEquipo = txtNombre.Text,
-                                   paisOrigen = txtPais.Text,
-                                   tipoEquipo = cbxTipo.Text;
-                            Bitmap imagenEquipo = new Bitmap(imagenCargada);
-
-                            Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
-                            string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
-                            using (MemoryStream memory = new MemoryStream())
+                            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
-                                {
-                                    imagenEquipo.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
-                                }
+                                imagenEquipo.Save(memory, ImageFormat.Bmp);
+                                byte[] bytes = memory.ToArray();
+                                fs.Write(bytes, 0, bytes.Length);
                             }
+                        }
 
-                            Logica.InsertEquipo(nombreEquipo, paisOrigen, tipoEquipo, FilePath);
+                        Logica.InsertEquipo(nombreEquipo, paisOrigen, tipoEquipo, FilePath);
 
-                            int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
+                        int idEquipo = Logica.GetEquipos(4, nombreEquipo)[0].IdEquipo;
 
-                            foreach (var m in miembros)
-                            {
-                                Logica.InsertEquiposDeportistas(idEquipo, m.IdPersona);
-                            }
+                        foreach (var m in miembros)
+                        {
+                            Logica.InsertEquiposDeportistas(idEquipo, m.IdPersona);
+                        }
 
-                            if (Program.language == "EN")
-                            {
-                                MessageBox.Show("New team created correctly");
-                            }
-                            else if (Program.language == "ES")
-                            {
-                                MessageBox.Show("Nuevo equipo creado correctamente");
-                            }
-                        } catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                        if (Program.language == "EN")
+                        {
+                            MessageBox.Show("New team created correctly");
+                        }
+                        else if (Program.language == "ES")
+                        {
+                            MessageBox.Show("Nuevo equipo creado correctamente");
+                        }
                     }
                     else
                     {
@@ -157,9 +154,7 @@ namespace SRD_BackOffice
                         }
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("Error"); return;
+                catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); return;
                 }
             } else
             {
@@ -177,6 +172,7 @@ namespace SRD_BackOffice
 
                             Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
                             string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
+
                             using (MemoryStream memory = new MemoryStream())
                             {
                                 using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
