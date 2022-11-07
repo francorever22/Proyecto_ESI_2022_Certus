@@ -5,7 +5,7 @@ USE SRD;
 CREATE TABLE Publicidades
 (
 IdPublicidad int AUTO_INCREMENT PRIMARY KEY, 
-Banner BLOB,
+Banner VARCHAR(150),
 Link VARCHAR(120),
 TituloPublicidad VARCHAR(70)
 );
@@ -51,7 +51,7 @@ NombreUsuario VARCHAR(50) UNIQUE,
 Contrasena VARCHAR(200),
 NumeroTelefono VARCHAR(15),
 NivelPermisos INT,
-Banner BLOB,
+Banner VARCHAR(150),
 Link VARCHAR(120),
 TituloPublicidad VARCHAR(70),
 IdEventosFavoritos INT,
@@ -107,7 +107,7 @@ Descripcion TEXT
 CREATE TABLE Equipos
 (
 IdEquipo INT AUTO_INCREMENT PRIMARY KEY,
-ImagenRepresentativa BLOB,
+ImagenRepresentativa VARCHAR(150),
 PaisOrigen VARCHAR(80) NOT NULL,
 NombreEquipo VARCHAR(120) NOT NULL,
 TipoEquipo VARCHAR(15) NOT NULL
@@ -117,7 +117,7 @@ CREATE TABLE EquiposDeportistas
 (
 IdEquipo INT,
 IdPersona INT,
-ImagenRepresentativa BLOB,
+ImagenRepresentativa VARCHAR(150),
 PaisOrigen varchar(80) NOT NULL,
 NombreEquipo varchar(120) NOT NULL,
 EstadoJugador varchar(70) NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE EquiposFases
 IdEquipo INT,
 NumeroFase INT,
 IdEvento INT,
-ImagenRepresentativa BLOB,
+ImagenRepresentativa VARCHAR(150),
 PaisOrigen VARCHAR(80) NOT NULL,
 NombreEquipo VARCHAR(120) NOT NULL,
 EstadoFase VARCHAR(20) NOT NULL,
@@ -180,7 +180,7 @@ FechaEvento DATE NOT NULL,
 NombreEvento VARCHAR(70) NOT NULL,
 HoraEvento TIME NOT NULL,
 EstadoEvento VARCHAR(20) NOT NULL,
-LogoEvento BLOB,
+LogoEvento VARCHAR(150),
 LugarEvento VARCHAR(50) NOT NULL,
 PRIMARY KEY (IdEvento)
 );
@@ -202,7 +202,7 @@ NombreCategoria VARCHAR(50) UNIQUE NOT NULL
 CREATE TABLE Deportes (
 IdDeporte INT AUTO_INCREMENT PRIMARY KEY, 
 NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
-ImagenDeporte BLOB,
+ImagenDeporte VARCHAR(150),
 Destacado BOOL
 );
  
@@ -210,7 +210,7 @@ CREATE TABLE DeportesCategorizados (
 IdDeporte INT,
 IdCategoria INT, 
 NombreDeporte VARCHAR(50) NOT NULL UNIQUE,
-ImagenDeporte BLOB,
+ImagenDeporte VARCHAR(150),
 Destacado BOOL,
 NombreCategoria VARCHAR(50) NOT NULL,
 PRIMARY KEY (IdDeporte, IdCategoria)
@@ -261,7 +261,7 @@ CREATE TABLE EquiposEncuentros (
  IdDeporte INT,
  IdCategoria INT,
  IdPersona INT,
- ImagenRepresentativa BLOB,
+ ImagenRepresentativa VARCHAR(150),
  PaisOrigen VARCHAR(80) NOT NULL,
  NombreEquipo VARCHAR(120) NOT NULL,
  TipoEquipo VARCHAR(15) NOT NULL,
@@ -273,7 +273,7 @@ CREATE TABLE EquiposEncuentros (
  Clima VARCHAR(25), 
  Puntuacion INT, 
  Posicion INT, 
- Alineacion BLOB,
+ Alineacion VARCHAR(150),
  TipoEncuentro TINYINT NOT NULL,
  PRIMARY KEY (IdEquipo, IdEncuentro)
  );
@@ -1014,7 +1014,7 @@ INSERT INTO Eventos (IdEvento, FechaEvento, NombreEvento, HoraEvento, EstadoEven
 ('1', '2024-03-21', 'Copa Libertadores de America', '21:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\CopaAmericaLogo.jpg', 'Estadio de Brasilia'),
 ('2', '2021-06-13', 'Evento beneficiario', '14:20', 'Finished', 'C:\Users\USUARIO\Downloads\TeletonLogo.jpg', 'Centro de ayuda'),
 ('3', '2022-04-30', 'Copa sin fin', '23:59', 'In progress', 'C:\Users\USUARIO\Downloads\InfinitoLogo.jpg', 'Borde'),
-('4', '2023-01-3', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
+('4', '2023-01-03', 'Campeonato x', '03:50', 'Coming soon', 'C:\Users\USUARIO\Downloads\XLogo.jpg', 'Club X'),
 ('5', '2022-10-18', 'Campeonato de ajedrez ruso', '17:00', 'Coming soon', 'C:\Users\USUARIO\Downloads\AjedrezRusoLogo.jpg', 'Casa floreada');
 
 INSERT INTO Fases (NumeroFase, IdEvento, EstadoFase, NombreFase, Fecha, Tipofase, TamanoGrupos, CantidadGrupos) VALUES
@@ -1192,3 +1192,10 @@ SELECT NombreEvento, NombreDeporte, COUNT(IdEquipo)
 FROM EncuentrosFases JOIN Eventos ON (EncuentrosFases.IdEvento = Eventos.IdEvento) JOIN DeportesCategorizados ON (EncuentrosFases.IdDeporte = DeportesCategorizados.IdDeporte) JOIN EquiposEncuentros ON (EncuentrosFases.IdEncuentro = EquiposEncuentros.IdEncuentro)
 WHERE TipoEquipo = 'Individual'
 GROUP BY Eventos.IdEvento;
+
+SELECT EquiposDeportistas.Nombre, EquiposDeportistas.Apellido, EquiposDeportistas.NombreEquipo, MAX(EstadisticasJugador.Anotacion)
+FROM EquiposDeportistas JOIN EquiposFases ON (EquiposDeportistas.IdEquipo = EquiposFases.IdEquipo) JOIN Eventos ON (EquiposFases.IdEvento = Eventos.IdEvento) JOIN 
+EncuentrosFases ON (EquiposFases.IdEvento = EncuentrosFases.IdEvento) JOIN EstadisticasJugador ON (EncuentrosFases.IdEncuentro = EstadisticasJugador.IdEncuentro)
+WHERE Eventos.IdEvento = '1'
+GROUP BY EstadisticasJugador.IdDeportista;
+
