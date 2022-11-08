@@ -240,6 +240,7 @@ namespace Sistema_de_Resultados_Deportivos
                                     {
                                         MessageBox.Show("Nuevo usuario creado correctamente");
                                     }
+                                    linklblRegistrarse_LinkClicked(sender, null);
                                 }
                                 else
                                 {
@@ -358,13 +359,6 @@ namespace Sistema_de_Resultados_Deportivos
 
                         if (match == true)
                         {
-                            if (AjustesDeUsuario.language == "EN")
-                            {
-                                MessageBox.Show("Successfully logged in");
-                            } else if (AjustesDeUsuario.language == "ES")
-                            {
-                                MessageBox.Show("Se a logeado existosamente");
-                            }
                             Principal.AlterPrincipal(1, 3, 0);
                             Program.login(uLog);
                             Parent.Hide();
@@ -396,7 +390,6 @@ namespace Sistema_de_Resultados_Deportivos
             {
                 txtCorreo.Show();
                 label2.Hide();
-                customtogglebutton1.Hide();
                 registrarse = true;
                 if (AjustesDeUsuario.language == "EN")
                 {
@@ -417,7 +410,6 @@ namespace Sistema_de_Resultados_Deportivos
             {
                 txtCorreo.Hide();
                 label2.Show();
-                customtogglebutton1.Show();
                 registrarse = false;
                 if (AjustesDeUsuario.language == "EN")
                 {
@@ -487,11 +479,6 @@ namespace Sistema_de_Resultados_Deportivos
             txtCorreo.ForeColor = AjustesDeUsuario.foreColor;
             btnAcceder.ForeColor = AjustesDeUsuario.foreColor;
             btnCancelar.ForeColor = AjustesDeUsuario.foreColor;
-            /* Botones on/off */
-            customtogglebutton1.OffBackColor = Color.Gray;
-            customtogglebutton1.OffToggleColor = Color.Gainsboro;
-            customtogglebutton1.OnBackColor = AjustesDeUsuario.foreColor;
-            customtogglebutton1.OnToggleColor = Color.WhiteSmoke;
         }
 
         void SetIdioma() //Establece el texto segun el idioma seleccionado

@@ -32,11 +32,9 @@
             this.cbxLenguaje = new System.Windows.Forms.ComboBox();
             this.lblTema = new System.Windows.Forms.Label();
             this.lblMinimizarlabandeja = new System.Windows.Forms.Label();
-            this.lblIniciarapp = new System.Windows.Forms.Label();
             this.lblactivarNotificaciones = new System.Windows.Forms.Label();
             this.tglTema = new Sistema_de_Resultados_Deportivos.CustomToggleButton();
             this.tglTray = new Sistema_de_Resultados_Deportivos.CustomToggleButton();
-            this.tglInicio = new Sistema_de_Resultados_Deportivos.CustomToggleButton();
             this.tglNotificaciones = new Sistema_de_Resultados_Deportivos.CustomToggleButton();
             this.lblConfiguraciones = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -84,20 +82,11 @@
             this.lblMinimizarlabandeja.Size = new System.Drawing.Size(0, 23);
             this.lblMinimizarlabandeja.TabIndex = 4;
             // 
-            // lblIniciarapp
-            // 
-            this.lblIniciarapp.AutoSize = true;
-            this.lblIniciarapp.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblIniciarapp.Location = new System.Drawing.Point(17, 234);
-            this.lblIniciarapp.Name = "lblIniciarapp";
-            this.lblIniciarapp.Size = new System.Drawing.Size(0, 23);
-            this.lblIniciarapp.TabIndex = 5;
-            // 
             // lblactivarNotificaciones
             // 
             this.lblactivarNotificaciones.AutoSize = true;
             this.lblactivarNotificaciones.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblactivarNotificaciones.Location = new System.Drawing.Point(17, 291);
+            this.lblactivarNotificaciones.Location = new System.Drawing.Point(17, 234);
             this.lblactivarNotificaciones.Name = "lblactivarNotificaciones";
             this.lblactivarNotificaciones.Size = new System.Drawing.Size(0, 23);
             this.lblactivarNotificaciones.TabIndex = 6;
@@ -132,24 +121,10 @@
             this.tglTray.UseVisualStyleBackColor = true;
             this.tglTray.CheckedChanged += new System.EventHandler(this.tglTray_CheckedChanged);
             // 
-            // tglInicio
-            // 
-            this.tglInicio.AutoSize = true;
-            this.tglInicio.Location = new System.Drawing.Point(270, 237);
-            this.tglInicio.MinimumSize = new System.Drawing.Size(45, 22);
-            this.tglInicio.Name = "tglInicio";
-            this.tglInicio.OffBackColor = System.Drawing.Color.Gray;
-            this.tglInicio.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.tglInicio.OnBackColor = System.Drawing.Color.MediumSlateBlue;
-            this.tglInicio.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.tglInicio.Size = new System.Drawing.Size(45, 22);
-            this.tglInicio.TabIndex = 9;
-            this.tglInicio.UseVisualStyleBackColor = true;
-            // 
             // tglNotificaciones
             // 
             this.tglNotificaciones.AutoSize = true;
-            this.tglNotificaciones.Location = new System.Drawing.Point(270, 291);
+            this.tglNotificaciones.Location = new System.Drawing.Point(270, 234);
             this.tglNotificaciones.MinimumSize = new System.Drawing.Size(45, 22);
             this.tglNotificaciones.Name = "tglNotificaciones";
             this.tglNotificaciones.OffBackColor = System.Drawing.Color.Gray;
@@ -159,6 +134,7 @@
             this.tglNotificaciones.Size = new System.Drawing.Size(45, 22);
             this.tglNotificaciones.TabIndex = 10;
             this.tglNotificaciones.UseVisualStyleBackColor = true;
+            this.tglNotificaciones.CheckedChanged += new System.EventHandler(this.tglNotificaciones_CheckedChanged);
             // 
             // lblConfiguraciones
             // 
@@ -199,11 +175,9 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.lblConfiguraciones);
             this.Controls.Add(this.tglNotificaciones);
-            this.Controls.Add(this.tglInicio);
             this.Controls.Add(this.tglTray);
             this.Controls.Add(this.tglTema);
             this.Controls.Add(this.lblactivarNotificaciones);
-            this.Controls.Add(this.lblIniciarapp);
             this.Controls.Add(this.lblMinimizarlabandeja);
             this.Controls.Add(this.lblTema);
             this.Controls.Add(this.cbxLenguaje);
@@ -212,7 +186,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Settings";
             this.Text = "Settings";
-            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,11 +197,9 @@
         private ComboBox cbxLenguaje;
         private Label lblTema;
         private Label lblMinimizarlabandeja;
-        private Label lblIniciarapp;
         private Label lblactivarNotificaciones;
         private CustomToggleButton tglTema;
         private CustomToggleButton tglTray;
-        private CustomToggleButton tglInicio;
         private CustomToggleButton tglNotificaciones;
         private Label lblConfiguraciones;
         private Button btnGuardar;

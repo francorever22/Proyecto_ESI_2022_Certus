@@ -11,11 +11,28 @@ namespace Sistema_de_Resultados_Deportivos
         public static string language = "EN";
         public static bool darkTheme = false;
         public static bool tray = false;
+        public static bool notificaciones = false;
         public static Color panel = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
         public static Color btnBack = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
         public static Color btnMouseDown = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
         public static Color btnMouseOver = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
         public static Color foreColor = Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(100)))), ((int)(((byte)(155)))));
+
+        public static void Load()
+        {
+            if (File.Exists("C:\\Certus\\SRD\\Ajustes.txt"))
+            {
+                var dic = File.ReadAllLines("C:\\Certus\\SRD\\Ajustes.txt")
+                .Select(l => l.Split(new[] { '=' }))
+                .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
+
+                language = dic["language"];
+                darkTheme = Convert.ToBoolean(dic["darkTheme"]);
+                tray = Convert.ToBoolean(dic["tray"]);
+                notificaciones = Convert.ToBoolean(dic["notificaciones"]);
+            }
+            SetTheme();
+        }
 
         public static void SetTheme()
         {

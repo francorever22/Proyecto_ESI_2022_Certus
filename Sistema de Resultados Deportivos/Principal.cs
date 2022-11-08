@@ -19,6 +19,7 @@ namespace Sistema_de_Resultados_Deportivos
         {
             InitializeComponent();
             form = this;
+            AjustesDeUsuario.Load();
 
             this.SetBevel(false);
             CargarCategorias();
@@ -26,10 +27,11 @@ namespace Sistema_de_Resultados_Deportivos
             panelOptions.Hide();
             panelLogin.Hide();
             panelSettings.Hide();
+            btnFavoritos.Enabled = false;
 
-            Form inicio = new BuscadorDeEncuentros();
+            Form inicio = new BuscadorDeEncuentros(0);
             inicio.TopLevel = false;
-            this.panelChico.Controls.Add(inicio);
+            panelChico.Controls.Add(inicio);
             inicio.Show();
 
             Form publicidad1 = new APIPublicidad();
@@ -44,8 +46,6 @@ namespace Sistema_de_Resultados_Deportivos
             SetTheme();
             PrincipalColor();
             SetIdioma();
-
-            Toast t = new Toast(2, "It", "Works");
         }
 
         private void PrincipalColor() //Establece el color de fondo del formulario Principal
@@ -151,10 +151,10 @@ namespace Sistema_de_Resultados_Deportivos
             encu.Show();
         }
 
-        private void openEventos()
+        private void openEventos(int id)
         {
             panelChico.Controls.Clear();
-            Form eve = new Frm_Eventos();
+            Form eve = new Frm_Eventos(id);
             eve.TopLevel = false;
             panelChico.Controls.Add(eve);
             eve.Show();
@@ -192,7 +192,7 @@ namespace Sistema_de_Resultados_Deportivos
             Form settings = new Settings();
             settings.TopLevel = false;
             settings.TopMost = true;
-            this.panelSettings.Controls.Add(settings);
+            panelSettings.Controls.Add(settings);
             settings.Show();
             panelSettings.Show();
 
@@ -212,10 +212,13 @@ namespace Sistema_de_Resultados_Deportivos
         private void b1_Click(object sender, EventArgs e, string cat)
         {
             panelChico.Controls.Clear();
-            toggleSubMenu(0);
+            if (cat != "12345Destacado54321")
+            {
+                toggleSubMenu(0);
+            }
             Form cate = new Categorias(cat);
             cate.TopLevel = false;
-            this.panelChico.Controls.Add(cate);
+            panelChico.Controls.Add(cate);
             cate.Show();
         }
 
@@ -240,6 +243,13 @@ namespace Sistema_de_Resultados_Deportivos
                     if (form != null)
                     {
                         form.ChangeAds(x);
+                        if (z == 0)
+                        {
+                            form.btnFavoritos.Enabled = true;
+                        } else
+                        {
+                            form.btnFavoritos.Enabled = false;
+                        }
                     }
                     break;
                 case 1:
@@ -283,10 +293,31 @@ namespace Sistema_de_Resultados_Deportivos
                 case 7:
                     if (form != null)
                     {
-                        form.openEventos();
+                        form.openEventos(x);
+                    }
+                    break;
+                case 8:
+                    if (form != null)
+                    {
+                        form.OpenBuscador(x, z);
+                    }
+                    break;
+                case 9:
+                    if (form != null)
+                    {
+                        form.OpenPayment();
                     }
                     break;
             }
+        }
+
+        private void OpenBuscador(int x, int id)
+        {
+            panelChico.Controls.Clear();
+            Form buscador = new BuscadorDeEncuentros(x, id);
+            buscador.TopLevel = false;
+            panelChico.Controls.Add(buscador);
+            buscador.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -339,6 +370,16 @@ namespace Sistema_de_Resultados_Deportivos
             }
         }
 
+        private void OpenPayment()
+        {
+            Form payment = new Frm_Payday();
+            payment.TopLevel = false;
+            payment.TopMost = true;
+            panelSettings.Controls.Add(payment);
+            payment.Show();
+            panelSettings.Show();
+        }
+
         private void btnNoticias_Click(object sender, EventArgs e)
         {
             try
@@ -355,7 +396,7 @@ namespace Sistema_de_Resultados_Deportivos
         private void btnInicio_Click(object sender, EventArgs e)
         {
             panelChico.Controls.Clear();
-            Form buscador = new BuscadorDeEncuentros();
+            Form buscador = new BuscadorDeEncuentros(0);
             buscador.TopLevel = false;
             panelChico.Controls.Add(buscador);
             buscador.Show();
@@ -368,7 +409,13 @@ namespace Sistema_de_Resultados_Deportivos
                 Show();
                 notifyIcon.Visible = false;
             }
-            MessageBox.Show("It works! :D");
+            if (type == 1)
+            {
+                openEncuentros(id);
+            } else if (type == 2)
+            {
+                openEncuentros(id);
+            }
         }
 
         public void SetTheme() //Establece los colores de los controladores segun el tema elegido
@@ -441,6 +488,21 @@ namespace Sistema_de_Resultados_Deportivos
                 btnOptions.Image = Properties.Resources.menu;
                 btnInicio.Image = Properties.Resources.Inicio_Claro;
             }
+        }
+
+        private void btnFavoritos_Click(object sender, EventArgs e)
+        {
+            OpenBuscador(6, 0);
+        }
+
+        private void btnDeportesPopulares_Click(object sender, EventArgs e)
+        {
+            b1_Click(sender, e, "12345Destacado54321");
+        }
+
+        private void btnEventosPopulares_Click(object sender, EventArgs e)
+        {
+            OpenBuscador(7, 0);
         }
 
         public void SetIdioma() //Establece el texto segun el idioma seleccionado

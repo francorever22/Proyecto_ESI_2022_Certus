@@ -28,28 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.panelContenedor = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.picFavorito = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFavorito)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // picLogo
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.picLogo.Location = new System.Drawing.Point(0, 0);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(150, 150);
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
             // 
-            // label1
+            // lblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(354, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblName.Location = new System.Drawing.Point(354, 64);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(0, 25);
+            this.lblName.TabIndex = 1;
             // 
             // panelContenedor
             // 
@@ -59,19 +61,33 @@
             this.panelContenedor.Size = new System.Drawing.Size(724, 345);
             this.panelContenedor.TabIndex = 2;
             // 
+            // picFavorito
+            // 
+            this.picFavorito.BackColor = System.Drawing.Color.Transparent;
+            this.picFavorito.BackgroundImage = global::Sistema_de_Resultados_Deportivos.Properties.Resources.estrellaVacia;
+            this.picFavorito.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picFavorito.Location = new System.Drawing.Point(694, 0);
+            this.picFavorito.Name = "picFavorito";
+            this.picFavorito.Size = new System.Drawing.Size(30, 30);
+            this.picFavorito.TabIndex = 18;
+            this.picFavorito.TabStop = false;
+            this.picFavorito.Click += new System.EventHandler(this.picFavorito_Click);
+            // 
             // Frm_Eventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 552);
+            this.Controls.Add(this.picFavorito);
             this.Controls.Add(this.panelContenedor);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_Eventos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Frm_Encuentros_Tipo_A";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFavorito)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,8 +95,9 @@
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private Label label1;
+        private PictureBox picLogo;
+        private Label lblName;
         private Panel panelContenedor;
+        private PictureBox picFavorito;
     }
 }

@@ -3,24 +3,61 @@
     public partial class Frm_Eventos : Form
     {
         private static Frm_Eventos form = null;
-        public Frm_Eventos()
+        int id;
+        bool favorite;
+        Evento evento = new Evento();
+        List<Fase> fases = new List<Fase>();
+        List<EquiposFases> equipos = new List<EquiposFases>();
+        List<EncuentrosFases> encuentros = new List<EncuentrosFases>();
+        public Frm_Eventos(int id)
         {
             InitializeComponent();
             form = this;
             SetTheme();
+            this.id = id;
 
-            ChargePhasesButtons(5);
+            if (Program.user.email == null)
+            {
+                picFavorito.Hide();
+            }
+            else
+            {
+                if (Program.user.eventosFavoritos.Exists(e => e.idEvento == id))
+                {
+                    favorite = true;
+                    picFavorito.BackgroundImage = Properties.Resources.estrellaRellena;
+                }
+            }
+
+            evento = Logica.GetEventos(4, "" + id)[0];
+            fases = Logica.GetFases(2, "" + id);
+            equipos = Logica.GetEquiposFases(2, "" + id);
+            encuentros = Logica.GetEncuentrosFases(2, "" + id);
+
+            lblName.Text = evento.NombreEvento;
+            lblName.Location = new Point(362 - (lblName.Width / 2), 64);
+
+            Bitmap imagenCargada = null;
+            try
+            {
+                imagenCargada = new Bitmap(evento.LogoEvento);
+            }
+            catch { }
+            picLogo.Image = imagenCargada;
+
+            ChargePhasesButtons();
         }
 
-        private void ChargePhasesButtons(int f)
+        private void ChargePhasesButtons()
         {
-            for (int i = 1; i <= f; i++)
+            int total = fases.Count();
+            foreach (var f in fases)
             {
                 Button btn = new Button();
 
                 var rand = new Random(); //Temporal
 
-                btn.Text = $"Fase {i}";
+                btn.Text = $"Fase {f.NumeroFase}";
                 btn.Size = new Size(70, 30);
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.TabIndex = 0;
@@ -29,24 +66,24 @@
                 btn.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
                 btn.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
                 btn.ForeColor = AjustesDeUsuario.foreColor;
-                btn.Click += (sender, EventArgs) => { PhasesButton_Click(sender, EventArgs, rand.Next(1, 5)); };
+                btn.Click += (sender, EventArgs) => { PhasesButton_Click(sender, EventArgs, f.TipoFase, f.NumeroFase); };
 
-                if (f == 1)
+                if (total == 1)
                 {
                     btn.Location = new Point(327, 163);
-                } else if (f % 2 == 0)
+                } else if (total % 2 == 0)
                 {
-                    btn.Location = new Point(362 - (f / 2 * 70) + (80 * (i - 1)), 163);
+                    btn.Location = new Point(362 - (total / 2 * 70) + (80 * (f.NumeroFase - 1)), 163);
                 } else
                 {
-                    btn.Location = new Point(327 - (f / 2 * 70) + (80 * (i - 1)), 163);
+                    btn.Location = new Point(327 - (total / 2 * 70) + (80 * (f.NumeroFase - 1)), 163);
                 }
 
-                this.Controls.Add(btn);
+                Controls.Add(btn);
             }
         }
 
-        private void DrawKeyFormat(int rounds, int participants) //Only works with 16 participants or less
+        private void DrawKeyFormat(int rounds, int participants) //Work in progress
         {
             PictureBox pic = new PictureBox();
 
@@ -131,8 +168,18 @@
             pic.Image = image;
         }
 
-        private void DrawGroupFormat()
+        private void DrawGroupFormat(int n)
         {
+            Fase f = fases.Find(r => r.NumeroFase == n);
+            List<Equipo> eq = new List<Equipo>();
+            foreach (var ef in equipos)
+            {
+                if (ef.NumeroFase == n)
+                {
+                    eq.Add(Logica.GetEquipos(3, "" + ef.IdEquipo)[0]);
+                }
+            }
+
             PictureBox pic = new PictureBox();
 
             pic.Location = new Point(0, 0);
@@ -143,9 +190,11 @@
             panelContenedor.Controls.Add(pic);
 
             int x = 0, y = 0;
-            String text = "teamName";
 
-            var teamImage = new Bitmap(150, 150); //Temporal
+
+            String text = "";
+
+            var teamImage = new Bitmap(150, 150);
             var image = new Bitmap(250 * (24 / 4 / 2), 600);
 
             SolidBrush drawBrush = new SolidBrush(AjustesDeUsuario.foreColor);
@@ -155,17 +204,30 @@
 
             Graphics g = Graphics.FromImage(image);
 
-            for (int i = 1; i <= 24 / 4; i++)
+            int count = 0;
+            for (int i = 1; i <= f.CantidadGrupos; i++)
             {
                 g.DrawRectangle(pen, x, y, 200, 50);
                 g.DrawString($"Group {i}", font, drawBrush, x + 70, 15 + y, drawFormat);
 
-                for (int j = 1; j <= 4; j++)
+                for (int j = 1; j <= f.TamañoGrupos; j++)
                 {
+                    if (eq[count] != null)
+                    {
+                        text = eq[count].NombreEquipo;
+                        try
+                        {
+                            teamImage = new Bitmap(eq[count].ImagenRepresentativa);
+                        }
+                        catch { }
+                    }
+
                     y += 50;
                     g.DrawRectangle(pen, x, y, 200, 50);
                     g.DrawImage(teamImage, 5 + x, 5 + y, 40, 40);
                     g.DrawString(text, font, drawBrush, x + 50, 15 + y, drawFormat);
+
+                    count++;
                 }
                 if (i % 2 != 0 || i == 1)
                 {
@@ -181,8 +243,18 @@
             pic.Image = image;
         }
 
-        private void DrawDispairedFormat()
+        private void DrawDispairedFormat(int n)
         {
+            Fase f = fases.Find(r => r.NumeroFase == n);
+            List<Encuentro> enc = new List<Encuentro>();
+            foreach (var ef in encuentros)
+            {
+                if (ef.NumeroFase == n)
+                {
+                    enc.Add(Logica.GetEncuentros(4, "" + ef.IdEncuentro)[0]);
+                }
+            }
+
             PictureBox pic = new PictureBox();
 
             pic.Location = new Point(0, 0);
@@ -193,9 +265,8 @@
             panelContenedor.Controls.Add(pic);
 
             int x = 0, y = 25;
-            String text = "teamName";
+            String text = "";
 
-            var teamImage = new Bitmap(150, 150); //Temporal
             var image = new Bitmap(250 * (24 / 2 / 2), 350);
 
             SolidBrush drawBrush = new SolidBrush(AjustesDeUsuario.foreColor);
@@ -205,18 +276,19 @@
 
             Graphics g = Graphics.FromImage(image);
 
-            for (int i = 1; i <= 24 / 2; i++)
+            for (int i = 1; i <= f.CantidadGrupos; i++)
             {
-                for (int j = 1; j <= 2; j++)
+                if (enc.Count() >= i)
                 {
-                    g.DrawRectangle(pen, x, y, 200, 50);
-                    g.DrawImage(teamImage, 5 + x, 5 + y, 40, 40);
-                    g.DrawString(text, font, drawBrush, x + 50, 15 + y, drawFormat);
-                    y += 50;
-                }
+                    text = enc[i - 1].Nombre;
+                } else { text = ""; }
+
+                g.DrawRectangle(pen, x, y, 200, 50);
+                g.DrawString(text, font, drawBrush, x + 50, 15 + y, drawFormat);
+
                 if (i % 2 != 0 || i == 1)
                 {
-                    y = 175;
+                    y = 125;
                 }
                 else
                 {
@@ -228,10 +300,23 @@
             pic.Image = image;
         }
 
-        public void PositionFormat()
+        public void PositionFormat(int n)
         {
-            for (int j = 0; j < 10; j++)
+            Fase f = fases.Find(r => r.NumeroFase == n);
+            List<Equipo> eq = new List<Equipo>();
+            List<EquiposFases> eqf = new List<EquiposFases>();
+            foreach (var ef in equipos)
             {
+                if (ef.NumeroFase == n)
+                {
+                    eq.Add(Logica.GetEquipos(3, "" + ef.IdEquipo)[0]);
+                    eqf.Add(ef);
+                }
+            }
+
+            for (int j = 0; j < eq.Count(); j++)
+            {
+                int id = eq[j].IdEquipo;
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -240,7 +325,7 @@
                 p1.TabIndex = 0;
                 p1.BackColor = AjustesDeUsuario.panel;
 
-                PictureBox pic1 = new PictureBox();
+                PictureBox pic1 = new PictureBox(); //Imagen representativa equipo
 
                 pic1.InitialImage = null;
                 pic1.BackColor = Color.Transparent;
@@ -248,12 +333,18 @@
                 pic1.Location = new Point(10, 5);
                 pic1.TabIndex = 1;
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic1.Image = Properties.Resources.barcelona;
+                Bitmap image = null;
+                try
+                {
+                    image = new Bitmap(eq[j].ImagenRepresentativa);
+                }
+                catch { }
+                pic1.Image = image;
 
-                Label l1 = new Label();
+                Label l1 = new Label(); //Nombre equipo
 
                 l1.Font = new Font("Segoe UI", 12.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"Barcelona";
+                l1.Text = eq[j].NombreEquipo;
                 l1.Size = new Size(600, 25);
                 l1.TextAlign = ContentAlignment.MiddleCenter;
                 l1.BorderStyle = BorderStyle.None;
@@ -261,10 +352,10 @@
                 l1.TabIndex = 3;
                 l1.ForeColor = AjustesDeUsuario.foreColor;
 
-                Label l2 = new Label();
+                Label l2 = new Label(); //Posicion equipo
 
                 l2.Font = new Font("Segoe UI", 12.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l2.Text = $"{j}º";
+                l2.Text = $"{eqf[j].PosicionEquipo}º";
                 l2.Size = new Size(50, 25);
                 l2.TextAlign = ContentAlignment.MiddleCenter;
                 l2.RightToLeft = RightToLeft.Yes;
@@ -273,22 +364,35 @@
                 l2.TabIndex = 3;
                 l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                l2.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                pic1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
+                p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                l2.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                pic1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
 
-                this.panelContenedor.Controls.Add(p1);
+                panelContenedor.Controls.Add(p1);
                 p1.Controls.Add(l1);
                 p1.Controls.Add(l2);
                 p1.Controls.Add(pic1);
             }
         }
 
-        private void EliminationFormat()
+        private void EliminationFormat(int n)
         {
-            for (int j = 0; j < 10; j++)
+            Fase f = fases.Find(r => r.NumeroFase == n);
+            List<Equipo> eq = new List<Equipo>();
+            List<EquiposFases> eqf = new List<EquiposFases>();
+            foreach (var ef in equipos)
             {
+                if (ef.NumeroFase == n)
+                {
+                    eq.Add(Logica.GetEquipos(3, "" + ef.IdEquipo)[0]);
+                    eqf.Add(ef);
+                }
+            }
+
+            for (int j = 0; j < eq.Count; j++)
+            {
+                int id = eq[j].IdEquipo;
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -305,12 +409,18 @@
                 pic1.Location = new Point(10, 5);
                 pic1.TabIndex = 1;
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic1.Image = Properties.Resources.barcelona;
+                Bitmap image = null;
+                try
+                {
+                    image = new Bitmap(eq[j].ImagenRepresentativa);
+                }
+                catch { }
+                pic1.Image = image;
 
                 Label l1 = new Label();
 
                 l1.Font = new Font("Segoe UI", 12.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"Barcelona";
+                l1.Text = eq[j].NombreEquipo;
                 l1.Size = new Size(540, 25);
                 l1.TextAlign = ContentAlignment.MiddleCenter;
                 l1.BorderStyle = BorderStyle.None;
@@ -321,7 +431,7 @@
                 Label l2 = new Label();
 
                 l2.Font = new Font("Segoe UI", 12.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l2.Text = $"Eliminated";
+                l2.Text = eqf[j].EstadoEquipo;
                 l2.Size = new Size(100, 25);
                 l2.TextAlign = ContentAlignment.MiddleCenter;
                 l2.RightToLeft = RightToLeft.Yes;
@@ -330,44 +440,44 @@
                 l2.TabIndex = 3;
                 l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                l2.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
-                pic1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs); };
+                p1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                l1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                l2.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
+                pic1.Click += (sender, EventArgs) => { Team_Click(sender, EventArgs, id); };
 
-                this.panelContenedor.Controls.Add(p1);
+                panelContenedor.Controls.Add(p1);
                 p1.Controls.Add(l1);
                 p1.Controls.Add(l2);
                 p1.Controls.Add(pic1);
             }
         }
 
-        private void PhasesButton_Click(object sender, EventArgs e, int t)
+        private void PhasesButton_Click(object sender, EventArgs e, int t, int n)
         {
-            this.panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Clear();
             switch (t)
             {
                 case 1:
-                    DrawKeyFormat(3, 16);
+                    //DrawKeyFormat(3, 16);
                     break;
                 case 2:
-                    DrawGroupFormat();
+                    DrawGroupFormat(n);
                     break;
                 case 3:
-                    DrawDispairedFormat();
+                    DrawDispairedFormat(n);
                     break;
                 case 4:
-                    PositionFormat();
+                    EliminationFormat(n);
                     break;
                 case 5:
-                    EliminationFormat();
+                    PositionFormat(n);
                     break;
             }
         }
 
-        private void Team_Click(object sender, EventArgs e)
+        private void Team_Click(object sender, EventArgs e, int id)
         {
-            Principal.AlterPrincipal(1, 6, 0);
+            Principal.AlterPrincipal(1, 6, id);
         }
 
         private void SetTheme()
@@ -376,7 +486,25 @@
             BackColor = AjustesDeUsuario.panel;
             panelContenedor.BackColor = AjustesDeUsuario.panel;
             /* Textos (Incluidos botones) */
-            label1.ForeColor = AjustesDeUsuario.foreColor;
+            lblName.ForeColor = AjustesDeUsuario.foreColor;
+        }
+
+        private void picFavorito_Click(object sender, EventArgs e)
+        {
+            if (favorite == false)
+            {
+                picFavorito.BackgroundImage = Properties.Resources.estrellaRellena;
+                favorite = true;
+                Logica.InsertEventosFavoritos(Program.user.email, id);
+                Program.refreshFavorites();
+            }
+            else
+            {
+                picFavorito.BackgroundImage = Properties.Resources.estrellaVacia;
+                favorite = false;
+                Logica.Delete("EventosFavoritos", "Email", Program.user.email, "IdEvento", "" + id);
+                Program.refreshFavorites();
+            }
         }
     }
 }

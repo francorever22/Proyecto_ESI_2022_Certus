@@ -36,7 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.customtogglebutton1 = new Sistema_de_Resultados_Deportivos.CustomToggleButton();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -142,21 +141,6 @@
             this.txtCorreo.Enter += new System.EventHandler(this.txtCorreo_Enter);
             this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
             // 
-            // customtogglebutton1
-            // 
-            this.customtogglebutton1.AutoSize = true;
-            this.customtogglebutton1.Location = new System.Drawing.Point(150, 215);
-            this.customtogglebutton1.MinimumSize = new System.Drawing.Size(45, 22);
-            this.customtogglebutton1.Name = "customtogglebutton1";
-            this.customtogglebutton1.OffBackColor = System.Drawing.Color.Gray;
-            this.customtogglebutton1.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.customtogglebutton1.OnBackColor = System.Drawing.Color.MediumSlateBlue;
-            this.customtogglebutton1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.customtogglebutton1.Size = new System.Drawing.Size(45, 22);
-            this.customtogglebutton1.TabIndex = 8;
-            this.customtogglebutton1.UseVisualStyleBackColor = true;
-            this.customtogglebutton1.CheckedChanged += new System.EventHandler(this.customToggleButton1_CheckedChanged);
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -176,7 +160,6 @@
             this.panel1.Controls.Add(this.txtUsuario);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnCancelar);
-            this.panel1.Controls.Add(this.customtogglebutton1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -209,7 +192,6 @@
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label1;
         private Button btnCancelar;
-        private CustomToggleButton customtogglebutton1;
         private Label label2;
         private Panel panel1;
     }

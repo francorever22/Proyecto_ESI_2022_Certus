@@ -109,6 +109,7 @@
             this.btnDeportesPopulares.Size = new System.Drawing.Size(211, 58);
             this.btnDeportesPopulares.TabIndex = 5;
             this.btnDeportesPopulares.UseVisualStyleBackColor = false;
+            this.btnDeportesPopulares.Click += new System.EventHandler(this.btnDeportesPopulares_Click);
             // 
             // btnEventosPopulares
             // 
@@ -120,6 +121,7 @@
             this.btnEventosPopulares.Size = new System.Drawing.Size(211, 58);
             this.btnEventosPopulares.TabIndex = 2;
             this.btnEventosPopulares.UseVisualStyleBackColor = false;
+            this.btnEventosPopulares.Click += new System.EventHandler(this.btnEventosPopulares_Click);
             // 
             // btnFavoritos
             // 
@@ -131,6 +133,7 @@
             this.btnFavoritos.Size = new System.Drawing.Size(211, 58);
             this.btnFavoritos.TabIndex = 1;
             this.btnFavoritos.UseVisualStyleBackColor = false;
+            this.btnFavoritos.Click += new System.EventHandler(this.btnFavoritos_Click);
             // 
             // btnMore
             // 

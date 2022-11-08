@@ -17,7 +17,22 @@ namespace Sistema_de_Resultados_Deportivos
         {
             InitializeComponent();
             form = this;
-            lblCategorias.Text = cat;
+            if (cat == "12345Destacado54321")
+            {
+                switch (AjustesDeUsuario.language)
+                {
+                    case "EN":
+                        lblCategorias.Text = "Popular sports";
+                        break;
+                    case "ES":
+                        lblCategorias.Text = "Deportes populares";
+                        break;
+                }
+            }
+            else
+            {
+                lblCategorias.Text = cat;
+            }
             int x = (Size.Width - lblCategorias.Size.Width) / 2;
             lblCategorias.Location = new Point(x, lblCategorias.Location.Y);
             SetTheme();
@@ -29,9 +44,17 @@ namespace Sistema_de_Resultados_Deportivos
             panelDeportes.Controls.Clear();
             int x = 12;
             int y = 0;
-            var deportes = Logica.GetDeportes(6, lblCategorias.Text);
+            var deportes = new List<DeportesCategorizados>();
+            if (lblCategorias.Text == "Deportes populares" || lblCategorias.Text == "Popular sports")
+            {
+                deportes = Logica.GetDeportes(7, null);
+            } else
+            {
+                deportes = Logica.GetDeportes(6, lblCategorias.Text);
+            }
             foreach (var deporte in deportes)
             {
+                int id = deporte.IdDeporte;
 
                 Panel p1 = new Panel();
                 p1.BorderStyle = BorderStyle.None;
@@ -48,12 +71,19 @@ namespace Sistema_de_Resultados_Deportivos
                 b1.Font = new("Montserrat", 10F, FontStyle.Regular, GraphicsUnit.Point);
                 b1.UseVisualStyleBackColor = true;
                 b1.TextAlign = ContentAlignment.BottomCenter;
-                b1.Image = null;
+                Bitmap imagenCargada1 = null;
+                try
+                {
+                    imagenCargada1 = new Bitmap(deporte.ImagenDeporte);
+                }
+                catch { }
+                b1.BackgroundImage = imagenCargada1;
                 b1.Text = deporte.NombreDeporte;
                 b1.BackColor = AjustesDeUsuario.btnBack;
                 b1.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
                 b1.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
                 b1.ForeColor = AjustesDeUsuario.foreColor;
+                b1.Click += (sender, e) => { Deporte_Click(sender, e, id); };
 
                 panelDeportes.Controls.Add(p1); //Agrega los controles al panelCategorias
                 p1.Controls.Add(b1);
@@ -90,6 +120,11 @@ namespace Sistema_de_Resultados_Deportivos
                     }
                     break;
             }
+        }
+
+        private void Deporte_Click(Object sender, EventArgs e, int id)
+        {
+            Principal.AlterPrincipal(5, 8, id);
         }
 
         public void SetTheme() //Establece los colores de los controladores segun el tema elegido

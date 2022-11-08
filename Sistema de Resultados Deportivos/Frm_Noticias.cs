@@ -33,33 +33,36 @@ namespace Sistema_de_Resultados_Deportivos
 
             int y = 0;
 
-            foreach (var n in news.GetNoticias())
+            try
             {
-                foreach (var c in n.content)
+                foreach (var n in news.GetNoticias())
                 {
-                    LinkLabel llb = new LinkLabel(); //Noticia
+                    foreach (var c in n.content)
+                    {
+                        LinkLabel llb = new LinkLabel(); //Noticia
 
-                    llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                    llb.Text = $"{c.title}: {c.content}";
-                    llb.Size = new Size(707, 25);
-                    llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
-                    llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
-                    llb.ActiveLinkColor = AjustesDeUsuario.foreColor;
-                    llb.LinkBehavior = LinkBehavior.NeverUnderline;
-                    llb.LinkColor = AjustesDeUsuario.foreColor;
-                    llb.AutoSize = false;
-                    llb.BorderStyle = BorderStyle.FixedSingle;
-                    llb.Location = new Point(0, y);
-                    llb.TabIndex = 3;
-                    llb.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb); };
-                    llb.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb); };
-                    llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, c.href); };
+                        llb.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                        llb.Text = $"{c.title}: {c.content}";
+                        llb.Size = new Size(707, 25);
+                        llb.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                        llb.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                        llb.ActiveLinkColor = AjustesDeUsuario.foreColor;
+                        llb.LinkBehavior = LinkBehavior.NeverUnderline;
+                        llb.LinkColor = AjustesDeUsuario.foreColor;
+                        llb.AutoSize = false;
+                        llb.BorderStyle = BorderStyle.FixedSingle;
+                        llb.Location = new Point(0, y);
+                        llb.TabIndex = 3;
+                        llb.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb); };
+                        llb.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb); };
+                        llb.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, c.href); };
 
-                    panelContenedor.Controls.Add(llb);
+                        panelContenedor.Controls.Add(llb);
 
-                    y += 25;
+                        y += 25;
+                    }
                 }
-            }
+            } catch { Principal.AlterPrincipal(0, 8, 0); }
         }
 
         private void mouseHover_Click(object sender, EventArgs e, LinkLabel l)

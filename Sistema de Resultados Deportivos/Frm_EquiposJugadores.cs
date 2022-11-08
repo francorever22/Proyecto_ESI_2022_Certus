@@ -39,7 +39,13 @@
                     var eqEnc = Logica.GetEquiposEncuentros(3, ""+id);
                     var dep = Logica.GetEquiposDeportistas(3, "" + id).Find(d => d.Nombre + " " + d.Apellido == eq.NombreEquipo);
 
-                    picImagen.Image = eq.ImagenRepresentativa;
+                    Bitmap imagenCargada1 = null;
+                    try
+                    {
+                        imagenCargada1 = new Bitmap(eq.ImagenRepresentativa);
+                    }
+                    catch { }
+                    picImagen.Image = imagenCargada1;
                     lblNombre.Text = eq.NombreEquipo;
                     lblNombre.Location = new Point(175 - (lblNombre.Width / 2), 174);
 
@@ -64,6 +70,7 @@
                         int count = 0;
                         foreach (var eqE in eqEnc)
                         {
+                            int id = eqE.IdEncuentro;
                             Panel p4 = new Panel();
 
                             p4.BorderStyle = BorderStyle.FixedSingle;
@@ -83,8 +90,8 @@
                             l2.TabIndex = 3;
                             l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                            p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
-                            l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs); };
+                            p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
+                            l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
 
                             panelContenedor.Controls.Add(p4);
                             p4.Controls.Add(l2);
@@ -141,9 +148,9 @@
             }
         }
 
-        private void UltimoEncuentro_Click(object sender, EventArgs e)
+        private void UltimoEncuentro_Click(object sender, EventArgs e, int id)
         {
-            Principal.AlterPrincipal(0, 5, 0);
+            Principal.AlterPrincipal(id, 5, 0);
             Parent.Hide();
             Close();
         }

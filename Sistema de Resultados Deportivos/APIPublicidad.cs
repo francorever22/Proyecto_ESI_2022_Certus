@@ -35,21 +35,17 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void SetBanner()
         {
-            var banners = Logica.DeserializeBanners(Logica.GetJson("DinamicJson\\Banners.json"));
-            foreach (var banner in banners)
+            try
             {
-                x++;
-            }
-            int b = r.Next(x);
-            foreach (var banner in banners)
-            {
-                if (banner.IdBanner == b)
-                {
-                    link = banner.Link;
-                    imgPath = banner.BannerImage;
-                }
-            }
-            imgPublicidad.Image = Image.FromFile(imgPath);
+                var banners = Logica.GetBanners(1, null);
+                int b = r.Next(banners.Count());
+
+                var banner = banners[b];
+                link = banner.Link;
+                imgPath = banner.BannerImage;
+
+                imgPublicidad.Image = new Bitmap(imgPath);
+            } catch { }
         }
     }
 }

@@ -18,10 +18,10 @@
 				var request = new HttpRequestMessage
 				{
 					Method = HttpMethod.Get,
-					RequestUri = new Uri("https://top-sports-news.p.rapidapi.com/sportsillustraded/nba"),
+					RequestUri = new Uri("https://top-sports-news.p.rapidapi.com/espn"),
 					Headers =
 				{
-					{ "X-RapidAPI-Key", "7a47208588mshaf352cf6a7b93b3p184d2bjsna94aa5baf18c" },
+					{ "X-RapidAPI-Key", "af9d5e89f2msh4e940f6a728c2cdp1df0d5jsnf347faf99f14" },
 					{ "X-RapidAPI-Host", "top-sports-news.p.rapidapi.com" },
 				},
 				};
@@ -31,7 +31,7 @@
 					body = await response.Content.ReadAsStringAsync();
 					noticias = Logica.DeserializeNoticias(body);
 				}
-			} catch (Exception ex) { MessageBox.Show("Error, "+ex.Message); }
+			} catch { MessageBox.Show("Error: No se pudo conectar a la API de noticias"); }
 		}
 
 		public List<Noticia> GetNoticias()

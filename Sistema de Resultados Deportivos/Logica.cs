@@ -8,66 +8,15 @@ namespace Sistema_de_Resultados_Deportivos
     {
         private static DB_Connection db = new DB_Connection();
 
-        #region Serialization
-
-        public static void SerializeUsers(List<Usuario> usuarios, string path = "DinamicJson\\Usuarios.json")
-        {
-            string usuariosJsonData = JsonSerializer.Serialize(usuarios);
-            File.WriteAllText(path, usuariosJsonData);
-        }
-
-        public static void SerializeCategorias(List<Categoria> categorias, string path = "DinamicJson\\Categorias.json")
-        {
-            string categoriasJsonData = JsonSerializer.Serialize(categorias);
-            File.WriteAllText(path, categoriasJsonData);
-        }
-
-        public static void SerializeDeportes(List<Deporte> deportes, string path = "DinamicJson\\Deportes.json")
-        {
-            string deportesJsonData = JsonSerializer.Serialize(deportes);
-            File.WriteAllText(path, deportesJsonData);
-        }
-
-        public static void SerializeBanners(List<Banner> banners, string path = "DinamicJson\\Banners.json")
-        {
-            string bannersJsonData = JsonSerializer.Serialize(banners);
-            File.WriteAllText(path, bannersJsonData);
-        }
-        #endregion
-
         #region Deserialization
         public static string GetJson(string filePath)
         {
             string jsonFile;
-            using (var  reader = new StreamReader(filePath))
+            using (var reader = new StreamReader(filePath))
             {
                 jsonFile = reader.ReadToEnd();
             }
             return jsonFile;
-        }
-
-        public static List<Usuario> DeserializeUsers(String jsonFile)
-        {
-            var usuarios = JsonSerializer.Deserialize<List<Usuario>>(jsonFile);
-            return usuarios;
-        }
-
-        public static List<Categoria> DeserializeCategorias(String jsonFile)
-        {
-            var categorias = JsonSerializer.Deserialize<List<Categoria>>(jsonFile);
-            return categorias;
-        }
-
-        public static List<Deporte> DeserializeDeportes(String jsonFile)
-        {
-            var deportes = JsonSerializer.Deserialize<List<Deporte>>(jsonFile);
-            return deportes;
-        }
-
-        public static List<Banner> DeserializeBanners(String jsonFile)
-        {
-            var banners = JsonSerializer.Deserialize<List<Banner>>(jsonFile);
-            return banners;
         }
 
         public static List<Noticia> DeserializeNoticias(String jsonFile)
@@ -107,6 +56,9 @@ namespace Sistema_de_Resultados_Deportivos
                     break;
                 case 6:
                     deportes = db.SelectDeportes($"SELECT * FROM DeportesCategorizados WHERE NombreCategoria = '{constraint}'");
+                    break;
+                case 7:
+                    deportes = db.SelectDeportes($"SELECT * FROM DeportesCategorizados WHERE Destacado = TRUE");
                     break;
             }
             return deportes;
@@ -242,6 +194,18 @@ namespace Sistema_de_Resultados_Deportivos
                 case 5:
                     encuentros = db.SelectEncuentros($"SELECT * FROM Encuentros WHERE FechaEncuentro = '{constraint}'");
                     break;
+                case 6:
+                    encuentros = db.SelectEncuentros($"SELECT * FROM Encuentros WHERE IdDeporte = '{constraint}' ORDER BY FechaEncuentro");
+                    break;
+                case 7:
+                    encuentros = db.SelectEncuentros($"SELECT * FROM Encuentros JOIN DeportesCategorizados ON " +
+                        $"(Encuentros.IdDeporte = DeportesCategorizados.IdDeporte) WHERE Destacado = True ORDER BY FechaEncuentro");
+                    break;
+                case 8:
+                    string date = DateTime.Now.ToString("yyyy-MM-dd");
+                    encuentros = db.SelectEncuentros($"SELECT * FROM Encuentros WHERE IdEncuentro = '{constraint}' AND " +
+                        $"FechaEncuentro = '{date}'");
+                    break;
             }
             return encuentros;
         }
@@ -290,6 +254,9 @@ namespace Sistema_de_Resultados_Deportivos
                 case 3:
                     hitos = db.SelectHitos($"SELECT * FROM Hito WHERE IdEncuentro = '{constraint1}'");
                     break;
+                case 4:
+                    hitos = db.SelectHitos($"SELECT * FROM Hito WHERE IdEncuentro = '{constraint1}' LIMIT 1");
+                    break;
             }
             return hitos;
         }
@@ -335,6 +302,19 @@ namespace Sistema_de_Resultados_Deportivos
                     break;
                 case 5:
                     eventos = db.SelectEventos($"SELECT * FROM Eventos WHERE FechaEvento = '{constraint}'");
+                    break;
+                case 6:
+                    eventos = db.SelectEventos($"SELECT * FROM Eventos JOIN EncuentrosFases ON " +
+                        $"(Eventos.IdEvento = EncuentrosFases.IdEvento) WHERE IdDeporte = '{constraint}' ORDER BY FechaEvento");
+                    break;
+                case 7:
+                    eventos = db.SelectEventos($"SELECT * FROM Eventos JOIN EncuentrosFases ON " +
+                        $"(Eventos.IdEvento = EncuentrosFases.IdEvento) JOIN DeportesCategorizados ON " +
+                        $"(EncuentrosFases.IdDeporte = DeportesCategorizados.IdDeporte) WHERE Destacado = True ORDER BY FechaEvento");
+                    break;
+                case 8:
+                    eventos = db.SelectEventos($"SELECT * FROM Eventos WHERE IdEvento = '{constraint}' AND " +
+                        $"FechaEvento = '{DateTime.Now.ToString("yyyy-MM-dd")}'");
                     break;
             }
             return eventos;
@@ -488,6 +468,11 @@ namespace Sistema_de_Resultados_Deportivos
                 case 3:
                     eE = db.SelectEquiposEncuentros($"SELECT * FROM EquiposEncuentros WHERE IdEquipo = '{constraint}' LIMIT 10");
                     break;
+                case 4:
+                    string date = DateTime.Now.ToString("yyyy-MM-dd");
+                    eE = db.SelectEquiposEncuentros($"SELECT * FROM EquiposEncuentros WHERE IdEquipo = '{constraint}' AND " +
+                        $"FechaEncuentro = '{date}'");
+                    break;
             }
             return eE;
         }
@@ -633,6 +618,18 @@ namespace Sistema_de_Resultados_Deportivos
         {
             db.ExecuteSql($"INSERT INTO EquiposFavoritos (IdEquipo, Email) VALUES " +
                 $"('{equipo}', '{email}')");
+        }
+
+        public static void InsertEncuentrosFavoritos(string email, int enc)
+        {
+            db.ExecuteSql($"INSERT INTO EncuentrosFavoritos (IdEncuentro, Email) VALUES " +
+                $"('{enc}', '{email}')");
+        }
+
+        public static void InsertEventosFavoritos(string email, int eve)
+        {
+            db.ExecuteSql($"INSERT INTO EventosFavoritos (IdEvento, Email) VALUES " +
+                $"('{eve}', '{email}')");
         }
 
         public static void InsertEquiposDeportistas(int idEq, int IdD)

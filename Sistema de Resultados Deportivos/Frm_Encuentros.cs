@@ -3,6 +3,7 @@
     public partial class Frm_Encuentros : Form
     {
         private static Frm_Encuentros form = null;
+        bool favorite = false;
         int id;
         Encuentro encuentro = new Encuentro();
         List<EquiposEncuentros> equiposEncuentro = new List<EquiposEncuentros>();
@@ -19,6 +20,19 @@
             SetTheme();
             SetIdioma();
             form = this;
+
+            if (Program.user.email == null)
+            {
+                picFavorito.Hide();
+            }
+            else
+            {
+                if (Program.user.encuentrosFavoritos.Exists(e => e.idEncuentro == id))
+                {
+                    favorite = true;
+                    picFavorito.BackgroundImage = Properties.Resources.estrellaRellena;
+                }
+            }
 
             llbTeam2.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llbTeam2); };
             llbTeam2.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llbTeam2); };
@@ -38,53 +52,77 @@
                 if (equipos[count].Miembros.Count() > amount) { amount = equipos[count].Miembros.Count(); }
                 count++;
             }
-            llbTeam1.Text = equipos[0].NombreEquipo;
-            llbTeam2.Text = equipos[1].NombreEquipo;
-            llbTeam1.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[0].IdEquipo); };
-            llbTeam2.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[1].IdEquipo); };
-            if (encuentro.TipoEncuentro == 1 || encuentro.TipoEncuentro == 2 || encuentro.TipoEncuentro == 4)
+            if (equiposEncuentro.Count() > 0)
             {
-                lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equipos[0].IdEquipo);
-                lastMatchsEq2 = Logica.GetEquiposEncuentros(3, "" + equipos[1].IdEquipo);
+                llbTeam1.Text = equipos[0].NombreEquipo;
+                llbTeam2.Text = equipos[1].NombreEquipo;
+                llbTeam1.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[0].IdEquipo); };
+                llbTeam2.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[1].IdEquipo); };
+                if (encuentro.TipoEncuentro == 1 || encuentro.TipoEncuentro == 2 || encuentro.TipoEncuentro == 4)
+                {
+                    lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equipos[0].IdEquipo);
+                    lastMatchsEq2 = Logica.GetEquiposEncuentros(3, "" + equipos[1].IdEquipo);
 
-                switch (encuentro.TipoEncuentro)
-                {
-                    case 1:
-                        lblMarcador.Show();
-                        lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
-                        lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                        break;
-                    case 2:
-                        lblMarcador.Show();
-                        lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
-                        lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                        break;
-                    case 4:
-                        char eq1, eq2;
-                        if (equiposEncuentro[0].Posicion == 1 && equiposEncuentro[1].Posicion == 1)
-                        {
+                    switch (encuentro.TipoEncuentro)
+                    {
+                        case 1:
                             lblMarcador.Show();
-                            lblMarcador.Text =  "Draw";
+                            lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
                             lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                        } else if (equiposEncuentro[0].Posicion == 1) {
+                            break;
+                        case 2:
                             lblMarcador.Show();
-                            lblMarcador.Text = "W - L";
+                            lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
                             lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                        } else if (equiposEncuentro[1].Posicion == 1)
-                        {
-                            lblMarcador.Show();
-                            lblMarcador.Text = "L - W";
-                            lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                        }
-                        break;
+                            break;
+                        case 4:
+                            char eq1, eq2;
+                            if (equiposEncuentro[0].Posicion == 1 && equiposEncuentro[1].Posicion == 1)
+                            {
+                                lblMarcador.Show();
+                                lblMarcador.Text = "Draw";
+                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                            }
+                            else if (equiposEncuentro[0].Posicion == 1)
+                            {
+                                lblMarcador.Show();
+                                lblMarcador.Text = "W - L";
+                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                            }
+                            else if (equiposEncuentro[1].Posicion == 1)
+                            {
+                                lblMarcador.Show();
+                                lblMarcador.Text = "L - W";
+                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                            }
+                            break;
+                    }
                 }
-            } else if (encuentro.TipoEncuentro == 3)
-            {
-                lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equiposEncuentro.Find(e => e.Posicion == 1).IdEquipo);
-                if (equiposEncuentro.Count() > 2)
+                else if (encuentro.TipoEncuentro == 3)
                 {
-                    llbTeam1.Text = "";
-                    llbTeam2.Text = "";
+                    lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equiposEncuentro.Find(e => e.Posicion == 1).IdEquipo);
+                    if (equiposEncuentro.Count() > 2)
+                    {
+                        llbTeam1.Text = "";
+                        llbTeam2.Text = "";
+                    }
+                }
+                if (equiposEncuentro.Count() == 2)
+                {
+                    Bitmap imagenCargada1 = null;
+                    try
+                    {
+                        imagenCargada1 = new Bitmap(equipos[0].ImagenRepresentativa);
+                    }
+                    catch { }
+                    pictureBox1.BackgroundImage = imagenCargada1;
+                    Bitmap imagenCargada2 = null;
+                    try
+                    {
+                        imagenCargada2 = new Bitmap(equipos[1].ImagenRepresentativa);
+                    }
+                    catch { }
+                    pictureBox2.BackgroundImage = imagenCargada2;
                 }
             }
             hitos = Logica.GetHitos(3, id, 0);
@@ -173,10 +211,10 @@
 
                                     if (i == 1)
                                     {
-                                        p1.Controls.Add(p4);
+                                        p2.Controls.Add(p4);
                                     } else
                                     {
-                                        p2.Controls.Add(p4);
+                                        p1.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(llb);
                                 }
@@ -256,6 +294,7 @@
                                 
                                 foreach (var enc in eqEnc)
                                 {
+                                    int id = enc.IdEncuentro;
                                     Panel p4 = new Panel();
 
                                     p4.Dock = DockStyle.Top;
@@ -289,8 +328,8 @@
                                     l2.TabIndex = 3;
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };
-                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };;
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
+                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };;
 
                                     if (i == 1)
                                     {
@@ -500,6 +539,7 @@
                         case 3: // Últimos 10 encuentros (del ganador)
                             foreach (var l in lastMatchsEq1)
                             {
+                                int id = l.IdEncuentro;
                                 Panel p4 = new Panel();
 
                                 p4.Dock = DockStyle.Top;
@@ -507,16 +547,6 @@
                                 p4.Size = new Size(724, 50);
                                 p4.TabIndex = 0;
                                 p4.BackColor = AjustesDeUsuario.panel;
-
-                                PictureBox pic1 = new PictureBox();
-
-                                pic1.InitialImage = null;
-                                pic1.BackColor = Color.Transparent;
-                                pic1.Size = new Size(40, 40);
-                                pic1.Location = new Point(10, 5);
-                                pic1.TabIndex = 1;
-                                pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                pic1.Image = l.ImagenRepresentativa;
 
                                 Label l2 = new Label();
 
@@ -529,13 +559,11 @@
                                 l2.TabIndex = 3;
                                 l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
-                                l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
-                                pic1.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, l.IdEncuentro); };
+                                p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
+                                l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
 
                                 panelContenedor.Controls.Add(p4);
                                 p4.Controls.Add(l2);
-                                p4.Controls.Add(pic1);
                             }
                             break;
 
@@ -827,11 +855,11 @@
 
                                     if (i == 1)
                                     {
-                                        p1.Controls.Add(p4);
+                                        p2.Controls.Add(p4);
                                     }
                                     else
                                     {
-                                        p2.Controls.Add(p4);
+                                        p1.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(llb);
                                 }
@@ -912,6 +940,7 @@
                                 
                                 foreach (var enc in eqEnc)
                                 {
+                                    int id = enc.IdEncuentro;
                                     Panel p4 = new Panel();
 
                                     p4.Dock = DockStyle.Top;
@@ -945,8 +974,8 @@
                                     l9.TabIndex = 3;
                                     l9.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };
-                                    l9.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };;
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
+                                    l9.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };;
 
                                     if (i == 1)
                                     {
@@ -1120,6 +1149,7 @@
 
                                 foreach (var enc in eqEnc)
                                 {
+                                    int id = enc.IdEncuentro;
                                     Panel p4 = new Panel();
 
                                     p4.Dock = DockStyle.Top;
@@ -1153,8 +1183,8 @@
                                     l2.TabIndex = 3;
                                     l2.ForeColor = AjustesDeUsuario.foreColor;
 
-                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); };
-                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, enc.IdEncuentro); }; ;
+                                    p4.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); };
+                                    l2.Click += (sender, EventArgs) => { UltimoEncuentro_Click(sender, EventArgs, id); }; ;
 
                                     if (i == 1)
                                     {
@@ -1252,7 +1282,7 @@
 
         private void llb_Click(object sender, EventArgs e, int id, int tipo)
         {
-            Principal.AlterPrincipal(tipo, 6, id);
+            Principal.AlterPrincipal(2, 6, id);
         }
 
         private void btnJugadores_Click(object sender, EventArgs e)
@@ -1281,11 +1311,6 @@
         }
 
         private void llbTeam1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e, int id)
-        {
-            Principal.AlterPrincipal(1, 6, id);
-        }
-
-        private void llbTeam2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e, int id)
         {
             Principal.AlterPrincipal(1, 6, id);
         }
@@ -1365,6 +1390,24 @@
                     btnResumen.Text = "Resumen";
                     btnUltimosEncuentros.Text = "Últimos encuentros";
                     break;
+            }
+        }
+
+        private void picFavorito_Click(object sender, EventArgs e)
+        {
+            if (favorite == false)
+            {
+                picFavorito.BackgroundImage = Properties.Resources.estrellaRellena;
+                favorite = true;
+                Logica.InsertEncuentrosFavoritos(Program.user.email, id);
+                Program.refreshFavorites();
+            }
+            else
+            {
+                picFavorito.BackgroundImage = Properties.Resources.estrellaVacia;
+                favorite = false;
+                Logica.Delete("EncuentrosFavoritos", "Email", Program.user.email, "IdEncuentro", "" + id);
+                Program.refreshFavorites();
             }
         }
     }

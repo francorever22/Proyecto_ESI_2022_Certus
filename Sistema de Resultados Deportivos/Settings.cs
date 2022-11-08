@@ -4,6 +4,7 @@
     {
         bool theme = AjustesDeUsuario.darkTheme;
         bool tray = AjustesDeUsuario.tray;
+        bool noti = AjustesDeUsuario.notificaciones;
         String lan = AjustesDeUsuario.language;
         public Settings()
         {
@@ -13,11 +14,6 @@
             cbxLenguaje.SelectedItem = AjustesDeUsuario.language;
             tglTema.Checked = theme;
             tglTray.Checked = tray;
-        }
-        
-        private void Settings_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void tglTema_CheckedChanged(object sender, EventArgs e)
@@ -33,7 +29,7 @@
                 {
                     AjustesDeUsuario.darkTheme = theme;
                     AjustesDeUsuario.SetTheme();
-                    this.SetTheme();
+                    SetTheme();
                     Principal.AlterPrincipal(0, 1, 0);
                     Users.AlterUsers(1);
                     Login.AlterLogin(1);
@@ -50,7 +46,7 @@
                 if (AjustesDeUsuario.language != lan)
                 {
                     AjustesDeUsuario.language = lan;
-                    this.SetIdioma();
+                    SetIdioma();
                     Principal.AlterPrincipal(0, 2, 0);
                     Users.AlterUsers(2);
                     Login.AlterLogin(2);
@@ -58,17 +54,35 @@
                     Frm_Encuentros.AlterEncuentros(2);
                     Frm_Noticias.AlterNoticias(2);
                 }
+                if (AjustesDeUsuario.notificaciones != noti)
+                {
+                    AjustesDeUsuario.notificaciones = noti;
+                }
+
+                SaveAsync();
+
                 MessageBox.Show("Ajustes guardados correctamente");
             } catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Error"); return;
             }
         }
         
         private void btnCerrarSettings_Click(object sender, EventArgs e)
         {
             Parent.Hide();
-            this.Close();
+            Close();
+        }
+
+        private async Task SaveAsync()
+        {
+            string[] lines = {
+                    $"language = {AjustesDeUsuario.language}",
+                    $"darkTheme = {AjustesDeUsuario.darkTheme}",
+                    $"tray = {AjustesDeUsuario.tray}",
+                    $"notificaciones = {AjustesDeUsuario.notificaciones}"
+                };
+            await File.WriteAllLinesAsync("C:\\Certus\\SRD\\Ajustes.txt", lines);
         }
 
         private void cbxLenguaje_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,7 +104,6 @@
                     lblConfiguraciones.Text = "Settings";
                     lblConfiguraciones.Location = new Point(136, 9);
                     lblactivarNotificaciones.Text = "Activate notifications";
-                    lblIniciarapp.Text = "Open application on pc startup";
                     lblMinimizarlabandeja.Text = "Minimize to tray";
                     lblLenguaje.Text = "Language";
                     lblTema.Text = "Dark theme";
@@ -100,7 +113,6 @@
                     lblConfiguraciones.Text = "Configuraciones";
                     lblConfiguraciones.Location = new Point(92, 9);
                     lblactivarNotificaciones.Text = "Activar notificaciones";
-                    lblIniciarapp.Text = "Abrir app al iniciar el sistema";
                     lblMinimizarlabandeja.Text = "Minimizar a la bandeja";
                     lblLenguaje.Text = "Lenguaje";
                     lblTema.Text = "Tema oscuro";
@@ -127,7 +139,6 @@
             lblTema.ForeColor = AjustesDeUsuario.foreColor;
             lblConfiguraciones.ForeColor = AjustesDeUsuario.foreColor;
             lblactivarNotificaciones.ForeColor = AjustesDeUsuario.foreColor;
-            lblIniciarapp.ForeColor = AjustesDeUsuario.foreColor;
             cbxLenguaje.ForeColor = AjustesDeUsuario.foreColor;
             cbxLenguaje.BackColor = AjustesDeUsuario.btnBack;
             /* Botones on/off */
@@ -139,14 +150,15 @@
             tglTray.OffToggleColor = Color.Gainsboro;
             tglTray.OnBackColor = AjustesDeUsuario.foreColor;
             tglTray.OnToggleColor = Color.WhiteSmoke;
-            tglInicio.OffBackColor = Color.Gray;
-            tglInicio.OffToggleColor = Color.Gainsboro;
-            tglInicio.OnBackColor = AjustesDeUsuario.foreColor;
-            tglInicio.OnToggleColor = Color.WhiteSmoke;
             tglNotificaciones.OffBackColor = Color.Gray;
             tglNotificaciones.OffToggleColor = Color.Gainsboro;
             tglNotificaciones.OnBackColor = AjustesDeUsuario.foreColor;
             tglNotificaciones.OnToggleColor = Color.WhiteSmoke;
+        }
+
+        private void tglNotificaciones_CheckedChanged(object sender, EventArgs e)
+        {
+            noti = tglNotificaciones.Checked;
         }
     }
 }

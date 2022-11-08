@@ -1,103 +1,46 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Security;
+using System.Drawing.Imaging;
 
 namespace Sistema_de_Resultados_Deportivos
 {
     internal class Toast
     {
         private static Toast baker = null;
-        public Toast(int x, String title, String msg)
+        public Toast(int x, String title, String msg, int id)
         {
             baker = this;
-            SelectBread(x, title, msg);
+            SelectBread(x, title, msg, id);
         }
 
-        private void MatchBeginsToast(String title, String msg)
-        {
-            new ToastContentBuilder()
-            .AddText(title)
-            .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 1, null))
-            .Show();
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                ToastClick(1);
-            };
-        }
-
-        private void MatchScoreToast(String title, String msg)
-        {
-            new ToastContentBuilder()
-            .AddText(title)
-            .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, "10 - 10"))
-            .Show();
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                ToastClick(1);
-            };
-        }
-
-        private void MatchRoundToast(String title, String msg)
-        {
-            new ToastContentBuilder()
-            .AddText(title)
-            .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), new Bitmap(Properties.Resources.realmadrid), 2, "1 - 1"))
-            .Show();
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                ToastClick(1);
-            };
-        }
-
-        private void MatchNotificationToast(String title, String msg)
+        private void MatchBeginsToast(String title, String msg, int id)
         {
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
             .Show();
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                ToastClick(1);
-            };
         }
 
-        private void EventToast(String title, String msg)
+        private void EventToast(String title, String msg, int id)
         {
             new ToastContentBuilder()
             .AddText(title)
             .AddText(msg)
-            .AddInlineImage(NewImage(new Bitmap(Properties.Resources.barcelona), null, 4, null))
             .Show();
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                ToastClick(2);
-            };
         }
 
-        private void ToastClick(int type)
-        {
-            Principal.AlterPrincipal(type, 4, 1);
-        }
-
-        private void SelectBread(int x, String title, String msg)
+        private void SelectBread(int x, String title, String msg, int id)
         {
             switch (x)
             {
                 case 0:
-                    baker.MatchBeginsToast(title, msg);
+                    baker.MatchBeginsToast(title, msg, id);
                     break;
                 case 1:
-                    baker.MatchScoreToast(title, msg);
-                    break;
-                case 2:
-                    baker.MatchRoundToast(title, msg);
-                    break;
-                case 3:
-                    baker.MatchNotificationToast(title, msg);
-                    break;
-                case 4:
-                    baker.EventToast(title, msg);
+                    baker.EventToast(title, msg, id);
                     break;
             }
         }
@@ -109,6 +52,8 @@ namespace Sistema_de_Resultados_Deportivos
              * 2) Match score */
             Bitmap first;
             Bitmap second;
+            Directory.CreateDirectory(@"C:\Certus\SRD\Toast");
+            string FilePath = $@"C:\\Certus\\SRD\\Toast\\toast.png";
             switch (type)
             {
                 case 1: //For VS
@@ -128,7 +73,15 @@ namespace Sistema_de_Resultados_Deportivos
                         g.DrawImage(image2, first.Width, 15);
                     }
 
-                    second.Save("toast.png");
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            second.Save(memory, ImageFormat.Png);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
                     break;
                 case 2: //For score
                     Bitmap score = new Bitmap(GetText(textImage, 1));
@@ -147,7 +100,15 @@ namespace Sistema_de_Resultados_Deportivos
                         g.DrawImage(image2, first.Width, 15);
                     }
 
-                    second.Save("toast.png");
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            second.Save(memory, ImageFormat.Png);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
                     break;
                 case 3: //For round
 
@@ -174,7 +135,15 @@ namespace Sistema_de_Resultados_Deportivos
                         g.DrawImage(image2, first.Width, 15);
                     }
 
-                    second.Save("toast.png");
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            second.Save(memory, ImageFormat.Png);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
                     break;
                 case 4: //For single images
 
@@ -184,10 +153,18 @@ namespace Sistema_de_Resultados_Deportivos
                         g.DrawImage(image1, 107, 15);
                     }
 
-                    first.Save("toast.png");
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            first.Save(memory, ImageFormat.Png);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
                     break;
             }
-            Uri uri = new Uri(@"C:\Users\Hinoken\source\repos\Proyecto_ESI_2022_Certus\Sistema de Resultados Deportivos\bin\Debug\net6.0-windows10.0.17763.0\toast.png");
+            Uri uri = new Uri(FilePath);
             return uri;
         }
 
@@ -222,6 +199,21 @@ namespace Sistema_de_Resultados_Deportivos
                     break;
             }
             return s;
+        }
+
+        public void SendMail(string receptor, string title, string body)
+        {
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("Certus.SRL@gmail.com"));
+            email.To.Add(MailboxAddress.Parse(receptor));
+            email.Subject = title;
+            email.Body = new TextPart(TextFormat.Html) { Text = "<h1>"+body+"</h1>" };
+
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate("Certus.SRL@gmail.com", "khzjnzequehueazq");
+            smtp.Send(email);
+            smtp.Disconnect(true);
         }
     }
 }

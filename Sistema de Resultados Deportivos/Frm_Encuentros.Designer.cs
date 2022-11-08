@@ -43,12 +43,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblState = new System.Windows.Forms.Label();
+            this.picFavorito = new System.Windows.Forms.PictureBox();
             this.panelPrincipal.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.panelTeam2.SuspendLayout();
             this.panelTeam1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFavorito)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
@@ -179,6 +181,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(50, 18);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -188,6 +191,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(576, 18);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
@@ -202,11 +206,24 @@
             this.lblState.Size = new System.Drawing.Size(0, 15);
             this.lblState.TabIndex = 4;
             // 
+            // picFavorito
+            // 
+            this.picFavorito.BackColor = System.Drawing.Color.Transparent;
+            this.picFavorito.BackgroundImage = global::Sistema_de_Resultados_Deportivos.Properties.Resources.estrellaVacia;
+            this.picFavorito.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picFavorito.Location = new System.Drawing.Point(6, 6);
+            this.picFavorito.Name = "picFavorito";
+            this.picFavorito.Size = new System.Drawing.Size(30, 30);
+            this.picFavorito.TabIndex = 18;
+            this.picFavorito.TabStop = false;
+            this.picFavorito.Click += new System.EventHandler(this.picFavorito_Click);
+            // 
             // Frm_Encuentros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 552);
+            this.Controls.Add(this.picFavorito);
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -222,6 +239,7 @@
             this.panelTeam1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFavorito)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,5 +261,6 @@
         private LinkLabel llbTeam2;
         private LinkLabel llbTeam1;
         private Label lblState;
+        private PictureBox picFavorito;
     }
 }

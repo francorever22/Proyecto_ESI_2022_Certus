@@ -23,7 +23,7 @@
             {
                 txtUser.Text = u.nombreUsuario;
                 txtEmail.Text = u.email;
-                if (u.numeroTelefono != null)
+                if (u.numeroTelefono != null && u.numeroTelefono != "")
                 {
                     txtPhoneNumber.Text = u.numeroTelefono;
                     btnAddNumber.Hide();
@@ -33,10 +33,15 @@
                     txtPhoneNumber.Hide();
                     btnEditPhone.Hide();
                 }
+                if (u.nivelPermisos >= 2)
+                {
+                    btnPremium.Hide();
+                }
             }
             foreach (var ef in u.encuentrosFavoritos)
             {
                 var enc = Logica.GetEncuentros(4, ""+ef.idEncuentro)[0];
+                int idEnc = enc.IdEncuentro;
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -44,36 +49,44 @@
                 p1.Size = new Size(265, 25);
                 p1.TabIndex = 0;
 
-                TextBox l1 = new TextBox();
+                LinkLabel llb1 = new LinkLabel();
 
-                l1.ReadOnly = true;
-                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"{enc.Nombre}";
-                l1.TextAlign = HorizontalAlignment.Center;
-                l1.Size = new Size(257, 25);
-                l1.AutoSize = false;
-                l1.BorderStyle = BorderStyle.FixedSingle;
-                l1.Location = new Point(0, 0);
-                l1.TabIndex = 3;
+                llb1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                llb1.Text = $"{enc.Nombre}";
+                llb1.TextAlign = ContentAlignment.MiddleCenter;
+                llb1.Size = new Size(257, 25);
+                llb1.AutoSize = false;
+                llb1.BorderStyle = BorderStyle.FixedSingle;
+                llb1.Location = new Point(0, 0);
+                llb1.TabIndex = 3;
+                llb1.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                llb1.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                llb1.ActiveLinkColor = AjustesDeUsuario.foreColor;
+                llb1.LinkBehavior = LinkBehavior.NeverUnderline;
+                llb1.LinkColor = AjustesDeUsuario.foreColor;
+                llb1.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb1); };
+                llb1.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb1); };
+                llb1.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, idEnc, 5); };
 
                 switch (AjustesDeUsuario.darkTheme)
                 {
                     case false: //Tema claro
-                        l1.ForeColor = Color.Black;
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        llb1.ForeColor = Color.Black;
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
                         break;
                     case true: //Tema oscuro
-                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        llb1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
                         break;
                 }
 
                 panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
-                p1.Controls.Add(l1);
+                p1.Controls.Add(llb1);
             }
             foreach (var ef in u.eventosFavoritos)
             {
                 var eve = Logica.GetEventos(4, "" + ef.idEvento)[0];
+                int idEve = eve.IdEvento;
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -81,36 +94,44 @@
                 p1.Size = new Size(265, 25);
                 p1.TabIndex = 0;
 
-                TextBox l1 = new TextBox();
+                LinkLabel llb1 = new LinkLabel();
 
-                l1.ReadOnly = true;
-                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"{eve.NombreEvento}";
-                l1.TextAlign = HorizontalAlignment.Center;
-                l1.Size = new Size(257, 25);
-                l1.AutoSize = false;
-                l1.BorderStyle = BorderStyle.FixedSingle;
-                l1.Location = new Point(0, 0);
-                l1.TabIndex = 3;
+                llb1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                llb1.Text = $"{eve.NombreEvento}";
+                llb1.TextAlign = ContentAlignment.MiddleCenter;
+                llb1.Size = new Size(257, 25);
+                llb1.AutoSize = false;
+                llb1.BorderStyle = BorderStyle.FixedSingle;
+                llb1.Location = new Point(0, 0);
+                llb1.TabIndex = 3;
+                llb1.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                llb1.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                llb1.ActiveLinkColor = AjustesDeUsuario.foreColor;
+                llb1.LinkBehavior = LinkBehavior.NeverUnderline;
+                llb1.LinkColor = AjustesDeUsuario.foreColor;
+                llb1.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb1); };
+                llb1.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb1); };
+                llb1.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, idEve, 7); };
 
                 switch (AjustesDeUsuario.darkTheme)
                 {
                     case false: //Tema claro
-                        l1.ForeColor = Color.Black;
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        llb1.ForeColor = Color.Black;
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
                         break;
                     case true: //Tema oscuro
-                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        llb1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
                         break;
                 }
 
                 panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
-                p1.Controls.Add(l1);
+                p1.Controls.Add(llb1);
             }
             foreach (var ef in u.equiposFavoritos)
             {
                 var eq = Logica.GetEquipos(3, "" + ef.idEquipo)[0];
+                int idEq = eq.IdEquipo;
                 Panel p1 = new Panel();
 
                 p1.Dock = DockStyle.Top;
@@ -118,34 +139,63 @@
                 p1.Size = new Size(265, 25);
                 p1.TabIndex = 0;
 
-                TextBox l1 = new TextBox();
+                LinkLabel llb1 = new LinkLabel();
 
-                l1.ReadOnly = true;
-                l1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-                l1.Text = $"{eq.NombreEquipo}";
-                l1.TextAlign = HorizontalAlignment.Center;
-                l1.Size = new Size(257, 25);
-                l1.AutoSize = false;
-                l1.BorderStyle = BorderStyle.FixedSingle;
-                l1.Location = new Point(0, 0);
-                l1.TabIndex = 3;
+                llb1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+                llb1.Text = $"{eq.NombreEquipo}";
+                llb1.TextAlign = ContentAlignment.MiddleCenter;
+                llb1.Size = new Size(257, 25);
+                llb1.AutoSize = false;
+                llb1.BorderStyle = BorderStyle.FixedSingle;
+                llb1.Location = new Point(0, 0);
+                llb1.TabIndex = 3;
+                llb1.DisabledLinkColor = AjustesDeUsuario.foreColor;
+                llb1.VisitedLinkColor = AjustesDeUsuario.foreColor;
+                llb1.ActiveLinkColor = AjustesDeUsuario.foreColor;
+                llb1.LinkBehavior = LinkBehavior.NeverUnderline;
+                llb1.LinkColor = AjustesDeUsuario.foreColor;
+                llb1.MouseHover += (sender, EventArgs) => { mouseHover_Click(sender, EventArgs, llb1); };
+                llb1.MouseLeave += (sender, EventArgs) => { mouseLeave_Click(sender, EventArgs, llb1); };
+                llb1.Click += (sender, EventArgs) => { llb_Click(sender, EventArgs, idEq, 6); };
 
                 switch (AjustesDeUsuario.darkTheme)
                 {
                     case false: //Tema claro
-                        l1.ForeColor = Color.Black;
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+                        llb1.ForeColor = Color.Black;
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
                         break;
                     case true: //Tema oscuro
-                        l1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
-                        l1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                        llb1.ForeColor = Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(110)))), ((int)(((byte)(223)))));
+                        llb1.BackColor = Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
                         break;
                 }
 
                 panelDepFav.Controls.Add(p1); //Agrega los controles al panelDepFav
-                p1.Controls.Add(l1);
+                p1.Controls.Add(llb1);
             }
         }
+
+        private void mouseHover_Click(object sender, EventArgs e, LinkLabel l)
+        {
+            l.LinkColor = Color.MediumVioletRed;
+        }
+
+        private void mouseLeave_Click(object sender, EventArgs e, LinkLabel l)
+        {
+            l.LinkColor = AjustesDeUsuario.foreColor;
+        }
+
+        private void llb_Click(object sender, EventArgs e, int id, int tipo)
+        {
+            if (tipo != 6)
+            {
+                Principal.AlterPrincipal(id, tipo, 0);
+            } else
+            {
+                Principal.AlterPrincipal(1, tipo, id);
+            }
+        }
+
         private void btnEditarEmail_Click(object sender, EventArgs e)
         {
             if (editingEmail == true)
@@ -289,7 +339,8 @@
 
         private void btnPremium_Click(object sender, EventArgs e)
         {
-
+            Principal.AlterPrincipal(0, 8, 0);
+            Principal.AlterPrincipal(0, 9, 0);
         }
 
         public static void AlterUsers(int y)
