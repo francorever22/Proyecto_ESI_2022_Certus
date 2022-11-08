@@ -156,7 +156,7 @@ namespace SRD_BackOffice
                             Bitmap bannerImage = new Bitmap(image);
 
                             Directory.CreateDirectory(@"C:\Certus\SRD\Banners");
-                            string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.gif";
+                            string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.bmp";
                             using (MemoryStream memory = new MemoryStream())
                             {
                                 using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
@@ -254,9 +254,12 @@ namespace SRD_BackOffice
 
             txtBannerTitle.Text = banner.TitleBanner;
             txtBannerLink.Text = banner.Link;
+            string path = banner.BannerImage;
+            MessageBox.Show(path);
             try
             {
-                image = new Bitmap(banner.BannerImage);
+
+                image = new Bitmap(path);
             } catch { }
             imgBannerSelected.Image = image;
             btnAddBanner.Text = "Modify";

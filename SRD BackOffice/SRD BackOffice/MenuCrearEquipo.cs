@@ -341,6 +341,19 @@ namespace SRD_BackOffice
             panelContenedor.Size = new Size(352, 222);
             panelContenedor.AutoScroll = true;
 
+            Button btnCerrar = new Button();
+
+            btnCerrar.BackColor = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            btnCerrar.Cursor = Cursors.Hand;
+            btnCerrar.FlatAppearance.BorderColor = Color.DimGray;
+            btnCerrar.FlatAppearance.MouseDownBackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            btnCerrar.Location = new Point(325, 4);
+            btnCerrar.Size = new Size(21, 21);
+            btnCerrar.Text = "X";
+            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += new EventHandler(btnCerrarBuscador_Click);
+
             Button btn1 = new Button();
 
             btn1.Size = new Size(80, 20);
@@ -356,6 +369,7 @@ namespace SRD_BackOffice
             panelBuscadorEquipos.Controls.Add(buscador);
             panelBuscadorEquipos.Controls.Add(btnBuscar);
             panelBuscadorEquipos.Controls.Add(btn1);
+            panelBuscadorEquipos.Controls.Add(btnCerrar);
             panelPrincipal.Controls.Add(panelLabels);
             panelPrincipal.Controls.Add(panelContenedor);
             panelLabels.Controls.Add(lblDeportista);
@@ -413,6 +427,11 @@ namespace SRD_BackOffice
 
                 count++;
             }
+        }
+
+        private void btnCerrarBuscador_Click(object sender, EventArgs e)
+        {
+            panelBuscadorEquipos.Hide();
         }
 
         private void BtnChange(object sender, EventArgs e, Button b, Panel p, int id, string name)

@@ -254,6 +254,7 @@ public class DB_Connection
         }
         else
         {
+            Connection_Close();
             return banners;
         }
     }
