@@ -199,7 +199,7 @@
                     pic2.Location = new Point(428, 7);
                     pic2.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic2.Image = Properties.Resources.pluma;
-                    pic2.Click += (sender, EventArgs) => { Modify(sender, EventArgs, deportistas.IndexOf(deportista)); };
+                    pic2.Click += (sender, EventArgs) => { Modify(sender, EventArgs, deportista.IdPersona); };
 
                     panelContenedor.Controls.Add(p1); //Agrega los controles al panelDeportesContenedor
                     p1.Controls.Add(pic2);

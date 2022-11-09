@@ -5,7 +5,7 @@ namespace SRD_BackOffice
     public partial class MenuCrearEvento : Form
     {
         bool modify, startModify = false, avoid = false;
-        string eqName, encName;
+        string eqName, encName, oldPath;
         Bitmap imagenCargada = null;
         int index, cantFases = 1, faseSeleccionada = 1, groupAmount = 1, groupSize = 2, eqId, lblId = 0, txtId = 0, txtPos = 0, tipoFase = 1, encId;
         List<Fase> fases = new List<Fase>();
@@ -63,12 +63,7 @@ namespace SRD_BackOffice
             } catch { }
             txtlugarEvento.Text = evento.Lugar;
             cbxEstadoEvento.Text = evento.EstadoEvento;
-            string path = evento.LogoEvento;
-            try
-            {
-                imagenCargada = new Bitmap(path);
-            } catch { }
-            imgEventSelected.Image = imagenCargada;
+            oldPath = evento.LogoEvento;
 
             evento.Fases = Logica.GetFases(2, ""+index);
 
@@ -1074,18 +1069,28 @@ namespace SRD_BackOffice
                                    horaEvento = txtHoraEvento.Text,
                                    estadoEvento = cbxEstadoEvento.Text,
                                    lugar = txtlugarEvento.Text;
-                            Bitmap imagenEvento = new Bitmap(imagenCargada);
-
-                            Directory.CreateDirectory(@"C:\Certus\SRD\Eventos");
-                            string FilePath = $@"C:\\Certus\\SRD\\Eventos\\{nombreEvento + lugar + fechaEvento}.bmp";
-                            using (MemoryStream memory = new MemoryStream())
+                            Bitmap imagenEvento = null;
+                            try
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                imagenEvento = new Bitmap(imagenCargada);
+                            } catch { }
+
+                            string FilePath = $@"C:\\Certus\\SRD\\Eventos\\{nombreEvento + lugar + fechaEvento}.bmp";
+                            if (imagenEvento != null)
+                            {
+                                Directory.CreateDirectory(@"C:\Certus\SRD\Eventos");
+                                using (MemoryStream memory = new MemoryStream())
                                 {
-                                    imagenEvento.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        imagenEvento.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
                                 }
+                            } else
+                            {
+                                FilePath = oldPath;
                             }
 
                             Logica.UpdateEvento(index, nombreEvento, fechaEvento, horaEvento, estadoEvento, lugar, FilePath);

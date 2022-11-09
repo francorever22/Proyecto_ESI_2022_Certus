@@ -6,7 +6,7 @@ namespace SRD_BackOffice
     {
         Bitmap imagenCargada = null;
         bool modify = false;
-        string member;
+        string member, oldPath;
         int index, idMember;
         List<EquiposDeportistas> miembros = new List<EquiposDeportistas>();
 
@@ -35,11 +35,7 @@ namespace SRD_BackOffice
             equipo.Miembros = Logica.GetEquiposDeportistas(3, "" + index);
             
             btnSportAdd.Text = "Modify";
-            try
-            {
-                imagenCargada = new Bitmap(equipo.ImagenRepresentativa);
-            } catch { }
-            picTeam.Image = imagenCargada;
+            oldPath = equipo.ImagenRepresentativa;
             txtNombre.Text = equipo.NombreEquipo;
             txtPais.Text = equipo.PaisOrigen;
             cbxTipo.SelectedItem = equipo.TipoEquipo;
@@ -158,7 +154,7 @@ namespace SRD_BackOffice
                 }
             } else
             {
-                if (txtNombre.Text != "" && picTeam.Image != null && txtPais.Text != "" && cbxTipo.Text != "")
+                if (txtNombre.Text != "" && txtPais.Text != "" && cbxTipo.Text != "")
                 {
                     DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify team", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
@@ -168,19 +164,28 @@ namespace SRD_BackOffice
                             string nombreEquipo = txtNombre.Text,
                                    paisOrigen = txtPais.Text,
                                    tipoEquipo = cbxTipo.Text;
-                            Bitmap imagenEquipo = new Bitmap(imagenCargada);
-
-                            Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
-                            string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
-
-                            using (MemoryStream memory = new MemoryStream())
+                            Bitmap imagenEquipo = null;
+                            try
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                imagenEquipo = new Bitmap(imagenCargada);
+                            } catch { }
+
+                            string FilePath = $@"C:\\Certus\\SRD\\Equipos\\{nombreEquipo + paisOrigen + tipoEquipo}.bmp";
+                            if (imagenEquipo != null)
+                            {
+                                Directory.CreateDirectory(@"C:\Certus\SRD\Equipos");
+                                using (MemoryStream memory = new MemoryStream())
                                 {
-                                    imagenEquipo.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        imagenEquipo.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
                                 }
+                            } else
+                            {
+                                FilePath = oldPath;
                             }
 
                             Logica.UpdateEquipo(index, nombreEquipo, paisOrigen, tipoEquipo, FilePath);

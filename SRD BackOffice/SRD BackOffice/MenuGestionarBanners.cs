@@ -6,6 +6,7 @@ namespace SRD_BackOffice
     {
         Bitmap image = null;
         bool modify = false;
+        string oldPath;
         int index;
         public MenuGestionarBanners()
         {
@@ -144,7 +145,7 @@ namespace SRD_BackOffice
             }
             else
             {
-                if (txtBannerTitle.Text != "" && txtBannerLink.Text != "" && image != null)
+                if (txtBannerTitle.Text != "" && txtBannerLink.Text != "")
                 {
                     DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify banner", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
@@ -153,18 +154,30 @@ namespace SRD_BackOffice
                         {
                             string titleBanner = txtBannerTitle.Text,
                                    link = txtBannerLink.Text;
-                            Bitmap bannerImage = new Bitmap(image);
-
-                            Directory.CreateDirectory(@"C:\Certus\SRD\Banners");
-                            string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.bmp";
-                            using (MemoryStream memory = new MemoryStream())
+                            Bitmap bannerImage = null;
+                            try
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                bannerImage = new Bitmap(image);
+                            }
+                            catch { }
+
+                            string FilePath = $@"C:\\Certus\\SRD\\Banners\\{titleBanner}.bmp";
+                            if (bannerImage != null)
+                            {
+                                Directory.CreateDirectory(@"C:\Certus\SRD\Banners");
+                                using (MemoryStream memory = new MemoryStream())
                                 {
-                                    bannerImage.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        bannerImage.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                FilePath = oldPath;
                             }
 
                             Logica.UpdateBanner(index, titleBanner, link, FilePath);
@@ -254,12 +267,7 @@ namespace SRD_BackOffice
 
             txtBannerTitle.Text = banner.TitleBanner;
             txtBannerLink.Text = banner.Link;
-            string path = banner.BannerImage;
-            try
-            {
-                image = new Bitmap(path);
-            } catch { }
-            imgBannerSelected.Image = image;
+            oldPath = banner.BannerImage;
             btnAddBanner.Text = "Modify";
         }
 
