@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.llbRegistrarse = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.btnAcceder = new System.Windows.Forms.Button();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,18 +51,6 @@
             this.llbRegistrarse.Size = new System.Drawing.Size(0, 20);
             this.llbRegistrarse.TabIndex = 1;
             this.llbRegistrarse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklblRegistrarse_LinkClicked);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.linkLabel2.Location = new System.Drawing.Point(18, 348);
-            this.linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(0, 20);
-            this.linkLabel2.TabIndex = 0;
-            this.linkLabel2.TabStop = true;
             // 
             // btnAcceder
             // 
@@ -141,26 +127,15 @@
             this.txtCorreo.Enter += new System.EventHandler(this.txtCorreo_Enter);
             this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(19, 212);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 23);
-            this.label2.TabIndex = 9;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.txtCorreo);
             this.panel1.Controls.Add(this.llbRegistrarse);
-            this.panel1.Controls.Add(this.linkLabel2);
             this.panel1.Controls.Add(this.btnAcceder);
             this.panel1.Controls.Add(this.txtContraseña);
             this.panel1.Controls.Add(this.txtUsuario);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnCancelar);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(588, 378);
@@ -185,14 +160,12 @@
 
         #endregion
         private System.Windows.Forms.LinkLabel llbRegistrarse;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button btnAcceder;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label1;
         private Button btnCancelar;
-        private Label label2;
         private Panel panel1;
     }
 }

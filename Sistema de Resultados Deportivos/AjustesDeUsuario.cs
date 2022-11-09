@@ -11,7 +11,7 @@ namespace Sistema_de_Resultados_Deportivos
         public static string language = "EN";
         public static bool darkTheme = false;
         public static bool tray = false;
-        public static bool notificaciones = false;
+        public static bool notificaciones = true;
         public static Color panel = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(248)))));
         public static Color btnBack = Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
         public static Color btnMouseDown = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));

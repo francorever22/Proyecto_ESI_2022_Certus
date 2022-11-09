@@ -89,7 +89,7 @@
             // 
             // mtcFechasEventos
             // 
-            this.mtcFechasEventos.Location = new System.Drawing.Point(512, 27);
+            this.mtcFechasEventos.Location = new System.Drawing.Point(495, 27);
             this.mtcFechasEventos.Name = "mtcFechasEventos";
             this.mtcFechasEventos.TabIndex = 0;
             this.mtcFechasEventos.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mtcFechasEventos_DateChanged);

@@ -131,13 +131,13 @@ namespace Sistema_de_Resultados_Deportivos
                 btnLogout.Visible = true;
                 btnUser.Visible = true;
                 btnLogin.Visible = false;
-                panelOptions.Size = new System.Drawing.Size(140, 160);
+                panelOptions.Size = new Size(140, 160);
             } else if (x == 0)
             {
                 btnLogout.Visible = false;
                 btnUser.Visible = false;
                 btnLogin.Visible = true;
-                panelOptions.Size = new System.Drawing.Size(140, 120);
+                panelOptions.Size = new Size(140, 120);
                 Program.logout();
             }
         }
@@ -176,7 +176,7 @@ namespace Sistema_de_Resultados_Deportivos
             Form login = new Login();
             login.TopLevel = false;
             login.TopMost = true;
-            this.panelLogin.Controls.Add(login);
+            panelLogin.Controls.Add(login);
             panelLogin.Show();
             login.Show();
         }
@@ -230,7 +230,7 @@ namespace Sistema_de_Resultados_Deportivos
                 toggleSubMenu(1);
                 Form us = new Users();
                 us.TopLevel = false;
-                this.panelChico.Controls.Add(us);
+                panelChico.Controls.Add(us);
                 us.Show();
             } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -308,6 +308,12 @@ namespace Sistema_de_Resultados_Deportivos
                         form.OpenPayment();
                     }
                     break;
+                case 10:
+                    if (form != null)
+                    {
+                        form.log(0);
+                    }
+                    break;
             }
         }
 
@@ -325,7 +331,7 @@ namespace Sistema_de_Resultados_Deportivos
             if (AjustesDeUsuario.tray == true)
             {
                 toggleSubMenu(1);
-                this.Hide();
+                Hide();
                 notifyIcon.Visible = true;
             } else
             {
@@ -340,7 +346,7 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Show();
+            Show();
             notifyIcon.Visible = false;
         }
 
@@ -353,7 +359,7 @@ namespace Sistema_de_Resultados_Deportivos
         {
             if (InvokeRequired)
             {
-                this.Invoke(new EnableDelegate(ChangeAds), new object[] { x });
+                Invoke(new EnableDelegate(ChangeAds), new object[] { x });
                 return;
             }
 

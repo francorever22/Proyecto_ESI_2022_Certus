@@ -255,10 +255,8 @@ namespace SRD_BackOffice
             txtBannerTitle.Text = banner.TitleBanner;
             txtBannerLink.Text = banner.Link;
             string path = banner.BannerImage;
-            MessageBox.Show(path);
             try
             {
-
                 image = new Bitmap(path);
             } catch { }
             imgBannerSelected.Image = image;

@@ -25,12 +25,15 @@ namespace Sistema_de_Resultados_Deportivos
 
         private void imgPublicidad_Click(object sender, EventArgs e)
         {
-            var hl = new ProcessStartInfo(link)
+            if (link != null && link != "")
             {
-                UseShellExecute = true,
-                Verb = "open"
-            };
-            Process.Start(hl);
+                var hl = new ProcessStartInfo(link)
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                };
+                Process.Start(hl);
+            }
         }
 
         private void SetBanner()
@@ -41,11 +44,22 @@ namespace Sistema_de_Resultados_Deportivos
                 int b = r.Next(banners.Count());
 
                 var banner = banners[b];
-                link = banner.Link;
                 imgPath = banner.BannerImage;
 
-                imgPublicidad.Image = new Bitmap(imgPath);
-            } catch { }
+                if (File.Exists(imgPath))
+                {
+                    link = banner.Link;
+                    imgPublicidad.Image = new Bitmap(imgPath);
+                } else
+                {
+                    imgPublicidad.Image = Properties.Resources.Publicidad_Certus;
+                    link = "www.Certus.com";
+                }
+            } catch
+            {
+                imgPublicidad.Image = Properties.Resources.Publicidad_Certus;
+                link = "www.Certus.com";
+            }
         }
     }
 }

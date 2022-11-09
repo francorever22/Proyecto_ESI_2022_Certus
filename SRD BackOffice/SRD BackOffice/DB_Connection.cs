@@ -696,7 +696,7 @@ public class DB_Connection
                     evento.Lugar = $"{dataReader.GetString("LugarEvento")}";
                 } catch { }
                 try {
-                    evento.LogoEvento = $"{dataReader.GetString("FechaEncuentro")}";
+                    evento.LogoEvento = $"{dataReader.GetString("LogoEvento")}";
                 } catch { }
 
                 eventos.Add(evento);

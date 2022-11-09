@@ -411,7 +411,11 @@
                 DialogResult dialogResult2 = MessageBox.Show("Are you really sure of this?", "DELETE ACCOUNT", MessageBoxButtons.YesNo);
                 if (dialogResult2 == DialogResult.Yes)
                 {
-                    Logica.Delete("Usuarios", "Email", u.email);
+                    try
+                    {
+                        Logica.Delete("Usuarios", "Email", u.email);
+                        Principal.AlterPrincipal(0, 10, 0);
+                    } catch { MessageBox.Show("Error"); return; }
                 }
             }
         }

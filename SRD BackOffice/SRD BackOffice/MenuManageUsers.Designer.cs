@@ -153,9 +153,10 @@
             // lblUsersManagerTitle
             // 
             this.lblUsersManagerTitle.AutoSize = true;
+            this.lblUsersManagerTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblUsersManagerTitle.Location = new System.Drawing.Point(0, 0);
             this.lblUsersManagerTitle.Name = "lblUsersManagerTitle";
-            this.lblUsersManagerTitle.Size = new System.Drawing.Size(0, 15);
+            this.lblUsersManagerTitle.Size = new System.Drawing.Size(0, 32);
             this.lblUsersManagerTitle.TabIndex = 8;
             // 
             // MenuManageUsers

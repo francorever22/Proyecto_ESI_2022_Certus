@@ -105,7 +105,7 @@ namespace SRD_BackOffice
                 bool exist = false;
                 try
                 {
-                    if (txtNombre.Text != "" && cbxTipo != null && txtPais.Text != "")
+                    if (txtNombre.Text != "" && cbxTipo != null && txtPais.Text != "" && picTeam.Image != null)
                     {
                         string nombreEquipo = txtNombre.Text,
                                paisOrigen = txtPais.Text,
@@ -158,9 +158,9 @@ namespace SRD_BackOffice
                 }
             } else
             {
-                if (txtNombre.Text != "" && picTeam != null && txtPais != null)
+                if (txtNombre.Text != "" && picTeam.Image != null && txtPais.Text != "" && cbxTipo.Text != "")
                 {
-                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify sport", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult1 = MessageBox.Show("Are you sure of this?", "Modify team", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
                     {
                         try

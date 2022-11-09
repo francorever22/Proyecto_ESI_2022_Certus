@@ -52,53 +52,9 @@
                 if (equipos[count].Miembros.Count() > amount) { amount = equipos[count].Miembros.Count(); }
                 count++;
             }
-            if (equiposEncuentro.Count() > 0)
+            if (equiposEncuentro.Count() > 1)
             {
-                llbTeam1.Text = equipos[0].NombreEquipo;
-                llbTeam2.Text = equipos[1].NombreEquipo;
-                llbTeam1.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[0].IdEquipo); };
-                llbTeam2.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[1].IdEquipo); };
-                if (encuentro.TipoEncuentro == 1 || encuentro.TipoEncuentro == 2 || encuentro.TipoEncuentro == 4)
-                {
-                    lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equipos[0].IdEquipo);
-                    lastMatchsEq2 = Logica.GetEquiposEncuentros(3, "" + equipos[1].IdEquipo);
-
-                    switch (encuentro.TipoEncuentro)
-                    {
-                        case 1:
-                            lblMarcador.Show();
-                            lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
-                            lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                            break;
-                        case 2:
-                            lblMarcador.Show();
-                            lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
-                            lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                            break;
-                        case 4:
-                            char eq1, eq2;
-                            if (equiposEncuentro[0].Posicion == 1 && equiposEncuentro[1].Posicion == 1)
-                            {
-                                lblMarcador.Show();
-                                lblMarcador.Text = "Draw";
-                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                            }
-                            else if (equiposEncuentro[0].Posicion == 1)
-                            {
-                                lblMarcador.Show();
-                                lblMarcador.Text = "W - L";
-                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                            }
-                            else if (equiposEncuentro[1].Posicion == 1)
-                            {
-                                lblMarcador.Show();
-                                lblMarcador.Text = "L - W";
-                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
-                            }
-                            break;
-                    }
-                }
-                else if (encuentro.TipoEncuentro == 3)
+                if (encuentro.TipoEncuentro == 3)
                 {
                     lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equiposEncuentro.Find(e => e.Posicion == 1).IdEquipo);
                     if (equiposEncuentro.Count() > 2)
@@ -109,6 +65,50 @@
                 }
                 if (equiposEncuentro.Count() == 2)
                 {
+                    llbTeam1.Text = equipos[0].NombreEquipo;
+                    llbTeam2.Text = equipos[1].NombreEquipo;
+                    llbTeam1.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[0].IdEquipo); };
+                    llbTeam2.LinkClicked += (sender, EventArgs) => { llbTeam1_LinkClicked(sender, EventArgs, equipos[1].IdEquipo); };
+                    if (encuentro.TipoEncuentro == 1 || encuentro.TipoEncuentro == 2 || encuentro.TipoEncuentro == 4)
+                    {
+                        lastMatchsEq1 = Logica.GetEquiposEncuentros(3, "" + equipos[0].IdEquipo);
+                        lastMatchsEq2 = Logica.GetEquiposEncuentros(3, "" + equipos[1].IdEquipo);
+
+                        switch (encuentro.TipoEncuentro)
+                        {
+                            case 1:
+                                lblMarcador.Show();
+                                lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
+                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                                break;
+                            case 2:
+                                lblMarcador.Show();
+                                lblMarcador.Text = equiposEncuentro[0].Puntuacion + " - " + equiposEncuentro[1].Puntuacion;
+                                lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                                break;
+                            case 4:
+                                char eq1, eq2;
+                                if (equiposEncuentro[0].Posicion == 1 && equiposEncuentro[1].Posicion == 1)
+                                {
+                                    lblMarcador.Show();
+                                    lblMarcador.Text = "Draw";
+                                    lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                                }
+                                else if (equiposEncuentro[0].Posicion == 1)
+                                {
+                                    lblMarcador.Show();
+                                    lblMarcador.Text = "W - L";
+                                    lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                                }
+                                else if (equiposEncuentro[1].Posicion == 1)
+                                {
+                                    lblMarcador.Show();
+                                    lblMarcador.Text = "L - W";
+                                    lblMarcador.Location = new Point(366 - (lblMarcador.Width / 2), 48);
+                                }
+                                break;
+                        }
+                    }
                     Bitmap imagenCargada1 = null;
                     try
                     {
@@ -266,6 +266,23 @@
                             lineup.BorderStyle = BorderStyle.None;
                             lineup.Location = new Point(0, 0);
                             lineup.Image = null;
+                            lineup.SizeMode = PictureBoxSizeMode.AutoSize;
+                            panelContenedor.Controls.Add(lineup);
+                            Bitmap imagenCargada = null;
+
+                            foreach (var eq in equiposEncuentro)
+                            {
+                                if (eq.Alineacion != null && eq.Alineacion != "")
+                                {
+                                    try
+                                    {
+                                        imagenCargada = new Bitmap(eq.Alineacion);
+                                        lineup.Image = imagenCargada;
+                                    }
+                                    catch { }
+                                    return;
+                                }
+                            }
                             break;
                         case 3: // Últimos 10 encuentros
                             Panel p7 = new Panel();
@@ -333,11 +350,11 @@
 
                                     if (i == 1)
                                     {
-                                        p7.Controls.Add(p4);
+                                        p8.Controls.Add(p4);
                                     }
                                     else
                                     {
-                                        p8.Controls.Add(p4);
+                                        p7.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(l2);
                                 }
@@ -535,6 +552,21 @@
                             lineup.BorderStyle = BorderStyle.None;
                             lineup.Location = new Point(0, 0);
                             lineup.Image = null;
+                            lineup.SizeMode = PictureBoxSizeMode.AutoSize;
+                            Bitmap imagenCargada = null;
+
+                            foreach (var eq in equiposEncuentro)
+                            {
+                                if (eq.Alineacion != null && eq.Alineacion != "")
+                                {
+                                    try
+                                    {
+                                        imagenCargada = new Bitmap(eq.Alineacion);
+                                    }
+                                    catch { }
+                                    lineup.Image = imagenCargada;
+                                }
+                            }
                             break;
                         case 3: // Últimos 10 encuentros (del ganador)
                             foreach (var l in lastMatchsEq1)
@@ -911,6 +943,21 @@
                             lineup.BorderStyle = BorderStyle.None;
                             lineup.Location = new Point(0, 0);
                             lineup.Image = null;
+                            lineup.SizeMode = PictureBoxSizeMode.AutoSize;
+                            Bitmap imagenCargada = null;
+
+                            foreach (var eq in equiposEncuentro)
+                            {
+                                if (eq.Alineacion != null && eq.Alineacion != "")
+                                {
+                                    try
+                                    {
+                                        imagenCargada = new Bitmap(eq.Alineacion);
+                                    }
+                                    catch { }
+                                    lineup.Image = imagenCargada;
+                                }
+                            }
                             break;
 
                         case 3: // Últimos 10 encuentros
@@ -979,11 +1026,11 @@
 
                                     if (i == 1)
                                     {
-                                        p7.Controls.Add(p4);
+                                        p12.Controls.Add(p4);
                                     }
                                     else
                                     {
-                                        p12.Controls.Add(p4);
+                                        p7.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(l9);
                                 }
@@ -1188,11 +1235,11 @@
 
                                     if (i == 1)
                                     {
-                                        p7.Controls.Add(p4);
+                                        p8.Controls.Add(p4);
                                     }
                                     else
                                     {
-                                        p8.Controls.Add(p4);
+                                        p7.Controls.Add(p4);
                                     }
                                     p4.Controls.Add(l2);
                                 }

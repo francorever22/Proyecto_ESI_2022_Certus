@@ -65,12 +65,12 @@ namespace Sistema_de_Resultados_Deportivos
             user.equiposFavoritos = Logica.GetEquiposFavoritos(2, user.email);
         }
 
-        private static async Task NotificationsAsync()
+        public static async Task NotificationsAsync()
         {
             int lastHito = 0;
             while (true)
             {
-                if (user.email == null || AjustesDeUsuario.notificaciones == false)
+                if (user.email == null || AjustesDeUsuario.notificaciones != true)
                 {
                     return;
                 } else

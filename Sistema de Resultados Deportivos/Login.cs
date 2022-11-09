@@ -389,7 +389,6 @@ namespace Sistema_de_Resultados_Deportivos
             if (registrarse == false)
             {
                 txtCorreo.Show();
-                label2.Hide();
                 registrarse = true;
                 if (AjustesDeUsuario.language == "EN")
                 {
@@ -409,7 +408,6 @@ namespace Sistema_de_Resultados_Deportivos
             } else
             {
                 txtCorreo.Hide();
-                label2.Show();
                 registrarse = false;
                 if (AjustesDeUsuario.language == "EN")
                 {
@@ -467,9 +465,7 @@ namespace Sistema_de_Resultados_Deportivos
             btnCancelar.FlatAppearance.MouseDownBackColor = AjustesDeUsuario.btnMouseDown;
             btnCancelar.FlatAppearance.MouseOverBackColor = AjustesDeUsuario.btnMouseOver;
             /* Textos (Incluidos botones) */
-            label2.ForeColor = AjustesDeUsuario.foreColor;
             llbRegistrarse.LinkColor = AjustesDeUsuario.foreColor;
-            linkLabel2.LinkColor = AjustesDeUsuario.foreColor;
             txtContraseña.BackColor = AjustesDeUsuario.btnBack;
             txtContraseña.ForeColor = AjustesDeUsuario.foreColor;
             txtUsuario.BackColor = AjustesDeUsuario.btnBack;
@@ -487,8 +483,6 @@ namespace Sistema_de_Resultados_Deportivos
             {
                 case "EN": //Ingles
                     llbRegistrarse.Text = "Registrate";
-                    linkLabel2.Text = "Recover password";
-                    label2.Text = "Remember me";
                     btnCancelar.Text = "Cancel";
                     label1.Text = "Welcome";
                     txtUsuario.Text = "User or email";
@@ -497,8 +491,6 @@ namespace Sistema_de_Resultados_Deportivos
                     break;
                 case "ES": //Español
                     llbRegistrarse.Text = "Registrarse";
-                    linkLabel2.Text = "Recuperar contraseña";
-                    label2.Text = "Recordarme";
                     btnCancelar.Text = "Cancelar";
                     label1.Text = "Bienvenido";
                     txtUsuario.Text = "Usuario o email";

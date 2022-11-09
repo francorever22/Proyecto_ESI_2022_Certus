@@ -14,6 +14,7 @@
             cbxLenguaje.SelectedItem = AjustesDeUsuario.language;
             tglTema.Checked = theme;
             tglTray.Checked = tray;
+            tglNotificaciones.Checked = noti;
         }
 
         private void tglTema_CheckedChanged(object sender, EventArgs e)
@@ -57,6 +58,10 @@
                 if (AjustesDeUsuario.notificaciones != noti)
                 {
                     AjustesDeUsuario.notificaciones = noti;
+                    if (noti == true)
+                    {
+                        Program.NotificationsAsync();
+                    }
                 }
 
                 SaveAsync();
@@ -76,6 +81,7 @@
 
         private async Task SaveAsync()
         {
+            Directory.CreateDirectory(@"C:\Certus\SRD");
             string[] lines = {
                     $"language = {AjustesDeUsuario.language}",
                     $"darkTheme = {AjustesDeUsuario.darkTheme}",

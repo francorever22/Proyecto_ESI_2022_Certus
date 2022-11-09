@@ -22,7 +22,7 @@ public class DB_Connection
             uid = "root";
             password = "";
             string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "Pwd=" + password + ";";
 
             connection = new MySqlConnection(connectionString);
         }

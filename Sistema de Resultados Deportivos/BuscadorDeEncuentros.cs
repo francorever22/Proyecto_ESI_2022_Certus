@@ -102,6 +102,7 @@
             {
                 foreach (var enc in encuentros)
                 {
+                    int id = enc.IdEncuentro;
                     var eqEnc = Logica.GetEquiposEncuentros(2, "" + enc.IdEncuentro);
                     var eq = new List<Equipo>();
                     foreach (var eqE in eqEnc)
@@ -186,16 +187,16 @@
 
                         l1.Text = eqEnc[0].NombreEquipo;
 
-                        l2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
-                        pic1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
-                        pic2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
+                        l2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
+                        pic1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
+                        pic2.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
                         p1.Controls.Add(pic1);
                         p1.Controls.Add(pic2);
                         p1.Controls.Add(l2);
                     }
                     else
                     {
-                        l3.Location = new Point(722 - (10 + l3.Width), p1.Height - 25);
+                        l3.Location = new Point(722 - (10 + l3.Width), 30 - (l3.Height / 2));
                         l1.Text = enc.Nombre;
                     }
 
@@ -217,10 +218,10 @@
                     l4.Size = new Size(l4.Text.Length * 14, 30);
                     l4.Location = new Point(p1.Width / 2 - l4.Width / 2, 8);
 
-                    p1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
-                    l1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
-                    l3.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
-                    l4.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, enc.IdEncuentro); };
+                    p1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
+                    l1.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
+                    l3.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
+                    l4.Click += (sender, EventArgs) => { OpenEncuentros_Click(sender, EventArgs, id); };
 
                     panelEncuentros.Controls.Add(p1); //Agrega los controles al panelEncuentros
                     p1.Controls.Add(l1);

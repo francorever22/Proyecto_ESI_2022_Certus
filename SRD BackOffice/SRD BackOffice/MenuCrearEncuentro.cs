@@ -109,10 +109,6 @@ namespace SRD_BackOffice
             {
                 equiposEncuentros.Add(eE);
             }
-            try
-            {
-                alineacion = new Bitmap(equiposEncuentros[0].Alineacion);
-            } catch { }
             avoid = true;
             var encuentro = Logica.GetEncuentros(4, ""+index)[0];
             var arbitro = Logica.GetArbitros(3, ""+encuentro.IdPersona)[0];
@@ -811,20 +807,6 @@ namespace SRD_BackOffice
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     alineacion = new Bitmap(open.FileName);
-                    int wid = alineacion.Width;
-                    int hei = alineacion.Height;
-                    if (!(wid == 150 || hei == 150))
-                    {
-                        alineacion = null;
-                        if (Program.language == "EN")
-                        {
-                            MessageBox.Show("The banner has to have the sizes 150x150 pixels");
-                        }
-                        else if (Program.language == "ES")
-                        {
-                            MessageBox.Show("El banner debe tener las medidas 150x150 pixeles");
-                        }
-                    }
                 }
             }
             catch
@@ -1076,13 +1058,17 @@ namespace SRD_BackOffice
                         {
                             Directory.CreateDirectory(@"C:\Certus\SRD\Encuentros\Alineaciones");
                             FilePath = $@"C:\\Certus\\SRD\\Encuentros\\Alineaciones\\{nombre + idEncuentro}.bmp";
-                            using (MemoryStream memory = new MemoryStream())
+                            
+                            if (alineacion != null)
                             {
-                                using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                using (MemoryStream memory = new MemoryStream())
                                 {
-                                    imagenAlineacion.Save(memory, ImageFormat.Bmp);
-                                    byte[] bytes = memory.ToArray();
-                                    fs.Write(bytes, 0, bytes.Length);
+                                    using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite))
+                                    {
+                                        imagenAlineacion.Save(memory, ImageFormat.Bmp);
+                                        byte[] bytes = memory.ToArray();
+                                        fs.Write(bytes, 0, bytes.Length);
+                                    }
                                 }
                             }
                         }

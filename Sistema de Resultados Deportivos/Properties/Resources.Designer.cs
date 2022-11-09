@@ -213,6 +213,16 @@ namespace Sistema_de_Resultados_Deportivos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Publicidad_Certus {
+            get {
+                object obj = ResourceManager.GetObject("Publicidad_Certus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Publicidad_Despegar {
             get {
                 object obj = ResourceManager.GetObject("Publicidad_Despegar", resourceCulture);

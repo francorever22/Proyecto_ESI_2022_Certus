@@ -219,8 +219,16 @@
             switch (Program.language)
             {
                 case "EN": //Ingles
+                    lblUsersManagerTitle.Text = "Manage users";
+                    lblUsersManagerTitle.Location = new Point(250 - (lblUsersManagerTitle.Width / 2), 61);
+                    label1.Text = "User";
+                    label1.Location = new Point(34, 5);
                     break;
                 case "ES": //Español
+                    lblUsersManagerTitle.Text = "Administrar usuarios";
+                    lblUsersManagerTitle.Location = new Point(250 - (lblUsersManagerTitle.Width / 2), 61);
+                    label1.Text = "Usuario";
+                    label1.Location = new Point(26, 5);
                     break;
             }
         }

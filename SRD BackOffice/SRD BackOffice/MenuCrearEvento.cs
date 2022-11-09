@@ -63,9 +63,10 @@ namespace SRD_BackOffice
             } catch { }
             txtlugarEvento.Text = evento.Lugar;
             cbxEstadoEvento.Text = evento.EstadoEvento;
+            string path = evento.LogoEvento;
             try
             {
-                imagenCargada = new Bitmap(evento.LogoEvento);
+                imagenCargada = new Bitmap(path);
             } catch { }
             imgEventSelected.Image = imagenCargada;
 
