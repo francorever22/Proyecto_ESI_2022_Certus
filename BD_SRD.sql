@@ -402,6 +402,18 @@ FOREIGN KEY (IdEquiposFavoritos)
 REFERENCES EquiposFavoritos(IdEquiposFavoritos)
 ON DELETE CASCADE;
 
+ALTER TABLE PublicidadesUsuarios #Nueva 
+ADD CONSTRAINT FK_PublicidadesUsuariosEmail
+FOREIGN KEY (Email) 
+REFERENCES Usuarios(Email)
+ON DELETE CASCADE;
+
+ALTER TABLE PublicidadesUsuarios #Nueva 
+ADD CONSTRAINT FK_PublicidadesUsuariosPubliciades
+FOREIGN KEY (IdPublicidad) 
+REFERENCES Publicidades(IdPublicidad)
+ON DELETE CASCADE;
+
 ALTER TABLE UsuariosPersonas
 ADD CONSTRAINT FK_UsuariosPersonasEventosFavoritos 
 FOREIGN KEY (IdEventosFavoritos) 
@@ -418,6 +430,30 @@ ALTER TABLE UsuariosPersonas
 ADD CONSTRAINT FK_UsuariosPersonasEquiposFavoritos 
 FOREIGN KEY (IdEquiposFavoritos) 
 REFERENCES EquiposFavoritos(IdEquiposFavoritos)
+ON DELETE CASCADE;
+
+ALTER TABLE UsuariosPersonas #Nueva 
+ADD CONSTRAINT FK_UsuariosPersonasUsuarios
+FOREIGN KEY (Email) 
+REFERENCES Usuarios(Email)
+ON DELETE CASCADE;
+
+ALTER TABLE UsuariosPersonas #Nueva 
+ADD CONSTRAINT FK_UsuariosPersonasPersonas
+FOREIGN KEY (IdPersona) 
+REFERENCES Personas(IdPersona)
+ON DELETE CASCADE;
+
+ALTER TABLE Arbitros #Nueva 
+ADD CONSTRAINT FK_ArbitrosPersonas
+FOREIGN KEY (IdPersona) 
+REFERENCES Personas(IdPersona)
+ON DELETE CASCADE;
+
+ALTER TABLE Deportistas #Nueva 
+ADD CONSTRAINT FK_DeportistasPersonas
+FOREIGN KEY (IdPersona) 
+REFERENCES Personas(IdPersona)
 ON DELETE CASCADE;
 
 ALTER TABLE EquiposDeportistas
@@ -444,6 +480,11 @@ FOREIGN KEY (IdCategoria)
 REFERENCES Categorias(IdCategoria)
 ON DELETE CASCADE;
 
+ALTER TABLE Encuentros #Nueva 
+ADD CONSTRAINT FK_EncuentrosDeportesCategorizados
+FOREIGN KEY (IdDeporte, IdCategoria)
+REFERENCES DeportesCategorizados(IdDeporte, IdCategoria);
+
 ALTER TABLE PuntuacionRound
 ADD CONSTRAINT FK_PuntuacionRoundRound
 FOREIGN KEY (NumeroRound, IdEncuentro)
@@ -468,10 +509,16 @@ FOREIGN KEY (IdEquipo)
 REFERENCES Equipos(IdEquipo)
 ON DELETE CASCADE;
 
-ALTER TABLE EquiposFases
-ADD CONSTRAINT FK_EquiposFasesNumeroFase
-FOREIGN KEY (NumeroFase)
-REFERENCES Fases(NumeroFase)
+ALTER TABLE Fases #Nueva 
+ADD CONSTRAINT FK_FasesEventos
+FOREIGN KEY (IdEvento) 
+REFERENCES Eventos(IdEvento)
+ON DELETE CASCADE;
+
+ALTER TABLE EquiposFases #Actualizada
+ADD CONSTRAINT FK_EquiposFasesFases
+FOREIGN KEY (NumeroFase, IdEvento)
+REFERENCES Fases(NumeroFase, IdEvento)
 ON DELETE CASCADE;
 
 ALTER TABLE EquiposFases
@@ -480,10 +527,10 @@ FOREIGN KEY (IdEquipo)
 REFERENCES Equipos(IdEquipo)
 ON DELETE CASCADE;
 
-ALTER TABLE EncuentrosFases
-ADD CONSTRAINT FK_EncuentrosFasesNumeroFase
-FOREIGN KEY (NumeroFase)
-REFERENCES Fases(NumeroFase)
+ALTER TABLE EncuentrosFases #Actualizada
+ADD CONSTRAINT FK_EncuentrosFasesEventos
+FOREIGN KEY (NumeroFase, IdEvento)
+REFERENCES Fases(NumeroFase, IdEvento)
 ON DELETE CASCADE;
 
 ALTER TABLE EncuentrosFases
@@ -507,6 +554,11 @@ ALTER TABLE EstadisticasJugador
 ADD CONSTRAINT FK_EstadisticasJugadorDeportistas
 FOREIGN KEY (IdDeportista)
 REFERENCES Deportistas(IdPersona);
+
+ALTER TABLE EstadisticasJugador #Nueva
+ADD CONSTRAINT FK_EstadisticasJugadorEncuentros
+FOREIGN KEY (IdEncuentro)
+REFERENCES Encuentros(IdEncuentro);
 
 ALTER TABLE Usuarios
 ADD CONSTRAINT CHK_Usuarios_NivelPermisos
@@ -1145,11 +1197,11 @@ INSERT INTO PublicidadesUsuarios (IdPublicidad, Email, NombreUsuario, Contrasena
 ('16', 'Desmond@gmail.com', 'Des', 'mond', 094636342, '1', 'C:\Users\USUARIO\Videos\Mercedes', 'https://www.mercedes-benz.com.uy/', 'Mercedes', '1', '1', '1');
  
 INSERT INTO UsuariosPersonas (Email, IdPersona, Nombre, Apellido, Nacionalidad, NombreUsuario, Contrasena, NumeroTelefono, NivelPermisos, IdEventosFavoritos, IdEncuentrosFavoritos, IdEquiposFavoritos) VALUES
-('alexelleon2018@gmail.com','61','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '1', '1', '1'),
-('perezgomez45@gmail.com','1019','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '2', '2', '2'),
-('analaurali@gmail.com','1129','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
-('loloOne@gmail.com', '2332', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '3', '3', '3'),
-('lolaFive@gmail.com', '2113', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '4', '4', '4');
+('alexelleon2018@gmail.com','1','Alex','Sarasola','Uruguaya','Alex001','Nomeacuerdomucho1234*','092038170', '2', '1', '1', '1'),
+('perezgomez45@gmail.com','2','Perez','Gomez','Argentina','perezito2233','estudiomucho90<<','099456743', '2', '2', '2', '2'),
+('analaurali@gmail.com','3','Ana','Anniston','Estadounidense','Lauranole2', 'altabaja221', '099445274', '2', '3', '3', '3'),
+('loloOne@gmail.com', '4', 'Lorenzo', 'DiCaprio','Italiana', 'Elfaraon03', 'faraon03-', '092345221', '1', '3', '3', '3'),
+('lolaFive@gmail.com', '5', 'Teresa', 'Garcia','Mexicana', 'TheQueen121', 'fordescort1967>', '095567451', '1', '4', '4', '4');
 
 SELECT IdEncuentro, NombreEncuentro
 FROM Encuentros INNER JOIN DeportesCategorizados ON Encuentros.IdDeporte = DeportesCategorizados.IdDeporte
@@ -1198,4 +1250,3 @@ FROM EquiposDeportistas JOIN EquiposFases ON (EquiposDeportistas.IdEquipo = Equi
 EncuentrosFases ON (EquiposFases.IdEvento = EncuentrosFases.IdEvento) JOIN EstadisticasJugador ON (EncuentrosFases.IdEncuentro = EstadisticasJugador.IdEncuentro)
 WHERE Eventos.IdEvento = '1'
 GROUP BY EstadisticasJugador.IdDeportista;
-
