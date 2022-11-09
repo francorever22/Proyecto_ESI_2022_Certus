@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj": {}
+    "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj": {
+    "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj",
+        "projectUniqueName": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj",
         "projectName": "SRD BackOffice",
-        "projectPath": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj",
+        "projectPath": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\SRD BackOffice.csproj",
         "packagesPath": "C:\\Users\\Hinoken\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hinoken\\Source\\Repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\obj\\",
+        "outputPath": "C:\\Users\\Hinoken\\source\\repos\\Proyecto_ESI_2022_Certus\\SRD BackOffice\\SRD BackOffice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
